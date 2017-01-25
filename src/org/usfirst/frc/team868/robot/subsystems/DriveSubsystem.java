@@ -2,8 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 
-import com.ctre.CANTalon;
-
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSubsystem extends Subsystem {
 	
 	private static DriveSubsystem instance;
-	private CANTalon leftMotor;
-	private CANTalon rightMotor;
+	private Spark leftMotor;
+	private Spark rightMotor;
 	
 	private DriveSubsystem(){
-		leftMotor = new CANTalon(RobotMap.Drive.LEFT_MOTOR);
-		rightMotor = new CANTalon(RobotMap.Drive.RIGHT_MOTOR);
+		leftMotor = new Spark(RobotMap.Drive.LEFT_MOTOR);
+		rightMotor = new Spark(RobotMap.Drive.RIGHT_MOTOR);
 	}
 	
 	public static DriveSubsystem getInstance(){
