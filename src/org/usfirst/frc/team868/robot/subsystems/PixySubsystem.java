@@ -1,5 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,13 +28,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  
  */
 public class PixySubsystem extends Subsystem {
-    
-	public final int CAM_WIDTH = 318;
-	public final int CAM_X_ANGLE = 80;
-	public final int CAM_HEIGHT = 198;
-	public final int CAM_Y_ANGLE = 40;
-	public final int BAUDRATE = 19200;
-	//TODO: move ^these^ values to RobotMap
 	
 	private static PixySubsystem instance;
 	private SerialPort pixyCam;
@@ -47,7 +42,7 @@ public class PixySubsystem extends Subsystem {
 	private int height;
 	
 	private PixySubsystem(){
-		pixyCam = new SerialPort(BAUDRATE, Port.kMXP);
+		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, Port.kMXP);
 	}public void getValues(){
 		byte [] input;
 		try{
@@ -96,6 +91,13 @@ public class PixySubsystem extends Subsystem {
 		yMid = record[3];
 		width = record[4];
 		height = record[5];
+	}
+	
+	public void updateSD(){
+		SmartDashboard.putNumber("Camera Target X", getXAngleOffFromCenter());
+		SmartDashboard.putNumber("Camera Target Y", getYAngleOffFromCenter());
+		SmartDashboard.putNumber("Camera Target Width", getWidthOfTarget());
+		SmartDashboard.putNumber("Camera Target Height", getHeightOfTarget());
 		SmartDashboard.putNumber("Frame count", frame);
 	}
 	
@@ -106,7 +108,7 @@ public class PixySubsystem extends Subsystem {
 	 */
 	public double getXAngleOffFromCenter(){
 		if(xMid != 0){
-			return (xMid - (CAM_WIDTH/2))*(CAM_X_ANGLE/2)/CAM_WIDTH;
+			return (xMid - (RobotMap.Pixy.CAM_WIDTH/2))*(RobotMap.Pixy.CAM_X_ANGLE/2)/RobotMap.Pixy.CAM_WIDTH;
 		}else{
 			return xMid;
 		}
@@ -114,7 +116,7 @@ public class PixySubsystem extends Subsystem {
 	
 	public double getYAngleOffFromCenter(){
 		if(yMid != 0){
-			return (yMid - (CAM_HEIGHT/2))*(CAM_Y_ANGLE/2)/CAM_HEIGHT;
+			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
 		}else{
 			return yMid;
 		}

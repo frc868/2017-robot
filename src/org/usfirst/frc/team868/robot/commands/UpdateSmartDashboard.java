@@ -1,8 +1,10 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -28,7 +30,8 @@ public class UpdateSmartDashboard extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(time.get() >= 1/200){
-    		//SmartDashboard.putNumber("", );
+    		PixySubsystem.getInstance().updateSD();
+    		DriveSubsystem.getInstance().updateSD();
     		time.reset();
     	}
     }

@@ -2,11 +2,12 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -89,6 +90,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	private void initSubsystems() {
+		PixySubsystem.getInstance();
 		DriveSubsystem.getInstance();
 	}
     
