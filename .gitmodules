@@ -1,0 +1,3 @@
+[submodule "lib-robot"]
+	path = lib-robot
+	url = https://github.com/frc868/lib-robot
