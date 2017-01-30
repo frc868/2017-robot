@@ -9,28 +9,28 @@ package org.usfirst.frc.team868.robot;
 public interface RobotMap {
 	
 	public interface Drive{
-		final int LEFT_MOTOR = -1;
-		final int RIGHT_MOTOR = -1;
+		final int LEFT_MOTOR = 4;
+		final int RIGHT_MOTOR = 5;
 		final boolean LEFT_IS_INVERTED = false;
 		final boolean RIGHT_IS_INVERTED = false;
 		//6 drive train motors, using Sparks
 	}
 	
 	public interface Shoot{
-		final int SHOOTER_MOTOR = -1;
+		final int SHOOTER_MOTOR = 8;
 		final boolean IS_INVERTED = false;
 		//2 shooter motors, using CANTalons
 	}
 	
 	public interface Turret{
-		final int TURRET_MOTOR = -1;
+		final int TURRET_MOTOR = 9;
 		final boolean IS_INVERTED = false;
 		//1 turret motor, using a CAN speed controller from mindstorm?
 	}
 	
 	public interface Feeder{
-		final int AGITATOR_MOTOR = -1;
-		final int CONVEYOR_MOTOR = -1;
+		final int AGITATOR_MOTOR = 6;
+		final int CONVEYOR_MOTOR = 7;
 		final boolean AGITATOR_IS_INVERTED = false;
 		final boolean CONVEYOR_IS_INVERTED = false;
 		//1 agitator motor, using a Spark
@@ -38,14 +38,14 @@ public interface RobotMap {
 	}
 	
 	public interface Climber{
-		final int CLIMBER_MOTOR = -1;
+		final int CLIMBER_MOTOR = 10;
 		final boolean IS_INVERTED = false;
 		//1 climber motor, using a CANTalon
 	}
 	
 	public interface GearCollector{
-		final int GEAR_MOTOR_1 = -1;
-		final int GEAR_MOTOR_2 = -1;
+		final int GEAR_MOTOR_1 = 11;
+		final int GEAR_MOTOR_2 = 12;
 		final boolean GEAR_1_IS_INVERTED = false;
 		final boolean GEAR_2_IS_INVERTED = false;
 		//2 gear collector motors, using CANTalons
@@ -63,6 +63,7 @@ public interface RobotMap {
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
 	public static final int PWM_DRIVE_LEFT = 2;
+	public static final int PWM_DRIVE_RIGHT = 3;
     
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
