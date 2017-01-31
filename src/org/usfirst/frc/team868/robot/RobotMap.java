@@ -32,8 +32,10 @@ public interface RobotMap {
 		final int AGITATOR_MOTOR = 6;
 		final boolean AGITATOR_IS_INVERTED = false;
 		final double AGITATOR_SPEED = 0.8;
+		
 		final int CONVEYOR_MOTOR = 7;
 		final boolean CONVEYOR_IS_INVERTED = false;
+		final double CONVEYOR_SPEED = 0.8;
 		//1 agitator motor, using a Spark
 		//1 conveyor belt motor, using a Spark
 	}
