@@ -49,6 +49,7 @@ public interface RobotMap {
 	public interface GearCollector{
 		final int GEAR_SOL_LEFT = 0;
 		final int GEAR_SOL_RIGHT = 1;
+
 		//2 gear collector solenoids
 	}
 	
