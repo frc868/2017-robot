@@ -43,7 +43,9 @@ public class PixySubsystem extends Subsystem {
 	
 	private PixySubsystem(){
 		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, Port.kMXP);
-	}public void getValues(){
+	}
+	
+	public void getValues(){//Call this method to update all of the data obtained from the Pixy
 		byte [] input;
 		try{
 			input = pixyCam.read(pixyCam.getBytesReceived());
@@ -61,13 +63,13 @@ public class PixySubsystem extends Subsystem {
 		}
 	}
 	
-	private void processBytesRecieved(byte[] input) {
+	private void processBytesRecieved(byte[] input) {//See getValues()
 		for(int i = 0; i < input.length; i++){
 			processByte(input[i]);
 		}
 	}
 
-	private void processByte(byte b) {
+	private void processByte(byte b) {//See processBytesRecieved()
 		int val = b & 0xff;
 		if(val == 0xaa && lastVal  == 0x55){
 			recordStarted  = true;
@@ -86,14 +88,14 @@ public class PixySubsystem extends Subsystem {
 		lastVal = val;
 	}
 
-	private void processRecord() {
+	private void processRecord() {//Called in processByte(), sends obtained Pixy values to field values.
 		xMid = record[2];
 		yMid = record[3];
 		width = record[4];
 		height = record[5];
 	}
 	
-	public void updateSD(){
+	public void updateSD(){//Updates the SD with the values specified.
 		SmartDashboard.putNumber("Camera Target X", getXAngleOffFromCenter());
 		SmartDashboard.putNumber("Camera Target Y", getYAngleOffFromCenter());
 		SmartDashboard.putNumber("Camera Target Width", getWidthOfTarget());
@@ -114,6 +116,11 @@ public class PixySubsystem extends Subsystem {
 		}
 	}
 	
+	/**
+	 * Returns the angle in degrees off from the y-axis center the target is. 
+	 * Negative degrees means below, positive means above, 
+	 * zero means it is either centered or cannot be found.
+	 */
 	public double getYAngleOffFromCenter(){
 		if(yMid != 0){
 			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
@@ -122,14 +129,23 @@ public class PixySubsystem extends Subsystem {
 		}
 	}
 	
-	public int getSizeOfTargetInPixels(){
+	/**
+	 * Returns the size of the current target in pixels.
+	 */
+	public int getSizeOfTarget(){
 		return width*height;
 	}
 	
+	/**
+	 * Returns the width of the current target in pixels.
+	 */
 	public int getWidthOfTarget(){
 		return width;
 	}
 	
+	/**
+	 * Returns the height of the current target in pixels.
+	 */
 	public int getHeightOfTarget(){
 		return height;
 	}
