@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
+import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
 
@@ -26,7 +27,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 
-    	
+    	CameraSubsystem.getRearInstance();
     	initSubsystems();
 		OI oi = OI.getInstance();
     	new UpdateSmartDashboard().start();
