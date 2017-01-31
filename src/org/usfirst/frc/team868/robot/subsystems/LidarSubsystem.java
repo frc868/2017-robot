@@ -17,11 +17,36 @@ public class LidarSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {}
 	
+	/**
+	 * Constructor. Creates a network table
+	 * and a serial port object, and then creates
+	 * a thread and runs it.
+	 */
 	private LidarSubsystem() {
 		table = NetworkTable.getTable("LIDAR");
 		serial = new SerialPort(115200, Port.kUSB);
 		
-		Thread t = new Thread() {
+		this.getThread().start();
+	}
+	
+	/**
+	 * Gets the subsystem instance
+	 * 
+	 * @return subsystem instance
+	 */
+	public static LidarSubsystem getInstance() {
+		return instance == null ? instance = new LidarSubsystem() : instance;
+	}
+	
+	/**
+	 * Creates a runnable instance of the
+	 * LIDAR distance reading thread. Loops and
+	 * continuously reads from the Serial buffer.
+	 * 
+	 * @return Thread object to be run
+	 */
+	private Thread getThread() {
+		return new Thread() {
 			@Override
 			public void run() {
 				while (!isInterrupted()) {
@@ -30,38 +55,36 @@ public class LidarSubsystem extends Subsystem {
 					} else {
 						try {
 							Thread.sleep(1);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+						} catch (InterruptedException e) {}
 					}
-				}
-			}
+				} //end while
+			} //end run
 		};
-		t.start();
-	}
-	
-	public static LidarSubsystem getInstance() {
-		return instance == null ? instance = new LidarSubsystem() : instance;
 	}
 
 	/**
-	 * Reads distance
+	 * Reads current saved distance
+	 * 
 	 * @return distance in CM
 	 */
 	public int getDistance() {
 		return distance;
 	}
 	
-
 	/**
 	 * Whether more than two 
 	 * bytes are available to read
+	 * 
 	 * @return
 	 */
 	private boolean bytesAvailable() {
 		return serial.getBytesReceived() > 2;
 	}
 
+	/**
+	 * Reads from Serial data buffer until no data
+	 * exists, and sets the value of distance
+	 */
 	private void updateDistance() {
 		while(serial.getBytesReceived() > 0) {
 			byte read = serial.read(1)[0];
@@ -82,6 +105,10 @@ public class LidarSubsystem extends Subsystem {
 		} //end while
 	} //end method
 	
+	/**
+	 * Updates the NetworkTable with the 
+	 * most recent distance information
+	 */
 	public void updateTable() {
 		table.putNumber("LIDAR Distance", distance);
 	}
