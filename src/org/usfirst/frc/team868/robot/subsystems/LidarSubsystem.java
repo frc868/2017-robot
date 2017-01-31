@@ -20,6 +20,24 @@ public class LidarSubsystem extends Subsystem {
 	private LidarSubsystem() {
 		table = NetworkTable.getTable("LIDAR");
 		serial = new SerialPort(115200, Port.kUSB);
+		
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				while (!isInterrupted()) {
+					if (bytesAvailable()) {
+						updateDistance();
+					} else {
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		};
+		t.start();
 	}
 	
 	public static LidarSubsystem getInstance() {
@@ -27,27 +45,24 @@ public class LidarSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Reads most recent distance from the
-	 * serial buffer and returns that. May hang 
-	 * very slightly.
+	 * Reads distance
 	 * @return distance in CM
 	 */
 	public int getDistance() {
-		updateDistance();
 		return distance;
 	}
 	
+
 	/**
-	 * Gets currently stored distance, may be
-	 * out of date from the serial buffer. Has
-	 * the advantage of being very quick.
-	 * @return distance in CM
+	 * Whether more than two 
+	 * bytes are available to read
+	 * @return
 	 */
-	public int getCurrentDistance() {
-		return distance;
+	private boolean bytesAvailable() {
+		return serial.getBytesReceived() > 2;
 	}
 
-	public void updateDistance() {
+	private void updateDistance() {
 		while(serial.getBytesReceived() > 0) {
 			byte read = serial.read(1)[0];
 			
@@ -65,7 +80,6 @@ public class LidarSubsystem extends Subsystem {
 				System.err.println("LIDAR Read Invalid Character");
 			}
 		} //end while
-		updateTable();
 	} //end method
 	
 	public void updateTable() {
