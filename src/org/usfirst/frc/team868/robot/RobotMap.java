@@ -47,11 +47,9 @@ public interface RobotMap {
 	}
 	
 	public interface GearCollector{
-		final int GEAR_MOTOR_1 = 11;
-		final int GEAR_MOTOR_2 = 12;
-		final boolean GEAR_1_IS_INVERTED = false;
-		final boolean GEAR_2_IS_INVERTED = false;
-		//2 gear collector motors, using CANTalons
+		final int GEAR_SOL_1 = 1;
+		final int GEAR_SOL_2 = 2;
+		//2 gear collector solenoids
 	}
 	
 	public interface Pixy{
