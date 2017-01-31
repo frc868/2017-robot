@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ShooterFeederSubsystem extends Subsystem {
-	public static ShooterFeederSubsystem instance;
+	private static ShooterFeederSubsystem instance;
 	private Spark motor;
 	private boolean state;
 	
