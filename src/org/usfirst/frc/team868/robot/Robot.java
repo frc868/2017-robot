@@ -10,8 +10,6 @@ import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -29,7 +27,7 @@ public class Robot extends IterativeRobot {
 
     	CameraSubsystem.getRearInstance();
     	initSubsystems();
-		OI oi = OI.getInstance();
+		OI.getInstance();
     	new UpdateSmartDashboard().start();
     }
 

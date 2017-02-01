@@ -19,6 +19,7 @@ public interface RobotMap {
 	public interface Shoot{
 		final int SHOOTER_MOTOR = 8;
 		final boolean IS_INVERTED = false;
+		final double SHOOTER_POWER = 0.8;
 		//2 shooter motors, using CANTalons
 	}
 	
@@ -47,8 +48,8 @@ public interface RobotMap {
 	}
 	
 	public interface GearCollector{
-		final int GEAR_SOL_1 = 1;
-		final int GEAR_SOL_2 = 2;
+		final int GEAR_SOLENOID = 0;
+
 		//2 gear collector solenoids
 	}
 	

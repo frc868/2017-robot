@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class AgitatorSubsystem extends Subsystem {
 
-	public static AgitatorSubsystem instance;
+	private static AgitatorSubsystem instance;
 	private Spark motor;
 	private boolean state;
 	
