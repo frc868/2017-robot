@@ -19,6 +19,7 @@ public interface RobotMap {
 	public interface Shoot{
 		final int SHOOTER_MOTOR = 8;
 		final boolean IS_INVERTED = false;
+		final double SHOOTER_POWER = 0.8;
 		//2 shooter motors, using CANTalons
 	}
 	
