@@ -11,14 +11,18 @@ public class ShooterFeederCommand extends Command {
 
 	ShooterFeederSubsystem feeder;
 	
-    public ShooterFeederCommand() {
-        feeder = ShooterFeederSubsystem.getInstance();
+	boolean state;
+	
+    public ShooterFeederCommand(boolean on) { 
+    	feeder = ShooterFeederSubsystem.getInstance(); 
         requires(feeder);
+        
+        state = on;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	feeder.setFeederOn();
+    	feeder.setFeeder(state);
     }
 
     // Called repeatedly when this Command is scheduled to run

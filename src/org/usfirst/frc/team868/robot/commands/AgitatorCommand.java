@@ -12,18 +12,11 @@ public class AgitatorCommand extends Command {
 
 	AgitatorSubsystem agitator;
 	
-	boolean usingTimeout;
-	boolean finished; //happens to always be the opposite of usingTimeout, but added for code clarity
-	long endTime;
-
-	public AgitatorCommand() { //TODO take boolean as argument
-		this(0);
-	}
-
-	public AgitatorCommand(long millis) {
-		usingTimeout = millis > 0;
-		finished = !usingTimeout; //if not using timeout, we don't need to run execute()
-		endTime = millis + getTimeMillis();
+	boolean state;
+	
+	public AgitatorCommand(boolean on) {
+		
+		state = on;
 		
 		agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
@@ -31,20 +24,17 @@ public class AgitatorCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		agitator.setAgitatorOn();
+		agitator.setAgitator(state);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(usingTimeout && getTimeMillis() > endTime) {
-			agitator.setAgitatorOff();
-			finished = true;
-		}
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return usingTimeout;
+		return true;
 	}
 
 	// Called once after isFinished returns true
