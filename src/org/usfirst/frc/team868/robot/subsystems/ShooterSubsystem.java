@@ -48,7 +48,7 @@ public class ShooterSubsystem extends Subsystem {
     	control.setOutputRange(0, 1);
     }
     
-    private void setPower(double power){
+    public void setPower(double power){
     	shooter.set(power);
     }
     
@@ -56,7 +56,7 @@ public class ShooterSubsystem extends Subsystem {
     	return shooter.getSpeed();
     }
     
-    public ShooterSubsystem getInstance(){
+    public static ShooterSubsystem getInstance(){
     	if(instance == null){
     		instance = new ShooterSubsystem();
     	}
