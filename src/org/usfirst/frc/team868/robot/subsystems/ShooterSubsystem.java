@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -41,7 +42,7 @@ public class ShooterSubsystem extends Subsystem {
     	}, new PIDOutput(){
 
 			public void pidWrite(double output) {
-				setPower(output);
+				shooter.set(output);
 			}
     		
     	}, 1/100);
@@ -49,15 +50,25 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public void setPower(double power){
+    	control.disable();
     	shooter.set(power);
     }
     
-    public void setSpeed(double rps) {
-    	shooter.setSetpoint(rps); //TODO multiply by encoder counts per rotation?
+    public PIDController getPIDController(){
+    	return control;
+    }
+    
+    public void setSpeed(double speed) {
+    	control.setSetpoint(speed);
+    	control.enable();
     }
     
     public double getSpeed(){
     	return shooter.getSpeed();
+    }
+    
+    public double getPower(){
+    	return shooter.get();
     }
     
     public static ShooterSubsystem getInstance(){
@@ -65,6 +76,12 @@ public class ShooterSubsystem extends Subsystem {
     		instance = new ShooterSubsystem();
     	}
     	return instance;
+    }
+    
+    public void updateSD(){
+    	SmartDashboard.putNumber("Shooter Speed", getSpeed());
+    	SmartDashboard.putNumber("Shooter Power", getPower());
+    	SmartDashboard.putData("Shooter PID", control);
     }
 
     public void initDefaultCommand() {
