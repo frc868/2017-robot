@@ -17,6 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  	7	8
  *  	9	10
  *  
+ *  RC Servo ports:
+ *  ^directly below pinout^
+ *  	PWM0	PWM1		<---(Programmable Pixy output PWMs)
+ *  	5V		5V			<---(5V of power)
+ *  	GND		GND			<---(Ground)
+ *  
  *  Pixy to I2C ports:
  *  
  *  Pixy port 5 goes to I2c port SCL
