@@ -52,6 +52,10 @@ public class ShooterSubsystem extends Subsystem {
     	shooter.set(power);
     }
     
+    public void setSpeed(double rps) {
+    	//TODO
+    }
+    
     public double getSpeed(){
     	return shooter.getSpeed();
     }
