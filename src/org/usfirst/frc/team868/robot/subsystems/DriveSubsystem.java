@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -42,6 +41,10 @@ public class DriveSubsystem extends Subsystem {
 		return (getRSpeed()+getLSpeed())/2;
 	}
 	
+	public void recordMotors(double speedL, double speedR){
+		
+	}
+	
 	public static DriveSubsystem getInstance(){
 		if(instance == null){
 			instance = new DriveSubsystem();
@@ -52,6 +55,7 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
+		SmartDashboard.putString("write/read for motor record", null);
 	}
 
     public void initDefaultCommand() {
