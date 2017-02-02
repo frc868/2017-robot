@@ -27,21 +27,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  ...		  10	 to			  12
  *  
  */
-public class PixySubsystem extends Subsystem {
+public class IRPixySubsystem extends Subsystem {
 	
-	private static PixySubsystem instance;
+	private static IRPixySubsystem instance;
 	private SerialPort pixyCam;
 	private int lastVal = 0;
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int [] record = new int[6];
-	private int frame = 0;
+	//private int frame = 0;
 	private double xMid;
 	private int yMid;
 	private int width;
 	private int height;
 	
-	private PixySubsystem(){
+	private IRPixySubsystem(){
 		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, Port.kMXP);
 	}
 	
@@ -96,11 +96,11 @@ public class PixySubsystem extends Subsystem {
 	}
 	
 	public void updateSD(){//Updates the SD with the values specified.
-		SmartDashboard.putNumber("Camera Target X", getXAngleOffFromCenter());
-		SmartDashboard.putNumber("Camera Target Y", getYAngleOffFromCenter());
-		SmartDashboard.putNumber("Camera Target Width", getWidthOfTarget());
-		SmartDashboard.putNumber("Camera Target Height", getHeightOfTarget());
-		SmartDashboard.putNumber("Frame count", frame);
+		SmartDashboard.putNumber("IR Target X", getXAngleOffFromCenter());
+		SmartDashboard.putNumber("IR Target Y", getYAngleOffFromCenter());
+		//SmartDashboard.putNumber("IR Camera Target Width", getWidthOfTarget());
+		//SmartDashboard.putNumber("IR Camera Target Height", getHeightOfTarget());
+		//SmartDashboard.putNumber("IR Frame count", frame);
 	}
 	
 	/**
@@ -150,9 +150,9 @@ public class PixySubsystem extends Subsystem {
 		return height;
 	}
 	
-	public static PixySubsystem getInstance(){
+	public static IRPixySubsystem getInstance(){
 		if(instance == null){
-			instance = new PixySubsystem();
+			instance = new IRPixySubsystem();
 		}
 		return instance;
 	}
