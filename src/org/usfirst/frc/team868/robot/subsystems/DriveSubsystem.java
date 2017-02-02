@@ -29,6 +29,11 @@ public class DriveSubsystem extends Subsystem {
 		rightMotor.set(speed);
 	}
 	
+	public void setSpeed(double speed) {
+		setR(speed);
+		setL(speed);
+	}
+		
 	public double getLSpeed(){
 		return leftMotor.getSpeed();
 	}
