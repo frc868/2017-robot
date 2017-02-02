@@ -53,7 +53,7 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public void setSpeed(double rps) {
-    	//TODO
+    	shooter.setSetpoint(rps); //TODO multiply by encoder counts per rotation?
     }
     
     public double getSpeed(){
