@@ -8,6 +8,13 @@ import java.util.ArrayList;
 
 public class RecordMotorMovement {
 	
+	public static ArrayList<Double> DrivePowersR = new ArrayList<Double>();
+	public static ArrayList<Double> DrivePowersL = new ArrayList<Double>();
+	public static ArrayList<Double> GearPowers = new ArrayList<Double>();
+	public static ArrayList<Double> ShooterColPowers = new ArrayList<Double>();
+	public static ArrayList<Double> ShooterPowers = new ArrayList<Double>();
+	public static ArrayList<Double> TurretPowers = new ArrayList<Double>();
+	
 	public void saveFile(double[] powers, String fileLoc){
 		
 	}
@@ -62,7 +69,24 @@ public class RecordMotorMovement {
 			TTurretPowers.add(temp2);
 			count++;
 		}
-		ArrayList<Double> DrivePowersR = TDrivePowersR;
+		
+		for(String string:TDrivePowersR){
+			DrivePowersR.add(StringToDouble.stringToDouble(string));
+		}
+		for(String string:TDrivePowersL){
+			DrivePowersL.add(StringToDouble.stringToDouble(string));
+		}
+		for(String string:TGearPowers){
+			GearPowers.add(StringToDouble.stringToDouble(string));
+		}
+		for(String string:TShooterColPowers){
+			ShooterColPowers.add(StringToDouble.stringToDouble(string));
+		}
+		for(String string:TShooterPowers){
+			ShooterPowers.add(StringToDouble.stringToDouble(string));
+		}
+		for(String string:TTurretPowers){
+			TurretPowers.add(StringToDouble.stringToDouble(string));
+		}
 	}
-
 }
