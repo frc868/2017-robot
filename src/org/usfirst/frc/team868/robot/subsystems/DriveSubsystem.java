@@ -46,6 +46,18 @@ public class DriveSubsystem extends Subsystem {
 		return (getRSpeed()+getLSpeed())/2;
 	}
 	
+	public int getRightEncoder() {
+		return 0;
+	}
+	
+	public int getLeftEncoder() {
+		return 0;
+	}
+	
+	public int getAvgEncoders() {
+		return (getRightEncoder() + getLeftEncoder()) / 2;
+	}
+	
 	public void recordMotors(double speedL, double speedR){
 		
 	}
