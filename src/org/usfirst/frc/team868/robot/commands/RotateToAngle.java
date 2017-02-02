@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -12,40 +11,37 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateUsingPixy extends Command {
-	
-	private PIDController controller;
+public class RotateToAngle extends Command {
+
 	private DriveSubsystem motors;
-	private PixySubsystem camera;
+	private PIDController controller;
 	private final double P = 0, I = 0, D = 0;
 
-    public RotateUsingPixy() {
+    public RotateToAngle(double angle) {
     	motors = DriveSubsystem.getInstance();
-    	camera = PixySubsystem.getInstance();
     	requires(motors);
-    	requires(camera);
     	controller = new PIDController(P, I, D, new PIDSource(){
 
-			public void setPIDSourceType(PIDSourceType pidSource) {}
+		public void setPIDSourceType(PIDSourceType pidSource) {}
 
-			public PIDSourceType getPIDSourceType() {
-				return PIDSourceType.kDisplacement;
-			}
+		public PIDSourceType getPIDSourceType() {
+			return PIDSourceType.kDisplacement;
+		}
 
-			public double pidGet() {
-				return camera.getXAngleOffFromCenter();
-			}
-    		
-    	}, new PIDOutput(){
-    		
-			public void pidWrite(double output) {
-				motors.setL(rangeCheck(output));
-				motors.setR(rangeCheck(-output));
-			}
-    		
-    	});
-    	controller.setAbsoluteTolerance(1);
-    	controller.setToleranceBuffer(3);// I read the docs, and thought it was applicable, may be good to test if it is helpful or not.
+		public double pidGet() {
+			return angle;
+		}
+		
+	}, new PIDOutput(){
+		
+		public void pidWrite(double output) {
+			motors.setL(rangeCheck(output));
+			motors.setR(rangeCheck(-output));
+		}
+		
+	});
+	controller.setAbsoluteTolerance(1);
+	controller.setToleranceBuffer(3);// I read the docs, and thought it was applicable, may be good to test if it is helpful or not.
     }
     
     public double rangeCheck(double power){
@@ -69,7 +65,7 @@ public class RotateUsingPixy extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return controller.onTarget();
     }
 
     // Called once after isFinished returns true
@@ -80,6 +76,5 @@ public class RotateUsingPixy extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

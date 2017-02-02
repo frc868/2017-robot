@@ -1,8 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,37 +8,44 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class UpdateSmartDashboard extends Command {
+public class RotateUsingColorPixy extends Command {
 	
+	private ColorPixySubsystem camera;
 	private Timer time;
+	private double timeout;
 	
 	/**
-	 * Use this command for adding any SmartDashboard output.  e.g. Subsystem get methods
+	 * Uses the Pixy camera to rotate to look directly towards the target 
+	 * Will stop after 'timeout' seconds have passed.
 	 */
-    public UpdateSmartDashboard() {
-    	setRunWhenDisabled(true);
-    	time = new Timer();
+    public RotateUsingColorPixy(double timeout) {
+    	camera = ColorPixySubsystem.getInstance();
+    	requires(camera);
+    	this.timeout = timeout;
+    }
+    
+    /**
+     * Runs this command with a default timeout of 2.5 seconds
+     */
+    public RotateUsingColorPixy(){
+    	this(2.5);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	time = new Timer();
     	time.reset();
     	time.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(time.get() >= 1/200){
-    		ColorPixySubsystem.getInstance().updateSD();
-    		IRPixySubsystem.getInstance().updateSD();
-    		DriveSubsystem.getInstance().updateSD();
-    		time.reset();
-    	}
+    	new RotateToAngle(camera.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return time.get() > timeout;
     }
 
     // Called once after isFinished returns true
@@ -50,5 +55,6 @@ public class UpdateSmartDashboard extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

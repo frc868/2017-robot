@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.PixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -91,7 +92,8 @@ public class Robot extends IterativeRobot {
     }
 	
 	private void initSubsystems() {
-		PixySubsystem.getInstance();
+		ColorPixySubsystem.getInstance();
+		IRPixySubsystem.getInstance();
 		DriveSubsystem.getInstance();
 	}
     
