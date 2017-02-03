@@ -71,6 +71,11 @@ public class ShooterSubsystem extends Subsystem {
     	return shooter.get();
     }
     
+    public double getCounts() {
+    	return shooter.getPosition();
+    	
+    }
+    
     public static ShooterSubsystem getInstance(){
     	if(instance == null){
     		instance = new ShooterSubsystem();

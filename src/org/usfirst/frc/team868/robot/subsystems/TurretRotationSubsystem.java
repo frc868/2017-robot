@@ -27,6 +27,8 @@ public class TurretRotationSubsystem extends Subsystem {
 	//TODO for a PID object should this have a setSetpoint?
 
 	//TODO setPower method?
+	
+	//TODO getPower, getSpeed, getPosition
 
 	public static TurretRotationSubsystem getInstance(){
 		if(instance == null){
