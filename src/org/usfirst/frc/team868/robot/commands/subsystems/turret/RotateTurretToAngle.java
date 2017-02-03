@@ -1,33 +1,26 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ShootCommand extends Command {
+public class RotateTurretToAngle extends Command {
 
-	ShooterSubsystem shooter;
-	double power;
+	TurretRotationSubsystem turret;
+	double angle;
 	
-	public ShootCommand(boolean on) {
-		this(on ? RobotMap.Shoot.SHOOTER_POWER : 0); //TODO fix this
-	}
-	
-    public ShootCommand(double p) {
-        shooter = ShooterSubsystem.getInstance();
-        requires(shooter);
-        power = p;
+    public RotateTurretToAngle(double absoluteAngle) {
+        turret = TurretRotationSubsystem.getInstance();
+        requires(turret);
+        angle = absoluteAngle; 
     }
-    
-    //TODO should be have a factory (public) or a Subsystem initializer (private) or neither?
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.setPower(power);
+    	turret.setPosition(angle); //convert to encoder counts?
     }
 
     // Called repeatedly when this Command is scheduled to run

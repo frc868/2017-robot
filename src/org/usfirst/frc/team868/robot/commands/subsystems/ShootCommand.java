@@ -1,24 +1,33 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearHoldCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class ShootCommand extends Command {
 
-    public GearHoldCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	ShooterSubsystem shooter;
+	double power;
+	
+	public ShootCommand(boolean on) {
+		this(on ? RobotMap.Shoot.SHOOTER_POWER : 0); //TODO fix this
+	}
+	
+    public ShootCommand(double p) {
+        shooter = ShooterSubsystem.getInstance();
+        requires(shooter);
+        power = p;
     }
+    
+    //TODO should be have a factory (public) or a Subsystem initializer (private) or neither?
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	shooter.setPower(power);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -1,26 +1,24 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RotateTurretToAngle extends Command {
-
-	TurretRotationSubsystem turret;
-	double angle;
+public class GearHoldCommand extends Command {
 	
-    public RotateTurretToAngle(double absoluteAngle) {
-        turret = TurretRotationSubsystem.getInstance();
-        requires(turret);
-        angle = absoluteAngle; 
+	private GearCollectorSubsystem holder;
+
+    public GearHoldCommand() {
+    	holder = GearCollectorSubsystem.getInstance();
+    	requires(holder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	turret.setPosition(angle); //convert to encoder counts?
+    	holder.toggleGearCollector();
     }
 
     // Called repeatedly when this Command is scheduled to run

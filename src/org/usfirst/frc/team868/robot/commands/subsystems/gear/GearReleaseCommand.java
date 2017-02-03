@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
 import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 
@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
+public class GearReleaseCommand extends Command {
 	
 	private GearCollectorSubsystem holder;
 
-    public GearCollectorToggleCommand() {
+    public GearReleaseCommand() {
     	holder = GearCollectorSubsystem.getInstance();
     	requires(holder);
     }

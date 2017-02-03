@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
