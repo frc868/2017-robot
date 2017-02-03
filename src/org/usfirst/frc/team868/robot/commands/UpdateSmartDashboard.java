@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
@@ -30,10 +31,15 @@ public class UpdateSmartDashboard extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(time.get() >= 1/200){
+    	// This had been set to go as high as 200 times a second (actually it had been infinite as it was 1/20 which is probably 0)
+    	// I turned it down to 20 times a second max - does it need to be higher? (pkb)
+    	final double refreshRate = (1.0 / 20.0);
+    	
+    	if(time.get() >= refreshRate){
     		ColorPixySubsystem.getInstance().updateSD();
     		IRPixySubsystem.getInstance().updateSD();
     		DriveSubsystem.getInstance().updateSD();
+    		AgitatorSubsystem.getInstance().updateSD();
     		time.reset();
     	}
     }
