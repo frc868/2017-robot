@@ -23,10 +23,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  	5V		5V			<---(5V of power)
  *  	GND		GND			<---(Ground)
  *  
- *  Pixy to I2C ports:
+ *  Pixy to I2C ports: (kOnboard)
  *  
- *  Pixy port 5 goes to I2c port SCL
+ *  Pixy port 5 goes to I2C port SCL
  *  ...		  9		 to			 SDA
+ *  
+ *  OR
+ *  
+ *  Pixy to I2C ports: (kMXP)
+ *  
+ *  Pinout of kMXP ports:
+ *  	33	31	29	27	...	7	5	3	1
+ *  	34	32	30	28	...	8	6	4	2
+ *  
+ *  Pixy port 5 goes to I2C port 32
+ *  ...		  9		 to 		 34
  *  
  */
 public class ColorPixySubsystem extends Subsystem {
