@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateToAngle extends Command {
+public class TurnToAngle extends Command {
 
 	private DriveSubsystem motors;
 	private PIDController controller;
 	private final double P = 0, I = 0, D = 0;
 
-    public RotateToAngle(double angle) {
+    public TurnToAngle(double angle) {
     	motors = DriveSubsystem.getInstance();
     	requires(motors);
     	controller = new PIDController(P, I, D, new PIDSource(){

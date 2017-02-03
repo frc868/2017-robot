@@ -40,7 +40,7 @@ public class RotateUsingIRPixy extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	new RotateToAngle(camera.getXAngleOffFromCenter()).start();
+    	new TurnToAngle(camera.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
