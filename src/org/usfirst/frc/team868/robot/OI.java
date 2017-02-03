@@ -1,9 +1,5 @@
 package org.usfirst.frc.team868.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team868.robot.commands.DriveTrainCommand;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -44,7 +40,6 @@ public class OI {
 	}
 
 	public void initSmartDashboard(){
-		SmartDashboard.putData("DriveTrain", new DriveTrainCommand());
 	}
 
 	public static OI getInstance(){
