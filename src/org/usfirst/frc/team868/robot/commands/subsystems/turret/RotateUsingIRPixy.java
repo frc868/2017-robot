@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -41,7 +40,7 @@ public class RotateUsingIRPixy extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	new TurnToAngle(camera.getXAngleOffFromCenter()).start();
+    	new RotateTurretToAngle(camera.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
