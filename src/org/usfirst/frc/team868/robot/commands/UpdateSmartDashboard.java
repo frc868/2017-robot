@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,6 +34,7 @@ public class UpdateSmartDashboard extends Command {
     protected void execute() {
     	// This had been set to go as high as 200 times a second (actually it had been infinite as it was 1/20 which is probably 0)
     	// I turned it down to 20 times a second max - does it need to be higher? (pkb)
+    	// I don't know, last year's robot was 1/200, so I assumed that it would be fine. (cjd)
     	final double refreshRate = (1.0 / 20.0);
     	
     	if(time.get() >= refreshRate){
@@ -40,6 +42,7 @@ public class UpdateSmartDashboard extends Command {
     		IRPixySubsystem.getInstance().updateSD();
     		DriveSubsystem.getInstance().updateSD();
     		AgitatorSubsystem.getInstance().updateSD();
+    		TurretRotationSubsystem.getInstance().updateSD();
     		time.reset();
     	}
     }
