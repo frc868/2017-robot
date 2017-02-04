@@ -15,6 +15,8 @@ public class LidarSubsystem extends Subsystem {
 	private int distance;
 	private int distanceBuffer;
 	
+	private Thread thread;
+	
 	@Override
 	protected void initDefaultCommand() {}
 	
@@ -24,12 +26,10 @@ public class LidarSubsystem extends Subsystem {
 	 * a thread and runs it.
 	 */
 	private LidarSubsystem() {
-		table = NetworkTable.getTable("LIDAR");
-		
-		
+		table = NetworkTable.getTable("LIDAR"); //TODO change to SmartDashboard?
 		serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
 		
-		this.getThread().start();
+		startThread();
 	}
 	
 	/**
@@ -39,6 +39,20 @@ public class LidarSubsystem extends Subsystem {
 	 */
 	public static LidarSubsystem getInstance() {
 		return instance == null ? instance = new LidarSubsystem() : instance;
+	}
+	
+	public void startThread() {
+		if(thread == null) {
+			thread = getThread();
+			thread.start();
+		}
+	}
+	
+	public void stopThread() {
+		if(thread != null) {
+			thread.interrupt();
+			thread = null;
+		}
 	}
 	
 	/**
