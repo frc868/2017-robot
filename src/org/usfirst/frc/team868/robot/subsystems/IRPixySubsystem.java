@@ -28,23 +28,51 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  
  */
 public class IRPixySubsystem extends Subsystem {
-	
+
 	private static IRPixySubsystem instance;
 	private SerialPort pixyCam;
 	private int lastVal = 0;
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int [] record = new int[6];
-	//private int frame = 0;
+	private int frame = 0;
 	private double xMid;
 	private int yMid;
 	private int width;
 	private int height;
-	
+
+	private Thread thread;
+
 	private IRPixySubsystem(){
 		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, Port.kMXP);
+		startThread();
+	}
+
+	public void startThread() {
+		if(thread != null) return;
+
+		thread = createThread();
+		thread.start();
 	}
 	
+	public void stopThread() {
+		if(thread == null) return;
+		
+		thread.interrupt();
+		thread = null;
+	}
+
+	private Thread createThread() {
+		return new Thread() {
+			@Override
+			public void run() {
+				while(!isInterrupted()) {
+					getValues();
+				}
+			}
+		};
+	}
+
 	public void getValues(){//Call this method to update all of the data obtained from the Pixy
 		byte [] input;
 		try{
@@ -62,7 +90,7 @@ public class IRPixySubsystem extends Subsystem {
 			processBytesRecieved(input);
 		}
 	}
-	
+
 	private void processBytesRecieved(byte[] input) {//See getValues()
 		for(int i = 0; i < input.length; i++){
 			processByte(input[i]);
@@ -94,15 +122,15 @@ public class IRPixySubsystem extends Subsystem {
 		width = record[4];
 		height = record[5];
 	}
-	
+
 	public void updateSD(){//Updates the SD with the values specified.
 		SmartDashboard.putNumber("IR Target X", getXAngleOffFromCenter());
 		SmartDashboard.putNumber("IR Target Y", getYAngleOffFromCenter());
-		//SmartDashboard.putNumber("IR Camera Target Width", getWidthOfTarget());
-		//SmartDashboard.putNumber("IR Camera Target Height", getHeightOfTarget());
-		//SmartDashboard.putNumber("IR Frame count", frame);
+		SmartDashboard.putNumber("IR Camera Target Width", getWidthOfTarget());
+		SmartDashboard.putNumber("IR Camera Target Height", getHeightOfTarget());
+		SmartDashboard.putNumber("IR Frame count", frame);
 	}
-	
+
 	/**
 	 * Returns the angle in degrees off from the x-axis center the target is. 
 	 * Negative degrees means left, positive means right, 
@@ -115,7 +143,7 @@ public class IRPixySubsystem extends Subsystem {
 			return xMid;
 		}
 	}
-	
+
 	/**
 	 * Returns the angle in degrees off from the y-axis center the target is. 
 	 * Negative degrees means below, positive means above, 
@@ -128,28 +156,28 @@ public class IRPixySubsystem extends Subsystem {
 			return yMid;
 		}
 	}
-	
+
 	/**
 	 * Returns the size of the current target in pixels.
 	 */
 	public int getSizeOfTarget(){
 		return width*height;
 	}
-	
+
 	/**
 	 * Returns the width of the current target in pixels.
 	 */
 	public int getWidthOfTarget(){
 		return width;
 	}
-	
+
 	/**
 	 * Returns the height of the current target in pixels.
 	 */
 	public int getHeightOfTarget(){
 		return height;
 	}
-	
+
 	public static IRPixySubsystem getInstance(){
 		if(instance == null){
 			instance = new IRPixySubsystem();
@@ -157,8 +185,8 @@ public class IRPixySubsystem extends Subsystem {
 		return instance;
 	}
 
-    public void initDefaultCommand() {
-    	
-    }
+	public void initDefaultCommand() {
+
+	}
 }
 
