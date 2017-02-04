@@ -24,6 +24,8 @@ public class LidarSubsystem extends Subsystem {
 	 */
 	private LidarSubsystem() {
 		table = NetworkTable.getTable("LIDAR");
+		
+		
 		serial = new SerialPort(115200, Port.kUSB);
 		
 		this.getThread().start();
@@ -109,7 +111,7 @@ public class LidarSubsystem extends Subsystem {
 	 * Updates the NetworkTable with the 
 	 * most recent distance information
 	 */
-	public void updateTable() {
+	public void updateSmartDashboard() {
 		table.putNumber("LIDAR Distance", distance);
 	}
 }
