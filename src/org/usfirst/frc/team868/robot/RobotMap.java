@@ -1,4 +1,9 @@
 package org.usfirst.frc.team868.robot;
+
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.SerialPort;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -8,7 +13,7 @@ package org.usfirst.frc.team868.robot;
 
 public interface RobotMap {
 	
-	public interface Drive{
+	public interface Drive {
 		final int LEFT_MOTOR = 4;
 		final int RIGHT_MOTOR = 5;
 		final boolean LEFT_IS_INVERTED = false;
@@ -18,20 +23,20 @@ public interface RobotMap {
 		final double COUNTS_PER_CM = 1; //TODO calculate
 	}
 	
-	public interface Shoot{
+	public interface Shoot {
 		final int SHOOTER_MOTOR = 8;
 		final boolean IS_INVERTED = false;
 		final double SHOOTER_POWER = 0.8;
 		//2 shooter motors, using CANTalons
 	}
 	
-	public interface Turret{
+	public interface Turret {
 		final int TURRET_MOTOR = 9;
 		final boolean IS_INVERTED = false;
 		//1 turret motor, using a CAN speed controller from mindstorm?
 	}
 	
-	public interface Feeder{
+	public interface Feeder {
 		final int AGITATOR_MOTOR = 6;
 		final boolean AGITATOR_IS_INVERTED = false;
 		final double AGITATOR_SPEED = 0.8;
@@ -43,24 +48,27 @@ public interface RobotMap {
 		//1 conveyor belt motor, using a Spark
 	}
 	
-	public interface Climber{
+	public interface Climber {
 		final int CLIMBER_MOTOR = 10;
 		final boolean IS_INVERTED = false;
 		//1 climber motor, using a CANTalon
 	}
 	
-	public interface GearCollector{
+	public interface GearCollector {
 		final int GEAR_SOLENOID = 0;
 
 		//2 gear collector solenoids
 	}
 	
-	public interface Pixy{
+	public interface Pixy {
 		final int CAM_WIDTH = 318; //in pixels
 		final int CAM_HEIGHT = 198;//in pixels
 		final int CAM_X_ANGLE = 80;//in degrees
 		final int CAM_Y_ANGLE = 40;//in degrees
 		final int BAUDRATE = 19200;//
+		
+		final SerialPort.Port IR_PORT = SerialPort.Port.kMXP;
+		final I2C.Port COLOR_PORT = I2C.Port.kOnboard;
 	}
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
@@ -73,11 +81,16 @@ public interface RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	public static class Joystick{
+	public static class Joystick {
 		public static final int PORT_NUMBER = 0;
 		public static final int LEFT_Y = 1;
 		public static final int RIGHT_Y = 5;
 		public static final int LEFT_X = 0;
 		public static final int RIGHT_X = 4;
+	}
+	
+	public interface LIDAR {
+		final SerialPort.Port PORT = SerialPort.Port.kUSB;
+		final int BAUD = 9600;
 	}
 }

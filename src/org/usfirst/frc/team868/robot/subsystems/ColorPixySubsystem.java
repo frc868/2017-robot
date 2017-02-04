@@ -55,7 +55,7 @@ public class ColorPixySubsystem extends Subsystem {
 	private int height;
 	
 	private ColorPixySubsystem(){
-		pixyCam = new I2C(I2C.Port.kOnboard, 0x5);
+		pixyCam = new I2C(RobotMap.Pixy.COLOR_PORT, 0x5);
 	}
 	
 	public void getValues(){//Call this method to update all of the data obtained from the Pixy

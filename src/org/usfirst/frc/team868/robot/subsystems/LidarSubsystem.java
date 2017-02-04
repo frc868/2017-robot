@@ -1,7 +1,8 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -26,7 +27,7 @@ public class LidarSubsystem extends Subsystem {
 		table = NetworkTable.getTable("LIDAR");
 		
 		
-		serial = new SerialPort(115200, Port.kUSB);
+		serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
 		
 		this.getThread().start();
 	}

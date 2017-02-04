@@ -3,7 +3,6 @@ package org.usfirst.frc.team868.robot.subsystems;
 import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -44,7 +43,7 @@ public class IRPixySubsystem extends Subsystem {
 	private Thread thread;
 
 	private IRPixySubsystem(){
-		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, Port.kMXP);
+		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, RobotMap.Pixy.IR_PORT);
 		startThread();
 	}
 
