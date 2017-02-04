@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * The Camera is responsible for autonomous vision processing on the robot.
+ * It can also be used as live video feed to the Smart Dashboard as an aid
+ * for drivers and operators. 
  */
 public class CameraSubsystem extends Subsystem {
 	
@@ -61,6 +63,20 @@ public class CameraSubsystem extends Subsystem {
 		visionThread.start();
 	}
 	
+	/* TODO: Add a getInstance method for the PixiCam. It will be mounted
+	 * on the turret shooter and can locate the reflective tape
+	 * on the boilers. Once the boiler is located, the {@link TurretRotationSubsystem}
+	 * can rotate the turret to aim at the goal.
+	 * */
+	
+	/**
+	 * Return an instance of the USB camera mounted on the rear of the robot.
+	 * 
+	 * @deprecated All ground collection systems have been removed, so this
+	 * camera will most likely not be added to the final robot.
+	 * 
+	 * @return An instance of the rear-mounted USB camera.
+	 * */
 	public static CameraSubsystem getRearInstance(){
 		if(rearInstance == null){
 			UsbCamera cam = new UsbCamera("rear", 0);
@@ -70,6 +86,14 @@ public class CameraSubsystem extends Subsystem {
 		return rearInstance;
 	}
 	
+	/**
+	 * Return and instance of the Axis Camera that is mounted on the
+	 * gear collector. This camera will be used by the drivers to align
+	 * the robot while collecting gears from the feeder station, and
+	 * so sophisticated vision processing will likely not be required.
+	 * 
+	 * @return An instance of the Axis camera on the gear collector.
+	 */
 	public static CameraSubsystem getFrontInstance(){
 		if(frontInstance == null){
 			AxisCamera cam = new AxisCamera("front", "10.8.68.11");
@@ -84,4 +108,3 @@ public class CameraSubsystem extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 }
-
