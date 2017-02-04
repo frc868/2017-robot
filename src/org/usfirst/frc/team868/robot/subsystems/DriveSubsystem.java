@@ -72,7 +72,7 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
-		SmartDashboard.putString("write/read for motor record", null);
+//		SmartDashboard.putString("write/read for motor record", null);
 	}
 
     public void initDefaultCommand() {
