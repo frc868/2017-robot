@@ -84,7 +84,7 @@ public class LidarSubsystem extends Subsystem {
 			@Override
 			public void run() {
 				while (!isInterrupted()) {
-					if (bytesAvailable()) {
+					if (bytesAvailable()) { //TODO remove if, just updateDistance() then delay
 						updateDistance();
 					} else {
 						try {
@@ -112,7 +112,7 @@ public class LidarSubsystem extends Subsystem {
 	 * @return
 	 */
 	private boolean bytesAvailable() {
-		return serial.getBytesReceived() > 2;
+		return isConnected() && serial.getBytesReceived() > 0;
 	}
 
 	/**
@@ -120,8 +120,8 @@ public class LidarSubsystem extends Subsystem {
 	 * exists, and sets the value of distance
 	 */
 	private void updateDistance() {
-		while(serial.getBytesReceived() > 0) {
-			byte read = serial.read(1)[0];
+		while(bytesAvailable()) {
+			byte read = readByte();
 
 			if (read == 13) {
 				//CR
@@ -138,6 +138,14 @@ public class LidarSubsystem extends Subsystem {
 			}
 		} //end while
 	} //end method
+	
+	private byte readByte() {
+		byte b = 0;
+		if(bytesAvailable() && isConnected()) {
+			return serial.read(1)[0];
+		} 
+		return b;
+	}
 
 	/**
 	 * Updates the NetworkTable with the 
