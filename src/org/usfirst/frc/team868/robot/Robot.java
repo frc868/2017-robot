@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 
-    	CameraSubsystem.getRearInstance();
+    	CameraSubsystem.getFrontInstance();
     	initSubsystems();
 		OI.getInstance();
     	new UpdateSmartDashboard().start();
