@@ -1,7 +1,8 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -14,6 +15,8 @@ public class LidarSubsystem extends Subsystem {
 	private int distance;
 	private int distanceBuffer;
 	
+	private Thread thread;
+	
 	@Override
 	protected void initDefaultCommand() {}
 	
@@ -23,10 +26,10 @@ public class LidarSubsystem extends Subsystem {
 	 * a thread and runs it.
 	 */
 	private LidarSubsystem() {
-		table = NetworkTable.getTable("LIDAR");
-		serial = new SerialPort(115200, Port.kUSB);
+		table = NetworkTable.getTable("LIDAR"); //TODO change to SmartDashboard?
+		serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
 		
-		this.getThread().start();
+		startThread();
 	}
 	
 	/**
@@ -36,6 +39,20 @@ public class LidarSubsystem extends Subsystem {
 	 */
 	public static LidarSubsystem getInstance() {
 		return instance == null ? instance = new LidarSubsystem() : instance;
+	}
+	
+	public void startThread() {
+		if(thread == null) {
+			thread = getThread();
+			thread.start();
+		}
+	}
+	
+	public void stopThread() {
+		if(thread != null) {
+			thread.interrupt();
+			thread = null;
+		}
 	}
 	
 	/**
@@ -109,7 +126,7 @@ public class LidarSubsystem extends Subsystem {
 	 * Updates the NetworkTable with the 
 	 * most recent distance information
 	 */
-	public void updateTable() {
+	public void updateSmartDashboard() {
 		table.putNumber("LIDAR Distance", distance);
 	}
 }

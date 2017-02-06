@@ -1,13 +1,10 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class UpdateSmartDashboard extends Command {
 	
 	private Timer time;
+	private int counts;
 	
 	/**
 	 * Use this command for adding any SmartDashboard output.  e.g. Subsystem get methods
@@ -38,12 +36,17 @@ public class UpdateSmartDashboard extends Command {
     	final double refreshRate = (1.0 / 20.0);
     	
     	if(time.get() >= refreshRate){
-    		ColorPixySubsystem.getInstance().updateSD();
+//    		ColorPixySubsystem.getInstance().updateSD();
     		IRPixySubsystem.getInstance().updateSD();
-    		DriveSubsystem.getInstance().updateSD();
-    		AgitatorSubsystem.getInstance().updateSD();
-    		TurretRotationSubsystem.getInstance().updateSD();
+//    		DriveSubsystem.getInstance().updateSD();
+//    		AgitatorSubsystem.getInstance().updateSD();
+//    		TurretRotationSubsystem.getInstance().updateSD();
+//    		LidarSubsystem.getInstance().updateSmartDashboard();
     		time.reset();
+    		
+    		counts++;
+    		SmartDashboard.putNumber("Update SD Counts", counts);
+    		//Debug
     	}
     }
 
