@@ -11,15 +11,15 @@ public class LidarSubsystem extends Subsystem {
 	private static LidarSubsystem instance;
 	private NetworkTable table;
 	private SerialPort serial;
-	
+
 	private int distance;
 	private int distanceBuffer;
-	
+
 	private Thread thread;
-	
+
 	@Override
 	protected void initDefaultCommand() {}
-	
+
 	/**
 	 * Constructor. Creates a network table
 	 * and a serial port object, and then creates
@@ -27,11 +27,11 @@ public class LidarSubsystem extends Subsystem {
 	 */
 	private LidarSubsystem() {
 		table = NetworkTable.getTable("LIDAR"); //TODO change to SmartDashboard?
-		serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
-		
+
+		connect();
 		startThread();
 	}
-	
+
 	/**
 	 * Gets the subsystem instance
 	 * 
@@ -40,21 +40,38 @@ public class LidarSubsystem extends Subsystem {
 	public static LidarSubsystem getInstance() {
 		return instance == null ? instance = new LidarSubsystem() : instance;
 	}
-	
+
 	public void startThread() {
 		if(thread == null) {
 			thread = getThread();
 			thread.start();
 		}
 	}
-	
+
 	public void stopThread() {
 		if(thread != null) {
 			thread.interrupt();
 			thread = null;
 		}
 	}
-	
+
+	public void connect() {
+		if(serial == null) {
+			serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
+		}
+	}
+
+	public boolean isConnected() {
+		return serial != null;
+	}
+
+	public void disconnect() {
+		if(serial != null) {
+			serial.free();
+			serial = null;
+		}
+	}
+
 	/**
 	 * Creates a runnable instance of the
 	 * LIDAR distance reading thread. Loops and
@@ -87,7 +104,7 @@ public class LidarSubsystem extends Subsystem {
 	public int getDistance() {
 		return distance;
 	}
-	
+
 	/**
 	 * Whether more than two 
 	 * bytes are available to read
@@ -105,7 +122,7 @@ public class LidarSubsystem extends Subsystem {
 	private void updateDistance() {
 		while(serial.getBytesReceived() > 0) {
 			byte read = serial.read(1)[0];
-			
+
 			if (read == 13) {
 				//CR
 			} else if (read == 10) {
@@ -121,7 +138,7 @@ public class LidarSubsystem extends Subsystem {
 			}
 		} //end while
 	} //end method
-	
+
 	/**
 	 * Updates the NetworkTable with the 
 	 * most recent distance information
