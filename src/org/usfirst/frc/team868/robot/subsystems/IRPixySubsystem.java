@@ -26,6 +26,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  ...		  10	 to			  12
  *  
  */
+
+/*
+ * Distance		Width		Height
+ * 4ft			64 or 65	16 or 17
+ * 5ft			64			17 or 18
+ * 6ft			54			14
+ * 7ft			47,48,53	13,41
+ * 8ft			46,47		36
+ * 9ft			42			33
+ * 10ft			37,38		30
+ * 11ft			34,35		27
+ * 12ft			33			26
+ * 13ft			29			23
+ * 14ft			26			22
+ * 15ft			26			20
+ * 16ft			24			19
+ * 17ft			22			18,19
+ * 18ft			21			17
+ * 19ft			18,19		16
+ */
 public class IRPixySubsystem extends Subsystem {
 
 	private static IRPixySubsystem instance;
