@@ -2,9 +2,12 @@ package randomUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RecordMotorMovement {
 	
@@ -15,16 +18,50 @@ public class RecordMotorMovement {
 	public static ArrayList<Double> ShooterPowers = new ArrayList<Double>();
 	public static ArrayList<Double> TurretPowers = new ArrayList<Double>();
 	
-	public void saveFile(double[] powers, String fileLoc){
+	public void saveFile(String fileLoc) throws IOException{
+		FileWriter output = new FileWriter(fileLoc);
+		ArrayList<String> filemod = new ArrayList<String>(Arrays.asList(fileLoc.split("")));
+		FileReader incheck = new FileReader(fileLoc);
+		int check = incheck.read();
+		boolean mknewfl = false;
+		Integer counting = 1;
+		while(mknewfl){
+			if(check != -1){
+				filemod.add(filemod.size() - 4, "(");
+				filemod.add(filemod.size() - 4, counting.toString());
+				filemod.add(filemod.size() - 4, ")");
+				for(String temp:filemod){
+					fileLoc = fileLoc + temp;
+				}
+			}else{
+				mknewfl = true;
+			}
+			output = new FileWriter(fileLoc);
+			incheck = new FileReader(fileLoc);
+			check = incheck.read();
+			counting++;
+		}
+		String outstr = "";
+		for(int count = 0; count < DrivePowersR.size();){
+			outstr = outstr + (DrivePowersR.get(count)+";"+"\t"+DrivePowersL.get(count)+";"+"\t"+
+					GearPowers.get(count)+";"+"\t"+ShooterColPowers.get(count)+";"+"\t"+ShooterPowers.get(count)+";"+
+					"\t"+"TurretPowers"+";"+"\r");
+			count++;
+		}
+		output.write(outstr);
+	}
+	
+	public void RecordMotors(){
 		
 	}
 	
 	public void readFile(String fileLoc) throws IOException{
 		InputStream inPower = null;
+		FileWriter mkfl = null;
 		try{
 			inPower = new FileInputStream(fileLoc);
 		}catch(FileNotFoundException e1){
-			e1.printStackTrace();
+			mkfl = new FileWriter(fileLoc);
 		}
 		ArrayList<Character> powers = new ArrayList<Character>();
 		ArrayList<String> TDrivePowersR = new ArrayList<String>();
