@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -37,6 +38,7 @@ public class UpdateSmartDashboard extends Command {
     	
     	if(time.get() >= refreshRate){
 //    		ColorPixySubsystem.getInstance().updateSD();
+    		GyroSubsystem.getInstance().updateSD();
     		IRPixySubsystem.getInstance().updateSD();
 //    		DriveSubsystem.getInstance().updateSD();
 //    		AgitatorSubsystem.getInstance().updateSD();

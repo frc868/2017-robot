@@ -48,14 +48,42 @@ public class ColorPixySubsystem extends Subsystem {
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int [] record = new int[6];
-	//private int frame = 0;
-	private double xMid;
-	private int yMid;
-	private int width;
-	private int height;
+	//volatile private int frame = 0;
+	volatile private double xMid;
+	volatile private int yMid;
+	volatile private int width;
+	volatile private int height;
+	
+	private Thread thread;
 	
 	private ColorPixySubsystem(){
 		pixyCam = new I2C(RobotMap.Pixy.COLOR_PORT, 0x5);
+		startThread();
+	}
+	
+	public void startThread() {
+		if(thread != null) return;
+
+		thread = createThread();
+		thread.start();
+	}
+	
+	public void stopThread() {
+		if(thread == null) return;
+		
+		thread.interrupt();
+		thread = null;
+	}
+
+	private Thread createThread() {
+		return new Thread() {
+			@Override
+			public void run() {
+				while(!isInterrupted()) {
+					getValues();
+				}
+			}
+		};
 	}
 	
 	public void getValues(){//Call this method to update all of the data obtained from the Pixy

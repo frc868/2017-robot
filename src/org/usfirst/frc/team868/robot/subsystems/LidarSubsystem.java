@@ -12,7 +12,7 @@ public class LidarSubsystem extends Subsystem {
 	private NetworkTable table;
 	private SerialPort serial;
 
-	private int distance;
+	volatile private int distance;
 	private int distanceBuffer;
 
 	private Thread thread;

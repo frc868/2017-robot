@@ -26,6 +26,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  ...		  10	 to			  12
  *  
  */
+
+/*
+ * Distance		Width		Height
+ * 4ft			64 or 65	16 or 17
+ * 5ft			64			17 or 18
+ * 6ft			54			14
+ * 7ft			47,48,53	13,41
+ * 8ft			46,47		36
+ * 9ft			42			33
+ * 10ft			37,38		30
+ * 11ft			34,35		27
+ * 12ft			33			26
+ * 13ft			29			23
+ * 14ft			26			22
+ * 15ft			26			20
+ * 16ft			24			19
+ * 17ft			22			18,19
+ * 18ft			21			17
+ * 19ft			18,19		16
+ */
 public class IRPixySubsystem extends Subsystem {
 
 	private static IRPixySubsystem instance;
@@ -34,11 +54,11 @@ public class IRPixySubsystem extends Subsystem {
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int [] record = new int[6];
-	private int frame = 0;
-	private double xMid;
-	private int yMid;
-	private int width;
-	private int height;
+	//volatile private int frame = 0;
+	volatile private double xMid;
+	volatile private int yMid;
+	volatile private int width;
+	volatile private int height;
 
 	private Thread thread;
 
@@ -127,7 +147,7 @@ public class IRPixySubsystem extends Subsystem {
 		SmartDashboard.putNumber("IR Target Y", getYAngleOffFromCenter());
 		SmartDashboard.putNumber("IR Camera Target Width", getWidthOfTarget());
 		SmartDashboard.putNumber("IR Camera Target Height", getHeightOfTarget());
-		SmartDashboard.putNumber("IR Frame count", frame);
+		//SmartDashboard.putNumber("IR Frame count", frame);
 	}
 
 	/**
