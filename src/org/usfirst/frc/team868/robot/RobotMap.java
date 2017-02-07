@@ -66,8 +66,14 @@ public interface RobotMap {
 		final int CAM_Y_ANGLE = 40;//in degrees
 		final int BAUDRATE = 19200;//
 		
-		final SerialPort.Port IR_PORT = SerialPort.Port.kMXP;
-		final I2C.Port COLOR_PORT = I2C.Port.kOnboard;
+		/**
+		 * 0 = Serial MXP, 1 = I2C Onboard, 2 = I2C MXP
+		 */
+		final int IR_PORT_TYPE = 0;
+		final int COLOR_PORT_TYPE = 1;
+		
+		final int IR_I2C_VALUE = 0x5;
+		final int COLOR_I2C_VALUE = 0x5;
 	}
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
