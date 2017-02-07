@@ -48,11 +48,11 @@ public class ColorPixySubsystem extends Subsystem {
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int [] record = new int[6];
-	//private int frame = 0;
-	private double xMid;
-	private int yMid;
-	private int width;
-	private int height;
+	//volatile private int frame = 0;
+	volatile private double xMid;
+	volatile private int yMid;
+	volatile private int width;
+	volatile private int height;
 	
 	private Thread thread;
 	
