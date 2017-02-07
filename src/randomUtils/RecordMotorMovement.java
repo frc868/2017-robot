@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+
 public class RecordMotorMovement {
 	
 	public static ArrayList<Double> DrivePowersR = new ArrayList<Double>();
@@ -52,6 +54,8 @@ public class RecordMotorMovement {
 	}
 	
 	public void RecordMotors(){
+		DrivePowersR.add(DriveSubsystem.getInstance().getRSpeed());
+		DrivePowersL.add(DriveSubsystem.getInstance().getLSpeed());
 		
 	}
 	
