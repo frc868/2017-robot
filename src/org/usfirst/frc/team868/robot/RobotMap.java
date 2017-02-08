@@ -20,18 +20,24 @@ public interface RobotMap {
 		//6 drive train motors, using Sparks
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 1; //TODO calculate
+		final int ENCODER_A = 1;
+		final int ENCODER_B = 2;
 	}
 	
 	public interface Shoot {
 		final int SHOOTER_MOTOR = 8;
 		final boolean IS_INVERTED = false;
 		final double SHOOTER_POWER = 0.8;
+		final int ENCODER_A = 3;
+		final int ENCODER_B = 4;
 		//2 shooter motors, using CANTalons
 	}
 	
 	public interface Turret {
 		final int TURRET_MOTOR = 9;
 		final boolean IS_INVERTED = false;
+		final int ENCODER_A = 5;
+		final int ENCODER_B = 6;
 		//1 turret motor, using a CAN speed controller from mindstorm?
 	}
 	

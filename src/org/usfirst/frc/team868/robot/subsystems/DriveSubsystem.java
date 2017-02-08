@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,12 +16,16 @@ public class DriveSubsystem extends Subsystem {
 	private static DriveSubsystem instance;
 	private Spark leftMotor;
 	private Spark rightMotor;
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 	
 	private DriveSubsystem(){
 		leftMotor = new Spark(RobotMap.Drive.LEFT_MOTOR);
 		rightMotor = new Spark(RobotMap.Drive.RIGHT_MOTOR);
 		leftMotor.setInverted(RobotMap.Drive.LEFT_IS_INVERTED);
 		rightMotor.setInverted(RobotMap.Drive.RIGHT_IS_INVERTED);
+		leftEncoder = new Encoder(RobotMap.Drive.ENCODER_L_A, RobotMap.Drive.ENCODER_L_B);
+		rightEncoder = new Encoder(RobotMap.Drive.ENCODER_R_A, RobotMap.Drive.ENCODER_R_B);
 	}
 	
 	public void setL(double speed){
@@ -36,11 +42,11 @@ public class DriveSubsystem extends Subsystem {
 	}
 		
 	public double getLSpeed(){
-		return leftMotor.getSpeed();
+		return leftEncoder.getRate();
 	}
 	
 	public double getRSpeed(){
-		return rightMotor.getSpeed();
+		return rightEncoder.getRate();
 	}
 	
 	public double getAvgSpeed(){
