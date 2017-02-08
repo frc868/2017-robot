@@ -10,10 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
-public class RecordMotorMovement {
+public class RecordMotorMovement{
+	
+	private static RecordMotorMovement instance;
 	
 	public static ArrayList<Double> DrivePowersR = new ArrayList<Double>();
 	public static ArrayList<Double> DrivePowersL = new ArrayList<Double>();
@@ -131,5 +132,10 @@ public class RecordMotorMovement {
 		for(String string:TTurretPowers){
 			TurretPowers.add(StringToDouble.stringToDouble(string));
 		}
+	}
+	
+	public static RecordMotorMovement getInstance(){
+		if(instance == null)instance = new RecordMotorMovement();
+		return instance;
 	}
 }

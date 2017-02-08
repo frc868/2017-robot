@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import randomUtils.RecordMotorMovement;
 
 /**
  *
@@ -58,8 +59,8 @@ public class DriveSubsystem extends Subsystem {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
 	}
 	
-	public void recordMotors(double speedL, double speedR){
-		
+	public void recordMotor(){
+		RecordMotorMovement.getInstance().RecordMotors();
 	}
 	
 	public static DriveSubsystem getInstance(){
