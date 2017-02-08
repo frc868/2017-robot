@@ -20,8 +20,10 @@ public interface RobotMap {
 		//6 drive train motors, using Sparks
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 1; //TODO calculate
-		final int ENCODER_A = 1;
-		final int ENCODER_B = 2;
+		final int ENCODER_L_A = 5;
+		final int ENCODER_L_B = 6;
+		final int ENCODER_R_A = 7;
+		final int ENCODER_R_B = 8;
 	}
 	
 	public interface Shoot {
@@ -36,8 +38,8 @@ public interface RobotMap {
 	public interface Turret {
 		final int TURRET_MOTOR = 9;
 		final boolean IS_INVERTED = false;
-		final int ENCODER_A = 5;
-		final int ENCODER_B = 6;
+		final int ENCODER_A = 1;
+		final int ENCODER_B = 2;
 		//1 turret motor, using a CAN speed controller from mindstorm?
 	}
 	
@@ -85,8 +87,6 @@ public interface RobotMap {
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
-	public static final int PWM_DRIVE_LEFT = 2;
-	public static final int PWM_DRIVE_RIGHT = 3;
     
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
