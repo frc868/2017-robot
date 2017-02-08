@@ -69,14 +69,14 @@ public class ColorPixySubsystem extends Subsystem {
 		startThread();
 	}
 	
-	public void startThread() {
+	synchronized public void startThread() {
 		if(thread != null) return;
 
 		thread = createThread();
 		thread.start();
 	}
 	
-	public void stopThread() {
+	synchronized public void stopThread() {
 		if(thread == null) return;
 		
 		thread.interrupt();
@@ -94,7 +94,7 @@ public class ColorPixySubsystem extends Subsystem {
 		};
 	}
 	
-	public void getValues(){//Call this method to update all of the data obtained from the Pixy
+	synchronized public void getValues(){//Call this method to update all of the data obtained from the Pixy
 		byte [] input = new byte [14];
 		try{
 			if(RobotMap.Pixy.COLOR_PORT_TYPE == 0){
@@ -162,7 +162,7 @@ public class ColorPixySubsystem extends Subsystem {
 	 * zero means it is either centered or cannot be found.
 	 * @return
 	 */
-	public double getXAngleOffFromCenter(){
+	synchronized public double getXAngleOffFromCenter(){
 		if(xMid != 0){
 			return (xMid - (RobotMap.Pixy.CAM_WIDTH/2))*(RobotMap.Pixy.CAM_X_ANGLE/2)/RobotMap.Pixy.CAM_WIDTH;
 		}else{
@@ -175,7 +175,7 @@ public class ColorPixySubsystem extends Subsystem {
 	 * Negative degrees means below, positive means above, 
 	 * zero means it is either centered or cannot be found.
 	 */
-	public double getYAngleOffFromCenter(){
+	synchronized public double getYAngleOffFromCenter(){
 		if(yMid != 0){
 			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
 		}else{
@@ -186,25 +186,25 @@ public class ColorPixySubsystem extends Subsystem {
 	/**
 	 * Returns the size of the current target in pixels.
 	 */
-	public int getSizeOfTargetInPixels(){
+	synchronized public int getSizeOfTargetInPixels(){
 		return width*height;
 	}
 	
 	/**
 	 * Returns the width of the current target in pixels.
 	 */
-	public int getWidthOfTarget(){
+	synchronized public int getWidthOfTarget(){
 		return width;
 	}
 	
 	/**
 	 * Returns the height of the current target in pixels.
 	 */
-	public int getHeightOfTarget(){
+	synchronized public int getHeightOfTarget(){
 		return height;
 	}
 	
-	public static ColorPixySubsystem getInstance(){
+	synchronized public static ColorPixySubsystem getInstance(){
 		if(instance == null){
 			instance = new ColorPixySubsystem();
 		}return instance;
