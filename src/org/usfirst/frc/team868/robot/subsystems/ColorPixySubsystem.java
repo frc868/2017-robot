@@ -5,6 +5,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,7 +44,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ColorPixySubsystem extends Subsystem {
 	
 	private static ColorPixySubsystem instance;
-	private I2C pixyCam;
+	private SerialPort pixyCamS;
+	private I2C pixyCamI;
 	private int lastVal = 0;
 	private boolean recordStarted = false;
 	private int bytesRecorded;
@@ -57,18 +59,24 @@ public class ColorPixySubsystem extends Subsystem {
 	private Thread thread;
 	
 	private ColorPixySubsystem(){
-		pixyCam = new I2C(RobotMap.Pixy.COLOR_PORT, 0x5);
+		if(RobotMap.Pixy.COLOR_PORT_TYPE == 0){
+			pixyCamS = new SerialPort(RobotMap.Pixy.BAUDRATE, SerialPort.Port.kMXP);
+		}else if(RobotMap.Pixy.COLOR_PORT_TYPE == 1){
+			pixyCamI = new I2C(I2C.Port.kOnboard, RobotMap.Pixy.COLOR_I2C_VALUE);
+		}else{
+			pixyCamI = new I2C(I2C.Port.kMXP, RobotMap.Pixy.COLOR_I2C_VALUE);
+		}
 		startThread();
 	}
 	
-	public void startThread() {
+	synchronized public void startThread() {
 		if(thread != null) return;
 
 		thread = createThread();
 		thread.start();
 	}
 	
-	public void stopThread() {
+	synchronized public void stopThread() {
 		if(thread == null) return;
 		
 		thread.interrupt();
@@ -86,10 +94,14 @@ public class ColorPixySubsystem extends Subsystem {
 		};
 	}
 	
-	public void getValues(){//Call this method to update all of the data obtained from the Pixy
+	synchronized public void getValues(){//Call this method to update all of the data obtained from the Pixy
 		byte [] input = new byte [14];
 		try{
-			pixyCam.readOnly(input, 14);//Basically the only line of code, aside from porting that differs between the 2 Pixy cameras.
+			if(RobotMap.Pixy.COLOR_PORT_TYPE == 0){
+				input = pixyCamS.read(pixyCamS.getBytesReceived());
+			}else{
+				pixyCamI.readOnly(input, 14);
+			}
 		}catch(Throwable t){
 			return;
 		}
@@ -150,7 +162,7 @@ public class ColorPixySubsystem extends Subsystem {
 	 * zero means it is either centered or cannot be found.
 	 * @return
 	 */
-	public double getXAngleOffFromCenter(){
+	synchronized public double getXAngleOffFromCenter(){
 		if(xMid != 0){
 			return (xMid - (RobotMap.Pixy.CAM_WIDTH/2))*(RobotMap.Pixy.CAM_X_ANGLE/2)/RobotMap.Pixy.CAM_WIDTH;
 		}else{
@@ -163,7 +175,7 @@ public class ColorPixySubsystem extends Subsystem {
 	 * Negative degrees means below, positive means above, 
 	 * zero means it is either centered or cannot be found.
 	 */
-	public double getYAngleOffFromCenter(){
+	synchronized public double getYAngleOffFromCenter(){
 		if(yMid != 0){
 			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
 		}else{
@@ -174,25 +186,25 @@ public class ColorPixySubsystem extends Subsystem {
 	/**
 	 * Returns the size of the current target in pixels.
 	 */
-	public int getSizeOfTargetInPixels(){
+	synchronized public int getSizeOfTargetInPixels(){
 		return width*height;
 	}
 	
 	/**
 	 * Returns the width of the current target in pixels.
 	 */
-	public int getWidthOfTarget(){
+	synchronized public int getWidthOfTarget(){
 		return width;
 	}
 	
 	/**
 	 * Returns the height of the current target in pixels.
 	 */
-	public int getHeightOfTarget(){
+	synchronized public int getHeightOfTarget(){
 		return height;
 	}
 	
-	public static ColorPixySubsystem getInstance(){
+	synchronized public static ColorPixySubsystem getInstance(){
 		if(instance == null){
 			instance = new ColorPixySubsystem();
 		}return instance;

@@ -1,5 +1,10 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.RecordMotorMovementHelper;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import randomUtils.RecordMotorMovement;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -40,6 +45,9 @@ public class OI {
 	}
 
 	public void initSmartDashboard(){
+		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
+		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
+		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
 	}
 
 	public static OI getInstance(){

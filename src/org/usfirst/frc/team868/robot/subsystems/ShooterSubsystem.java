@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -19,6 +20,7 @@ public class ShooterSubsystem extends Subsystem {
     private static ShooterSubsystem instance;
     private CANTalon shooter;
     private PIDController control;
+    private Encoder count;
     public static final double P = 0;
     public static final double I = 0;
     public static final double D = 0;
@@ -26,6 +28,7 @@ public class ShooterSubsystem extends Subsystem {
     private ShooterSubsystem(){
     	shooter = new CANTalon(RobotMap.Shoot.SHOOTER_MOTOR);
     	shooter.setInverted(RobotMap.Shoot.IS_INVERTED);
+    	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B);
     	control = new PIDController(P, I, D, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {
@@ -64,7 +67,7 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public double getSpeed(){
-    	return shooter.getSpeed();
+    	return count.getRate();
     }
     
     public double getPower(){

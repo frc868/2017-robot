@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -19,12 +20,14 @@ public class TurretRotationSubsystem extends Subsystem {
 	private static TurretRotationSubsystem instance;
 	private CANTalon turretRotator;
 	private PIDController control;
+	private Encoder count;
 	private final double P = 0, I = 0, D = 0;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		count = new Encoder(RobotMap.Turret.ENCODER_A, RobotMap.Turret.ENCODER_B);
 		control = new PIDController(P , I, D, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {}
@@ -34,7 +37,7 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 
 			public double pidGet() {
-				return getPosition();
+				return getEncoderPosition();
 			}
 			
 		}, new PIDOutput(){
@@ -73,10 +76,14 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 	
 	public double getSpeed(){
-		return turretRotator.getSpeed();
+		return count.getRate();
 	}
 	
-	public double getPosition(){
+	public double getEncoderPosition(){
+		return count.get();
+	}
+	
+	public double getCANTalonPosition(){
 		return turretRotator.getPosition();
 	}
 	
@@ -86,7 +93,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	
 	public void updateSD(){
 		SmartDashboard.putData("Turret PID", control);
-		SmartDashboard.putNumber("Turret Position", getPosition());
+		SmartDashboard.putNumber("Turret Position", getEncoderPosition());
 		SmartDashboard.putNumber("Turret Power", getPower());
 		SmartDashboard.putNumber("Turret Speed", getSpeed());
 		SmartDashboard.putNumber("Turret Setpoint", getSetpoint());

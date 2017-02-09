@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,7 +50,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IRPixySubsystem extends Subsystem {
 
 	private static IRPixySubsystem instance;
-	private SerialPort pixyCam;
+	private SerialPort pixyCamS;
+	private I2C pixyCamI;
 	private int lastVal = 0;
 	private boolean recordStarted = false;
 	private int bytesRecorded;
@@ -63,18 +65,24 @@ public class IRPixySubsystem extends Subsystem {
 	private Thread thread;
 
 	private IRPixySubsystem(){
-		pixyCam = new SerialPort(RobotMap.Pixy.BAUDRATE, RobotMap.Pixy.IR_PORT);
+		if(RobotMap.Pixy.IR_PORT_TYPE == 0){
+			pixyCamS = new SerialPort(RobotMap.Pixy.BAUDRATE, SerialPort.Port.kMXP);
+		}else if(RobotMap.Pixy.IR_PORT_TYPE == 1){
+			pixyCamI = new I2C(I2C.Port.kOnboard, RobotMap.Pixy.IR_I2C_VALUE);
+		}else{
+			pixyCamI = new I2C(I2C.Port.kMXP, RobotMap.Pixy.IR_I2C_VALUE);
+		}
 		startThread();
 	}
 
-	public void startThread() {
+	synchronized public void startThread() {
 		if(thread != null) return;
 
 		thread = createThread();
 		thread.start();
 	}
 	
-	public void stopThread() {
+	synchronized public void stopThread() {
 		if(thread == null) return;
 		
 		thread.interrupt();
@@ -92,10 +100,14 @@ public class IRPixySubsystem extends Subsystem {
 		};
 	}
 
-	public void getValues(){//Call this method to update all of the data obtained from the Pixy
+	synchronized public void getValues(){//Call this method to update all of the data obtained from the Pixy
 		byte [] input;
 		try{
-			input = pixyCam.read(pixyCam.getBytesReceived());
+			if(RobotMap.Pixy.IR_PORT_TYPE == 0){
+				input = pixyCamS.read(pixyCamS.getBytesReceived());
+			}else{
+				pixyCamI.readOnly(input, 14);
+			}
 		}catch(Throwable t){
 			return;
 		}
@@ -155,7 +167,7 @@ public class IRPixySubsystem extends Subsystem {
 	 * Negative degrees means left, positive means right, 
 	 * zero means it is either centered or cannot be found.
 	 */
-	public double getXAngleOffFromCenter(){
+	synchronized public double getXAngleOffFromCenter(){
 		if(xMid != 0){
 			return (xMid - (RobotMap.Pixy.CAM_WIDTH/2))*(RobotMap.Pixy.CAM_X_ANGLE/2)/RobotMap.Pixy.CAM_WIDTH;
 		}else{
@@ -168,7 +180,7 @@ public class IRPixySubsystem extends Subsystem {
 	 * Negative degrees means below, positive means above, 
 	 * zero means it is either centered or cannot be found.
 	 */
-	public double getYAngleOffFromCenter(){
+	synchronized public double getYAngleOffFromCenter(){
 		if(yMid != 0){
 			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
 		}else{
@@ -179,25 +191,25 @@ public class IRPixySubsystem extends Subsystem {
 	/**
 	 * Returns the size of the current target in pixels.
 	 */
-	public int getSizeOfTarget(){
+	synchronized public int getSizeOfTarget(){
 		return width*height;
 	}
 
 	/**
 	 * Returns the width of the current target in pixels.
 	 */
-	public int getWidthOfTarget(){
+	synchronized public int getWidthOfTarget(){
 		return width;
 	}
 
 	/**
 	 * Returns the height of the current target in pixels.
 	 */
-	public int getHeightOfTarget(){
+	synchronized public int getHeightOfTarget(){
 		return height;
 	}
 
-	public static IRPixySubsystem getInstance(){
+	synchronized public static IRPixySubsystem getInstance(){
 		if(instance == null){
 			instance = new IRPixySubsystem();
 		}
