@@ -79,6 +79,10 @@ public class TurretRotationSubsystem extends Subsystem {
 			control.enable();
 	}
 	
+	public void setAngle(double degree) {
+		setSetpoint(degree * RobotMap.Turret.COUNTS_PER_DEGREE);
+	}
+	
 	public double getPower(){
 		return turretRotator.get();
 	}

@@ -42,6 +42,7 @@ public interface RobotMap {
 		final int FORWARD_LIMIT = 180;
 		final int REVERSE_LIMIT = -90;
 		//1 turret motor, using a CAN speed controller from mindstorm?
+		final double COUNTS_PER_DEGREE = 1;
 	}
 	
 	public interface Feeder {
