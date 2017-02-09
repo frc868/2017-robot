@@ -47,6 +47,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 18ft			21			17
  * 19ft			18,19		16
  */
+@SuppressWarnings("unused")
 public class IRPixySubsystem extends Subsystem {
 
 	private static IRPixySubsystem instance;

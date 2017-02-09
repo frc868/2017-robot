@@ -3,7 +3,6 @@ package org.usfirst.frc.team868.robot;
 import org.usfirst.frc.team868.robot.commands.RecordMotorMovementHelper;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import randomUtils.RecordMotorMovement;
 
 /**
  * This class is the glue that binds the controls on the physical operator

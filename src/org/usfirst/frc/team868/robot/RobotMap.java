@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
 
 /**

@@ -41,6 +41,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *  ...		  9		 to 		 34
  *  
  */
+@SuppressWarnings("unused")
 public class ColorPixySubsystem extends Subsystem {
 	
 	private static ColorPixySubsystem instance;
