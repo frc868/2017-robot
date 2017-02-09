@@ -47,6 +47,14 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 			
 		});
+		makeSoftLimits();
+	}
+	
+	private void makeSoftLimits(){
+		turretRotator.setForwardSoftLimit(RobotMap.Turret.FORWARD_LIMIT);
+		turretRotator.setReverseSoftLimit(RobotMap.Turret.REVERSE_LIMIT);
+		turretRotator.enableForwardSoftLimit(true);
+		turretRotator.enableReverseSoftLimit(true);
 	}
 	
 	public void resetPosition(){
