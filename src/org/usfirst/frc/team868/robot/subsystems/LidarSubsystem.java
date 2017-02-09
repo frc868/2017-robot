@@ -4,12 +4,11 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LidarSubsystem extends Subsystem {
 
 	private static LidarSubsystem instance;
-	private NetworkTable table;
 	private SerialPort serial;
 
 	volatile private int distance;
@@ -26,8 +25,6 @@ public class LidarSubsystem extends Subsystem {
 	 * a thread and runs it.
 	 */
 	private LidarSubsystem() {
-		table = NetworkTable.getTable("LIDAR"); //TODO change to SmartDashboard?
-
 		connect();
 		startThread();
 	}
@@ -141,7 +138,7 @@ public class LidarSubsystem extends Subsystem {
 	
 	private byte readByte() {
 		byte b = 0;
-		if(bytesAvailable() && isConnected()) {
+		if(bytesAvailable()) {
 			return serial.read(1)[0];
 		} 
 		return b;
@@ -152,6 +149,6 @@ public class LidarSubsystem extends Subsystem {
 	 * most recent distance information
 	 */
 	public void updateSmartDashboard() {
-		table.putNumber("LIDAR Distance", distance);
+		SmartDashboard.putNumber("LIDAR Distance", distance);
 	}
 }
