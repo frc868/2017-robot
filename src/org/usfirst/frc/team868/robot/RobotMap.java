@@ -39,6 +39,8 @@ public interface RobotMap {
 		final boolean IS_INVERTED = false;
 		final int ENCODER_A = 1;
 		final int ENCODER_B = 2;
+		final int FORWARD_LIMIT = 180;
+		final int REVERSE_LIMIT = -90;
 		//1 turret motor, using a CAN speed controller from mindstorm?
 	}
 	
