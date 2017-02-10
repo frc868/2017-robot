@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
@@ -10,8 +9,8 @@ public class AutonChooser {
 
 	private static AutonChooser instance;
 	
-	private static SendableChooser chooseStart;
-	private static SendableChooser chooseDoThis;
+	private static SendableChooser<StartingPoint> chooseStart;
+	private static SendableChooser<DoThis> chooseDoThis;
 	
 	public static AutonChooser getInstance() {
 		if(instance == null) instance = new AutonChooser();
@@ -40,7 +39,7 @@ public class AutonChooser {
     }
     
     public void setupDashboard() {
-    	chooseStart = new SendableChooser();
+    	chooseStart = new SendableChooser<StartingPoint>();
     		chooseStart.addObject("B1", StartingPoint.B1);
     		chooseStart.addObject("B2", StartingPoint.B2);
     		chooseStart.addObject("B3", StartingPoint.B3);
@@ -48,7 +47,7 @@ public class AutonChooser {
     		chooseStart.addObject("R2", StartingPoint.R2);
     		chooseStart.addObject("R3", StartingPoint.R3);
     		
-    	chooseDoThis = new SendableChooser();
+    	chooseDoThis = new SendableChooser<DoThis>();
     		chooseDoThis.addObject("A: Cross the Baseline", DoThis.CROSS_BASE);
     		chooseDoThis.addObject("B: Drop off Gear", DoThis.DROP_GEAR);
     		chooseDoThis.addObject("C: Shoot Balls", DoThis.HOPPER);
