@@ -13,8 +13,8 @@ public interface RobotMap {
 	
 	public interface Drive {
 		//PORTS:
-		final int LEFT_MOTOR = 4;
-		final int RIGHT_MOTOR = 5;
+		final int LEFT_MOTOR = 9;
+		final int RIGHT_MOTOR = 8;
 		final int ENCODER_L_A = 5;
 		final int ENCODER_L_B = 6;
 		final int ENCODER_R_A = 7;
@@ -53,9 +53,9 @@ public interface RobotMap {
 	
 	public interface Feeder {
 		//PORTS:
-		final int AGITATOR_MOTOR = 6;
+		final int AGITATOR_MOTOR = 7;
 		
-		final int CONVEYOR_MOTOR = 7;
+		final int CONVEYOR_MOTOR = 6;
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
