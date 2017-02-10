@@ -111,4 +111,9 @@ public interface RobotMap {
 		//VALUES:
 		final int BAUD = 9600;
 	}
+	
+	public interface Flashlight {
+		final int GEAR_LIGHT_PORT = 1;
+		final int SHOOT_LIGHT_PORT = 0;
+	}
 }
