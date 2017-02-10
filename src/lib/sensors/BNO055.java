@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.lib.sensors;
+package lib.sensors;
 
 import java.util.TimerTask;
 

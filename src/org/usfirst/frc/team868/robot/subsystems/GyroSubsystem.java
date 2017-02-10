@@ -1,11 +1,10 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
-import org.usfirst.frc.team868.robot.lib.sensors.BNO055;
-
 import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.sensors.BNO055;
 
 /**
  *
