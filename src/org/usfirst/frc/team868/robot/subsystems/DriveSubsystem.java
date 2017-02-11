@@ -26,41 +26,105 @@ public class DriveSubsystem extends Subsystem {
 		rightMotor.setInverted(RobotMap.Drive.RIGHT_IS_INVERTED);
 		leftEncoder = new Encoder(RobotMap.Drive.ENCODER_L_A, RobotMap.Drive.ENCODER_L_B);
 		rightEncoder = new Encoder(RobotMap.Drive.ENCODER_R_A, RobotMap.Drive.ENCODER_R_B);
+		leftEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
+		rightEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
 	}
 	
+	/**
+	 * Sets power to left motors
+	 * @param speed 1 to -1
+	 */
 	public void setL(double speed){
 		leftMotor.set(speed);
 	}
 	
+	/**
+	 * Sets power to right motors
+	 * @param speed 1 to -1
+	 */
 	public void setR(double speed){
 		rightMotor.set(speed);
 	}
 	
+	/**
+	 * Sets power to both motors
+	 * @param speed 1 to -1
+	 */
 	public void setSpeed(double speed) {
 		setR(speed);
 		setL(speed);
 	}
+	
+	/**
+	 * Sets power to both motors 
+	 * @param leftSpeed 1 to -1
+	 * @param RightSpeed 1 to -1
+	 */
+	public void setSpeed(double leftSpeed, double rightSpeed) {
+		setL(leftSpeed);
+		setR(rightSpeed);
+	}
 		
+	/**
+	 * Gets speed of left drivetrain
+	 * @return cm per second
+	 */
 	public double getLSpeed(){
 		return leftEncoder.getRate();
 	}
 	
+	/**
+	 * Gets speed of right drivetrain
+	 * @return cm per second
+	 */
 	public double getRSpeed(){
 		return rightEncoder.getRate();
 	}
 	
+	/**
+	 * Gets average speed of drivetrain
+	 * @return cm per second
+	 */
 	public double getAvgSpeed(){
 		return (getRSpeed()+getLSpeed())/2;
 	}
 	
+	/**
+	 * Gets counts from right encoder
+	 * @return counts
+	 */
 	public int getRightEncoder() {
-		return 0;
+		return rightEncoder.get();
 	}
 	
+	/**
+	 * Gets counts from left encoder
+	 * @return counts
+	 */
 	public int getLeftEncoder() {
-		return 0;
+		return leftEncoder.get();
 	}
 	
+	/**
+	 * Gets distance traveled by right encoder
+	 * @return cm
+	 */
+	public double getRightEncoderDistance() {
+		return rightEncoder.getDistance();
+	}
+	
+	/**
+	 * Gets distance traveled by left encoder
+	 * @return cm
+	 */
+	public double getLeftEncoderDistance() {
+		return leftEncoder.getDistance();
+	}
+	
+	/**
+	 * Gets average encoder counts
+	 * @return counts
+	 */
 	public int getAvgEncoders() {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
 	}

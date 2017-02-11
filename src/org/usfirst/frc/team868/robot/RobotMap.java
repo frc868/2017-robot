@@ -25,6 +25,7 @@ public interface RobotMap {
 		final boolean RIGHT_IS_INVERTED = false;
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 1; //TODO calculate
+		final double CM_PER_COUNT = 1;
 	}
 	
 	public interface Shoot {
