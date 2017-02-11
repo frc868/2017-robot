@@ -54,6 +54,9 @@ public class RecordMotorMovement{
 			count++;
 		}
 		output.write(outstr);
+		
+		output.close();
+		incheck.close();
 	}
 	
 	public void RecordMotors(){
@@ -132,6 +135,9 @@ public class RecordMotorMovement{
 		for(String string:TTurretPowers){
 			TurretPowers.add(StringToDouble.stringToDouble(string));
 		}
+		
+		if(mkfl != null) mkfl.close();
+		if(inPower != null) inPower.close();
 	}
 	
 	public static RecordMotorMovement getInstance(){
