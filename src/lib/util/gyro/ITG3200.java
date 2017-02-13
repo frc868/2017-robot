@@ -31,7 +31,7 @@
  * </p>
  */
 
-package lib.sensors;
+package lib.util.gyro;
 
 import java.io.File;
 import java.io.IOException;

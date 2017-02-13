@@ -1,9 +1,9 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import java.io.IOException;
 
 import edu.wpi.first.wpilibj.command.Command;
-import randomUtils.RecordMotorMovement;
+import lib.util.RecordMotorMovement;
 
 /**
  *
