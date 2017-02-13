@@ -27,14 +27,14 @@ public class DriveDistanceCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	drive.setSpeed(RobotMap.Drive.SPEED);
+    	drive.setPower(RobotMap.Drive.SPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(drive.getAvgEncoders() > endCount) {
     		isFinished = true;
-    		drive.setSpeed(0);
+    		drive.setPower(0);
     	}
     }
 

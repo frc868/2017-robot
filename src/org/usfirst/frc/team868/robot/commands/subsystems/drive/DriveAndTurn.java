@@ -42,7 +42,7 @@ public class DriveAndTurn extends Command {
     protected void execute() {
     	if(drive.getAvgEncoders() > endCount) {
     		isFinished = true;
-    		drive.setSpeed(0);
+    		drive.setPower(0);
     	}
     }
 

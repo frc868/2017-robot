@@ -19,6 +19,10 @@ public class DriveSubsystem extends Subsystem {
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
 	
+	/**
+	 * Constructor, provides the port values for motors and encoders,
+	 * and inverts any motors that need inversion.
+	 */
 	private DriveSubsystem(){
 		leftMotor = new Spark(RobotMap.Drive.LEFT_MOTOR);
 		rightMotor = new Spark(RobotMap.Drive.RIGHT_MOTOR);
@@ -27,48 +31,84 @@ public class DriveSubsystem extends Subsystem {
 		leftEncoder = new Encoder(RobotMap.Drive.ENCODER_L_A, RobotMap.Drive.ENCODER_L_B);
 		rightEncoder = new Encoder(RobotMap.Drive.ENCODER_R_A, RobotMap.Drive.ENCODER_R_B);
 	}
-	
-	public void setL(double speed){
-		leftMotor.set(speed);
+	/**
+	 * Sets the left motor to power.
+	 * @param power
+	 */
+	public void setL(double power){
+		leftMotor.set(power);
 	}
-	
-	public void setR(double speed){
-		rightMotor.set(speed);
+	/**
+	 * Sets the right motor to power.
+	 * @param power
+	 */
+	public void setR(double power){
+		rightMotor.set(power);
 	}
-	
-	public void setSpeed(double speed) {
-		setR(speed);
-		setL(speed);
+	/**
+	 * Sets both left and right motors to power.
+	 * @param power
+	 */
+	public void setPower(double power) {
+		setR(power);
+		setL(power);
 	}
-		
+	/**
+	 * @return speed of the left side of drive train.
+	 */
 	public double getLSpeed(){
 		return leftEncoder.getRate();
 	}
-	
+	/**
+	 * @return speed of right side of the drive train.
+	 */
 	public double getRSpeed(){
 		return rightEncoder.getRate();
 	}
-	
+	/**
+	 * @return the average speed of the drive train.
+	 */
 	public double getAvgSpeed(){
 		return (getRSpeed()+getLSpeed())/2;
 	}
-	
+	/**
+	 * @return the number of counts on the right encoder.
+	 */
 	public int getRightEncoder() {
-		return 0;
+		return rightEncoder.get();
 	}
-	
+	/**
+	 * @return the number of counts on the left encoder.
+	 */
 	public int getLeftEncoder() {
-		return 0;
+		return leftEncoder.get();
 	}
-	
+	/**
+	 * Resets the counts on both encoders.
+	 */
+	public void resetEncoders(){
+		leftEncoder.reset();
+		rightEncoder.reset();
+	}
+	/**
+	 * @return the average number of counts on both encoders.
+	 */
 	public int getAvgEncoders() {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
 	}
-	
+	/**
+	 * Attempts to record the movement of the motors.
+	 * See class: RecordMotorMovement, and see method: RecordMotors
+	 */
 	public void recordMotor(){
 		RecordMotorMovement.getInstance().RecordMotors();
 	}
-	
+
+	/**
+	 * Gets the subsystem instance
+	 * 
+	 * @return subsystem instance
+	 */
 	public static DriveSubsystem getInstance(){
 		if(instance == null){
 			instance = new DriveSubsystem();
@@ -79,12 +119,9 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
-//		SmartDashboard.putString("write/read for motor record", null);
 	}
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 
