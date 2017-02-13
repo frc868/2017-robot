@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import randomUtils.RecordMotorMovement;
+import lib.util.RecordMotorMovement;
 
 /**
  *
@@ -30,59 +30,114 @@ public class DriveSubsystem extends Subsystem {
 		rightMotor.setInverted(RobotMap.Drive.RIGHT_IS_INVERTED);
 		leftEncoder = new Encoder(RobotMap.Drive.ENCODER_L_A, RobotMap.Drive.ENCODER_L_B);
 		rightEncoder = new Encoder(RobotMap.Drive.ENCODER_R_A, RobotMap.Drive.ENCODER_R_B);
+		leftEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
+		rightEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
 	}
+	
 	/**
-	 * Sets the left motor to power.
-	 * @param power
+	 * Sets power to left motors
+	 * @param speed 1 to -1
 	 */
-	public void setL(double power){
-		leftMotor.set(power);
+	public void setL(double speed){
+		leftMotor.set(speed);
 	}
+	
 	/**
-	 * Sets the right motor to power.
-	 * @param power
+	 * Sets power to right motors
+	 * @param speed 1 to -1
 	 */
-	public void setR(double power){
-		rightMotor.set(power);
+	public void setR(double speed){
+		rightMotor.set(speed);
 	}
+	
 	/**
-	 * Sets both left and right motors to power.
-	 * @param power
+	 * Sets power to both motors
+	 * @param speed 1 to -1
 	 */
-	public void setPower(double power) {
-		setR(power);
-		setL(power);
+	public void setSpeed(double speed) {
+		setR(speed);
+		setL(speed);
 	}
+	
+	/**
+	 * Sets power to both motors 
+	 * @param leftSpeed 1 to -1
+	 * @param RightSpeed 1 to -1
+	 */
+	public void setSpeed(double leftSpeed, double rightSpeed) {
+		setL(leftSpeed);
+		setR(rightSpeed);
+	}
+		
+
 	/**
 	 * @return speed of the left side of drive train.
+>>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getLSpeed(){
 		return leftEncoder.getRate();
 	}
+	
+	/**
+	 * Gets speed of right drivetrain
+	 * @return cm per second
+=======
 	/**
 	 * @return speed of right side of the drive train.
+>>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getRSpeed(){
 		return rightEncoder.getRate();
 	}
+	
+	/**
+	 * Gets average speed of drivetrain
+	 * @return cm per second
+=======
 	/**
 	 * @return the average speed of the drive train.
+>>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getAvgSpeed(){
 		return (getRSpeed()+getLSpeed())/2;
 	}
+	
+	/**
+	 * Gets counts from right encoder
+	 * @return counts
+=======
 	/**
 	 * @return the number of counts on the right encoder.
+>>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public int getRightEncoder() {
 		return rightEncoder.get();
 	}
+	
 	/**
-	 * @return the number of counts on the left encoder.
+	 * Gets counts from left encoder
+	 * @return counts
 	 */
 	public int getLeftEncoder() {
 		return leftEncoder.get();
 	}
+	
+	/**
+	 * Gets distance traveled by right encoder
+	 * @return cm
+	 */
+	public double getRightEncoderDistance() {
+		return rightEncoder.getDistance();
+	}
+	
+	/**
+	 * Gets distance traveled by left encoder
+	 * @return cm
+	 */
+	public double getLeftEncoderDistance() {
+		return leftEncoder.getDistance();
+	}
+
 	/**
 	 * Resets the counts on both encoders.
 	 */
@@ -92,6 +147,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	/**
 	 * @return the average number of counts on both encoders.
+>>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public int getAvgEncoders() {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
