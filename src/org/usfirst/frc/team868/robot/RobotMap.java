@@ -82,9 +82,8 @@ public interface RobotMap {
 	
 	public interface Pixy {
 		//PORTS:
-		/** 0 = Serial MXP, 1 = I2C Onboard, 2 = I2C MXP */
-		final int IR_PORT_TYPE = 0;
-		final int COLOR_PORT_TYPE = 1;
+		final SerialPortType IR_PORT_TYPE = SerialPortType.SERIAL_MXP;
+		final SerialPortType COLOR_PORT_TYPE = SerialPortType.I2C_ONBOARD;
 		final int IR_I2C_VALUE = 0x5; // Only needed if using I2C
 		final int COLOR_I2C_VALUE = 0x5;
 		
@@ -94,6 +93,11 @@ public interface RobotMap {
 		final int CAM_X_ANGLE = 80;//in degrees
 		final int CAM_Y_ANGLE = 40;//in degrees
 		final int BAUDRATE = 19200;
+	}
+	
+	/** Serial port types that make it so that serial objects only need their port value changed in RobotMap */
+	public static enum SerialPortType{
+		SERIAL_ONBOARD, SERIAL_MXP, I2C_ONBOARD, I2C_MXP
 	}
 	
 	public static class Joystick {

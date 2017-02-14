@@ -66,9 +66,9 @@ public class IRPixySubsystem extends Subsystem {
 	private Thread thread;
 
 	private IRPixySubsystem(){
-		if(RobotMap.Pixy.IR_PORT_TYPE == 0){
+		if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.SERIAL_MXP){
 			pixyCamS = new SerialPort(RobotMap.Pixy.BAUDRATE, SerialPort.Port.kMXP);
-		}else if(RobotMap.Pixy.IR_PORT_TYPE == 1){
+		}else if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.I2C_ONBOARD){
 			pixyCamI = new I2C(I2C.Port.kOnboard, RobotMap.Pixy.IR_I2C_VALUE);
 		}else{
 			pixyCamI = new I2C(I2C.Port.kMXP, RobotMap.Pixy.IR_I2C_VALUE);
@@ -102,9 +102,9 @@ public class IRPixySubsystem extends Subsystem {
 	}
 
 	synchronized public void getValues(){//Call this method to update all of the data obtained from the Pixy
-		byte [] input;
+		byte [] input = new byte [14];
 		try{
-			if(RobotMap.Pixy.IR_PORT_TYPE == 0){
+			if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.SERIAL_MXP){
 				input = pixyCamS.read(pixyCamS.getBytesReceived());
 			}else{
 				pixyCamI.readOnly(input, 14);
