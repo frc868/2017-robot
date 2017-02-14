@@ -95,6 +95,10 @@ public class TurretRotationSubsystem extends Subsystem {
 		return count.get();
 	}
 	
+	public double getAngle() {
+		return getEncoderPosition() * RobotMap.Turret.DEGREES_PER_COUNT;
+	}
+	
 	public double getCANTalonPosition(){
 		return turretRotator.getPosition();
 	}
