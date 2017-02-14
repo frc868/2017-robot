@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GearCollectorSubsystem extends Subsystem {
@@ -20,7 +21,11 @@ public class GearCollectorSubsystem extends Subsystem {
 	 */
 	private GearCollectorSubsystem() {
 		sol = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID);
+		
+		// Assign test mode group
+		LiveWindow.addActuator("Gear Collector", "Solenoid", sol);
 	}
+	
 	/**
 	 * Normal get instance method.
 	 */

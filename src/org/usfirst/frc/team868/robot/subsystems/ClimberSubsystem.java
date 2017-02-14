@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * Subsystem which represents the rope climber
@@ -17,6 +18,9 @@ public class ClimberSubsystem extends Subsystem {
 	private ClimberSubsystem(){
 		climber = new CANTalon(RobotMap.Climber.CLIMBER_MOTOR);
 		climber.setInverted(RobotMap.Climber.IS_INVERTED);
+		
+		// Assign test mode group
+		LiveWindow.addActuator("Climber", "Motor", climber);
 	}
 	
 	/**

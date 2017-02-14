@@ -1,4 +1,4 @@
-package lib.sensors;
+package lib.util.gyro;
 
 import edu.wpi.first.wpilibj.GyroBase;
 

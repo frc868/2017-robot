@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -26,6 +27,10 @@ public class TurretRotationSubsystem extends Subsystem {
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
+		// Make sure we stop if we hit a physical limit switch
+		turretRotator.enableLimitSwitch(true, true);
+		
+		// TODO: Refactor to use encoder connected directly to CANTalon
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		count = new Encoder(RobotMap.Turret.ENCODER_A, RobotMap.Turret.ENCODER_B);
 		control = new PIDController(P , I, D, new PIDSource(){
@@ -48,6 +53,9 @@ public class TurretRotationSubsystem extends Subsystem {
 			
 		});
 		makeSoftLimits();
+		
+		// Assign test mode group
+    	LiveWindow.addActuator("Turret", "Motor", turretRotator);
 	}
 	
 	private void makeSoftLimits(){

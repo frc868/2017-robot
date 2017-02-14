@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -24,6 +25,9 @@ public class GearFlashlightSubsystem extends Subsystem {
     private GearFlashlightSubsystem() {
     	flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);
     	flashlight.setDirection(Relay.Direction.kForward);
+
+    	// Assign test mode group
+		LiveWindow.addActuator("Gear Flashlight", "Relay", flashlight);
     }
     
     public void setLight(boolean on) {
