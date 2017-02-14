@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
@@ -44,6 +45,7 @@ public class UpdateSmartDashboard extends Command {
 //    		AgitatorSubsystem.getInstance().updateSD();
 //    		TurretRotationSubsystem.getInstance().updateSD();
 //    		LidarSubsystem.getInstance().updateSmartDashboard();
+//    		ClimberSubsystem.getInstance().updateSD();
     		time.reset();
     		
     		counts++;
