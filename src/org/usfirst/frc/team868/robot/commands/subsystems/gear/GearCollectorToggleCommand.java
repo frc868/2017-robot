@@ -18,9 +18,7 @@ public class GearCollectorToggleCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(!holder.isGearCollectorOpen()){
-    		holder.setGearCollectorOpen();
-    	}
+    	holder.toggleGearCollector();
     }
 
     // Called repeatedly when this Command is scheduled to run
