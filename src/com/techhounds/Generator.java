@@ -7,12 +7,12 @@ import com.team254.lib.trajectory.WaypointSequence.Waypoint;
 
 public class Generator extends Functions {
 
-	public static final double dt = 0.0,
-	    max_acc = 0.0,
-	    max_jerk = 0.0,
-	    max_vel = 0.0;
+	public static final double dt = 0.02,
+	    max_acc = 5.0,
+	    max_jerk = 1.0,
+	    max_vel = 10.0;
 
-	static final double wheelBase_width = 0.0;
+	static final double wheelBase_width = 40.0;
 	static String directory = "paths";
 	static String workingDirectory = "paths/trajectory";
 
@@ -31,13 +31,17 @@ public class Generator extends Functions {
 		config(0.825);
 
 		// Name of Path
-		final String path_name = "Drive200";
+		final String path_name = "TurnRightBoi";
 
 		// Argument 10 - Maximum Waypoints Allotted in a Waypoint Sequence
 		// new Waypoint(y, x, theta);
 		WaypointSequence points = new WaypointSequence(10);
 		points.addWaypoint(new Waypoint(0, 0, 0));
+		points.addWaypoint(new Waypoint(100, 0, 0));
 		points.addWaypoint(new Waypoint(200, 0, 0));
+//		points.addWaypoint(new Waypoint(300, 200, 45));
+		
+		System.out.println(points.getNumWaypoints()); //TODO debug, works
 
 		// makePath(WaypointSequence points, config, Width from Left to Right wheels, Path Name);
 		Path path = PathGenerator.makePath(points, config, wheelBase_width, path_name);

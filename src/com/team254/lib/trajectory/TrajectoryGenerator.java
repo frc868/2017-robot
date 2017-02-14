@@ -103,6 +103,9 @@ public class TrajectoryGenerator {
     }
 
     Trajectory traj;
+    
+    System.out.println(strategy.toString());
+    
     if (strategy == StepStrategy) {
       double impulse = (goal_pos / config.max_vel) / config.dt;
 
@@ -118,9 +121,19 @@ public class TrajectoryGenerator {
       double start_discount = .5 * start_vel * start_vel / config.max_acc;
       double end_discount = .5 * goal_vel * goal_vel / config.max_acc;
 
-      double adjusted_max_vel = Math.min(config.max_vel,
-              Math.sqrt(config.max_acc * goal_pos - start_discount
-                      - end_discount));
+      //original code, config.max_vel == 0????????
+//      double adjusted_max_vel = Math.min(config.max_vel,
+//              Math.sqrt(config.max_acc * goal_pos - start_discount
+//                      - end_discount)); 
+      
+      //modified code, hardcoded config.max_vel == 100.0
+    double adjusted_max_vel = Math.min(100.0,
+    Math.sqrt(config.max_acc * goal_pos - start_discount
+            - end_discount)); 
+      
+//      System.out.println("Math.min(" + config.max_vel + ", Math.sqrt(" + config.max_acc + "*" + goal_pos + "-" + start_discount + "-" + end_discount);
+//      System.out.println(adjusted_max_vel);
+      
       double t_rampup = (adjusted_max_vel - start_vel) / config.max_acc;
       double x_rampup = start_vel * t_rampup + .5 * config.max_acc
               * t_rampup * t_rampup;
@@ -129,10 +142,19 @@ public class TrajectoryGenerator {
               * config.max_acc * t_rampdown * t_rampdown;
       double x_cruise = goal_pos - x_rampdown - x_rampup;
 
-      // The +.5 is to round to nearest
-      int time = (int) ((t_rampup + t_rampdown + x_cruise
-              / adjusted_max_vel) / config.dt + .5);
+      // The +.5 is to round to nearest //TODO no pls don't
+//      int time = (int) ((t_rampup + t_rampdown + x_cruise / adjusted_max_vel) / config.dt + .5);
+      int time = (int) Math.round(((t_rampup + t_rampdown + x_cruise / adjusted_max_vel) / config.dt + 0.5));
 
+      
+//      System.out.println(t_rampup + "+" + t_rampdown + "+" + x_cruise + "/" + adjusted_max_vel + ")/" + config.dt);
+//      System.out.println(t_rampup + t_rampdown + x_cruise);
+//      System.out.println((t_rampup + t_rampdown + x_cruise / adjusted_max_vel));
+//      System.out.println((t_rampup + t_rampdown + x_cruise / adjusted_max_vel) / config.dt);
+//      System.out.println(((t_rampup + t_rampdown + x_cruise / adjusted_max_vel) / config.dt + .5));
+//      System.out.println(Math.round(((t_rampup + t_rampdown + x_cruise / adjusted_max_vel) / config.dt + 0.5)));
+//      System.out.println(time); //TODO debug
+      
       // Compute the length of the linear filters and impulse.
       int f1_length = (int) Math.ceil((adjusted_max_vel
               / config.max_acc) / config.dt);
@@ -167,6 +189,7 @@ public class TrajectoryGenerator {
     // Now assign headings by interpolating along the path.
     // Don't do any wrapping because we don't know units.
     double total_heading_change = goal_heading - start_heading;
+            
     for (int i = 0; i < traj.getNumSegments(); ++i) {
       traj.segments_[i].heading = start_heading + total_heading_change
               * (traj.segments_[i].pos)
@@ -186,10 +209,11 @@ public class TrajectoryGenerator {
           int length,
           IntegrationMethod integration) {
     if (length <= 0) {
+    	System.out.println("Length Zero!");
       return null;
     }
     Trajectory traj = new Trajectory(length);
-
+    
     Trajectory.Segment last = new Trajectory.Segment();
     // First segment is easy
     last.pos = 0;
@@ -254,7 +278,7 @@ public class TrajectoryGenerator {
 
       last = traj.segments_[i];
     }
-
+    
     return traj;
   }
 
