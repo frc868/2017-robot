@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class ShooterFeederSubsystem extends Subsystem {
 	private static ShooterFeederSubsystem instance;
@@ -16,6 +17,9 @@ public class ShooterFeederSubsystem extends Subsystem {
 	private ShooterFeederSubsystem() {
 		motor = new Spark(RobotMap.Feeder.CONVEYOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.CONVEYOR_IS_INVERTED);
+		
+		// Assign test mode group
+		LiveWindow.addActuator("Feeder", "Motor", motor);
 	}
 	
 	public static ShooterFeederSubsystem getInstance() {

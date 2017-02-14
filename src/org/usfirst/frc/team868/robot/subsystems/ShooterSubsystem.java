@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -27,6 +28,7 @@ public class ShooterSubsystem extends Subsystem {
     
     private ShooterSubsystem(){
     	shooter = new CANTalon(RobotMap.Shoot.SHOOTER_MOTOR);
+    	// TODO: Need second shooter motor controller set to follower mode
     	shooter.setInverted(RobotMap.Shoot.IS_INVERTED);
     	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B);
     	control = new PIDController(P, I, D, new PIDSource(){
@@ -50,6 +52,11 @@ public class ShooterSubsystem extends Subsystem {
     		
     	}, 1/100);
     	control.setOutputRange(0, 1);
+    	
+		// Assign test mode group
+    	LiveWindow.addActuator("Shooter", "Motor Main", shooter);
+    	//LiveWindow.addActuator("Shooter", "Motor Follower", shooter2);
+		LiveWindow.addSensor("Shooter", "Encoder", count);
     }
     
     public void setPower(double power){

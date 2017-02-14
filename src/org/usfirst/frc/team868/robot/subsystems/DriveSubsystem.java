@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.util.RecordMotorMovement;
 
@@ -32,6 +33,12 @@ public class DriveSubsystem extends Subsystem {
 		rightEncoder = new Encoder(RobotMap.Drive.ENCODER_R_A, RobotMap.Drive.ENCODER_R_B);
 		leftEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
 		rightEncoder.setDistancePerPulse(RobotMap.Drive.CM_PER_COUNT);
+		
+		// Assign test mode group
+		LiveWindow.addActuator("Drive", "Left Motors", leftMotor);
+		LiveWindow.addActuator("Drive", "Right Motors", rightMotor);
+		LiveWindow.addSensor("Drive", "Left Encoder", leftEncoder);
+		LiveWindow.addSensor("Drive", "Right Encoder", rightEncoder);
 	}
 	
 	/**
