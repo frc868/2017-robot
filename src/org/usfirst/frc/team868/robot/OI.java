@@ -43,44 +43,26 @@ public class OI {
 	
 	static OI instance;
 	private ControllerMap driver, operator, curDriver;
-	private SendableChooser<Type> driverChooser, operatorChooser;
 	
 	public OI() {
-		driverChooser = createControllerChooser(true);
-		operatorChooser = createControllerChooser(false);
-		
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
-						(ControllerMap.Type) driverChooser.getSelected());
+						ControllerMap.Type.XBOX_ONE);
 		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
-						(ControllerMap.Type) operatorChooser.getSelected());
+						ControllerMap.Type.XBOX_ONE);
 		
 		setup();
 	}
 	
 	private void setup() {
-		if (Robot.oneControllerMode) {
-			setupController(driver);
-		} else {
-			setupDriver();
-			setupOperator();
-		}
-		
 		curDriver = driver;
 		
 		initSmartDashboard();
 	}
 	
-	public void setupDriver() {
-		setupController(driver);
-	}
-	
-	public void setupOperator() {
-		setupController(operator);
-	}
-	
-	public void setupController(ControllerMap controller) {
+	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
 		
+		// TURRET
 		controller.getButton(RobotMap.Controls.Turret.START)
 			.whenPressed(new ShootCommand(true));
 		controller.getButton(RobotMap.Controls.Turret.STOP)
@@ -98,15 +80,6 @@ public class OI {
 			instance = new OI();
 		}
 		return instance;
-	}
-
-	private SendableChooser<Type> createControllerChooser(boolean driver) {
-		SendableChooser<Type> chooser = new SendableChooser<Type>();
-		chooser.addObject("Logitech", ControllerMap.Type.LOGITECH);
-		chooser.addObject("XBOX ONE", ControllerMap.Type.XBOX_ONE);
-		chooser.addObject("XBOX 360", ControllerMap.Type.XBOX_360);
-		chooser.addObject("Playstation 4", ControllerMap.Type.PS4);
-		return chooser;
 	}
 }
 
