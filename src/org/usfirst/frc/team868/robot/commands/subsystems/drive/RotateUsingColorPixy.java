@@ -43,7 +43,7 @@ public class RotateUsingColorPixy extends Command {
     protected void execute() {
 		Record target = camera.getTarget();
 
-    	new TurnToAngle(target.getXAngleOffFromCenter()).start();
+    	new RotateAngle(target.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
