@@ -15,9 +15,7 @@ import org.usfirst.frc.team868.robot.subsystems.*;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
-	public static boolean oneControllerMode = false;
-	
+public class Robot extends IterativeRobot {	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
