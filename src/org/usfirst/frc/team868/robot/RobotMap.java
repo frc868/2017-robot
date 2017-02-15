@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import lib.hid.ControllerMap;
+import lib.hid.DPadButton;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -10,6 +12,13 @@ import edu.wpi.first.wpilibj.SerialPort;
  */
 
 public interface RobotMap {
+	
+	// needs review -- not sure if this is right
+	public interface JoystickPort {
+		// PORTS:
+		final int DRIVER = 0;
+		final int OPERATOR = 1;
+	}
 	
 	public interface Drive {
 		//PORTS:
@@ -116,5 +125,15 @@ public interface RobotMap {
 	public interface Flashlight {
 		final int GEAR_LIGHT_PORT = 1;
 		final int SHOOT_LIGHT_PORT = 0;
+	}
+	
+	public interface Controls {
+		public interface Turret {
+			final int START = ControllerMap.Key.X;
+			final int STOP = DPadButton.Direction.UP;
+			final int R_LEFT = DPadButton.Direction.LEFT;
+			final int R_RIGHT = DPadButton.Direction.RIGHT;
+			final int R_PIXY = ControllerMap.Key.B;
+		}
 	}
 }
