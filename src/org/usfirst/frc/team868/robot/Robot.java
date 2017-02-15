@@ -16,7 +16,8 @@ import org.usfirst.frc.team868.robot.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	public static boolean oneControllerMode = false;
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.

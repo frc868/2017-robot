@@ -1,7 +1,11 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RecordMotorMovementHelper;
-
+import lib.hid.ControllerMap;
+import lib.hid.ControllerMap.Type;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -35,26 +39,74 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // Start the command when the button is released  and let it run the command
 // until it is finished as determined by it's isFinished method.
 // button.whenReleased(new ExampleCommand());
-public class OI {	
+public class OI {
 	
 	static OI instance;
+	private ControllerMap driver, operator, curDriver;
+	private SendableChooser<Type> driverChooser, operatorChooser;
 	
-	public OI(){
+	public OI() {
+		driverChooser = createControllerChooser(true);
+		operatorChooser = createControllerChooser(false);
+		
+		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
+						(ControllerMap.Type) driverChooser.getSelected());
+		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
+						(ControllerMap.Type) operatorChooser.getSelected());
+		
+		setup();
+	}
+	
+	private void setup() {
+		if (Robot.oneControllerMode) {
+			setupController(driver);
+		} else {
+			setupDriver();
+			setupOperator();
+		}
+		
+		curDriver = driver;
+		
 		initSmartDashboard();
 	}
+	
+	public void setupDriver() {
+		setupController(driver);
+	}
+	
+	public void setupOperator() {
+		setupController(operator);
+	}
+	
+	public void setupController(ControllerMap controller) {
+		controller.clearButtons();
+		
+		controller.getButton(RobotMap.Controls.Turret.START)
+			.whenPressed(new ShootCommand(true));
+		controller.getButton(RobotMap.Controls.Turret.STOP)
+			.whenPressed(new ShootCommand(false));
+	}
 
-	public void initSmartDashboard(){
+	public void initSmartDashboard() {
 		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
 		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
 	}
 
-	public static OI getInstance(){
-		if(instance == null){
+	public static OI getInstance() {
+		if(instance == null) {
 			instance = new OI();
 		}
 		return instance;
 	}
 
+	private SendableChooser<Type> createControllerChooser(boolean driver) {
+		SendableChooser<Type> chooser = new SendableChooser<Type>();
+		chooser.addObject("Logitech", ControllerMap.Type.LOGITECH);
+		chooser.addObject("XBOX ONE", ControllerMap.Type.XBOX_ONE);
+		chooser.addObject("XBOX 360", ControllerMap.Type.XBOX_360);
+		chooser.addObject("Playstation 4", ControllerMap.Type.PS4);
+		return chooser;
+	}
 }
 
