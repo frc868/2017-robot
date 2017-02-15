@@ -16,6 +16,7 @@ public class ClimberSubsystem extends Subsystem {
 	
 	private static ClimberSubsystem instance;
 	private CANTalon climber;
+	private static final boolean DEBUG = false;
 	
 	private ClimberSubsystem(){
 		climber = new CANTalon(RobotMap.Climber.CLIMBER_MOTOR);
@@ -66,9 +67,14 @@ public class ClimberSubsystem extends Subsystem {
 		return climber.isFwdLimitSwitchClosed();
 	}
 	
+	/**
+	 * Update information on SmartDashboard.
+	 */
 	public void updateSD(){
-		SmartDashboard.putBoolean("Is climbing", isClimbing());
-		SmartDashboard.putBoolean("Is pressing button", isPressingButton());
+		if(DEBUG){
+			SmartDashboard.putBoolean("Is climbing", isClimbing());
+			SmartDashboard.putBoolean("Is pressing button", isPressingButton());
+		}
 	}
 	
 	/**
