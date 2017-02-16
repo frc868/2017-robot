@@ -63,6 +63,7 @@ public class OI {
 		
 		curDriver = driver;
 		
+		new ShootCommand(true);
 		initSmartDashboard();
 	}
 	
@@ -72,9 +73,6 @@ public class OI {
 		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
-		controller.getButton(RobotMap.Controls.Turret.SHOOT)
-			.whenPressed(new ShootCommand(true))
-			.whenReleased(new ShootCommand(false));
 		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
 			.whenPressed(new RotateTurretByAngle(10));
 		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
@@ -91,6 +89,14 @@ public class OI {
 	
 	public void setupOperator(ControllerMap controller) {
 		
+	}
+	
+	public ControllerMap getDriver() {
+		return driver;
+	}
+	
+	public ControllerMap getOperator() {
+		return operator;
 	}
 
 	public void initSmartDashboard() {
