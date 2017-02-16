@@ -83,7 +83,10 @@ public class OI {
 			.whenPressed(new RotateUsingIRPixy());
 		
 		// GEAR
-		
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
+			.whenPressed(new GearCollectorToggleCommand());
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
+			.whenPressed(new GearFlashlightCommand());
 	}
 	
 	public void setupOperator(ControllerMap controller) {

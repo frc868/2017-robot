@@ -141,7 +141,8 @@ public interface RobotMap {
 		}
 		
 		public interface Gear {
-			
+			final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
+			final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
 		}
 	}
 }
