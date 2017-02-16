@@ -139,5 +139,9 @@ public interface RobotMap {
 			final int R_RIGHT = DPadButton.Direction.RIGHT;
 			final int R_PIXY = ControllerMap.Key.B;
 		}
+		
+		public interface Gear {
+			
+		}
 	}
 }
