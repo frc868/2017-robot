@@ -1,31 +1,27 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.turret;
+package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RotateTurretToAngle extends Command {
-
-	TurretRotationSubsystem turret;
-	double angle;
+public class RotateAngle extends Command {
+	
+	private double angle;
 	
 	/**
-	 * Rotates the turret to the position value of the given angle.
-	 * (Note that this is not relative to where the turret is when this command is called)
-	 * @param absoluteAngle in degrees
+	 * Rotates the robot by 'angle' degrees from it's current rotation, where right is positive and left is negative
+	 * @param angle
 	 */
-    public RotateTurretToAngle(double absoluteAngle) {
-        turret = TurretRotationSubsystem.getInstance();
-        requires(turret);
-        angle = absoluteAngle; 
+    public RotateAngle(double angle) {
+    	this.angle = GyroSubsystem.getInstance().getRotation()+angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	turret.setPosition(angle); //convert to encoder counts?
+    	new TurnToAngle(angle).start();
     }
 
     // Called repeatedly when this Command is scheduled to run
