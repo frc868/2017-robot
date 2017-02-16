@@ -1,41 +1,41 @@
-package org.usfirst.frc.team868.robot.commands.subsystems;
+package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
-import org.usfirst.frc.team868.robot.subsystems.ShooterFeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ShooterFeederCommand extends Command {
+public class GearFlashlightCommand extends Command {
 
-	ShooterFeederSubsystem feeder;
+	GearFlashlightSubsystem flash;
 	
 	boolean state;
 	
 	/**
-	 * Sets the feeder to the given argument
+	 * Sets the flashlight to the given argument
 	 * @param on
 	 */
-    public ShooterFeederCommand(boolean on) { 
-    	feeder = ShooterFeederSubsystem.getInstance(); 
-        requires(feeder);
+    public GearFlashlightCommand(boolean on) { 
+    	flash = GearFlashlightSubsystem.getInstance(); 
+        requires(flash);
         
         state = on;
     }
     
     /**
-     * Toggles the feeder's on/off status
+     * Toggles the flashlight's on/off status
      */
-    public ShooterFeederCommand(){
-    	feeder = ShooterFeederSubsystem.getInstance();
-    	requires(feeder);
-    	state = !feeder.isFeederOn();
+    public GearFlashlightCommand(){
+    	flash = GearFlashlightSubsystem.getInstance();
+    	requires(flash);
+    	state = !flash.isOn();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	feeder.setFeeder(state);
+    	flash.setLight(state);
     }
 
     // Called repeatedly when this Command is scheduled to run
