@@ -144,5 +144,8 @@ public interface RobotMap {
 			final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 			final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
 		}
+		public interface Climber {
+			final int CLIMB = ControllerMap.Key.RB;
+		}
 	}
 }

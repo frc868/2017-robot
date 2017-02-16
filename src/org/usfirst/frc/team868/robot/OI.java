@@ -1,9 +1,11 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.*;
+import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 
 import lib.hid.ControllerMap;
@@ -88,7 +90,24 @@ public class OI {
 	}
 	
 	public void setupOperator(ControllerMap controller) {
-		
+		// TURRET
+				controller.getButton(RobotMap.Controls.Turret.R_LEFT)
+					.whenPressed(new RotateTurretByAngle(10));
+				controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
+					.whenPressed(new RotateTurretByAngle(-10));
+				controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+					.whenPressed(new RotateUsingIRPixy());
+				controller.getButton(RobotMap.Controls.Turret.SHOOT)
+					.whenPressed(new FeedAndShootCommandGroup());
+				
+		// GEAR
+				controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
+					.whenPressed(new GearCollectorToggleCommand());
+				controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
+					.whenPressed(new GearFlashlightCommand());
+		// CLIMBER
+				controller.getButton(RobotMap.Controls.Climber.CLIMB)
+					.whileHeld(new ClimberCommand());
 	}
 	
 	public ControllerMap getDriver() {
