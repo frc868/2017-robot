@@ -1,24 +1,41 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class GearFlashlightCommand extends Command {
 
-    public GearCollectorToggleCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	GearFlashlightSubsystem flash;
+	
+	boolean state;
+	
+	/**
+	 * Sets the flashlight to the given argument
+	 * @param on
+	 */
+    public GearFlashlightCommand(boolean on) { 
+    	flash = GearFlashlightSubsystem.getInstance(); 
+        requires(flash);
+        
+        state = on;
+    }
+    
+    /**
+     * Toggles the flashlight's on/off status
+     */
+    public GearFlashlightCommand(){
+    	flash = GearFlashlightSubsystem.getInstance();
+    	requires(flash);
+    	state = !flash.isOn();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	flash.setLight(state);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -1,24 +1,27 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.gear;
+package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
+public class RotateAngle extends Command {
 	
-	private GearCollectorSubsystem holder;
-
-    public GearCollectorToggleCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	private double angle;
+	
+	/**
+	 * Rotates the robot by 'angle' degrees from it's current rotation, where right is positive and left is negative
+	 * @param angle
+	 */
+    public RotateAngle(double angle) {
+    	this.angle = GyroSubsystem.getInstance().getRotation()+angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	new TurnToAngle(angle).start();
     }
 
     // Called repeatedly when this Command is scheduled to run

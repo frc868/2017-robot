@@ -1,4 +1,4 @@
-package randomUtils;
+package lib.util;
 
 public class StringToDouble {
 	

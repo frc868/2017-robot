@@ -12,6 +12,11 @@ public class RotateTurretToAngle extends Command {
 	TurretRotationSubsystem turret;
 	double angle;
 	
+	/**
+	 * Rotates the turret to the position value of the given angle.
+	 * (Note that this is not relative to where the turret is when this command is called)
+	 * @param absoluteAngle in degrees
+	 */
     public RotateTurretToAngle(double absoluteAngle) {
         turret = TurretRotationSubsystem.getInstance();
         requires(turret);

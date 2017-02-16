@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem.Record;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,7 +41,9 @@ public class RotateUsingColorPixy extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	new TurnToAngle(camera.getXAngleOffFromCenter()).start();
+		Record target = camera.getTarget();
+
+    	new RotateAngle(target.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
