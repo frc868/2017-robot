@@ -1,8 +1,11 @@
 package org.usfirst.frc.team868.robot;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.ArcadeDriveCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.RecordMotorMovementHelper;
+import org.usfirst.frc.team868.robot.commands.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+
 import lib.hid.ControllerMap;
 import lib.hid.ControllerMap.Type;
 import edu.wpi.first.wpilibj.Joystick;
@@ -72,6 +75,15 @@ public class OI {
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
 			.whenPressed(new ShootCommand(true))
 			.whenReleased(new ShootCommand(false));
+		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
+			.whenPressed(new RotateTurretByAngle(10));
+		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
+			.whenPressed(new RotateTurretByAngle(-10));
+		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+			.whenPressed(new RotateUsingIRPixy());
+		
+		// GEAR
+		
 	}
 	
 	public void setupOperator(ControllerMap controller) {
