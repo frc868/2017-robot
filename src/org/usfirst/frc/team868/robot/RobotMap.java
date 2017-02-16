@@ -31,6 +31,7 @@ public interface RobotMap {
 	public interface Shoot {
 		//PORTS:
 		final int SHOOTER_MOTOR = 8;
+		final int OTHER_SHOOTER_MOTOR = 11;
 		final int ENCODER_A = 3;
 		final int ENCODER_B = 4;
 		
