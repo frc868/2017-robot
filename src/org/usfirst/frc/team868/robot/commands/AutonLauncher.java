@@ -17,7 +17,7 @@ public class AutonLauncher extends CommandGroup {
         	case CROSS_BASE:
         		break;
         	case DROP_GEAR:
-        		new DropOffGearAutonCommandGroup().start();
+        		new DropOffGearAutonCommandGroup(AutonChooser.getStart()).start();
         		break;
         	case HOPPER: 
         		break;
