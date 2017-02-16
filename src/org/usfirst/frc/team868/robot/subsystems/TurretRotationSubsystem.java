@@ -4,7 +4,6 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -21,8 +20,8 @@ public class TurretRotationSubsystem extends Subsystem {
 	private static TurretRotationSubsystem instance;
 	private CANTalon turretRotator;
 	private PIDController control;
-	private Encoder count;
 	private final double P = 0, I = 0, D = 0;
+	private final boolean DEBUG = false;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
@@ -30,10 +29,8 @@ public class TurretRotationSubsystem extends Subsystem {
 		// Make sure we stop if we hit a physical limit switch
 		turretRotator.enableLimitSwitch(true, true);
 		
-		// TODO: Refactor to use encoder connected directly to CANTalon
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		count = new Encoder(RobotMap.Turret.ENCODER_A, RobotMap.Turret.ENCODER_B);
-		control = new PIDController(P , I, D, new PIDSource(){
+		control = new PIDController(P, I, D, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {}
 
@@ -42,7 +39,7 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 
 			public double pidGet() {
-				return getEncoderPosition();
+				return getPosition();
 			}
 			
 		}, new PIDOutput(){
@@ -129,15 +126,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return
 	 */
 	public double getSpeed(){
-		return count.getRate();
-	}
-	
-	/**
-	 * Gets the turret's current position according to it's encoder.
-	 * @return position in encoder counts.
-	 */
-	public double getEncoderPosition(){
-		return count.get();
+		return turretRotator.getSpeed();
 	}
 	
 	/**
@@ -145,14 +134,14 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return angle in degrees
 	 */
 	public double getAngle() {
-		return getEncoderPosition() * RobotMap.Turret.DEGREES_PER_COUNT;
+		return getPosition() * RobotMap.Turret.DEGREES_PER_COUNT;
 	}
 	
 	/**
-	 * Gets the turret's position according to it's CANTalon.
-	 * @return
+	 * Gets the turret's position according to the CANTalon.
+	 * @return in encoder counts
 	 */
-	public double getCANTalonPosition(){
+	public double getPosition(){
 		return turretRotator.getPosition();
 	}
 	
@@ -168,11 +157,15 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * Update information on SmartDashboard.
 	 */
 	public void updateSD(){
-		SmartDashboard.putData("Turret PID", control);
-		SmartDashboard.putNumber("Turret Position", getEncoderPosition());
-		SmartDashboard.putNumber("Turret Power", getPower());
-		SmartDashboard.putNumber("Turret Speed", getSpeed());
-		SmartDashboard.putNumber("Turret Setpoint", getSetpoint());
+		if(DEBUG ){
+			SmartDashboard.putData("Turret PID", control);
+			SmartDashboard.putNumber("Turret Power", getPower());
+			SmartDashboard.putNumber("Turret Speed", getSpeed());
+			SmartDashboard.putNumber("Turret Setpoint", getSetpoint());
+			SmartDashboard.putBoolean("Turret at forward limit", turretRotator.isFwdLimitSwitchClosed());
+			SmartDashboard.putBoolean("Turret at reverse limit", turretRotator.isRevLimitSwitchClosed());
+		}
+		SmartDashboard.putNumber("Turret Position", getPosition());
 	}
 
 	/**

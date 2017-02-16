@@ -125,8 +125,6 @@ public interface RobotMap {
 	public interface Turret {
 		//PORTS:
 		final int TURRET_MOTOR = 9;
-		final int ENCODER_A = 1;
-		final int ENCODER_B = 2;
 		
 		//VALUES:
 		final boolean IS_INVERTED = false;
