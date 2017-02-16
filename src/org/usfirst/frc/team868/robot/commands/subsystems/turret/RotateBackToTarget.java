@@ -7,7 +7,6 @@ import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -59,8 +58,9 @@ public class RotateBackToTarget extends Command {
   
 	
     public void lockedOn() {
-    	lockedOn = Math.abs(ColorPixySubsystem.getInstance().getXAngleOffFromCenter()) < 1;
+    	lockedOn = Math.abs((int) ColorPixySubsystem.getInstance().getTarget().getXAngleOffFromCenter()) < 1;
     	if (lockedOn && !hasLockedOn) hasLockedOn = true;
+    	
     }
     
     public void updateLocked() {

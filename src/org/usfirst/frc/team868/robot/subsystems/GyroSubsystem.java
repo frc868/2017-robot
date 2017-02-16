@@ -11,8 +11,6 @@ import lib.util.gyro.BNO055;
  *
  */
 public class GyroSubsystem extends Subsystem {
-	
-	//BNO055
 
     private static GyroSubsystem instance;
     private BNO055 gyro;
@@ -28,14 +26,25 @@ public class GyroSubsystem extends Subsystem {
 
     }
     
+    /**
+     * Gets the current rotation of the robot.
+     * @return in degrees
+     */
     public double getRotation(){
     	return gyroX.getAngle();
     }
     
+    /**
+	 * Update information on SmartDashboard.
+	 */
     public void updateSD(){
     	SmartDashboard.putNumber("Rotation", getRotation());
     }
     
+    /**
+	 * Get the instance of this subsystem
+	 * @return instance
+	 */
     public static GyroSubsystem getInstance(){
     	if(instance == null){
     		instance = new GyroSubsystem();

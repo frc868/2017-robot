@@ -3,6 +3,7 @@ package org.usfirst.frc.team868.robot.commands;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,14 +39,18 @@ public class UpdateSmartDashboard extends Command {
     	final double refreshRate = (1.0 / 20.0);
     	
     	if(time.get() >= refreshRate){
-//    		ColorPixySubsystem.getInstance().updateSD();
-    		GyroSubsystem.getInstance().updateSD();
-    		IRPixySubsystem.getInstance().updateSD();
-//    		DriveSubsystem.getInstance().updateSD();
 //    		AgitatorSubsystem.getInstance().updateSD();
-//    		TurretRotationSubsystem.getInstance().updateSD();
-//    		LidarSubsystem.getInstance().updateSmartDashboard();
 //    		ClimberSubsystem.getInstance().updateSD();
+//    		ColorPixySubsystem.getInstance().updateSD();
+//    		DriveSubsystem.getInstance().updateSD();
+//    		GyroSubsystem.getInstance().updateSD();
+//			GearFlashlightSubsystem.getInstance().updateSD();
+//    		IRPixySubsystem.getInstance().updateSD();
+//    		LidarSubsystem.getInstance().updateSmartDashboard();
+//			ShooterFeederSubsystem.getInstance().updateSD();
+//			ShooterFlashlightSubsystem.getInstance().updateSD();
+//    		ShooterSubsystem.getInstance().updateSD();
+//    		TurretRotationSubsystem.getInstance().updateSD();
     		time.reset();
     		
     		counts++;
