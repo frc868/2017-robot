@@ -43,7 +43,7 @@ public class SetLEDs extends Command {
     			led.setShooterLEDs(true, false);//Shooter is spinning up to speed.
     		}
     	}else{
-    		led.setShooterLEDs(false, false);//Shooter is still spinning, but trying to stop.
+    		led.setShooterLEDs(false, false);//Shooter is still spinning, but trying to stop, or is stopped.
     	}
     }
 
