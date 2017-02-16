@@ -40,6 +40,10 @@ public class DriveSubsystem extends Subsystem {
 		LiveWindow.addActuator("Drive", "Right Motors", rightMotor);
 		LiveWindow.addSensor("Drive", "Left Encoder", leftEncoder);
 		LiveWindow.addSensor("Drive", "Right Encoder", rightEncoder);
+		
+		if(DEBUG){
+			SmartDashboard.putData("Drive subsystem", this);
+		}
 	}
 	
 	/**
