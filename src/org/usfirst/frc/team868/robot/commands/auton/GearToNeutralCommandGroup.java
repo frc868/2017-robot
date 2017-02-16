@@ -1,11 +1,8 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
-import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveAndTurn;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
-import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearReleaseCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

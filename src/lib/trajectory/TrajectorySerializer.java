@@ -30,6 +30,8 @@ public class TrajectorySerializer {
 				seg.heading = Double.parseDouble(data[7]);
 				
 				segments.add(seg);
+				scanner.close();
+				scanner = null;
 				
 			}
 			

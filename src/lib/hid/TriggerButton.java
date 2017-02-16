@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import lib.hid.ControllerMap.Key;
 
-import edu.wpi.first.wpilibj.Joystick;
-
 public class TriggerButton extends JoystickButton {
 	
 	private Hand hand;

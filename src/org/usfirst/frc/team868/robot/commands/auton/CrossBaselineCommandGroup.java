@@ -2,13 +2,9 @@ package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateUsingColorPixy;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
-import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearReleaseCommand;
-import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
