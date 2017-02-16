@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RecordMotorMovementHelper;
 import lib.hid.ControllerMap;
@@ -54,6 +55,9 @@ public class OI {
 	}
 	
 	private void setup() {
+		setupDriver(driver);
+		setupOperator(operator);
+		
 		curDriver = driver;
 		
 		initSmartDashboard();
@@ -61,12 +65,17 @@ public class OI {
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
+		@SuppressWarnings("unused") // eclipse pls
+		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
-		controller.getButton(RobotMap.Controls.Turret.START)
-			.whenPressed(new ShootCommand(true));
-		controller.getButton(RobotMap.Controls.Turret.STOP)
-			.whenPressed(new ShootCommand(false));
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whenPressed(new ShootCommand(true))
+			.whenReleased(new ShootCommand(false));
+	}
+	
+	public void setupOperator(ControllerMap controller) {
+		
 	}
 
 	public void initSmartDashboard() {
