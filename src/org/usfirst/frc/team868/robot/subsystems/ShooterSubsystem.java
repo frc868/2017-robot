@@ -20,6 +20,7 @@ public class ShooterSubsystem extends Subsystem {
 
     private static ShooterSubsystem instance;
     private CANTalon shooter;
+    private CANTalon otherShooter;
     private PIDController control;
     private Encoder count;
     public static final double P = 0;
@@ -28,8 +29,12 @@ public class ShooterSubsystem extends Subsystem {
     
     private ShooterSubsystem(){
     	shooter = new CANTalon(RobotMap.Shoot.SHOOTER_MOTOR);
-    	// TODO: Need second shooter motor controller set to follower mode
+    	otherShooter = new CANTalon(RobotMap.Shoot.OTHER_SHOOTER_MOTOR);
     	shooter.setInverted(RobotMap.Shoot.IS_INVERTED);
+    	otherShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
+    	shooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
+    	otherShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	otherShooter.set(shooter.getDeviceID());
     	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B);
     	control = new PIDController(P, I, D, new PIDSource(){
 

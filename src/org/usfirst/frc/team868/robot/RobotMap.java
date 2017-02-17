@@ -146,5 +146,8 @@ public interface RobotMap {
 		}
 
 		double MIN_JOYSTICK_VAL = 0.15;
+		public interface Climber {
+			final int CLIMB = ControllerMap.Key.RB;
+		}
 	}
 }

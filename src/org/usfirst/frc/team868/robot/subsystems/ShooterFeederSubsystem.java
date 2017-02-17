@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,6 +12,7 @@ public class ShooterFeederSubsystem extends Subsystem {
 	private static ShooterFeederSubsystem instance;
 	private Spark motor;
 	private boolean state;
+	private DigitalInput beamBreak;
 	private static final boolean DEBUG = false;
 	
 	@Override
@@ -19,9 +21,11 @@ public class ShooterFeederSubsystem extends Subsystem {
 	private ShooterFeederSubsystem() {
 		motor = new Spark(RobotMap.Feeder.CONVEYOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.CONVEYOR_IS_INVERTED);
+		beamBreak = new DigitalInput(RobotMap.Feeder.BEAM_BREAK_PORT);
 		
 		// Assign test mode group
 		LiveWindow.addActuator("Feeder", "Motor", motor);
+		LiveWindow.addSensor("Feeder", "Beam break", beamBreak);
 	}
 	
 	/**
@@ -79,9 +83,17 @@ public class ShooterFeederSubsystem extends Subsystem {
 	}
 	
 	/**
+	 * Gets whether or not a ball is detected.
+	 */
+	public boolean getBallBeamBreak(){
+		return beamBreak.get();
+	}
+	
+	/**
 	 * Update information on SmartDashboard.
 	 */
 	public void updateSD(){
+		SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
 		if(DEBUG){
 			SmartDashboard.putBoolean("Feeder is on", isFeederOn());
 		}

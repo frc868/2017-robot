@@ -8,6 +8,7 @@ public class Trajectory {
 		this.segments = segments;
 	}
 	
+	@SuppressWarnings("unused")
 	public Trajectory(int length) {
 		this.segments = new Segment[length];
 		

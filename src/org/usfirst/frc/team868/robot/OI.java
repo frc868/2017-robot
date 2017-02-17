@@ -1,9 +1,11 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.*;
+import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 
 import lib.hid.ControllerMap;
@@ -64,13 +66,14 @@ public class OI {
 		curDriver = driver;
 		
 		new ShootCommand(true);
+		new AgitatorCommand();
 		initSmartDashboard();
 	}
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
 		@SuppressWarnings("unused") // eclipse pls
-		ArcadeDrive arcadedrive = new ArcadeDrive(controller.);
+		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
 		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
@@ -80,16 +83,6 @@ public class OI {
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
 		
-		//SHOOT
-		controller.getButton(RobotMap.Controls.Turret.SHOOT)
-			.whenActive(new ShootCommand(true));
-		controller.getButton(RobotMap.Controls.Turret.SHOOT)
-			.whenInactive(new ShootCommand(false));
-		//CLIMBER
-		
-		//DRIVING
-		
-		
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
@@ -97,12 +90,25 @@ public class OI {
 			.whenPressed(new GearFlashlightCommand());
 	}
 	
-	public double getL_YAxis(){
-		return driver.getAxis(10);
-	}
-	
 	public void setupOperator(ControllerMap controller) {
-		
+		// TURRET
+		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
+			.whenPressed(new RotateTurretByAngle(10));
+		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
+			.whenPressed(new RotateTurretByAngle(-10));
+		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+			.whenPressed(new RotateUsingIRPixy());
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whenPressed(new FeedAndShootCommandGroup());
+				
+		// GEAR
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
+			.whenPressed(new GearCollectorToggleCommand());
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
+			.whenPressed(new GearFlashlightCommand());
+		// CLIMBER
+		controller.getButton(RobotMap.Controls.Climber.CLIMB)
+			.whileHeld(new ClimberCommand());
 	}
 	
 	public ControllerMap getDriver() {
@@ -126,4 +132,3 @@ public class OI {
 		return instance;
 	}
 }
-
