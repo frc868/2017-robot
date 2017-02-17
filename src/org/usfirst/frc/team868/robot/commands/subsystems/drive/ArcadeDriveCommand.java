@@ -14,6 +14,7 @@ public class ArcadeDriveCommand extends Command {
 
     public ArcadeDriveCommand(ControllerMap ctrl) {
         drive = DriveSubsystem.getInstance();
+        requires(drive);
         controller = ctrl;
     }
 

@@ -58,9 +58,7 @@ public class OI {
 	private void setup() {
 		setupDriver(driver);
 		setupOperator(operator);
-				
-		new ShootCommand(true);
-		new AgitatorCommand();
+
 		initSmartDashboard();
 	}
 	
@@ -78,6 +76,8 @@ public class OI {
 			.whenPressed(new RotateTurretByAngle(-10));
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whileHeld(new FeedAndShootCommandGroup());
 		
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
@@ -95,7 +95,7 @@ public class OI {
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
-			.whenPressed(new FeedAndShootCommandGroup());
+			.whileHeld(new FeedAndShootCommandGroup());
 				
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
