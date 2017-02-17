@@ -41,7 +41,7 @@ public class ClimberSubsystem extends Subsystem {
 	 * Begin climbing the rope at the default speed
 	 */
 	public void startClimbing(){
-		climber.set(RobotMap.Climber.CLIMBER_SPEED);
+		startClimbing(RobotMap.Climber.CLIMBER_SPEED);
 	}
 	
 	/**
