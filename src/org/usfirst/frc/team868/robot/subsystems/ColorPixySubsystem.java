@@ -22,9 +22,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 
  * Pixy to I2C ports: (kMXP)
  * 
- * Pinout of kMXP ports: 33 31 29 27 ... 7 5 3 1 34 32 30 28 ... 8 6 4 2
+ * Pinout of kMXP ports: 
+ * 		33 31 29 27 ... 7 5 3 1
+ * 		34 32 30 28 ... 8 6 4 2
  * 
- * Pixy port 5 goes to I2C port 32 ... 9 to 34
+ * Pixy port 5 goes to I2C port 32
+ * ...	 	 9		to			34
  * 
  */
 public class ColorPixySubsystem extends Subsystem {
