@@ -149,9 +149,12 @@ public interface RobotMap {
 	public interface Controls {
 		public interface Turret {
 			final int SHOOT = ControllerMap.Key.X;
+			final int R_FORWARD = DPadButton.Direction.UP;
+			final int R_BACKWARD = DPadButton.Direction.DOWN;
 			final int R_LEFT = DPadButton.Direction.LEFT;
 			final int R_RIGHT = DPadButton.Direction.RIGHT;
 			final int R_PIXY = ControllerMap.Key.B;
+			final int CALIBRATE = ControllerMap.Key.LB;
 		}
 		
 		public interface Gear {

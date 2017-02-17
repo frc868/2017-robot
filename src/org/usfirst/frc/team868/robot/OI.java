@@ -70,10 +70,6 @@ public class OI {
 		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
-		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
-			.whenPressed(new RotateTurretByAngle(10));
-		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
-			.whenPressed(new RotateTurretByAngle(-10));
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
@@ -88,14 +84,20 @@ public class OI {
 	
 	public void setupOperator(ControllerMap controller) {
 		// TURRET
+		controller.getButton(RobotMap.Controls.Turret.R_FORWARD)
+			.whenPressed(new RotateTurretToAngle(0));
+		controller.getButton(RobotMap.Controls.Turret.R_BACKWARD)
+			.whenPressed(new RotateTurretToAngle(180));
 		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
-			.whenPressed(new RotateTurretByAngle(10));
+			.whenPressed(new RotateTurretToAngle(90));
 		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
-			.whenPressed(new RotateTurretByAngle(-10));
+			.whenPressed(new RotateTurretToAngle(-90));
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
+		controller.getButton(RobotMap.Controls.Turret.CALIBRATE)
+			.whenPressed(new CalibrateTurretCommand());
 				
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
