@@ -72,6 +72,8 @@ public class OI {
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
+		
+		// DRIVE (DRIVER)
 		@SuppressWarnings("unused") // eclipse pls
 		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
@@ -106,7 +108,8 @@ public class OI {
 			.whenPressed(new GearCollectorToggleCommand());
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
 			.whenPressed(new GearFlashlightCommand());
-		// CLIMBER
+		
+		// CLIMBER (OPERATOR)
 		controller.getButton(RobotMap.Controls.Climber.CLIMB)
 			.whileHeld(new ClimberCommand());
 	}
