@@ -66,6 +66,7 @@ public class OI {
 		curDriver = driver;
 		
 		new ShootCommand(true);
+		new AgitatorCommand();
 		initSmartDashboard();
 	}
 	
