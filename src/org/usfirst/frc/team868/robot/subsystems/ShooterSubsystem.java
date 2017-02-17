@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 
 /**
  *
@@ -19,8 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterSubsystem extends Subsystem {
 
     private static ShooterSubsystem instance;
-    private CANTalon shooter;
-    private CANTalon otherShooter;
+    private CANTalon rightShooter;
+    private CANTalon leftShooter;
     private PIDController control;
     private Encoder count;
     public static final double P = 0;
@@ -28,15 +29,15 @@ public class ShooterSubsystem extends Subsystem {
     public static final double D = 0;
     
     private ShooterSubsystem(){
-    	shooter = new CANTalon(RobotMap.Shoot.SHOOTER_MOTOR);
-    	otherShooter = new CANTalon(RobotMap.Shoot.OTHER_SHOOTER_MOTOR);
+    	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
+    	leftShooter = new CANTalon(RobotMap.Shoot.LEFT_SHOOTER_MOTOR);
     	
-    	shooter.setInverted(RobotMap.Shoot.IS_INVERTED);
-    	otherShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
+    	rightShooter.setInverted(RobotMap.Shoot.IS_INVERTED);
+    	leftShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
     	
-    	shooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
-    	otherShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
-    	otherShooter.set(shooter.getDeviceID());
+    	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
+    	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	leftShooter.set(rightShooter.getDeviceID());
     	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B);
     	control = new PIDController(P, I, D, new PIDSource(){
 
@@ -54,25 +55,25 @@ public class ShooterSubsystem extends Subsystem {
     	}, new PIDOutput(){
 
 			public void pidWrite(double output) {
-				shooter.set(output); //TODO set otherShooter
+				rightShooter.set(output); //TODO set otherShooter
 			}
     		
     	});
     	control.setOutputRange(0, 1);
     	
 		// Assign test mode group
-    	LiveWindow.addActuator("Shooter", "RIGHT", shooter);
-    	LiveWindow.addActuator("Shooter", "LEFT", otherShooter);
+    	LiveWindow.addActuator("Shooter", "RIGHT", rightShooter);
+    	LiveWindow.addActuator("Shooter", "LEFT", leftShooter);
 		LiveWindow.addSensor("Shooter", "Encoder", count);
     }
     
     /**
 	 * Sets the shooter's power
-	 * @param power in percentage from -1 to 1.
+	 * @param power in voltage from 0 to 12.
 	 */
     public void setPower(double power){
     	control.disable();
-    	shooter.set(power);
+    	rightShooter.set(HoundMath.checkRange(power, 0, 12));
     }
     /**
      * @return the shooter's PID controller
@@ -100,10 +101,10 @@ public class ShooterSubsystem extends Subsystem {
     
     /**
      * Gets the shooter's power.
-     * @return in percentage from -1 to 1
+     * @return in voltage from 0 to 12
      */
     public double getPower(){
-    	return shooter.get();
+    	return rightShooter.get();
     }
     
     /**
@@ -111,7 +112,7 @@ public class ShooterSubsystem extends Subsystem {
      * @return in counts
      */
     public double getCounts() {
-    	return shooter.getPosition();
+    	return rightShooter.getPosition();
     	
     }
     

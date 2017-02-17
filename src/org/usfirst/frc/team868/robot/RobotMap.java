@@ -114,8 +114,8 @@ public interface RobotMap {
 	
 	public interface Shoot {
 		//PORTS:
-		final int SHOOTER_MOTOR = 13; //right IS INVERTED
-		final int OTHER_SHOOTER_MOTOR = 19; //left
+		final int RIGHT_SHOOTER_MOTOR = 13;
+		final int LEFT_SHOOTER_MOTOR = 19;
 		final int ENCODER_A = 3;
 		final int ENCODER_B = 4;
 		
