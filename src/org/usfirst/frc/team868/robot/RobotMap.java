@@ -88,6 +88,8 @@ public interface RobotMap {
 		
 		//VALUES:
 		final int BAUD = 9600;
+		
+		//random, useless comment
 	}
 	
 	public interface Pixy {
