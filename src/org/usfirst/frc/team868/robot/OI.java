@@ -92,23 +92,23 @@ public class OI {
 	
 	public void setupOperator(ControllerMap controller) {
 		// TURRET
-				controller.getButton(RobotMap.Controls.Turret.R_LEFT)
-					.whenPressed(new RotateTurretByAngle(10));
-				controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
-					.whenPressed(new RotateTurretByAngle(-10));
-				controller.getButton(RobotMap.Controls.Turret.R_PIXY)
-					.whenPressed(new RotateUsingIRPixy());
-				controller.getButton(RobotMap.Controls.Turret.SHOOT)
-					.whenPressed(new FeedAndShootCommandGroup());
+		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
+			.whenPressed(new RotateTurretByAngle(10));
+		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
+			.whenPressed(new RotateTurretByAngle(-10));
+		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+			.whenPressed(new RotateUsingIRPixy());
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whenPressed(new FeedAndShootCommandGroup());
 				
 		// GEAR
-				controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
-					.whenPressed(new GearCollectorToggleCommand());
-				controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
-					.whenPressed(new GearFlashlightCommand());
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
+			.whenPressed(new GearCollectorToggleCommand());
+		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
+			.whenPressed(new GearFlashlightCommand());
 		// CLIMBER
-				controller.getButton(RobotMap.Controls.Climber.CLIMB)
-					.whileHeld(new ClimberCommand());
+		controller.getButton(RobotMap.Controls.Climber.CLIMB)
+			.whileHeld(new ClimberCommand());
 	}
 	
 	public ControllerMap getDriver() {
