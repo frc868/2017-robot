@@ -1,17 +1,13 @@
 package org.usfirst.frc.team868.robot;
 
-import org.usfirst.frc.team868.robot.commands.*;
 import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
-import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 
 import lib.hid.ControllerMap;
-import lib.hid.ControllerMap.Type;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -48,7 +44,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	
 	static OI instance;
-	private ControllerMap driver, operator, curDriver;
+	private ControllerMap driver, operator;
 	
 	public OI() {
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
@@ -62,9 +58,7 @@ public class OI {
 	private void setup() {
 		setupDriver(driver);
 		setupOperator(operator);
-		
-		curDriver = driver;
-		
+				
 		new ShootCommand(true);
 		new AgitatorCommand();
 		initSmartDashboard();
