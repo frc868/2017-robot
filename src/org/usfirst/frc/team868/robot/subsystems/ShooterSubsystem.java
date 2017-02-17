@@ -30,8 +30,10 @@ public class ShooterSubsystem extends Subsystem {
     private ShooterSubsystem(){
     	shooter = new CANTalon(RobotMap.Shoot.SHOOTER_MOTOR);
     	otherShooter = new CANTalon(RobotMap.Shoot.OTHER_SHOOTER_MOTOR);
+    	
     	shooter.setInverted(RobotMap.Shoot.IS_INVERTED);
     	otherShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
+    	
     	shooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	otherShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
     	otherShooter.set(shooter.getDeviceID());
@@ -52,15 +54,15 @@ public class ShooterSubsystem extends Subsystem {
     	}, new PIDOutput(){
 
 			public void pidWrite(double output) {
-				shooter.set(output);
+				shooter.set(output); //TODO set otherShooter
 			}
     		
-    	}, 1/100);
+    	});
     	control.setOutputRange(0, 1);
     	
 		// Assign test mode group
-    	LiveWindow.addActuator("Shooter", "Motor Main", shooter);
-    	//LiveWindow.addActuator("Shooter", "Motor Follower", shooter2);
+    	LiveWindow.addActuator("Shooter", "RIGHT", shooter);
+    	LiveWindow.addActuator("Shooter", "LEFT", otherShooter);
 		LiveWindow.addSensor("Shooter", "Encoder", count);
     }
     
