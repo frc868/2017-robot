@@ -35,11 +35,11 @@ public class ControllerMap {
 		int LEFT_HORIZONTAL = 10,
 	  			RIGHT_HORIZONTAL = 11, LEFT_VERTICAL = 12, RIGHT_VERTICAL = 13;
 	}
-	//										  A  B  X  Y  RB  RT LB  LT ST BA  LH RH LV RV
-	protected static final int[] logitech =	{ 2, 3, 1, 4, 6,  8, 5,  7, 10, 9, 0, 2, 1, 3};	
-    protected static final int[] xbox360 = 	{ 1, 2, 3, 4, 6, -1, 5, -1,  8, 7, 0, 4, 1, 5};
-    protected static final int[] ps4 =		{ 2, 3, 1, 4, 6,  8, 5,  7, 10, 9, 0, 2, 1, 5};
-    protected static final int[] xboxOne = 	{ 1, 2, 3, 4, 6,  3, 5,  2,  8, 7, 0, 4, 1, 5};
+	//										 0A 1B 2X 3Y 4RB 5RT 6LB 7LT 8ST  9BA 10LH 11RH 12LV 13RV
+	protected static final int[] logitech =	{ 2, 3, 1, 4, 6,  8,  5,  7,  10,  9,   0,   2,   1,   3};	
+    protected static final int[] xbox360 = 	{ 1, 2, 3, 4, 6, -1,  5, -1,   8,  7,   0,   4,   1,   5};
+    protected static final int[] ps4 =		{ 2, 3, 1, 4, 6,  8,  5,  7,  10,  9,   0,   2,   1,   5};
+    protected static final int[] xboxOne = 	{ 1, 2, 3, 4, 6,  3,  5,  2,   8,  7,   0,   4,   1,   5};
     		
 	public ControllerMap(Joystick joystick) {
 		this(joystick, Type.LOGITECH);

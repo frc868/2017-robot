@@ -144,5 +144,7 @@ public interface RobotMap {
 			final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 			final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
 		}
+
+		double MIN_JOYSTICK_VAL = 0.15;
 	}
 }

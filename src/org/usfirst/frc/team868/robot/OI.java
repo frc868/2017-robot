@@ -70,7 +70,7 @@ public class OI {
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
 		@SuppressWarnings("unused") // eclipse pls
-		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
+		ArcadeDrive arcadedrive = new ArcadeDrive(controller.);
 		
 		// TURRET
 		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
@@ -80,11 +80,25 @@ public class OI {
 		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
 		
+		//SHOOT
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whenActive(new ShootCommand(true));
+		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+			.whenInactive(new ShootCommand(false));
+		//CLIMBER
+		
+		//DRIVING
+		
+		
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
 			.whenPressed(new GearFlashlightCommand());
+	}
+	
+	public double getL_YAxis(){
+		return driver.getAxis(10);
 	}
 	
 	public void setupOperator(ControllerMap controller) {
