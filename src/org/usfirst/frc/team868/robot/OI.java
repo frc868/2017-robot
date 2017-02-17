@@ -52,13 +52,9 @@ public class OI {
 		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
 						ControllerMap.Type.XBOX_ONE);
 		
-		setup();
-	}
-	
-	private void setup() {
 		setupDriver(driver);
 		setupOperator(operator);
-
+		
 		initSmartDashboard();
 	}
 	
@@ -74,15 +70,11 @@ public class OI {
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
-		
-		// GEAR
-		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
-			.whenPressed(new GearCollectorToggleCommand());
-		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
-			.whenPressed(new GearFlashlightCommand());
 	}
 	
 	public void setupOperator(ControllerMap controller) {
+		controller.clearButtons();
+		
 		// TURRET
 		controller.getButton(RobotMap.Controls.Turret.R_FORWARD)
 			.whenPressed(new RotateTurretToAngle(0));
