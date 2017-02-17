@@ -122,21 +122,19 @@ public interface RobotMap {
 	
 	public interface Shoot {
 		//PORTS:
-		final int SHOOTER_MOTOR = 8;
-		final int OTHER_SHOOTER_MOTOR = 11;
+		final int RIGHT_SHOOTER_MOTOR = 13;
+		final int LEFT_SHOOTER_MOTOR = 19;
 		final int ENCODER_A = 3;
 		final int ENCODER_B = 4;
 		
 		//VALUES:
-		final boolean IS_INVERTED = false;
+		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
 	}
 	
 	public interface Turret {
 		//PORTS:
-		final int TURRET_MOTOR = 9;
-		final int ENCODER_A = 1;
-		final int ENCODER_B = 2;
+		final int TURRET_MOTOR = 12;
 		
 		//VALUES:
 		final boolean IS_INVERTED = false;
