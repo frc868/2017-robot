@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 import lib.util.RecordMotorMovement;
 
 /**
@@ -40,6 +41,10 @@ public class DriveSubsystem extends Subsystem {
 		LiveWindow.addActuator("Drive", "Right Motors", rightMotor);
 		LiveWindow.addSensor("Drive", "Left Encoder", leftEncoder);
 		LiveWindow.addSensor("Drive", "Right Encoder", rightEncoder);
+		
+		if(DEBUG){
+			SmartDashboard.putData("Drive subsystem", this);
+		}
 	}
 	
 	/**
@@ -47,7 +52,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param speed 1 to -1
 	 */
 	public void setL(double speed){
-		leftMotor.set(speed);
+		leftMotor.set(HoundMath.checkRange(speed));
 	}
 	
 	/**
@@ -55,7 +60,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param speed 1 to -1
 	 */
 	public void setR(double speed){
-		rightMotor.set(speed);
+		rightMotor.set(HoundMath.checkRange(speed));
 	}
 	
 	/**

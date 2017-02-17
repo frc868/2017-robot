@@ -1,10 +1,5 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

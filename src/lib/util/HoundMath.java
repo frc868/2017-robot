@@ -2,6 +2,12 @@ package lib.util;
 
 public class HoundMath {
 
+	/**
+	 * Defaults as ranging from -1 to 1.
+	 * Call checkRange with 3 doubles to use your own max and min values.
+	 * @param value
+	 * @return
+	 */
 	public static double checkRange(double value) {
 		return checkRange(value, -1, 1);
 	}

@@ -1,7 +1,5 @@
 package lib.hid;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 public class DPadButton extends JoystickButton {
 	
 	protected boolean isEightDirectional;
