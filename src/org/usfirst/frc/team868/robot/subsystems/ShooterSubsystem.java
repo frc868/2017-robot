@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -22,7 +23,7 @@ public class ShooterSubsystem extends Subsystem {
     private CANTalon shooter;
     private CANTalon otherShooter;
     private PIDController control;
-    private Encoder count;
+    private Counter count;
     public static final double P = 0;
     public static final double I = 0;
     public static final double D = 0;
@@ -37,7 +38,8 @@ public class ShooterSubsystem extends Subsystem {
     	shooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	otherShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
     	otherShooter.set(shooter.getDeviceID());
-    	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B);
+//    	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B); //TODO remove
+    	count = new Counter(RobotMap.Shoot.ENCODER_A);
     	control = new PIDController(P, I, D, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {
