@@ -120,12 +120,13 @@ public interface RobotMap {
 		SERIAL_ONBOARD, SERIAL_MXP, I2C_ONBOARD, I2C_MXP
 	}
 	
-	public interface Shoot {
+	public interface Shoot { //TODO fix!
 		//PORTS:
 		final int RIGHT_SHOOTER_MOTOR = 13;
 		final int LEFT_SHOOTER_MOTOR = 19;
 		final int ENCODER_A = 3;
-		final int ENCODER_B = 4;
+		/**@deprecated*/
+		final int ENCODER_B = 4; //TODO remove
 		
 		//VALUES:
 		final boolean IS_INVERTED = true;
