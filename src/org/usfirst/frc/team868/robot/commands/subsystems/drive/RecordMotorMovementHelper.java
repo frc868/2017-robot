@@ -9,9 +9,9 @@ import lib.util.RecordMotorMovement;
  *
  */
 public class RecordMotorMovementHelper extends Command {
-	
-	String todo = "", fileLoc = "";
-	boolean isFinished = false;
+
+    String todo = "", fileLoc = "";
+    boolean isFinished = false;
 
     public RecordMotorMovementHelper(String todo, String fileLoc) {
         this.todo = todo;
@@ -19,40 +19,45 @@ public class RecordMotorMovementHelper extends Command {
     }
 
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
-    	if(todo.equals("saveFile")){
-    		try {
-				RecordMotorMovement.getInstance().saveFile(fileLoc);
-			} catch (IOException e) {
-			}
-    		isFinished = true;
-    	}else if(todo.equals("readFile")){
-    		try {
-				RecordMotorMovement.getInstance().readFile(fileLoc);
-			} catch (IOException e) {
-			}
-    		isFinished = true;
-    	}else if(todo.equals("record")){
-    		
-    	}
+        if (todo.equals("saveFile")) {
+            try {
+                RecordMotorMovement.getInstance().saveFile(fileLoc);
+            } catch (IOException e) {
+            }
+            isFinished = true;
+        } else if (todo.equals("readFile")) {
+            try {
+                RecordMotorMovement.getInstance().readFile(fileLoc);
+            } catch (IOException e) {
+            }
+            isFinished = true;
+        } else if (todo.equals("record")) {
+
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-    	RecordMotorMovement.getInstance().RecordMotors();
+        RecordMotorMovement.getInstance().RecordMotors();
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return isFinished;
     }
 
     // Called once after isFinished returns true
+    @Override
     protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
     }
 }

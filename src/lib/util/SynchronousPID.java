@@ -14,11 +14,16 @@ public class SynchronousPID {
     private double m_D;            // factor for "derivative" control
     private double m_maximumOutput = 1.0;    // |maximum output|
     private double m_minimumOutput = -1.0;    // |minimum output|
-    private double m_maximumInput = 0.0;        // maximum input - limit setpoint to this
-    private double m_minimumInput = 0.0;        // minimum input - limit setpoint to this
-    private boolean m_continuous = false;    // do the endpoints wrap around? eg. Absolute encoder
-    private double m_prevError = 0.0;    // the prior sensor input (used to compute velocity)
-    private double m_totalError = 0.0; //the sum of the errors for use in the integral calc
+    private double m_maximumInput = 0.0;        // maximum input - limit
+                                                // setpoint to this
+    private double m_minimumInput = 0.0;        // minimum input - limit
+                                                // setpoint to this
+    private boolean m_continuous = false;    // do the endpoints wrap around?
+                                             // eg. Absolute encoder
+    private double m_prevError = 0.0;    // the prior sensor input (used to
+                                         // compute velocity)
+    private double m_totalError = 0.0; // the sum of the errors for use in the
+                                       // integral calc
     private double m_setpoint = 0.0;
     private double m_error = 0.0;
     private double m_result = 0.0;
@@ -30,9 +35,12 @@ public class SynchronousPID {
     /**
      * Allocate a PID object with the given constants for P, I, D
      *
-     * @param Kp the proportional coefficient
-     * @param Ki the integral coefficient
-     * @param Kd the derivative coefficient
+     * @param Kp
+     *            the proportional coefficient
+     * @param Ki
+     *            the integral coefficient
+     * @param Kd
+     *            the derivative coefficient
      */
     public SynchronousPID(double Kp, double Ki, double Kd) {
         m_P = Kp;
@@ -41,28 +49,28 @@ public class SynchronousPID {
     }
 
     /**
-     * Read the input, calculate the output accordingly, and write to the output.
-     * This should be called at a constant rate by the user (ex. in a timed thread)
+     * Read the input, calculate the output accordingly, and write to the
+     * output.
+     * This should be called at a constant rate by the user (ex. in a timed
+     * thread)
      *
-     * @param input the input
+     * @param input
+     *            the input
      */
     public double calculate(double input) {
         m_last_input = input;
         m_error = m_setpoint - input;
         if (m_continuous) {
-            if (Math.abs(m_error) >
-                    (m_maximumInput - m_minimumInput) / 2) {
+            if (Math.abs(m_error) > (m_maximumInput - m_minimumInput) / 2) {
                 if (m_error > 0) {
                     m_error = m_error - m_maximumInput + m_minimumInput;
                 } else {
-                    m_error = m_error +
-                            m_maximumInput - m_minimumInput;
+                    m_error = m_error + m_maximumInput - m_minimumInput;
                 }
             }
         }
 
-        if ((m_error * m_P < m_maximumOutput) &&
-                (m_error * m_P > m_minimumOutput)) {
+        if ((m_error * m_P < m_maximumOutput) && (m_error * m_P > m_minimumOutput)) {
             m_totalError += m_error;
         } else {
             m_totalError = 0;
@@ -83,9 +91,12 @@ public class SynchronousPID {
      * Set the PID controller gain parameters.
      * Set the proportional, integral, and differential coefficients.
      *
-     * @param p Proportional coefficient
-     * @param i Integral coefficient
-     * @param d Differential coefficient
+     * @param p
+     *            Proportional coefficient
+     * @param i
+     *            Integral coefficient
+     * @param d
+     *            Differential coefficient
      */
     public void setPID(double p, double i, double d) {
         m_P = p;
@@ -136,7 +147,8 @@ public class SynchronousPID {
      * be the same point and automatically calculates the shortest route to
      * the setpoint.
      *
-     * @param continuous Set to true turns on continuous, false turns off continuous
+     * @param continuous
+     *            Set to true turns on continuous, false turns off continuous
      */
     public void setContinuous(boolean continuous) {
         m_continuous = continuous;
@@ -155,8 +167,10 @@ public class SynchronousPID {
     /**
      * Sets the maximum and minimum values expected from the input.
      *
-     * @param minimumInput the minimum value expected from the input
-     * @param maximumInput the maximum value expected from the output
+     * @param minimumInput
+     *            the minimum value expected from the input
+     * @param maximumInput
+     *            the maximum value expected from the output
      */
     public void setInputRange(double minimumInput, double maximumInput) {
         if (minimumInput > maximumInput) {
@@ -170,8 +184,10 @@ public class SynchronousPID {
     /**
      * Sets the minimum and maximum values to write.
      *
-     * @param minimumOutput the minimum value to write to the output
-     * @param maximumOutput the maximum value to write to the output
+     * @param minimumOutput
+     *            the minimum value to write to the output
+     * @param maximumOutput
+     *            the maximum value to write to the output
      */
     public void setOutputRange(double minimumOutput, double maximumOutput) {
         if (minimumOutput > maximumOutput) {
@@ -184,7 +200,8 @@ public class SynchronousPID {
     /**
      * Set the setpoint for the PID controller
      *
-     * @param setpoint the desired setpoint
+     * @param setpoint
+     *            the desired setpoint
      */
     public void setSetpoint(double setpoint) {
         if (m_maximumInput > m_minimumInput) {

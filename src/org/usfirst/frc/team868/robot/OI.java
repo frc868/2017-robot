@@ -32,29 +32,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // the button is released.
 // button.whileHeld(new ExampleCommand());
 
-// Start the command when the button is released  and let it run the command
+// Start the command when the button is released and let it run the command
 // until it is finished as determined by it's isFinished method.
 // button.whenReleased(new ExampleCommand());
-public class OI {	
-	
-	static OI instance;
-	
-	public OI(){
-		initSmartDashboard();
-	}
+public class OI {
 
-	public void initSmartDashboard(){
-		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
-		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
-		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
-	}
+    static OI instance;
 
-	public static OI getInstance(){
-		if(instance == null){
-			instance = new OI();
-		}
-		return instance;
-	}
+    public OI() {
+        initSmartDashboard();
+    }
+
+    public void initSmartDashboard() {
+        SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
+        SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
+        SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
+    }
+
+    public static OI getInstance() {
+        if (OI.instance == null) {
+            OI.instance = new OI();
+        }
+        return OI.instance;
+    }
 
 }
-

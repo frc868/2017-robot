@@ -16,71 +16,73 @@ public class ShooterFlashlightSubsystem extends Subsystem {
     private Relay flashlight;
     private boolean isOn;
     private static final boolean DEBUG = false;
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static ShooterFlashlightSubsystem getInstance() {
-    	if(instance == null) {
-    		instance = new ShooterFlashlightSubsystem();
-    	} 
-    	return instance;
-    }
-    
-    private ShooterFlashlightSubsystem() {
-    	flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);
-    	flashlight.setDirection(Relay.Direction.kForward);
 
-		// Assign test mode group
-		LiveWindow.addSensor("Shooter Flashlight", "Relay", flashlight);
+    /**
+     * Get the instance of this subsystem
+     *
+     * @return instance
+     */
+    public static ShooterFlashlightSubsystem getInstance() {
+        if (ShooterFlashlightSubsystem.instance == null) {
+            ShooterFlashlightSubsystem.instance = new ShooterFlashlightSubsystem();
+        }
+        return ShooterFlashlightSubsystem.instance;
     }
-    
+
+    private ShooterFlashlightSubsystem() {
+        flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);
+        flashlight.setDirection(Relay.Direction.kForward);
+
+        // Assign test mode group
+        LiveWindow.addSensor("Shooter Flashlight", "Relay", flashlight);
+    }
+
     /**
      * Sets the flashlight where on = true, off = false.
+     *
      * @param on
      */
     public void setLight(boolean on) {
-    	isOn = on;
-    	
-    	if(isOn) {
-    		flashlight.set(Relay.Value.kOn);
-    	} else {
-    		flashlight.set(Relay.Value.kOff);
-    	}
+        isOn = on;
+
+        if (isOn) {
+            flashlight.set(Relay.Value.kOn);
+        } else {
+            flashlight.set(Relay.Value.kOff);
+        }
     }
-    
+
     /**
      * @return current status of the flashlight.
      */
     public boolean isOn() {
-    	return isOn; //TODO should we instead call flashlight.get()?
+        return isOn; // TODO should we instead call flashlight.get()?
     }
 
     /**
      * Turns on the flashlight.
      */
     public void setLightOn() {
-    	setLight(true);
+        setLight(true);
     }
-    
+
     /**
      * Turns off the flashlight.
      */
     public void setLightOff() {
-    	setLight(false);
-    }
-    
-    /**
-	 * Update information on SmartDashboard.
-	 */
-    public void updateSD(){
-    	if(DEBUG){
-    		SmartDashboard.putBoolean("Shooter flashlight is on", isOn());
-    	}
+        setLight(false);
     }
 
+    /**
+     * Update information on SmartDashboard.
+     */
+    public void updateSD() {
+        if (ShooterFlashlightSubsystem.DEBUG) {
+            SmartDashboard.putBoolean("Shooter flashlight is on", isOn());
+        }
+    }
+
+    @Override
     public void initDefaultCommand() {
     }
 }
-
