@@ -13,18 +13,28 @@ public class TriggerButton extends JoystickButton {
     public TriggerButton(ControllerMap joystick, int buttonID) {
         super(joystick);
 
-        if (buttonID == Key.LT) hand = Hand.kLeft;
-        else if (buttonID == Key.RT) hand = Hand.kRight;
-        else hand = null;
+        if (buttonID == Key.LT) {
+            hand = Hand.kLeft;
+        } else if (buttonID == Key.RT) {
+            hand = Hand.kRight;
+        } else {
+            hand = null;
+        }
     }
 
     @Override
     public boolean get() {
 
-        if (off) return false;
+        if (off) {
+            return false;
+        }
 
-        if (hand == Hand.kLeft) return controllerMap.getJoystick().getRawAxis(LEFT_AXIS) > MIN_POW_ACT;
-        else if (hand == Hand.kRight) return controllerMap.getJoystick().getRawAxis(RIGHT_AXIS) > MIN_POW_ACT;
-        else return false;
+        if (hand == Hand.kLeft) {
+            return controllerMap.getJoystick().getRawAxis(TriggerButton.LEFT_AXIS) > TriggerButton.MIN_POW_ACT;
+        } else if (hand == Hand.kRight) {
+            return controllerMap.getJoystick().getRawAxis(TriggerButton.RIGHT_AXIS) > TriggerButton.MIN_POW_ACT;
+        } else {
+            return false;
+        }
     }
 }

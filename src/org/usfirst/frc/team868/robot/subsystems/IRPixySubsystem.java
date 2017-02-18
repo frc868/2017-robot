@@ -9,24 +9,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // @formatter:off
 /**
- *  Pinout of back of Pixy: 
+ *  Pinout of back of Pixy:
  *  ^top of Pixy^
  *  	1	2
  *  	3	4
  *  	5	6
  *  	7	8
  *  	9	10
- *  
+ *
  *  Pinout of kMXP ports:
  *  	33	31	29	27	...	7	5	3	1
  *  	34	32	30	28	...	8	6	4	2
- *  
+ *
  *  Pixy to kMXP ports:
- *  
+ *
  *  Pixy port 1 goes to kMXP port 14
  *  ...		  4		 to			  10
  *  ...		  10	 to			  12
- *  
+ *
  */
 
 /*
@@ -78,14 +78,18 @@ public class IRPixySubsystem extends Subsystem {
     }
 
     synchronized public void startThread() {
-        if (thread != null) return;
+        if (thread != null) {
+            return;
+        }
 
         thread = createThread();
         thread.start();
     }
 
     synchronized public void stopThread() {
-        if (thread == null) return;
+        if (thread == null) {
+            return;
+        }
 
         thread.interrupt();
         thread = null;
@@ -214,12 +218,13 @@ public class IRPixySubsystem extends Subsystem {
     }
 
     synchronized public static IRPixySubsystem getInstance() {
-        if (instance == null) {
-            instance = new IRPixySubsystem();
+        if (IRPixySubsystem.instance == null) {
+            IRPixySubsystem.instance = new IRPixySubsystem();
         }
-        return instance;
+        return IRPixySubsystem.instance;
     }
 
+    @Override
     public void initDefaultCommand() {
 
     }

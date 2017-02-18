@@ -16,7 +16,7 @@ public class AgitatorCommand extends Command {
 
     /**
      * Sets the agitator to the given argument
-     * 
+     *
      * @param on
      */
     public AgitatorCommand(boolean on) {

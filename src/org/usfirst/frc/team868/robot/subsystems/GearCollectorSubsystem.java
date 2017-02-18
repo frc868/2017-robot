@@ -35,7 +35,8 @@ public class GearCollectorSubsystem extends Subsystem {
      * Normal get instance method.
      */
     public static GearCollectorSubsystem getInstance() {
-        return instance == null ? instance = new GearCollectorSubsystem() : instance;
+        return GearCollectorSubsystem.instance == null ? GearCollectorSubsystem.instance = new GearCollectorSubsystem()
+                : GearCollectorSubsystem.instance;
     }
 
     /**

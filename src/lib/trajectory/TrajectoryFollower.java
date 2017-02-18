@@ -70,12 +70,16 @@ public class TrajectoryFollower {
     }
 
     public double getHeading() {
-        if (isFinished()) return 0;
+        if (isFinished()) {
+            return 0;
+        }
         return trajectory.getSegment(currSeg).heading;
     }
 
     public double calculateHeading(double currHeading) {
-        if (Kturn == null || isFinished()) return 0;
+        if (Kturn == null || isFinished()) {
+            return 0;
+        }
         return Kturn * HoundMath.getAngleDifferenceDegrees(currHeading, getHeading());
     }
 }

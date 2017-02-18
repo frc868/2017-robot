@@ -27,7 +27,7 @@ public abstract class GyroAdapter extends GyroBase {
 
     /**
      * Construct a new instance for a sensor that does not wrap around.
-     * 
+     *
      * @param initVal
      *            Initial reading from sensor.
      * @param hasRate
@@ -41,7 +41,7 @@ public abstract class GyroAdapter extends GyroBase {
 
     /**
      * Construct a new instance for a sensor that wraps.
-     * 
+     *
      * @param initVal
      *            Initial reading from the sensor.
      * @param minVal
@@ -53,8 +53,8 @@ public abstract class GyroAdapter extends GyroBase {
      *            feature.
      */
     GyroAdapter(double initVal, double minVal, double maxVal, boolean hasRate) {
-        this.zeroVal = initVal;
-        this.lastVal = initVal;
+        zeroVal = initVal;
+        lastVal = initVal;
         this.minVal = minVal;
         this.maxVal = maxVal;
         this.hasRate = hasRate;
@@ -65,7 +65,7 @@ public abstract class GyroAdapter extends GyroBase {
     /**
      * Creates a fake Gyro object that always reports 0 degrees and 0
      * degrees/second.
-     * 
+     *
      * @return A Gyro object that is stuck at zero (when you need a non-null
      *         gyro).
      */
@@ -87,7 +87,7 @@ public abstract class GyroAdapter extends GyroBase {
     /**
      * Indicates whether the gyro was mounted upside down and the values
      * returned by getAngle() are negated.
-     * 
+     *
      * @return true if gyro is mounted upside down.
      */
     public boolean isInverted() {
@@ -96,7 +96,7 @@ public abstract class GyroAdapter extends GyroBase {
 
     /**
      * Set whether the gyro was mounted upside down or not.
-     * 
+     *
      * @param inverted
      *            Pass true if gyro is mounted upside down.
      */
@@ -112,7 +112,7 @@ public abstract class GyroAdapter extends GyroBase {
      * within the min/max range you specified in the constructor (if
      * applicable).
      * </p>
-     * 
+     *
      * @return The current reading from the sensor in degrees.
      */
     protected abstract double getSensorValue();
@@ -144,7 +144,7 @@ public abstract class GyroAdapter extends GyroBase {
     /**
      * Get the current angle of rotation from the gyro along the axis (in
      * degrees).
-     * 
+     *
      * @return Degrees rotated about axis in the range of (-INF, +INF).
      */
     @Override
@@ -173,7 +173,7 @@ public abstract class GyroAdapter extends GyroBase {
     /**
      * Indicates whether or not the gyro implementation provides the
      * {@link #getRate} function.
-     * 
+     *
      * @return false unless the sensor provides the {@link #getRate} function.
      */
     public final boolean hasRate() {
@@ -188,7 +188,7 @@ public abstract class GyroAdapter extends GyroBase {
      * {@link ITG3200}) - check with the sensor's method used to construct a
      * Gyro instance to see whether it was implemented prior to using.
      * </p>
-     * 
+     *
      * @return Rate of rotation in degrees/second, OR throws an unsupported
      *         exception if you try to perform this operation on a sensor that
      *         does not support it.

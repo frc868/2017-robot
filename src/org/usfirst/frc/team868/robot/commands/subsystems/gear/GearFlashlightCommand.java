@@ -15,7 +15,7 @@ public class GearFlashlightCommand extends Command {
 
     /**
      * Sets the flashlight to the given argument
-     * 
+     *
      * @param on
      */
     public GearFlashlightCommand(boolean on) {

@@ -22,9 +22,13 @@ public class DPadButton extends JoystickButton {
     @Override
     public boolean get() {
 
-        if (off) return false;
+        if (off) {
+            return false;
+        }
 
-        if (!isDPADButton(direction)) return super.get();
+        if (!DPadButton.isDPADButton(direction)) {
+            return super.get();
+        }
 
         int angle = controllerMap.getJoystick().getPOV();
 

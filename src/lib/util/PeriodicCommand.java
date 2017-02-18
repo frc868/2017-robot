@@ -16,7 +16,7 @@ public abstract class PeriodicCommand extends Command {
     }
 
     public PeriodicCommand(double frequency) {
-        this.FREQUENCY = frequency;
+        FREQUENCY = frequency;
     }
 
     protected abstract void init();
@@ -53,9 +53,9 @@ public abstract class PeriodicCommand extends Command {
 
         @Override
         public void run() {
-            PeriodicCommand.this.doRun();
+            doRun();
 
-            if (isFinished = PeriodicCommand.this.doFinish()) {
+            if (isFinished = doFinish()) {
                 cancel();
             }
         }

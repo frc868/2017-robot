@@ -30,8 +30,8 @@ public class AgitatorSubsystem extends Subsystem {
         motor.setInverted(RobotMap.Feeder.AGITATOR_IS_INVERTED);
         LiveWindow.addActuator("Agitator", "Motor", motor);
 
-        if (DEBUG) {
-            SmartDashboard.putNumber(SpeedLabel, RobotMap.Feeder.AGITATOR_SPEED);
+        if (AgitatorSubsystem.DEBUG) {
+            SmartDashboard.putNumber(AgitatorSubsystem.SpeedLabel, RobotMap.Feeder.AGITATOR_SPEED);
         }
     }
 
@@ -43,23 +43,24 @@ public class AgitatorSubsystem extends Subsystem {
         boolean on = (power != 0);
 
         SmartDashboard.putBoolean("Agitator On", on);
-        if (DEBUG) {
+        if (AgitatorSubsystem.DEBUG) {
             SmartDashboard.putNumber("Agitator Power", power);
         }
     }
 
     /**
      * Get access to the single Agitator on the robot.
-     * 
+     *
      * @return Reference to agitator singleton.
      */
     public static AgitatorSubsystem getInstance() {
-        return instance == null ? instance = new AgitatorSubsystem() : instance;
+        return AgitatorSubsystem.instance == null ? AgitatorSubsystem.instance = new AgitatorSubsystem()
+                : AgitatorSubsystem.instance;
     }
 
     /**
      * Turns the agitator on/off.
-     * 
+     *
      * @param on
      *            If true, turns on the agitator at the default power level, if
      *            false, stops agitator.
@@ -70,8 +71,8 @@ public class AgitatorSubsystem extends Subsystem {
         if (on) {
             speed = RobotMap.Feeder.AGITATOR_SPEED;
             // When debugging/tuning, pull value from dashboard
-            if (DEBUG) {
-                speed = SmartDashboard.getNumber(SpeedLabel, speed);
+            if (AgitatorSubsystem.DEBUG) {
+                speed = SmartDashboard.getNumber(AgitatorSubsystem.SpeedLabel, speed);
             }
         }
         setAgitatorSpeed(on ? RobotMap.Feeder.AGITATOR_SPEED : 0);
@@ -101,7 +102,7 @@ public class AgitatorSubsystem extends Subsystem {
 
     /**
      * Indicates whether the agitator is on or not.
-     * 
+     *
      * @return true if agitator is running.
      */
     public boolean isAgitatorOn() {
@@ -110,7 +111,7 @@ public class AgitatorSubsystem extends Subsystem {
 
     /**
      * Sets the agitator to a specific power level.
-     * 
+     *
      * @param speed
      *            Power level to apply in the range of [-1.0, +1.0] (0 stops,
      *            negative values turn in reverse direction).

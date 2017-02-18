@@ -2,10 +2,9 @@ package lib.hid;
 
 import java.util.HashMap;
 
-import lib.util.HoundMath;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
+import lib.util.HoundMath;
 
 public class ControllerMap {
 
@@ -36,7 +35,7 @@ public class ControllerMap {
 
     // @formatter:off
     //										  A  B  X  Y  RB  RT LB  LT ST BA  LH RH LV RV
-    protected static final int[] logitech =	{ 2, 3, 1, 4, 6,  8, 5,  7, 10, 9, 0, 2, 1, 3};	
+    protected static final int[] logitech =	{ 2, 3, 1, 4, 6,  8, 5,  7, 10, 9, 0, 2, 1, 3};
     protected static final int[] xbox360 = 	{ 1, 2, 3, 4, 6, -1, 5, -1,  8, 7, 0, 4, 1, 5};
     protected static final int[] ps4 =		{ 2, 3, 1, 4, 6,  8, 5,  7, 10, 9, 0, 2, 1, 5};
     protected static final int[] xboxOne = 	{ 1, 2, 3, 4, 6,  3, 5,  2,  8, 7, 0, 4, 1, 5};
@@ -58,19 +57,19 @@ public class ControllerMap {
 
         switch (type) {
             case PS4:
-                buttonPorts = ps4;
+                buttonPorts = ControllerMap.ps4;
                 break;
             case LOGITECH:
-                buttonPorts = logitech;
+                buttonPorts = ControllerMap.logitech;
                 break;
             case XBOX_ONE:
-                buttonPorts = xboxOne;
+                buttonPorts = ControllerMap.xboxOne;
                 break;
             case XBOX_360:
-                buttonPorts = xbox360;
+                buttonPorts = ControllerMap.xbox360;
                 break;
             default:
-                buttonPorts = logitech;
+                buttonPorts = ControllerMap.logitech;
                 break;
         }
 
@@ -79,14 +78,17 @@ public class ControllerMap {
             JoystickButton button = buttons.get(buttonID);
             if (button != null) {
                 button.setOff(true);
-                if ((type == Type.XBOX_ONE || type == Type.XBOX_360) && (buttonID == Key.LT || buttonID == Key.RT))
+                if ((type == Type.XBOX_ONE || type == Type.XBOX_360) && (buttonID == Key.LT || buttonID == Key.RT)) {
                     buttons.replace(buttonID, new TriggerButton(this, buttonID));
-                else buttons.replace(buttonID, new JoystickButton(this, buttonPorts[buttonID]));
+                } else {
+                    buttons.replace(buttonID, new JoystickButton(this, buttonPorts[buttonID]));
+                }
             }
         }
 
-        for (MultiButton button : multiButtons.values())
+        for (MultiButton button : multiButtons.values()) {
             button.setOff(true);
+        }
         multiButtons.clear();
     }
 
@@ -97,8 +99,9 @@ public class ControllerMap {
             }
         }
 
-        for (MultiButton button : multiButtons.values())
+        for (MultiButton button : multiButtons.values()) {
             button.setOff(true);
+        }
 
         multiButtons.clear();
         buttons.clear();
@@ -144,17 +147,22 @@ public class ControllerMap {
     }
 
     public JoystickButton getNewButton(int buttonID) {
-        if (DPadButton.isDPADButton(buttonID)) return new DPadButton(this, buttonID);
-        else if ((type == Type.XBOX_ONE || type == Type.XBOX_360) && (buttonID == Key.LT || buttonID == Key.RT))
+        if (DPadButton.isDPADButton(buttonID)) {
+            return new DPadButton(this, buttonID);
+        } else if ((type == Type.XBOX_ONE || type == Type.XBOX_360) && (buttonID == Key.LT || buttonID == Key.RT)) {
             return new TriggerButton(this, buttonID);
-        else return new JoystickButton(this, buttonPorts[buttonID]);
+        } else {
+            return new JoystickButton(this, buttonPorts[buttonID]);
+        }
     }
 
     public Button getMultiButton(Integer... buttonID) {
         MultiButton button = new MultiButton(this, buttonID);
 
         for (Integer id : buttonID) {
-            if (multiButtons.get(id) == null) multiButtons.put(id, button);
+            if (multiButtons.get(id) == null) {
+                multiButtons.put(id, button);
+            }
         }
 
         return button;

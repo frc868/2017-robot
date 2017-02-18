@@ -14,7 +14,7 @@ public class RotateAngle extends Command {
     /**
      * Rotates the robot by 'angle' degrees from it's current rotation, where
      * right is positive and left is negative
-     * 
+     *
      * @param angle
      */
     public RotateAngle(double angle) {

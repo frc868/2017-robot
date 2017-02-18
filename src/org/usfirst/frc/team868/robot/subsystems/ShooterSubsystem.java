@@ -42,7 +42,7 @@ public class ShooterSubsystem extends Subsystem {
         // RobotMap.Shoot.ENCODER_B); //TODO remove
         count = new Counter(RobotMap.Shoot.ENCODER_A);
 
-        control = new PIDController(P, I, D, new PIDSource() {
+        control = new PIDController(ShooterSubsystem.P, ShooterSubsystem.I, ShooterSubsystem.D, new PIDSource() {
 
             @Override
             public void setPIDSourceType(PIDSourceType pidSource) {
@@ -76,7 +76,7 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Sets the shooter's power
-     * 
+     *
      * @param power
      *            in voltage from 0 to 12.
      */
@@ -94,7 +94,7 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Sets the shooter's speed using it's PID controller.
-     * 
+     *
      * @param speed
      */
     public void setSpeed(double speed) {
@@ -104,7 +104,7 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Gets the shooter's speed using it's encoder.
-     * 
+     *
      * @return
      */
     public double getSpeed() {
@@ -113,7 +113,7 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Gets the shooter's power.
-     * 
+     *
      * @return in voltage from 0 to 12
      */
     public double getPower() {
@@ -122,7 +122,7 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Gets the number of counts that the shooter's encoder has tracked.
-     * 
+     *
      * @return in counts
      */
     public double getCounts() {
@@ -132,14 +132,14 @@ public class ShooterSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static ShooterSubsystem getInstance() {
-        if (instance == null) {
-            instance = new ShooterSubsystem();
+        if (ShooterSubsystem.instance == null) {
+            ShooterSubsystem.instance = new ShooterSubsystem();
         }
-        return instance;
+        return ShooterSubsystem.instance;
     }
 
     /**

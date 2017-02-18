@@ -36,7 +36,7 @@ public class HoundSpeedController implements SpeedController {
     public double getCurrent() {
         double current = 0.0;
         for (int port : _pdpPorts) {
-            current += panel.getCurrent(port);
+            current += HoundSpeedController.panel.getCurrent(port);
         }
         return current;
     }
@@ -58,16 +58,18 @@ public class HoundSpeedController implements SpeedController {
 
     @Override
     public void set(double speed) {
-        for (SpeedController controller : _controllers)
+        for (SpeedController controller : _controllers) {
             controller.set(speed);
+        }
     }
 
     @Override
     public void setInverted(boolean inverted) {
         _inverted = inverted;
 
-        for (SpeedController controller : _controllers)
+        for (SpeedController controller : _controllers) {
             controller.setInverted(inverted);
+        }
     }
 
     @Override
@@ -77,13 +79,15 @@ public class HoundSpeedController implements SpeedController {
 
     @Override
     public void disable() {
-        for (SpeedController controller : _controllers)
+        for (SpeedController controller : _controllers) {
             controller.disable();
+        }
     }
 
     @Override
     public void stopMotor() {
-        for (SpeedController controller : _controllers)
+        for (SpeedController controller : _controllers) {
             controller.stopMotor();
+        }
     }
 }

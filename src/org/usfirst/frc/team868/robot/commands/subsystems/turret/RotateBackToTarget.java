@@ -63,7 +63,9 @@ public class RotateBackToTarget extends Command {
 
     public void lockedOn() {
         lockedOn = Math.abs((int) ColorPixySubsystem.getInstance().getTarget().getXAngleOffFromCenter()) < 1;
-        if (lockedOn && !hasLockedOn) hasLockedOn = true;
+        if (lockedOn && !hasLockedOn) {
+            hasLockedOn = true;
+        }
 
     }
 

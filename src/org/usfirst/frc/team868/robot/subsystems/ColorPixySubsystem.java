@@ -11,25 +11,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // @formatter:off
 /**
  * Pinout of back of Pixy: ^top of Pixy^ 1 2 3 4 5 6 7 8 9 10
- * 
+ *
  * RC Servo ports: ^directly below pinout^ PWM0 PWM1 <---(Programmable Pixy
  * output PWMs) 5V 5V <---(5V of power) GND GND <---(Ground)
- * 
+ *
  * Pixy to I2C ports: (kOnboard)
- * 
+ *
  * Pixy port 5 goes to I2C port SCL ... 9 to SDA
- * 
+ *
  * OR
- * 
+ *
  * Pixy to I2C ports: (kMXP)
- * 
- * Pinout of kMXP ports: 
+ *
+ * Pinout of kMXP ports:
  * 		33 31 29 27 ... 7 5 3 1
  * 		34 32 30 28 ... 8 6 4 2
- * 
+ *
  * Pixy port 5 goes to I2C port 32
  * ...	 	 9		to			34
- * 
+ *
  */
 // @formatter:on
 public class ColorPixySubsystem extends Subsystem {
@@ -43,7 +43,7 @@ public class ColorPixySubsystem extends Subsystem {
         private int id;
 
         public Record(int x, int y, int width, int height) {
-            this.id = idCounter++;
+            id = ColorPixySubsystem.idCounter++;
             this.x = x;
             this.y = y;
             this.width = width;
@@ -79,7 +79,7 @@ public class ColorPixySubsystem extends Subsystem {
          * is.
          * Negative degrees means left, positive means right, zero means it is
          * either centered or cannot be found.
-         * 
+         *
          * @return
          */
         public double getXAngleOffFromCenter() {
@@ -151,7 +151,7 @@ public class ColorPixySubsystem extends Subsystem {
 
     /**
      * Get information about the last target received.
-     * 
+     *
      * @return Reference to the last target received (note getID() will be 0 if
      *         none found yet).
      */
@@ -160,14 +160,18 @@ public class ColorPixySubsystem extends Subsystem {
     }
 
     synchronized public void startThread() {
-        if (thread != null) return;
+        if (thread != null) {
+            return;
+        }
 
         thread = createThread();
         thread.start();
     }
 
     synchronized public void stopThread() {
-        if (thread == null) return;
+        if (thread == null) {
+            return;
+        }
 
         thread.interrupt();
         thread = null;
@@ -285,12 +289,13 @@ public class ColorPixySubsystem extends Subsystem {
     }
 
     synchronized public static ColorPixySubsystem getInstance() {
-        if (instance == null) {
-            instance = new ColorPixySubsystem();
+        if (ColorPixySubsystem.instance == null) {
+            ColorPixySubsystem.instance = new ColorPixySubsystem();
         }
-        return instance;
+        return ColorPixySubsystem.instance;
     }
 
+    @Override
     public void initDefaultCommand() {
     }
 }

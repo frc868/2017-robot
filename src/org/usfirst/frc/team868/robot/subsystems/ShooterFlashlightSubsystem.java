@@ -19,14 +19,14 @@ public class ShooterFlashlightSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static ShooterFlashlightSubsystem getInstance() {
-        if (instance == null) {
-            instance = new ShooterFlashlightSubsystem();
+        if (ShooterFlashlightSubsystem.instance == null) {
+            ShooterFlashlightSubsystem.instance = new ShooterFlashlightSubsystem();
         }
-        return instance;
+        return ShooterFlashlightSubsystem.instance;
     }
 
     private ShooterFlashlightSubsystem() {
@@ -39,7 +39,7 @@ public class ShooterFlashlightSubsystem extends Subsystem {
 
     /**
      * Sets the flashlight where on = true, off = false.
-     * 
+     *
      * @param on
      */
     public void setLight(boolean on) {
@@ -77,7 +77,7 @@ public class ShooterFlashlightSubsystem extends Subsystem {
      * Update information on SmartDashboard.
      */
     public void updateSD() {
-        if (DEBUG) {
+        if (ShooterFlashlightSubsystem.DEBUG) {
             SmartDashboard.putBoolean("Shooter flashlight is on", isOn());
         }
     }

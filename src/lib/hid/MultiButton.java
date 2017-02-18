@@ -9,7 +9,7 @@ public class MultiButton extends Button {
 
     public MultiButton(ControllerMap controller, Integer... keys) {
         for (int i = 0; i < keys.length; i++) {
-            buttons.add(controller.getNewButton(keys[i]));
+            MultiButton.buttons.add(controller.getNewButton(keys[i]));
         }
         off = false;
     }
@@ -17,10 +17,12 @@ public class MultiButton extends Button {
     @Override
     public boolean get() {
 
-        if (off) return false;
+        if (off) {
+            return false;
+        }
 
-        for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).get() == false) {
+        for (int i = 0; i < MultiButton.buttons.size(); i++) {
+            if (MultiButton.buttons.get(i).get() == false) {
                 return false;
             }
         }
@@ -31,7 +33,8 @@ public class MultiButton extends Button {
     public void setOff(boolean off) {
         this.off = off;
 
-        for (JoystickButton b : buttons)
+        for (JoystickButton b : MultiButton.buttons) {
             b.setOff(off);
+        }
     }
 }

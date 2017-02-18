@@ -14,7 +14,7 @@ public class RotateTurretByAngle extends Command {
     /**
      * Rotates the turret by angle relative to its position when this command
      * was called.
-     * 
+     *
      * @param angle
      *            in degrees
      */

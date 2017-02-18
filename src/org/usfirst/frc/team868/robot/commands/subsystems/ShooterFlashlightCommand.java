@@ -15,7 +15,7 @@ public class ShooterFlashlightCommand extends Command {
 
     /**
      * Sets the flashlight to the given argument
-     * 
+     *
      * @param on
      */
     public ShooterFlashlightCommand(boolean on) {

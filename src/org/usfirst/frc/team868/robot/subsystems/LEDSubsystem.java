@@ -22,7 +22,7 @@ public class LEDSubsystem extends Subsystem {
 
     /**
      * Sets the shooter based LEDs.
-     * 
+     *
      * @param state1
      * @param state2
      */
@@ -33,7 +33,7 @@ public class LEDSubsystem extends Subsystem {
 
     /**
      * Sets the gear based LED.
-     * 
+     *
      * @param state
      */
     public void setGearLEDs(boolean state) {
@@ -44,10 +44,10 @@ public class LEDSubsystem extends Subsystem {
      * Normal get instance method.
      */
     public static LEDSubsystem getInstance() {
-        if (instance == null) {
-            instance = new LEDSubsystem();
+        if (LEDSubsystem.instance == null) {
+            LEDSubsystem.instance = new LEDSubsystem();
         }
-        return instance;
+        return LEDSubsystem.instance;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class ShooterFeederCommand extends Command {
 
     /**
      * Sets the feeder to the given argument
-     * 
+     *
      * @param on
      */
     public ShooterFeederCommand(boolean on) {

@@ -17,16 +17,16 @@ public class RecordMotorMovement {
 
     private static RecordMotorMovement instance;
 
-    public static ArrayList<Double> DrivePowersR = new ArrayList<Double>();
-    public static ArrayList<Double> DrivePowersL = new ArrayList<Double>();
-    public static ArrayList<Double> GearPowers = new ArrayList<Double>();
-    public static ArrayList<Double> ShooterColPowers = new ArrayList<Double>();
-    public static ArrayList<Double> ShooterPowers = new ArrayList<Double>();
-    public static ArrayList<Double> TurretPowers = new ArrayList<Double>();
+    public static ArrayList<Double> DrivePowersR = new ArrayList<>();
+    public static ArrayList<Double> DrivePowersL = new ArrayList<>();
+    public static ArrayList<Double> GearPowers = new ArrayList<>();
+    public static ArrayList<Double> ShooterColPowers = new ArrayList<>();
+    public static ArrayList<Double> ShooterPowers = new ArrayList<>();
+    public static ArrayList<Double> TurretPowers = new ArrayList<>();
 
     public void saveFile(String fileLoc) throws IOException {
         FileWriter output = new FileWriter(fileLoc);
-        ArrayList<String> filemod = new ArrayList<String>(Arrays.asList(fileLoc.split("")));
+        ArrayList<String> filemod = new ArrayList<>(Arrays.asList(fileLoc.split("")));
         FileReader incheck = new FileReader(fileLoc);
         int check = incheck.read();
         boolean mknewfl = false;
@@ -48,10 +48,12 @@ public class RecordMotorMovement {
             counting++;
         }
         String outstr = "";
-        for (int count = 0; count < DrivePowersR.size();) {
-            outstr = outstr + (DrivePowersR.get(count) + ";" + "\t" + DrivePowersL.get(count) + ";" + "\t"
-                    + GearPowers.get(count) + ";" + "\t" + ShooterColPowers.get(count) + ";" + "\t"
-                    + ShooterPowers.get(count) + ";" + "\t" + "TurretPowers" + ";" + "\r");
+        for (int count = 0; count < RecordMotorMovement.DrivePowersR.size();) {
+            outstr = outstr + (RecordMotorMovement.DrivePowersR.get(count) + ";" + "\t"
+                    + RecordMotorMovement.DrivePowersL.get(count) + ";" + "\t"
+                    + RecordMotorMovement.GearPowers.get(count) + ";" + "\t"
+                    + RecordMotorMovement.ShooterColPowers.get(count) + ";" + "\t"
+                    + RecordMotorMovement.ShooterPowers.get(count) + ";" + "\t" + "TurretPowers" + ";" + "\r");
             count++;
         }
         output.write(outstr);
@@ -61,8 +63,8 @@ public class RecordMotorMovement {
     }
 
     public void RecordMotors() {
-        DrivePowersR.add(DriveSubsystem.getInstance().getRSpeed());
-        DrivePowersL.add(DriveSubsystem.getInstance().getLSpeed());
+        RecordMotorMovement.DrivePowersR.add(DriveSubsystem.getInstance().getRSpeed());
+        RecordMotorMovement.DrivePowersL.add(DriveSubsystem.getInstance().getLSpeed());
 
     }
 
@@ -74,13 +76,13 @@ public class RecordMotorMovement {
         } catch (FileNotFoundException e1) {
             mkfl = new FileWriter(fileLoc);
         }
-        ArrayList<Character> powers = new ArrayList<Character>();
-        ArrayList<String> TDrivePowersR = new ArrayList<String>();
-        ArrayList<String> TDrivePowersL = new ArrayList<String>();
-        ArrayList<String> TGearPowers = new ArrayList<String>();
-        ArrayList<String> TShooterColPowers = new ArrayList<String>();
-        ArrayList<String> TShooterPowers = new ArrayList<String>();
-        ArrayList<String> TTurretPowers = new ArrayList<String>();
+        ArrayList<Character> powers = new ArrayList<>();
+        ArrayList<String> TDrivePowersR = new ArrayList<>();
+        ArrayList<String> TDrivePowersL = new ArrayList<>();
+        ArrayList<String> TGearPowers = new ArrayList<>();
+        ArrayList<String> TShooterColPowers = new ArrayList<>();
+        ArrayList<String> TShooterPowers = new ArrayList<>();
+        ArrayList<String> TTurretPowers = new ArrayList<>();
         int powersint;
         while ((powersint = inPower.read()) != -1) {
             powers.add((char) powersint);
@@ -119,30 +121,36 @@ public class RecordMotorMovement {
         }
 
         for (String string : TDrivePowersR) {
-            DrivePowersR.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.DrivePowersR.add(StringToDouble.stringToDouble(string));
         }
         for (String string : TDrivePowersL) {
-            DrivePowersL.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.DrivePowersL.add(StringToDouble.stringToDouble(string));
         }
         for (String string : TGearPowers) {
-            GearPowers.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.GearPowers.add(StringToDouble.stringToDouble(string));
         }
         for (String string : TShooterColPowers) {
-            ShooterColPowers.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.ShooterColPowers.add(StringToDouble.stringToDouble(string));
         }
         for (String string : TShooterPowers) {
-            ShooterPowers.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.ShooterPowers.add(StringToDouble.stringToDouble(string));
         }
         for (String string : TTurretPowers) {
-            TurretPowers.add(StringToDouble.stringToDouble(string));
+            RecordMotorMovement.TurretPowers.add(StringToDouble.stringToDouble(string));
         }
 
-        if (mkfl != null) mkfl.close();
-        if (inPower != null) inPower.close();
+        if (mkfl != null) {
+            mkfl.close();
+        }
+        if (inPower != null) {
+            inPower.close();
+        }
     }
 
     public static RecordMotorMovement getInstance() {
-        if (instance == null) instance = new RecordMotorMovement();
-        return instance;
+        if (RecordMotorMovement.instance == null) {
+            RecordMotorMovement.instance = new RecordMotorMovement();
+        }
+        return RecordMotorMovement.instance;
     }
 }

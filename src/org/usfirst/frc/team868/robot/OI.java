@@ -50,10 +50,10 @@ public class OI {
     }
 
     public static OI getInstance() {
-        if (instance == null) {
-            instance = new OI();
+        if (OI.instance == null) {
+            OI.instance = new OI();
         }
-        return instance;
+        return OI.instance;
     }
 
 }

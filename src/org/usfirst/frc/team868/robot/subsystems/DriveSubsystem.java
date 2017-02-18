@@ -49,7 +49,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Sets power to left motors
-     * 
+     *
      * @param speed
      *            1 to -1
      */
@@ -59,7 +59,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Sets power to right motors
-     * 
+     *
      * @param speed
      *            1 to -1
      */
@@ -69,7 +69,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Sets power to both motors
-     * 
+     *
      * @param speed
      *            1 to -1
      */
@@ -80,7 +80,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Sets power to both motors
-     * 
+     *
      * @param leftSpeed
      *            1 to -1
      * @param RightSpeed
@@ -100,7 +100,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets speed of right drivetrain
-     * 
+     *
      * @return cm per second
      */
     public double getRSpeed() {
@@ -109,7 +109,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets average speed of drivetrain
-     * 
+     *
      * @return cm per second
      */
     public double getAvgSpeed() {
@@ -118,7 +118,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets counts from right encoder
-     * 
+     *
      * @return counts
      */
     public int getRightEncoder() {
@@ -127,7 +127,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets counts from left encoder
-     * 
+     *
      * @return counts
      */
     public int getLeftEncoder() {
@@ -136,7 +136,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets distance traveled by right encoder
-     * 
+     *
      * @return cm
      */
     public double getRightEncoderDistance() {
@@ -145,7 +145,7 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets distance traveled by left encoder
-     * 
+     *
      * @return cm
      */
     public double getLeftEncoderDistance() {
@@ -177,14 +177,14 @@ public class DriveSubsystem extends Subsystem {
 
     /**
      * Gets the subsystem instance
-     * 
+     *
      * @return subsystem instance
      */
     public static DriveSubsystem getInstance() {
-        if (instance == null) {
-            instance = new DriveSubsystem();
+        if (DriveSubsystem.instance == null) {
+            DriveSubsystem.instance = new DriveSubsystem();
         }
-        return instance;
+        return DriveSubsystem.instance;
     }
 
     public void updateSD() {

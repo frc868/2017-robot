@@ -31,16 +31,17 @@ public class ShooterFeederSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static ShooterFeederSubsystem getInstance() {
-        return instance == null ? instance = new ShooterFeederSubsystem() : instance;
+        return ShooterFeederSubsystem.instance == null ? ShooterFeederSubsystem.instance = new ShooterFeederSubsystem()
+                : ShooterFeederSubsystem.instance;
     }
 
     /**
      * Turns the feeder on or off.
-     * 
+     *
      * @param on
      */
     public void setFeeder(boolean on) {
@@ -71,7 +72,7 @@ public class ShooterFeederSubsystem extends Subsystem {
 
     /**
      * Gets the feeder's status.
-     * 
+     *
      * @return whether or not the feeder is on
      */
     public boolean isFeederOn() {
@@ -80,7 +81,7 @@ public class ShooterFeederSubsystem extends Subsystem {
 
     /**
      * Sets the feeder's speed
-     * 
+     *
      * @param speed
      *            in percentage from -1 to 1.
      */
@@ -100,7 +101,7 @@ public class ShooterFeederSubsystem extends Subsystem {
      */
     public void updateSD() {
         SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
-        if (DEBUG) {
+        if (ShooterFeederSubsystem.DEBUG) {
             SmartDashboard.putBoolean("Feeder is on", isFeederOn());
         }
     }

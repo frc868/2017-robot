@@ -2,7 +2,7 @@ package lib.hid;
 
 /**
  * Implement our own Joystick Button class based on our custom Button class
- * 
+ *
  * @author Atif Niyaz
  */
 public class JoystickButton extends Button {
@@ -12,14 +12,14 @@ public class JoystickButton extends Button {
     protected boolean off;
 
     protected JoystickButton(ControllerMap joystick) {
-        this.controllerMap = joystick;
-        this.off = false;
+        controllerMap = joystick;
+        off = false;
     }
 
     public JoystickButton(ControllerMap joystick, int buttonNumber) {
-        this.controllerMap = joystick;
+        controllerMap = joystick;
         this.buttonNumber = buttonNumber;
-        this.off = false;
+        off = false;
     }
 
     public void setButtonNumber(int buttonNumber) {
@@ -32,10 +32,14 @@ public class JoystickButton extends Button {
 
     @Override
     public boolean get() {
-        if (off) return false;
+        if (off) {
+            return false;
+        }
 
         if (controllerMap.getMultiButton(buttonNumber) != null) {
-            if (controllerMap.getMultiButton(buttonNumber).get()) return false;
+            if (controllerMap.getMultiButton(buttonNumber).get()) {
+                return false;
+            }
         }
 
         return controllerMap.getJoystick().getRawButton(buttonNumber);

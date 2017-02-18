@@ -10,10 +10,11 @@ public class Trajectory {
 
     @SuppressWarnings("unused")
     public Trajectory(int length) {
-        this.segments = new Segment[length];
+        segments = new Segment[length];
 
-        for (Segment seg : segments)
+        for (Segment seg : segments) {
             seg = new Segment();
+        }
     }
 
     public static class Segment {

@@ -23,7 +23,7 @@ public class TrajectoryLoader {
 
             File[] directories = new File("/trajectory").listFiles(File::isDirectory);
 
-            trajectories = new HashMap<>();
+            TrajectoryLoader.trajectories = new HashMap<>();
 
             for (int i = 0; i < directories.length; i++) {
 
@@ -33,16 +33,17 @@ public class TrajectoryLoader {
                 Trajectory left2 = TrajectorySerializer.readFromCSV(new File(path + "/left.csv"));
                 Trajectory right2 = TrajectorySerializer.readFromCSV(new File(path + "/right.csv"));
 
-                trajectories.put(dirName, new TrajectoryPair(left2, right2));
+                TrajectoryLoader.trajectories.put(dirName, new TrajectoryPair(left2, right2));
             }
         }
     }
 
     public TrajectoryPair getTrajectory(String name) {
-        return trajectories.get(name);
+        return TrajectoryLoader.trajectories.get(name);
     }
 
     public static TrajectoryLoader getInstance() {
-        return instance == null ? instance = new TrajectoryLoader() : instance;
+        return TrajectoryLoader.instance == null ? TrajectoryLoader.instance = new TrajectoryLoader()
+                : TrajectoryLoader.instance;
     }
 }

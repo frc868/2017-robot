@@ -79,7 +79,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Sets the position of the turret.
-     * 
+     *
      * @param pos
      *            in encoder counts
      */
@@ -96,7 +96,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Sets the power being output to the turret's motor.
-     * 
+     *
      * @param power
      *            in percentage from -1 to 1
      */
@@ -106,18 +106,20 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Sets the setpoint of the turret.
-     * 
+     *
      * @param point
      *            in encoder counts.
      */
     public void setSetpoint(double point) {
         control.setSetpoint(point);
-        if (!control.isEnabled()) control.enable();
+        if (!control.isEnabled()) {
+            control.enable();
+        }
     }
 
     /**
      * Sets the setpoint of the turret.
-     * 
+     *
      * @param degree
      *            in degrees
      */
@@ -127,7 +129,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Gets the current power being put out to the turret's motor.
-     * 
+     *
      * @return power in percentage from -1 to 1
      */
     public double getPower() {
@@ -137,7 +139,7 @@ public class TurretRotationSubsystem extends Subsystem {
     /**
      * Gets the current rotational speed of the turret according to it's
      * encoder.
-     * 
+     *
      * @return
      */
     public double getSpeed() {
@@ -146,7 +148,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Gets the turret's current rotational position.
-     * 
+     *
      * @return angle in degrees
      */
     public double getAngle() {
@@ -155,7 +157,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Gets the turret's position according to the CANTalon.
-     * 
+     *
      * @return in encoder counts
      */
     public double getPosition() {
@@ -164,7 +166,7 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Gets the turret's current setpoint.
-     * 
+     *
      * @return setpoint in degrees
      */
     public double getSetpoint() {
@@ -188,14 +190,14 @@ public class TurretRotationSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static TurretRotationSubsystem getInstance() {
-        if (instance == null) {
-            instance = new TurretRotationSubsystem();
+        if (TurretRotationSubsystem.instance == null) {
+            TurretRotationSubsystem.instance = new TurretRotationSubsystem();
         }
-        return instance;
+        return TurretRotationSubsystem.instance;
     }
 
     @Override

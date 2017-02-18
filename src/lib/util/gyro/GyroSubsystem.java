@@ -79,32 +79,32 @@ public abstract class GyroSubsystem extends HoundSubsystem {
 
     /**
      * Get access to the single instance of the gyro subsystem.
-     * 
+     *
      * @return Reference to gyro subsystem implementation.
      */
     public static GyroSubsystem getInstance() {
-        if (instance == null) {
-            switch (GYRO_INSTALLED) {
+        if (GyroSubsystem.instance == null) {
+            switch (GyroSubsystem.GYRO_INSTALLED) {
                 case BNO055:
-                    instance = new GyroBNO055();
+                    GyroSubsystem.instance = new GyroBNO055();
                     break;
                 case ITG3200:
-                    instance = new GyroITG3200();
+                    GyroSubsystem.instance = new GyroITG3200();
                     break;
                 default:
-                    instance = new GyroFake();
+                    GyroSubsystem.instance = new GyroFake();
             }
 
             // NOTE: This must be done here and not in the constructor to
             // make use of overridden methods.
-            instance.gyroy = instance.createTiltGyro();
-            instance.gyrox = instance.createRotationGyro();
-            instance.gyroz = instance.createLeanGyro();
-            LiveWindow.addSensor("Gyro", "Rotation", instance.gyrox);
-            LiveWindow.addSensor("Gyro", "Tilt", instance.gyroy);
-            LiveWindow.addSensor("Gyro", "Lean", instance.gyroz);
+            GyroSubsystem.instance.gyroy = GyroSubsystem.instance.createTiltGyro();
+            GyroSubsystem.instance.gyrox = GyroSubsystem.instance.createRotationGyro();
+            GyroSubsystem.instance.gyroz = GyroSubsystem.instance.createLeanGyro();
+            LiveWindow.addSensor("Gyro", "Rotation", GyroSubsystem.instance.gyrox);
+            LiveWindow.addSensor("Gyro", "Tilt", GyroSubsystem.instance.gyroy);
+            LiveWindow.addSensor("Gyro", "Lean", GyroSubsystem.instance.gyroz);
         }
-        return instance;
+        return GyroSubsystem.instance;
     }
 
     public void storeCurrentAngle() {
@@ -156,7 +156,7 @@ public abstract class GyroSubsystem extends HoundSubsystem {
     /**
      * Get the total rotation in degrees since the gyro subsystem was first
      * realized.
-     * 
+     *
      * @return Number of degrees rotated in the range of [-INF, +INF].
      */
     public final double getRotation() {
@@ -178,7 +178,7 @@ public abstract class GyroSubsystem extends HoundSubsystem {
     /**
      * Returns a "nice" independent Gyro your can used in PID methods to track
      * rotation.
-     * 
+     *
      * @return A Gyro (initially 0) you can use to track relative rotation with.
      */
     public abstract GyroBase createRotationGyro();
@@ -194,7 +194,7 @@ public abstract class GyroSubsystem extends HoundSubsystem {
         private BNO055 sensor;
 
         GyroBNO055() {
-            sensor = BNO055.getInstance(BNO055_PORT);
+            sensor = BNO055.getInstance(GyroSubsystem.BNO055_PORT);
         }
 
         @Override
@@ -220,7 +220,7 @@ public abstract class GyroSubsystem extends HoundSubsystem {
         private ITG3200 sensor;
 
         public GyroITG3200() {
-            sensor = new ITG3200(ITG3200_PORT, ITG3200_ADDR_JUMPER);
+            sensor = new ITG3200(GyroSubsystem.ITG3200_PORT, GyroSubsystem.ITG3200_ADDR_JUMPER);
         }
 
         @Override

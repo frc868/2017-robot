@@ -28,7 +28,7 @@ public class GyroSubsystem extends Subsystem {
 
     /**
      * Gets the current rotation of the robot.
-     * 
+     *
      * @return in degrees
      */
     public double getRotation() {
@@ -44,14 +44,14 @@ public class GyroSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static GyroSubsystem getInstance() {
-        if (instance == null) {
-            instance = new GyroSubsystem();
+        if (GyroSubsystem.instance == null) {
+            GyroSubsystem.instance = new GyroSubsystem();
         }
-        return instance;
+        return GyroSubsystem.instance;
     }
 
     @Override

@@ -19,14 +19,14 @@ public class GearFlashlightSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static GearFlashlightSubsystem getInstance() {
-        if (instance == null) {
-            instance = new GearFlashlightSubsystem();
+        if (GearFlashlightSubsystem.instance == null) {
+            GearFlashlightSubsystem.instance = new GearFlashlightSubsystem();
         }
-        return instance;
+        return GearFlashlightSubsystem.instance;
     }
 
     private GearFlashlightSubsystem() {
@@ -39,7 +39,7 @@ public class GearFlashlightSubsystem extends Subsystem {
 
     /**
      * Sets the flashlight where on = true, off = false.
-     * 
+     *
      * @param on
      */
     public void setLight(boolean on) {
@@ -77,7 +77,7 @@ public class GearFlashlightSubsystem extends Subsystem {
      * Update information on SmartDashboard.
      */
     public void updateSD() {
-        if (DEBUG) {
+        if (GearFlashlightSubsystem.DEBUG) {
             SmartDashboard.putBoolean("Gear flashlight is on", isOn());
         }
     }

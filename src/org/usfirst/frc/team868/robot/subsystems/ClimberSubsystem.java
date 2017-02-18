@@ -31,7 +31,7 @@ public class ClimberSubsystem extends Subsystem {
 
     /**
      * Begin climbing the rope
-     * 
+     *
      * @param speed
      *            Speed to set motor in a range of 0 to 1, as a percentage of 12
      *            volts
@@ -49,7 +49,7 @@ public class ClimberSubsystem extends Subsystem {
 
     /**
      * Gets whether the robot is trying to climb
-     * 
+     *
      * @return if climber motor is running
      */
     public boolean isClimbing() {
@@ -65,7 +65,7 @@ public class ClimberSubsystem extends Subsystem {
 
     /**
      * Gets whether robot is pressing button
-     * 
+     *
      * @return if limit FWD limit switch is closed
      */
     public boolean isPressingButton() {
@@ -76,7 +76,7 @@ public class ClimberSubsystem extends Subsystem {
      * Update information on SmartDashboard.
      */
     public void updateSD() {
-        if (DEBUG) {
+        if (ClimberSubsystem.DEBUG) {
             SmartDashboard.putBoolean("Is climbing", isClimbing());
             SmartDashboard.putBoolean("Is pressing button", isPressingButton());
         }
@@ -84,14 +84,14 @@ public class ClimberSubsystem extends Subsystem {
 
     /**
      * Get the instance of this subsystem
-     * 
+     *
      * @return instance
      */
     public static ClimberSubsystem getInstance() {
-        if (instance == null) {
-            instance = new ClimberSubsystem();
+        if (ClimberSubsystem.instance == null) {
+            ClimberSubsystem.instance = new ClimberSubsystem();
         }
-        return instance;
+        return ClimberSubsystem.instance;
     }
 
     @Override

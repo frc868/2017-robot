@@ -23,7 +23,7 @@ public class TurnToAngle extends Command {
      * Rotates the robot to the orientation of the given angle.
      * (Note that this is not relative to the robot's orientation is when this
      * command is called)
-     * 
+     *
      * @param angle
      *            in degrees
      */

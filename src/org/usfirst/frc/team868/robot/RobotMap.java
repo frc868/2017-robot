@@ -138,6 +138,6 @@ public interface RobotMap {
         final int FORWARD_LIMIT = 180; // TODO determine soft limit values
         final int REVERSE_LIMIT = -90;
         final double COUNTS_PER_DEGREE = 1;
-        final double DEGREES_PER_COUNT = 1 / COUNTS_PER_DEGREE;
+        final double DEGREES_PER_COUNT = 1 / Turret.COUNTS_PER_DEGREE;
     }
 }

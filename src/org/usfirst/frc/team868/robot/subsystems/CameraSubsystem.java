@@ -72,19 +72,19 @@ public class CameraSubsystem extends Subsystem {
 
     /**
      * Return an instance of the USB camera mounted on the rear of the robot.
-     * 
+     *
      * @deprecated All ground collection systems have been removed, so this
      *             camera will most likely not be added to the final robot.
      * @return An instance of the rear-mounted USB camera.
      */
     @Deprecated
     public static CameraSubsystem getRearInstance() {
-        if (rearInstance == null) {
+        if (CameraSubsystem.rearInstance == null) {
             UsbCamera cam = new UsbCamera("rear", 0);
             cam.setResolution(320, 240);
-            rearInstance = new CameraSubsystem(cam);
+            CameraSubsystem.rearInstance = new CameraSubsystem(cam);
         }
-        return rearInstance;
+        return CameraSubsystem.rearInstance;
     }
 
     /**
@@ -92,16 +92,16 @@ public class CameraSubsystem extends Subsystem {
      * gear collector. This camera will be used by the drivers to align
      * the robot while collecting gears from the feeder station, and
      * so sophisticated vision processing will likely not be required.
-     * 
+     *
      * @return An instance of the Axis camera on the gear collector.
      */
     public static CameraSubsystem getFrontInstance() {
-        if (frontInstance == null) {
+        if (CameraSubsystem.frontInstance == null) {
             AxisCamera cam = new AxisCamera("front", "10.8.68.11");
             cam.setResolution(320, 240);
-            frontInstance = new CameraSubsystem(cam);
+            CameraSubsystem.frontInstance = new CameraSubsystem(cam);
         }
-        return frontInstance;
+        return CameraSubsystem.frontInstance;
     }
 
     @Override

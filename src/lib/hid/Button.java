@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * Implement our own Button class so that we can get the Button back on call.
- * 
+ *
  * @author Atif Niyaz
  */
 public abstract class Button extends Trigger {
@@ -39,12 +39,16 @@ public abstract class Button extends Trigger {
 
     private Command setupCommand(Command... command) {
 
-        if (command.length == 1) return command[0];
-        else if (command.length == 0) return new WaitCommand(0);
+        if (command.length == 1) {
+            return command[0];
+        } else if (command.length == 0) {
+            return new WaitCommand(0);
+        }
 
         CommandGroup commandGroup = new CommandGroup();
-        for (Command commands : command)
+        for (Command commands : command) {
             commandGroup.addParallel(commands);
+        }
 
         return commandGroup;
     }

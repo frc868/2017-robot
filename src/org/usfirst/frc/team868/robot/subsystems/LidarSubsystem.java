@@ -32,11 +32,12 @@ public class LidarSubsystem extends Subsystem {
 
     /**
      * Gets the subsystem instance
-     * 
+     *
      * @return subsystem instance
      */
     public static LidarSubsystem getInstance() {
-        return instance == null ? instance = new LidarSubsystem() : instance;
+        return LidarSubsystem.instance == null ? LidarSubsystem.instance = new LidarSubsystem()
+                : LidarSubsystem.instance;
     }
 
     public void startThread() {
@@ -74,7 +75,7 @@ public class LidarSubsystem extends Subsystem {
      * Creates a runnable instance of the
      * LIDAR distance reading thread. Loops and
      * continuously reads from the Serial buffer.
-     * 
+     *
      * @return Thread object to be run
      */
     private Thread getThread() {
@@ -98,7 +99,7 @@ public class LidarSubsystem extends Subsystem {
 
     /**
      * Reads current saved distance
-     * 
+     *
      * @return distance in CM
      */
     public int getDistance() {
@@ -108,7 +109,7 @@ public class LidarSubsystem extends Subsystem {
     /**
      * Whether more than two
      * bytes are available to read
-     * 
+     *
      * @return
      */
     private boolean bytesAvailable() {

@@ -24,28 +24,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * BNO055.vector_type_t.VECTOR_EULER);
  * }
  * Example 2: When you want gryo angle readings:
- * 
+ *
  * <pre>
  * <code>
- *  
+ *
  *  public void robotInit() {
  *    bno055 = BNO055.getInstance(I2C.Port.kOnboard);
  *  }
- *  
+ *
  *  public Gyro getGyroX() {
  *    return bno055.createGyroX();
  *  }
- *  
+ *
  *  public Gyro getGyroY() {
  *    return bno055.createGyroY();
  *  }
- *  
+ *
  *  public Gyro getGyroZ() {
  *    return bno055.createGyroZ();
  *  }
  *  </code>
  * </pre>
- * 
+ *
  * You can check the status of the sensor by using the following methods:
  * isSensorPresent(); //Checks if the code can talk to the sensor over I2C
  * // If this returns false, check your wiring.
@@ -61,7 +61,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * by using the getVector() method. See this method definiton for usage info.
  * This code was originally ported from arduino source developed by Adafruit.
  * See the original comment header below.
- * 
+ *
  * @author james@team2168.org
  *         ORIGINAL ADAFRUIT HEADER -
  *         https://github.com/adafruit/Adafruit_BNO055/
@@ -305,29 +305,30 @@ public class BNO055 {
      *            the address the sensor is at (0x28 or 0x29)
      */
     private BNO055(I2C.Port port, byte address) {
-        imu = new I2C(port, address);
+        BNO055.imu = new I2C(port, address);
 
         executor = new java.util.Timer();
-        executor.schedule(new BNO055UpdateTask(this), 0L, THREAD_PERIOD);
+        executor.schedule(new BNO055UpdateTask(this), 0L, BNO055.THREAD_PERIOD);
     }
 
     /**
      * Get an instance of the sensor configured for IMU mode and EULER format
      * for the purpose
      * of reading gyro angles (assumes sensor has default I2C address).
-     * 
+     *
      * @param port
      *            the physical port the sensor is plugged into on the roboRio
      *            (I2C.Port.kOnboard or I2C.Port.kMXP).
      * @return the instantiated BNO055 object
      */
     public static BNO055 getInstance(I2C.Port port) {
-        return getInstance(opmode_t.OPERATION_MODE_IMUPLUS, vector_type_t.VECTOR_EULER, port, BNO055.BNO055_ADDRESS_A);
+        return BNO055.getInstance(opmode_t.OPERATION_MODE_IMUPLUS, vector_type_t.VECTOR_EULER, port,
+                                  BNO055.BNO055_ADDRESS_A);
     }
 
     /**
      * Get an instance of the IMU object.
-     * 
+     *
      * @param mode
      *            the operating mode to run the sensor in.
      * @param port
@@ -337,18 +338,18 @@ public class BNO055 {
      * @return the instantiated BNO055 object
      */
     public static BNO055 getInstance(opmode_t mode, vector_type_t vectorType, I2C.Port port, byte address) {
-        if (instance == null) {
-            instance = new BNO055(port, address);
+        if (BNO055.instance == null) {
+            BNO055.instance = new BNO055(port, address);
         }
-        requestedMode = mode;
-        requestedVectorType = vectorType;
-        return instance;
+        BNO055.requestedMode = mode;
+        BNO055.requestedVectorType = vectorType;
+        return BNO055.instance;
     }
 
     /**
      * Get an instance of the IMU object plugged into the onboard I2C header.
      * Using the default address (0x28)
-     * 
+     *
      * @param mode
      *            the operating mode to run the sensor in.
      * @param vectorType
@@ -357,7 +358,7 @@ public class BNO055 {
      * @return the instantiated BNO055 object
      */
     public static BNO055 getInstance(opmode_t mode, vector_type_t vectorType) {
-        return getInstance(mode, vectorType, I2C.Port.kOnboard, BNO055_ADDRESS_A);
+        return BNO055.getInstance(mode, vectorType, I2C.Port.kOnboard, BNO055.BNO055_ADDRESS_A);
     }
 
     /**
@@ -376,7 +377,7 @@ public class BNO055 {
             switch (state) {
                 case 0:
                     // Wait for the sensor to be present
-                    if ((0xFF & read8(reg_t.BNO055_CHIP_ID_ADDR)) != BNO055_ID) {
+                    if ((0xFF & read8(reg_t.BNO055_CHIP_ID_ADDR)) != BNO055.BNO055_ID) {
                         // Sensor not present, keep trying
                         sensorPresent = false;
                     } else {
@@ -404,7 +405,7 @@ public class BNO055 {
                     break;
                 case 3:
                     // Wait for the sensor to be present
-                    if ((0xFF & read8(reg_t.BNO055_CHIP_ID_ADDR)) == BNO055_ID) {
+                    if ((0xFF & read8(reg_t.BNO055_CHIP_ID_ADDR)) == BNO055.BNO055_ID) {
                         // Sensor present, go to next state
                         state++;
                         // Log current time
@@ -438,7 +439,7 @@ public class BNO055 {
                 case 7:
                     // Set operating mode to mode requested at instantiation
                     if (currentTime >= nextTime) {
-                        setMode(requestedMode);
+                        setMode(BNO055.requestedMode);
                         nextTime = Timer.getFPGATimestamp() + 1.05;
                         state++;
                     }
@@ -470,12 +471,12 @@ public class BNO055 {
 
         // Read vector data (6 bytes)
         double startTime = Timer.getFPGATimestamp();
-        readLen(requestedVectorType.getVal(), positionVector);
+        readLen(BNO055.requestedVectorType.getVal(), positionVector);
 
         // Diagnostics for checking how long read operation took
         double endTime = Timer.getFPGATimestamp();
         readDurationLast = (endTime - startTime);
-        if (readDurationLast > READ_TOO_LONG_THRESHOLD) {
+        if (readDurationLast > BNO055.READ_TOO_LONG_THRESHOLD) {
             readDurationOver++;
         }
         if (readDurationLast > readDurationMax) {
@@ -488,7 +489,7 @@ public class BNO055 {
 
         /* Convert the value to an appropriate range (section 3.6.4) */
         /* and assign the value to the Vector type */
-        switch (requestedVectorType) {
+        switch (BNO055.requestedVectorType) {
             case VECTOR_MAGNETOMETER:
                 /* 1uT = 16 LSB */
                 pos[0] = (x) / 16.0;
@@ -534,7 +535,7 @@ public class BNO055 {
 
     /**
      * Puts the chip in the specified operating mode
-     * 
+     *
      * @param mode
      */
     public void setMode(opmode_t mode) {
@@ -542,13 +543,13 @@ public class BNO055 {
     }
 
     private void setMode(int mode) {
-        _mode = mode;
-        write8(reg_t.BNO055_OPR_MODE_ADDR, (byte) _mode);
+        BNO055._mode = mode;
+        write8(reg_t.BNO055_OPR_MODE_ADDR, (byte) BNO055._mode);
     }
 
     /**
      * Gets the latest system status info
-     * 
+     *
      * @return
      */
     public SystemStatus getSystemStatus() {
@@ -637,7 +638,7 @@ public class BNO055 {
      * with the sensor.
      * Communications are not actively monitored once sensor initialization
      * has started.
-     * 
+     *
      * @return true if the sensor is found on the I2C bus
      */
     public boolean isSensorPresent() {
@@ -650,7 +651,7 @@ public class BNO055 {
      * vector data. Once initialization is complete, data can be read,
      * although the sensor may not have completed calibration.
      * See isCalibrated.
-     * 
+     *
      * @return true when the sensor is initialized.
      */
     public boolean isInitialized() {
@@ -659,7 +660,7 @@ public class BNO055 {
 
     /**
      * Gets current calibration state.
-     * 
+     *
      * @return each value will be set to 0 if not calibrated, 3 if fully
      *         calibrated.
      */
@@ -680,7 +681,7 @@ public class BNO055 {
      * gyroscope) have completed their respective calibration sequence.
      * Only sensors required by the current operating mode are checked.
      * See Section 3.3.
-     * 
+     *
      * @return true if calibration is complete for all sensors required for the
      *         mode the sensor is currently operating in.
      */
@@ -707,19 +708,22 @@ public class BNO055 {
 
         CalData data = getCalibration();
 
-        if (sensorModeMap[_mode][0]) // Accelerometer used
+        if (sensorModeMap[BNO055._mode][0]) {
             retVal = retVal && (data.accel >= 3);
-        if (sensorModeMap[_mode][1]) // Magnetometer used
+        }
+        if (sensorModeMap[BNO055._mode][1]) {
             retVal = retVal && (data.mag >= 3);
-        if (sensorModeMap[_mode][2]) // Gyroscope used
+        }
+        if (sensorModeMap[BNO055._mode][2]) {
             retVal = retVal && (data.gyro >= 3);
+        }
 
         return retVal;
     }
 
     /**
      * Get the sensors internal temperature.
-     * 
+     *
      * @return temperature in degrees celsius.
      */
     public int getTemp() {
@@ -761,7 +765,7 @@ public class BNO055 {
      * <li>The {@link Gyro#getRate()} method is NOT implemented (do not use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroBase createGyroX() {
@@ -787,7 +791,7 @@ public class BNO055 {
      * <li>The {@link Gyro#getRate()} method is NOT implemented (do not use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroBase createGyroY() {
@@ -813,7 +817,7 @@ public class BNO055 {
      * <li>The {@link Gyro#getRate()} method is NOT implemented (do not use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroBase createGyroZ() {
@@ -830,7 +834,7 @@ public class BNO055 {
      * sensor clockwise two full rotations will return a value of 720 degrees.
      * The getVector method will return heading in a constrained 0 - 360 deg
      * format if required.
-     * 
+     *
      * @return heading in degrees
      */
     public double getHeading() {
@@ -839,7 +843,7 @@ public class BNO055 {
 
     /**
      * The heading (x axis) of the sensor in non-continuous format (0 - 360).
-     * 
+     *
      * @return Returns the heading from the gyro in the range of 0 - 360
      *         degrees.
      */
@@ -849,7 +853,7 @@ public class BNO055 {
 
     /**
      * Get the roll (y axis) of the sensor in non-continuous format (-90 - +90).
-     * 
+     *
      * @return Returns the roll from the gyro in the range of -90 to +90
      *         degrees.
      */
@@ -860,7 +864,7 @@ public class BNO055 {
     /**
      * Get the pitch (z axis) of the sensor in non-continuous format (-180 -
      * +180).
-     * 
+     *
      * @return Returns the pitch from the gyro in the range of -180 to +180
      *         degrees.
      */
@@ -870,7 +874,7 @@ public class BNO055 {
 
     /**
      * Displays information about the gyro to the dash board.
-     * 
+     *
      * @param verbosity
      *            Controls how much stuff to show (-1 nothing, 0 add heading,
      *            ... 9 adds everything).
@@ -957,7 +961,7 @@ public class BNO055 {
 
     /**
      * Writes an 8 bit value over I2C
-     * 
+     *
      * @param reg
      *            the register to write the data to
      * @param value
@@ -968,14 +972,14 @@ public class BNO055 {
     private boolean write8(reg_t reg, byte value) {
         boolean retVal = false;
 
-        retVal = imu.write(reg.getVal(), value);
+        retVal = BNO055.imu.write(reg.getVal(), value);
 
         return retVal;
     }
 
     /**
      * Reads an 8 bit value over I2C
-     * 
+     *
      * @param reg
      *            the register to read from.
      * @return
@@ -1016,7 +1020,7 @@ public class BNO055 {
             return false;
         }
 
-        retVal = !imu.read(reg, buffer.length, buffer);
+        retVal = !BNO055.imu.read(reg, buffer.length, buffer);
 
         return retVal;
     }

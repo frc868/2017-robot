@@ -5,12 +5,12 @@ public class HoundMath {
     /**
      * Defaults as ranging from -1 to 1.
      * Call checkRange with 3 doubles to use your own max and min values.
-     * 
+     *
      * @param value
      * @return
      */
     public static double checkRange(double value) {
-        return checkRange(value, -1, 1);
+        return HoundMath.checkRange(value, -1, 1);
     }
 
     public static double d2r(double degrees) {
@@ -22,9 +22,13 @@ public class HoundMath {
     }
 
     public static double checkRange(double value, double min, double max) {
-        if (value < min) return min;
-        else if (value > max) return max;
-        else return value;
+        if (value < min) {
+            return min;
+        } else if (value > max) {
+            return max;
+        } else {
+            return value;
+        }
     }
 
     public static double boundAngleNeg180to180Degrees(double angle) {
@@ -48,6 +52,6 @@ public class HoundMath {
     }
 
     public static double getAngleDifferenceDegrees(double from, double to) {
-        return boundAngleNeg180to180Degrees(to - from);
+        return HoundMath.boundAngleNeg180to180Degrees(to - from);
     }
 }

@@ -57,14 +57,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * track your robots rotation (direction your robot is
  * facing).</li>
  * </ul>
- * 
+ *
  * <pre>
  * <code>
  * ITG3200 sensor;
  * GyroBase gyrox;
  * GyroBase gyroy;
  * GyroBase gyroz;
- * 
+ *
  * public void robotInit() {
  * 	 sensor = new ITG3200(RobotMap.ITG3200_PORT,
  *				          RobotMap.ITG3200_JUMPERED);
@@ -72,22 +72,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *   gyrox = sensor.createGyroX();
  *   gyroy = sensor.createGyroY();
  *   gyroz = sensor.createGyroZ();
- *   
+ *
  *	 // Add Gyro objects to LiveWindow test mode
  * 	 String group = "ITG-3200";
  *   LiveWindow.addSensor(group, "Gyro (x)", gyrox);
  * 	 LiveWindow.addSensor(group, "Gyro (y)", gyroy);
  *   LiveWindow.addSensor(group, "Gyro (z)", gyroz);
  * }
- * 
+ *
  * public double getGyroAngleX() {
  *   return gyrox.getAngle();
  * }
- * 
+ *
  * public double getGyroAngleY() {
  *   return gyroy.getAngle();
  * }
- * 
+ *
  * public double getGyroAngleZ() {
  *   return gyroz.getAngle();
  * }
@@ -265,7 +265,7 @@ public final class ITG3200 {
      * Construct a new instance of the ITG-3200 gryo class.
      * <p>
      * IMPORTANT
-     * 
+     *
      * @param port
      *            This should be {@link I2C.Port#kOnboard} if the ITG-3200 is
      *            connected to the main I2C bus on the roboRIO. This should be
@@ -276,9 +276,9 @@ public final class ITG3200 {
      *            logic level high and false if not.
      */
     public ITG3200(I2C.Port port, boolean jumper) {
-        m_addr = (jumper ? itgAddressJumper : itgAddressNoJumper);
+        m_addr = (jumper ? ITG3200.itgAddressJumper : ITG3200.itgAddressNoJumper);
         m_i2c = new I2C(port, m_addr);
-        if (DEBUG) {
+        if (ITG3200.DEBUG) {
             check();
         }
         m_x = new Accumulator();
@@ -303,7 +303,7 @@ public final class ITG3200 {
      * <li>The {@link Gyro#getRate()} method is implemented (you can use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroAdapter createGyroX() {
@@ -334,7 +334,7 @@ public final class ITG3200 {
      * <li>The {@link Gyro#getRate()} method is implemented (you can use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroAdapter createGyroY() {
@@ -365,7 +365,7 @@ public final class ITG3200 {
      * <li>The {@link Gyro#getRate()} method is implemented (you can use
      * it).</li>
      * </ul>
-     * 
+     *
      * @return A new {@class Gyro} object you can used for tracking rotation.
      */
     public GyroAdapter createGyroZ() {
@@ -392,7 +392,7 @@ public final class ITG3200 {
 
     /**
      * Dumps information about the state of the Gyro to the smart dashboard.
-     * 
+     *
      * @param tag
      *            Short name like "Gyro" to prefix each label with on the
      *            dashboard.
@@ -421,7 +421,7 @@ public final class ITG3200 {
 
     /**
      * Clears dashboard variables from network table.
-     * 
+     *
      * @param tag
      *            Short name like "Gyro" to prefix each label with on the
      *            dashboard (what you passed to {@link #updateDashboard}.
@@ -459,7 +459,7 @@ public final class ITG3200 {
 
                 // Reset accumulators and set the number of readings to take to
                 // compute bias values
-                resetCnt = MIN_READINGS_TO_SET_BIAS;
+                resetCnt = ITG3200.MIN_READINGS_TO_SET_BIAS;
                 m_x.reset();
                 m_y.reset();
                 m_z.reset();
@@ -549,15 +549,15 @@ public final class ITG3200 {
     private void performResetSequence() {
         // Configure the gyroscope
         // Set the gyroscope scale for the outputs to +/-2000 degrees per second
-        m_i2c.write(DLPF_FS, (DLPF_FS_SEL_2000 | DLPF_LOWPASS_188HZ));
+        m_i2c.write(ITG3200.DLPF_FS, (ITG3200.DLPF_FS_SEL_2000 | ITG3200.DLPF_LOWPASS_188HZ));
         // Set the sample rate to 100 hz
-        m_i2c.write(SMPLRT_DIV, 9);
+        m_i2c.write(ITG3200.SMPLRT_DIV, 9);
     }
 
     /**
      * Enables the buffering of the next "n" data samples (which can then be
      * saved for analysis).
-     * 
+     *
      * @param samples
      *            Maximum number of samples to read.
      */
@@ -578,7 +578,7 @@ public final class ITG3200 {
 
     /**
      * Check to see if the buffer is full.
-     * 
+     *
      * @return true if buffer is at capacity.
      */
     public boolean isBufferFull() {
@@ -635,7 +635,7 @@ public final class ITG3200 {
         double now = Timer.getFPGATimestamp();
 
         byte[] buffer = new byte[6];
-        boolean rc = m_i2c.read(GYRO_XOUT_H, buffer.length, buffer);
+        boolean rc = m_i2c.read(ITG3200.GYRO_XOUT_H, buffer.length, buffer);
 
         if (rc) {
             // Got a good read, get 16 bit integer values for each axis and
@@ -663,7 +663,7 @@ public final class ITG3200 {
             }
         }
 
-        if (DEBUG) {
+        if (ITG3200.DEBUG) {
             String name = toString();
             String[] labels = { "XOUT_H", "XOUT_L", "YOUT_H", "YOUT_L", "ZOUT_H", "ZOUT_L" };
             for (int i = 0; i < labels.length; i++) {
@@ -677,8 +677,8 @@ public final class ITG3200 {
      */
     private void check() {
         byte[] buffer = new byte[1];
-        boolean rc = m_i2c.read(WHO_AM_I, buffer.length, buffer);
-        if (DEBUG) {
+        boolean rc = m_i2c.read(ITG3200.WHO_AM_I, buffer.length, buffer);
+        if (ITG3200.DEBUG) {
             String name = toString();
             SmartDashboard.putBoolean(name + " Check OK?", rc);
             SmartDashboard.putNumber(name + " WHO_AM_I", buffer[0]);
@@ -707,11 +707,11 @@ public final class ITG3200 {
         private long m_sum;
 
         /** Multipler to covert 2*Count to degrees/sec (optimization). */
-        private static final double COUNT2_TO_DEGSEC = (COUNT_TO_DEGSEC / 2.0);
+        private static final double COUNT2_TO_DEGSEC = (ITG3200.COUNT_TO_DEGSEC / 2.0);
 
         /**
          * Returns the accumulated degrees.
-         * 
+         *
          * @return Accumulated signed degrees since last zeroed.
          */
         public synchronized double getDegrees() {
@@ -728,17 +728,17 @@ public final class ITG3200 {
 
         /**
          * Returns the deg/sec value based on the last reading from the sensor.
-         * 
+         *
          * @return Degrees/Second reported by the sensor.
          */
         public double getDegPerSec() {
-            return (m_lastRaw - (m_bias2 / 2.0)) * COUNT_TO_DEGSEC;
+            return (m_lastRaw - (m_bias2 / 2.0)) * ITG3200.COUNT_TO_DEGSEC;
         }
 
         /**
          * Returns the number or readings that went into the accumulated
          * degrees.
-         * 
+         *
          * @return Count of readings since last zeroed.
          */
         public synchronized int getReadings() {
@@ -785,7 +785,7 @@ public final class ITG3200 {
 
         /**
          * Updates (accumulates) new value read from axis.
-         * 
+         *
          * @param raw
          *            Raw signed 16 bit value read from gyro for axis.
          * @param time
@@ -796,7 +796,7 @@ public final class ITG3200 {
 
             if (m_cnt != 0) {
                 // Get average of degrees per second over the time span
-                double degPerSec = (m_lastRaw + raw - m_bias2) * COUNT2_TO_DEGSEC;
+                double degPerSec = (m_lastRaw + raw - m_bias2) * Accumulator.COUNT2_TO_DEGSEC;
                 // Get time span this rate occurred for
                 double secs = (m_lastTime - time);
                 // Get number of degrees rotated for time period
