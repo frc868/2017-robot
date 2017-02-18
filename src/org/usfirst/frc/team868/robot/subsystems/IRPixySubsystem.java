@@ -7,42 +7,48 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+// @formatter:off
 /**
- * Pinout of back of Pixy:
- * ^top of Pixy^
- * 1 2
- * 3 4
- * 5 6
- * 7 8
- * 9 10
- * Pinout of kMXP ports:
- * 33 31 29 27 ... 7 5 3 1
- * 34 32 30 28 ... 8 6 4 2
- * Pixy to kMXP ports:
- * Pixy port 1 goes to kMXP port 14
- * ... 4 to 10
- * ... 10 to 12
+ *  Pinout of back of Pixy: 
+ *  ^top of Pixy^
+ *  	1	2
+ *  	3	4
+ *  	5	6
+ *  	7	8
+ *  	9	10
+ *  
+ *  Pinout of kMXP ports:
+ *  	33	31	29	27	...	7	5	3	1
+ *  	34	32	30	28	...	8	6	4	2
+ *  
+ *  Pixy to kMXP ports:
+ *  
+ *  Pixy port 1 goes to kMXP port 14
+ *  ...		  4		 to			  10
+ *  ...		  10	 to			  12
+ *  
  */
 
 /*
- * Distance Width Height
- * 4ft 64 or 65 16 or 17
- * 5ft 64 17 or 18
- * 6ft 54 14
- * 7ft 47,48,53 13,41
- * 8ft 46,47 36
- * 9ft 42 33
- * 10ft 37,38 30
- * 11ft 34,35 27
- * 12ft 33 26
- * 13ft 29 23
- * 14ft 26 22
- * 15ft 26 20
- * 16ft 24 19
- * 17ft 22 18,19
- * 18ft 21 17
- * 19ft 18,19 16
+ * Distance		Width		Height
+ * 4ft			64 or 65	16 or 17
+ * 5ft			64			17 or 18
+ * 6ft			54			14
+ * 7ft			47,48,53	13,41
+ * 8ft			46,47		36
+ * 9ft			42			33
+ * 10ft			37,38		30
+ * 11ft			34,35		27
+ * 12ft			33			26
+ * 13ft			29			23
+ * 14ft			26			22
+ * 15ft			26			20
+ * 16ft			24			19
+ * 17ft			22			18,19
+ * 18ft			21			17
+ * 19ft			18,19		16
  */
+// @formatter:on
 public class IRPixySubsystem extends Subsystem {
 
     private static IRPixySubsystem instance;
@@ -214,7 +220,6 @@ public class IRPixySubsystem extends Subsystem {
         return instance;
     }
 
-    @Override
     public void initDefaultCommand() {
 
     }
