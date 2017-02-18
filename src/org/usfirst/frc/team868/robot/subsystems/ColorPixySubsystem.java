@@ -8,20 +8,30 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+// @formatter:off
 /**
  * Pinout of back of Pixy: ^top of Pixy^ 1 2 3 4 5 6 7 8 9 10
+ * 
  * RC Servo ports: ^directly below pinout^ PWM0 PWM1 <---(Programmable Pixy
  * output PWMs) 5V 5V <---(5V of power) GND GND <---(Ground)
+ * 
  * Pixy to I2C ports: (kOnboard)
+ * 
  * Pixy port 5 goes to I2C port SCL ... 9 to SDA
+ * 
  * OR
+ * 
  * Pixy to I2C ports: (kMXP)
- * Pinout of kMXP ports:
- * 33 31 29 27 ... 7 5 3 1
- * 34 32 30 28 ... 8 6 4 2
+ * 
+ * Pinout of kMXP ports: 
+ * 		33 31 29 27 ... 7 5 3 1
+ * 		34 32 30 28 ... 8 6 4 2
+ * 
  * Pixy port 5 goes to I2C port 32
- * ... 9 to 34
+ * ...	 	 9		to			34
+ * 
  */
+// @formatter:on
 public class ColorPixySubsystem extends Subsystem {
     private static int idCounter = 0;
 
@@ -281,7 +291,6 @@ public class ColorPixySubsystem extends Subsystem {
         return instance;
     }
 
-    @Override
     public void initDefaultCommand() {
     }
 }
