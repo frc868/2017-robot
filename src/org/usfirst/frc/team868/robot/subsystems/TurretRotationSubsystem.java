@@ -95,6 +95,19 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.set(power);
 	}
 	
+	public void calibrateTurret(){
+		while (!isALimitSwitchClosed()) {
+			setPower(.3);
+		}
+		double startAngle = Math.abs(getAngle());
+		
+		while(!isALimitSwitchClosed()) {
+			setPower(-.3);
+		}
+		double endAngle = Math.abs(getAngle());
+		setAngle((startAngle + endAngle)/2);
+	}
+	
 	/**
 	 * Sets the setpoint of the turret.
 	 * @param point in encoder counts.

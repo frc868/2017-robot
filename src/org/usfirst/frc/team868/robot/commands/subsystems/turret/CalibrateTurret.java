@@ -1,21 +1,26 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
+import org.usfirst.frc.team868.robot.RobotMap.Turret;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CalibrateTurretCommand extends Command {
+public class CalibrateTurret extends Command {
 
-	// TODO: this
 	
-    public CalibrateTurretCommand() {
+	
+    public CalibrateTurret() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	TurretRotationSubsystem.getInstance().calibrateTurret();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,7 +29,7 @@ public class CalibrateTurretCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
