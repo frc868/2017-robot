@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 	
-//	static final String ROBOT_IP = "10.8.68.2";
-	static final String ROBOT_IP = null;
+	static final String ROBOT_IP = "10.8.68.2";
+//	static final String ROBOT_IP = null;
 	static final int ROBOT_PORT = 5800; 
 	static Scanner input;
 	static Socket network;
