@@ -27,14 +27,11 @@ public class GearToHopperCommandGroup extends CommandGroup {
     		break;
     	case B2:
     		addSequential(new TurnToAngle(-90));
-    		addSequential(new DriveDistanceCommand(310));
+    		addSequential(new DriveDistanceCommand(411.5 - (Math.sqrt(107) /2)));
     		addSequential(new TurnToAngle(90));
-    		addSequential(new DriveDistanceCommand(120));
+    		addSequential(new DriveDistanceCommand(33.5));
     		addSequential(new TurnToAngle(-90));
-    		addSequential(new DriveDistanceCommand(100));
-    		addSequential(new DriveDistanceCommand(-100));
-    		addSequential(new TurnToAngle(-90));
-    		addSequential(new DriveDistanceCommand(100));
+    		addSequential(new DriveDistanceCommand(Math.sqrt(107) /2));
     		addSequential(new FeedAndShootCommandGroup());
     		break;
     	case B3:
@@ -58,14 +55,11 @@ public class GearToHopperCommandGroup extends CommandGroup {
     		break;
     	case R2:
     		addSequential(new TurnToAngle(90));
-    		addSequential(new DriveDistanceCommand(310));
+    		addSequential(new DriveDistanceCommand(411.5 - (Math.sqrt(107) /2)));
     		addSequential(new TurnToAngle(-90));
-    		addSequential(new DriveDistanceCommand(120));
+    		addSequential(new DriveDistanceCommand(33.5));
     		addSequential(new TurnToAngle(90));
-    		addSequential(new DriveDistanceCommand(100));
-    		addSequential(new DriveDistanceCommand(-100));
-    		addSequential(new TurnToAngle(90));
-    		addSequential(new DriveDistanceCommand(100));
+    		addSequential(new DriveDistanceCommand(Math.sqrt(107) /2));
     		addSequential(new FeedAndShootCommandGroup());
     		break;
     	case R3:
