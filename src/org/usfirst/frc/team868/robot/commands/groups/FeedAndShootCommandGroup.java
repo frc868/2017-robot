@@ -14,17 +14,17 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class FeedAndShootCommandGroup extends CommandGroup {
 
     public FeedAndShootCommandGroup() {
-    	addSequential(new RotateUsingIRPixy(1));
-    	
-    	addParallel(new ShootCommand(true));
-    	addSequential(new WaitCommand(1));
-    	
-    	addParallel(new AgitatorCommand(true));
-    	addParallel(new ShooterFeederCommand(true));
-    	addSequential(new WaitCommand(3));
-    	
-    	addParallel(new ShootCommand(false));
-    	addParallel(new AgitatorCommand(false));
-    	addParallel(new ShooterFeederCommand(false));
+        addSequential(new RotateUsingIRPixy(1));
+
+        addParallel(new ShootCommand(true));
+        addSequential(new WaitCommand(1));
+
+        addParallel(new AgitatorCommand(true));
+        addParallel(new ShooterFeederCommand(true));
+        addSequential(new WaitCommand(3));
+
+        addParallel(new ShootCommand(false));
+        addParallel(new AgitatorCommand(false));
+        addParallel(new ShooterFeederCommand(false));
     }
 }

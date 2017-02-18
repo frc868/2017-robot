@@ -9,52 +9,57 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RotateUsingIRPixy extends Command {
-	
-	private IRPixySubsystem camera;
-	private Timer time;
-	private double timeout;
 
-	/**
-	 * Uses the Pixy camera to rotate to look directly towards the target 
-	 * Will stop after 'timeout' seconds have passed.
-	 */
+    private IRPixySubsystem camera;
+    private Timer time;
+    private double timeout;
+
+    /**
+     * Uses the Pixy camera to rotate to look directly towards the target
+     * Will stop after 'timeout' seconds have passed.
+     */
     public RotateUsingIRPixy(double timeout) {
-    	camera = IRPixySubsystem.getInstance();
-    	requires(camera);
-    	this.timeout = timeout;
+        camera = IRPixySubsystem.getInstance();
+        requires(camera);
+        this.timeout = timeout;
     }
-    
+
     /**
      * Runs this command with a default timeout of 2.5 seconds
      */
-    public RotateUsingIRPixy(){
-    	this(2.5);
+    public RotateUsingIRPixy() {
+        this(2.5);
     }
 
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
-    	time = new Timer();
-    	time.reset();
-    	time.start();
+        time = new Timer();
+        time.reset();
+        time.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-    	new RotateTurretByAngle(camera.getXAngleOffFromCenter()).start();
+        new RotateTurretByAngle(camera.getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return time.get() > timeout;
     }
 
     // Called once after isFinished returns true
+    @Override
     protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
-    	end();
+        end();
     }
 }

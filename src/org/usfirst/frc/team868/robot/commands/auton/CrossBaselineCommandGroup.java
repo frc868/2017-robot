@@ -12,30 +12,29 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CrossBaselineCommandGroup extends CommandGroup {
 
     public CrossBaselineCommandGroup(StartingPoint selected) {
-    	switch(selected) {
-    		case B1:
-    			addSequential(new DriveDistanceCommand(250));
-    			break;
-    		case B2:
-    			addSequential(new TurnToAngle(-45));
-    			addSequential(new DriveDistanceCommand(180));
-    			break;
-    		case B3:
-    			addSequential(new DriveDistanceCommand(250));
-    			break;
-    		case R1:
-    			addSequential(new DriveDistanceCommand(250));
-    			break;
-    		case R2:
-    			addSequential(new TurnToAngle(-45));
-    			addSequential(new DriveDistanceCommand(180));
-    			break;
-    		case R3:
-    			addSequential(new DriveDistanceCommand(250));
-    			break;
-    		default:
-    			break;
-    	}
+        switch (selected) {
+            case B1:
+                addSequential(new DriveDistanceCommand(250));
+                break;
+            case B2:
+                addSequential(new TurnToAngle(-45));
+                addSequential(new DriveDistanceCommand(180));
+                break;
+            case B3:
+                addSequential(new DriveDistanceCommand(250));
+                break;
+            case R1:
+                addSequential(new DriveDistanceCommand(250));
+                break;
+            case R2:
+                addSequential(new TurnToAngle(-45));
+                addSequential(new DriveDistanceCommand(180));
+                break;
+            case R3:
+                addSequential(new DriveDistanceCommand(250));
+                break;
+            default:
+                break;
+        }
     }
 }
-

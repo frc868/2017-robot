@@ -27,118 +27,131 @@ public class ShooterSubsystem extends Subsystem {
     public static final double P = 0;
     public static final double I = 0;
     public static final double D = 0;
-    
-    private ShooterSubsystem(){
-    	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
-    	leftShooter = new CANTalon(RobotMap.Shoot.LEFT_SHOOTER_MOTOR);
-    	
-    	rightShooter.setInverted(RobotMap.Shoot.IS_INVERTED);
-    	leftShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
-    	
-    	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
-    	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
-    	leftShooter.set(rightShooter.getDeviceID());
-//    	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B); //TODO remove
-    	count = new Counter(RobotMap.Shoot.ENCODER_A);
 
-    	control = new PIDController(P, I, D, new PIDSource(){
+    private ShooterSubsystem() {
+        rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
+        leftShooter = new CANTalon(RobotMap.Shoot.LEFT_SHOOTER_MOTOR);
 
-			public void setPIDSourceType(PIDSourceType pidSource) {
-			}
+        rightShooter.setInverted(RobotMap.Shoot.IS_INVERTED);
+        leftShooter.setInverted(!RobotMap.Shoot.IS_INVERTED);
 
-			public PIDSourceType getPIDSourceType() {
-				return PIDSourceType.kRate;
-			}
+        rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
+        leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
+        leftShooter.set(rightShooter.getDeviceID());
+        // count = new Encoder(RobotMap.Shoot.ENCODER_A,
+        // RobotMap.Shoot.ENCODER_B); //TODO remove
+        count = new Counter(RobotMap.Shoot.ENCODER_A);
 
-			public double pidGet() {
-				return getSpeed();
-			}
-    		
-    	}, new PIDOutput(){
+        control = new PIDController(P, I, D, new PIDSource() {
 
-			public void pidWrite(double output) {
-				rightShooter.set(output); //TODO set otherShooter
-			}
-    		
-    	});
-    	control.setOutputRange(0, 1);
-    	
-		// Assign test mode group
-    	LiveWindow.addActuator("Shooter", "RIGHT", rightShooter);
-    	LiveWindow.addActuator("Shooter", "LEFT", leftShooter);
-		LiveWindow.addSensor("Shooter", "Encoder", count);
+            @Override
+            public void setPIDSourceType(PIDSourceType pidSource) {
+            }
+
+            @Override
+            public PIDSourceType getPIDSourceType() {
+                return PIDSourceType.kRate;
+            }
+
+            @Override
+            public double pidGet() {
+                return getSpeed();
+            }
+
+        }, new PIDOutput() {
+
+            @Override
+            public void pidWrite(double output) {
+                rightShooter.set(output); // TODO set otherShooter
+            }
+
+        });
+        control.setOutputRange(0, 1);
+
+        // Assign test mode group
+        LiveWindow.addActuator("Shooter", "RIGHT", rightShooter);
+        LiveWindow.addActuator("Shooter", "LEFT", leftShooter);
+        LiveWindow.addSensor("Shooter", "Encoder", count);
     }
-    
+
     /**
-	 * Sets the shooter's power
-	 * @param power in voltage from 0 to 12.
-	 */
-    public void setPower(double power){
-    	control.disable();
-    	rightShooter.set(HoundMath.checkRange(power, 0, 12));
+     * Sets the shooter's power
+     * 
+     * @param power
+     *            in voltage from 0 to 12.
+     */
+    public void setPower(double power) {
+        control.disable();
+        rightShooter.set(HoundMath.checkRange(power, 0, 12));
     }
+
     /**
      * @return the shooter's PID controller
      */
-    public PIDController getPIDController(){
-    	return control;
+    public PIDController getPIDController() {
+        return control;
     }
-    
+
     /**
      * Sets the shooter's speed using it's PID controller.
+     * 
      * @param speed
      */
     public void setSpeed(double speed) {
-    	control.setSetpoint(speed);
-    	control.enable();
+        control.setSetpoint(speed);
+        control.enable();
     }
-    
+
     /**
      * Gets the shooter's speed using it's encoder.
+     * 
      * @return
      */
-    public double getSpeed(){
-    	return count.getRate();
+    public double getSpeed() {
+        return count.getRate();
     }
-    
+
     /**
      * Gets the shooter's power.
+     * 
      * @return in voltage from 0 to 12
      */
-    public double getPower(){
-    	return rightShooter.get();
+    public double getPower() {
+        return rightShooter.get();
     }
-    
+
     /**
      * Gets the number of counts that the shooter's encoder has tracked.
+     * 
      * @return in counts
      */
     public double getCounts() {
-    	return rightShooter.getPosition();
-    	
-    }
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static ShooterSubsystem getInstance(){
-    	if(instance == null){
-    		instance = new ShooterSubsystem();
-    	}
-    	return instance;
-    }
-	
-	/**
-	 * Update information on SmartDashboard.
-	 */
-    public void updateSD(){
-    	SmartDashboard.putNumber("Shooter Speed", getSpeed());
-    	SmartDashboard.putNumber("Shooter Power", getPower());
-    	SmartDashboard.putData("Shooter PID", control);
+        return rightShooter.getPosition();
+
     }
 
+    /**
+     * Get the instance of this subsystem
+     * 
+     * @return instance
+     */
+    public static ShooterSubsystem getInstance() {
+        if (instance == null) {
+            instance = new ShooterSubsystem();
+        }
+        return instance;
+    }
+
+    /**
+     * Update information on SmartDashboard.
+     */
+    public void updateSD() {
+        SmartDashboard.putNumber("Shooter Speed", getSpeed());
+        SmartDashboard.putNumber("Shooter Power", getPower());
+        SmartDashboard.putData("Shooter PID", control);
+    }
+
+    @Override
     public void initDefaultCommand() {
     }
 }
-
