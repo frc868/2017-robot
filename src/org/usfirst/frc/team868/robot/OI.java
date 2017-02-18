@@ -89,7 +89,7 @@ public class OI {
 		controller.getButton(RobotMap.Controls.Turret.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
 		controller.getButton(RobotMap.Controls.Turret.CALIBRATE)
-			.whenPressed(new CalibrateTurretCommand());
+			.whenPressed(new CalibrateTurret());
 				
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)

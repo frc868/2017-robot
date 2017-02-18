@@ -49,7 +49,6 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 			
 		});
-		makeSoftLimits();
 		
 		// Assign test mode group
     	LiveWindow.addActuator("Turret", "Motor", turretRotator);
@@ -57,6 +56,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	
 	/**
 	 * Generates the soft limits for the turret's rotation.
+	 * @deprecated
 	 */
 	private void makeSoftLimits(){
 		turretRotator.setForwardSoftLimit(RobotMap.Turret.FORWARD_LIMIT);
@@ -95,7 +95,7 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.set(power);
 	}
 	
-	public void calibrateTurret(){
+	public void calibrateTurret() {
 		while (!isALimitSwitchClosed()) {
 			setPower(.3);
 		}
@@ -106,6 +106,11 @@ public class TurretRotationSubsystem extends Subsystem {
 		}
 		double endAngle = Math.abs(getAngle());
 		setAngle((startAngle + endAngle)/2);
+		
+		turretRotator.setForwardSoftLimit(startAngle-2);
+		turretRotator.setReverseSoftLimit(endAngle+2);
+		turretRotator.enableForwardSoftLimit(true);
+		turretRotator.enableReverseSoftLimit(true);
 	}
 	
 	/**
