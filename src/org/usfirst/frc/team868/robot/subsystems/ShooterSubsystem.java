@@ -38,8 +38,9 @@ public class ShooterSubsystem extends Subsystem {
     	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
     	leftShooter.set(rightShooter.getDeviceID());
-//    	count = new Encoder(RobotMap.Shoot.ENCODER_A, RobotMap.Shoot.ENCODER_B); //TODO remove
     	count = new Counter(RobotMap.Shoot.ENCODER_A);
+    	
+    	count.setDistancePerPulse(RobotMap.Shoot.ROTATIONS_PER_COUNT);
 
     	control = new PIDController(P, I, D, new PIDSource(){
 

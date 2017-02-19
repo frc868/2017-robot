@@ -126,6 +126,7 @@ public interface RobotMap {
 		//VALUES:
 		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
+		final double ROTATIONS_PER_COUNT = 1.0;
 	}
 	
 	public interface Turret {
