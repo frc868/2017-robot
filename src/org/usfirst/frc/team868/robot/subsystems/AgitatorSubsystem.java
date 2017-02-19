@@ -15,7 +15,12 @@ public class AgitatorSubsystem extends Subsystem {
 
 	private static AgitatorSubsystem instance;
 	private Spark motor;
-	private boolean state;
+	
+	public enum State {
+		FORWARD, OFF, BACKWARD;
+	}
+	
+	public State state;
 	
 	/** Set this to true for tuning and diagnostic output. */
 	private static final boolean DEBUG = false;
@@ -64,31 +69,54 @@ public class AgitatorSubsystem extends Subsystem {
 	 *            If true, turns on the agitator at the default power level, if
 	 *            false, stops agitator.
 	 */
-	public void setAgitator(boolean on) {
-		state = on;
+	public void setAgitator(State state) {
 		double speed = 0;
-		if (on) {
+		this.state = state;
+		
+		 if (state.equals(State.FORWARD)) {
 			speed = RobotMap.Feeder.AGITATOR_SPEED;
+			
 			// When debugging/tuning, pull value from dashboard
 			if (DEBUG) {
 				speed = SmartDashboard.getNumber(SpeedLabel, speed);
 			}
-		}
-		setAgitatorSpeed(on ? RobotMap.Feeder.AGITATOR_SPEED : 0);
+		} else if (state.equals(State.FORWARD)) {
+			speed = -RobotMap.Feeder.AGITATOR_SPEED;
+			
+			// When debugging/tuning, pull value from dashboard (negates this value)
+			if (DEBUG) {
+				speed = -SmartDashboard.getNumber(SpeedLabel, speed);
+			}
+		}		
+		
+		setAgitatorSpeed(speed);;
 	}
-
+	
 	/**
-	 * Turns on agitator with the default power setting.
+	 * Turns agitator to foreward.
 	 */
-	public void setAgitatorOn() {
-		setAgitator(true);
+	public void setAgitatorForward() {
+		setAgitator(State.FORWARD);
 	}
 
 	/**
 	 * Turns off the agitator.
 	 */
 	public void setAgitatorOff() {
-		setAgitator(false);
+		setAgitator(State.OFF);
+	}
+	/**
+	 * Turns agitator to forward.
+	 */
+	public void setAgitatorBackward() {
+		setAgitator(State.OFF);
+	}
+	
+	/**
+	 * switches the direction of the agitator.
+	 */
+	public void switchDirection() {
+		setAgitator(!(state == State.FORWARD) ? State.FORWARD : State.BACKWARD);
 	}
 
 	/**
@@ -96,7 +124,7 @@ public class AgitatorSubsystem extends Subsystem {
 	 * default setting when turned back on).
 	 */
 	public void toggleAgitator() {
-		setAgitator(!state);
+		setAgitator(!(state == State.OFF) ? State.OFF : State.FORWARD);
 	}
 
 	/**
@@ -104,7 +132,7 @@ public class AgitatorSubsystem extends Subsystem {
 	 * 
 	 * @return true if agitator is running.
 	 */
-	public boolean isAgitatorOn() {
+	public State getState() {
 		return state;
 	}
 

@@ -30,12 +30,11 @@ public class AgitatorCommand extends Command {
     public AgitatorCommand(){
     	agitator = AgitatorSubsystem.getInstance();
     	requires(agitator);
-    	state = !agitator.isAgitatorOn();
     }
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		agitator.setAgitator(state);
+		agitator.toggleAgitator();;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
