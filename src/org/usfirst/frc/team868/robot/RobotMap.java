@@ -154,6 +154,7 @@ public interface RobotMap {
 			final int R_RIGHT = DPadButton.Direction.RIGHT;
 			final int R_PIXY = ControllerMap.Key.B;
 			final int CALIBRATE = ControllerMap.Key.LB;
+			final int AGITATOR = ControllerMap.Key.RT;
 		}
 		
 		public interface Gear {

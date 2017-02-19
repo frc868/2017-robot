@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.ArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -20,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	private Spark rightMotor;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
 	
 	/**
 	 * Constructor, provides the port values for motors and encoders,
@@ -183,6 +185,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 
     public void initDefaultCommand() {
+    	setDefaultCommand(new ArcadeDriveCommand(OI.getInstance().getDriver()));
     }
 }
 

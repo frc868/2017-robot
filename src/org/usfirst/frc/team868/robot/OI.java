@@ -48,9 +48,9 @@ public class OI {
 	
 	public OI() {
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
-						ControllerMap.Type.XBOX_ONE);
+						ControllerMap.Type.LOGITECH);
 		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
-						ControllerMap.Type.XBOX_ONE);
+						ControllerMap.Type.XBOX_360);
 		
 		setupDriver(driver);
 		setupOperator(operator);
@@ -90,6 +90,8 @@ public class OI {
 			.whileHeld(new FeedAndShootCommandGroup());
 		controller.getButton(RobotMap.Controls.Turret.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
+		controller.getButton(RobotMap.Controls.Turret.AGITATOR)
+			.whenPressed(new AgitatorCommand());
 				
 		// GEAR
 		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)

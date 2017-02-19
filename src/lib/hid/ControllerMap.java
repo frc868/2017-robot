@@ -110,16 +110,16 @@ public class ControllerMap {
 	}
 	
 	public double getForwardsRightPower(){
-		return HoundMath.checkRange(getAxis(Direction.LEFT_VERTICAL) - getAxis(Direction.RIGHT_HORIZONTAL));
+		return HoundMath.checkRange(-getAxis(Direction.LEFT_VERTICAL) - getAxis(Direction.RIGHT_HORIZONTAL));
 	}
 	public double getForwardsLeftPower(){
-		return HoundMath.checkRange(getAxis(Direction.LEFT_VERTICAL) + getAxis(Direction.RIGHT_HORIZONTAL));
+		return HoundMath.checkRange(-getAxis(Direction.LEFT_VERTICAL) + getAxis(Direction.RIGHT_HORIZONTAL));
 	}
 	public double getBackwardsRightPower(){
-		return HoundMath.checkRange(-getAxis(Direction.LEFT_VERTICAL) - getAxis(Direction.RIGHT_HORIZONTAL) );
+		return HoundMath.checkRange(getAxis(Direction.LEFT_VERTICAL) - getAxis(Direction.RIGHT_HORIZONTAL) );
 	}
 	public double getBackwardsLeftPower(){
-		return HoundMath.checkRange(-getAxis(Direction.LEFT_VERTICAL) + getAxis(Direction.RIGHT_HORIZONTAL));
+		return HoundMath.checkRange(getAxis(Direction.LEFT_VERTICAL) + getAxis(Direction.RIGHT_HORIZONTAL));
 	}
 	public Type getType() {
 		return type;

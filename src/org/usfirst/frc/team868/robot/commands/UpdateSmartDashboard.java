@@ -1,5 +1,9 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,15 +41,16 @@ public class UpdateSmartDashboard extends Command {
 //    		AgitatorSubsystem.getInstance().updateSD();
 //    		ClimberSubsystem.getInstance().updateSD();
 //    		ColorPixySubsystem.getInstance().updateSD();
-//    		DriveSubsystem.getInstance().updateSD();
+    		DriveSubsystem.getInstance().updateSD();
 //    		GyroSubsystem.getInstance().updateSD();
 //			GearFlashlightSubsystem.getInstance().updateSD();
 //    		IRPixySubsystem.getInstance().updateSD();
 //    		LidarSubsystem.getInstance().updateSmartDashboard();
 //			ShooterFeederSubsystem.getInstance().updateSD();
 //			ShooterFlashlightSubsystem.getInstance().updateSD();
-//    		ShooterSubsystem.getInstance().updateSD();
+    		ShooterSubsystem.getInstance().updateSD();
 //    		TurretRotationSubsystem.getInstance().updateSD();
+    		SmartDashboard.putNumber("Axis", OI.getInstance().getInstance().getDriver().getForwardsRightPower());
     		time.reset();
     		
     		counts++;
