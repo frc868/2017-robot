@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,23 +10,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootCommand extends Command {
 
 	ShooterSubsystem shooter;
-	double power;
-	
-	public ShootCommand(boolean on) {
-		this(on ? RobotMap.Shoot.SHOOTER_POWER : 0); //TODO fix this
-	}
-	
-    public ShootCommand(double p) {
-        shooter = ShooterSubsystem.getInstance();
-        requires(shooter);
-        power = p;
+	double speed;
+    
+    public ShootCommand(double rps) {
+    	shooter = ShooterSubsystem.getInstance();
+    	requires(shooter);
+    	speed = rps;
     }
     
     //TODO should be have a factory (public) or a Subsystem initializer (private) or neither?
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.setPower(power);
+    	shooter.setSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
