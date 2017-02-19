@@ -1,9 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.RobotMap.Turret;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
@@ -50,7 +49,6 @@ public class UpdateSmartDashboard extends Command {
 //			ShooterFlashlightSubsystem.getInstance().updateSD();
     		ShooterSubsystem.getInstance().updateSD();
 //    		TurretRotationSubsystem.getInstance().updateSD();
-    		SmartDashboard.putNumber("Axis", OI.getInstance().getInstance().getDriver().getForwardsRightPower());
     		time.reset();
     		
     		counts++;

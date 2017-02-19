@@ -21,4 +21,12 @@ public class CalculateAnglesAndDistances {
 		return hypotenuse;
 	}
 	
+	public double getOpposite() {
+		return oppositeSide;
+	}
+	
+	public double getAdjacent() {
+		return adjacentSide;
+	}
+	
 }
