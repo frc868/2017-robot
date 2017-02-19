@@ -144,27 +144,4 @@ public interface RobotMap {
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 	}
-	
-	public interface Controls {
-		public interface Turret {
-			final int SHOOT = ControllerMap.Key.X;
-			final int R_FORWARD = DPadButton.Direction.UP;
-			final int R_BACKWARD = DPadButton.Direction.DOWN;
-			final int R_LEFT = DPadButton.Direction.LEFT;
-			final int R_RIGHT = DPadButton.Direction.RIGHT;
-			final int R_PIXY = ControllerMap.Key.B;
-			final int CALIBRATE = ControllerMap.Key.LB;
-			final int AGITATOR = ControllerMap.Key.RT;
-		}
-		
-		public interface Gear {
-			final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
-			final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
-		}
-
-		double MIN_JOYSTICK_VAL = 0.15;
-		public interface Climber {
-			final int CLIMB = ControllerMap.Key.RB;
-		}
-	}
 }

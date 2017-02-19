@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
-import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,10 +25,10 @@ public class ArcadeDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(leftStick < RobotMap.Controls.MIN_JOYSTICK_VAL && leftStick > - RobotMap.Controls.MIN_JOYSTICK_VAL) {
+    	if(leftStick < OI.Controls.MIN_JOYSTICK_VAL && leftStick > - OI.Controls.MIN_JOYSTICK_VAL) {
     		leftStick = 0;
     	}
-    	if(rightStick < RobotMap.Controls.MIN_JOYSTICK_VAL && rightStick > - RobotMap.Controls.MIN_JOYSTICK_VAL) {
+    	if(rightStick < OI.Controls.MIN_JOYSTICK_VAL && rightStick > - OI.Controls.MIN_JOYSTICK_VAL) {
     		rightStick = 0;
     	}
     	leftPower += leftStick;

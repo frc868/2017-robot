@@ -55,17 +55,6 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * Generates the soft limits for the turret's rotation.
-	 * @deprecated
-	 */
-	private void makeSoftLimits(){
-		turretRotator.setForwardSoftLimit(RobotMap.Turret.FORWARD_LIMIT);
-		turretRotator.setReverseSoftLimit(RobotMap.Turret.REVERSE_LIMIT);
-		turretRotator.enableForwardSoftLimit(true);
-		turretRotator.enableReverseSoftLimit(true);
-	}
-	
-	/**
 	 * Sets the turret's position to the encoder count value of 0.
 	 */
 	public void resetPosition(){

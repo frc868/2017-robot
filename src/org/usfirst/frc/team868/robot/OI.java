@@ -7,6 +7,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 
 import lib.hid.ControllerMap;
+import lib.hid.DPadButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -58,6 +59,24 @@ public class OI {
 		initSmartDashboard();
 	}
 	
+	public interface Controls {
+		double MIN_JOYSTICK_VAL = 0.15;
+		
+		final int SHOOT = ControllerMap.Key.X;
+		final int R_FORWARD = DPadButton.Direction.UP;
+		final int R_BACKWARD = DPadButton.Direction.DOWN;
+		final int R_LEFT = DPadButton.Direction.LEFT;
+		final int R_RIGHT = DPadButton.Direction.RIGHT;
+		final int R_PIXY = ControllerMap.Key.B;
+		final int CALIBRATE = ControllerMap.Key.LB;
+		final int AGITATOR = ControllerMap.Key.RT;
+	
+		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
+		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
+
+		final int CLIMB = ControllerMap.Key.RB;
+	}
+	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
 		
@@ -66,9 +85,9 @@ public class OI {
 		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
-		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+		controller.getButton(Controls.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
-		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+		controller.getButton(Controls.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
 	}
 	
@@ -76,31 +95,31 @@ public class OI {
 		controller.clearButtons();
 		
 		// TURRET
-		controller.getButton(RobotMap.Controls.Turret.R_FORWARD)
+		controller.getButton(Controls.R_FORWARD)
 			.whenPressed(new RotateTurretToAngle(0));
-		controller.getButton(RobotMap.Controls.Turret.R_BACKWARD)
+		controller.getButton(Controls.R_BACKWARD)
 			.whenPressed(new RotateTurretToAngle(180));
-		controller.getButton(RobotMap.Controls.Turret.R_LEFT)
+		controller.getButton(Controls.R_LEFT)
 			.whenPressed(new RotateTurretToAngle(90));
-		controller.getButton(RobotMap.Controls.Turret.R_RIGHT)
+		controller.getButton(Controls.R_RIGHT)
 			.whenPressed(new RotateTurretToAngle(-90));
-		controller.getButton(RobotMap.Controls.Turret.R_PIXY)
+		controller.getButton(Controls.R_PIXY)
 			.whenPressed(new RotateUsingIRPixy());
-		controller.getButton(RobotMap.Controls.Turret.SHOOT)
+		controller.getButton(Controls.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
-		controller.getButton(RobotMap.Controls.Turret.CALIBRATE)
+		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
-		controller.getButton(RobotMap.Controls.Turret.AGITATOR)
+		controller.getButton(Controls.AGITATOR)
 			.whenPressed(new AgitatorCommand());
 				
 		// GEAR
-		controller.getButton(RobotMap.Controls.Gear.TOGGLE_COLLECTOR)
+		controller.getButton(Controls.TOGGLE_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
-		controller.getButton(RobotMap.Controls.Gear.TOGGLE_FLASHLIGHT)
+		controller.getButton(Controls.TOGGLE_FLASHLIGHT)
 			.whenPressed(new GearFlashlightCommand());
 		
 		// CLIMBER (OPERATOR)
-		controller.getButton(RobotMap.Controls.Climber.CLIMB)
+		controller.getButton(Controls.CLIMB)
 			.whileHeld(new ClimberCommand());
 	}
 	
