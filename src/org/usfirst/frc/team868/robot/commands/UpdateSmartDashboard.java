@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands;
 
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -41,7 +42,7 @@ public class UpdateSmartDashboard extends Command {
 //    		ClimberSubsystem.getInstance().updateSD();
 //    		ColorPixySubsystem.getInstance().updateSD();
     		DriveSubsystem.getInstance().updateSD();
-//    		GyroSubsystem.getInstance().updateSD();
+    		GyroSubsystem.getInstance().updateSD();
 //			GearFlashlightSubsystem.getInstance().updateSD();
 //    		IRPixySubsystem.getInstance().updateSD();
 //    		LidarSubsystem.getInstance().updateSmartDashboard();

@@ -67,7 +67,8 @@ public interface RobotMap {
 	
 	public interface GearCollector {
 		//PORTS:
-		final int GEAR_SOLENOID = 0;
+		final int GEAR_SOLENOID_CLOSER = 1;
+		final int GEAR_SOLENOID_OPENER = 0;
 		final int GEAR_DETECTOR_ANALOG_PORT = 0;
 		
 		//VALUES:

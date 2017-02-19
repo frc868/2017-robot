@@ -9,10 +9,6 @@ import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
-
- *
- */
 public class RotateBackToTarget extends Command {
 
 	private IRPixySubsystem camera;

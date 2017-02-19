@@ -1,37 +1,43 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ShootCommand extends Command {
+public class FreeBall extends Command {
 
-	ShooterSubsystem shooter;
-	double speed;
-    
-    public ShootCommand(double rps) {
-    	shooter = ShooterSubsystem.getInstance();
-    	requires(shooter);
-    	speed = rps;
+	private AgitatorSubsystem agitator;
+
+	private double delay;
+	private double start;
+
+	
+    public FreeBall(double delay) {
+    	agitator = AgitatorSubsystem.getInstance();
+		requires(agitator);
+		this.delay = delay;
     }
-    
-    //TODO should be have a factory (public) or a Subsystem initializer (private) or neither?
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.setSpeed(speed);
+    	start = System.nanoTime();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (System.nanoTime() - start >= delay) {
+    		agitator.switchDirection();
+    		start = System.nanoTime();
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
