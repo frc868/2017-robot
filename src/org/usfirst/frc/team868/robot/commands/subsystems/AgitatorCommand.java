@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,13 +13,25 @@ public class AgitatorCommand extends Command {
 	
 	boolean state;
 	
+	/**
+	 * Sets the agitator to the given argument
+	 * @param on
+	 */
 	public AgitatorCommand(boolean on) {
 		
 		state = on;
-		
 		agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
 	}
+    
+    /**
+     * Toggles the agitator's on/off status
+     */
+    public AgitatorCommand(){
+    	agitator = AgitatorSubsystem.getInstance();
+    	requires(agitator);
+    	state = !agitator.isAgitatorOn();
+    }
 
 	// Called just before this Command runs the first time
 	protected void initialize() {

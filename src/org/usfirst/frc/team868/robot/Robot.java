@@ -6,10 +6,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
-import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,8 +15,7 @@ import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
-
+public class Robot extends IterativeRobot {	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -92,10 +88,23 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 	
+    /**
+     * This function gets called to initialize the subsystems
+     */
 	private void initSubsystems() {
-		ColorPixySubsystem.getInstance();
-		IRPixySubsystem.getInstance();
+		AgitatorSubsystem.getInstance();
+		ClimberSubsystem.getInstance();
+//		ColorPixySubsystem.getInstance();
 		DriveSubsystem.getInstance();
+//		GearCollectorSubsystem.getInstance();
+//		GearFlashlightSubsystem.getInstance();
+		GyroSubsystem.getInstance();
+//		IRPixySubsystem.getInstance();
+//		LidarSubsystem.getInstance();
+		ShooterFeederSubsystem.getInstance();
+//		ShooterFlashlightSubsystem.getInstance();
+		ShooterSubsystem.getInstance();
+//		TurretRotationSubsystem.getInstance();
 	}
     
     /**

@@ -1,24 +1,24 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.gear;
+package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class CalibrateTurret extends Command {
 
-    public GearCollectorToggleCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	
+	
+    public CalibrateTurret() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	TurretRotationSubsystem.getInstance().calibrateTurret();
     }
 
     // Called repeatedly when this Command is scheduled to run

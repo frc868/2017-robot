@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import lib.hid.ControllerMap;
+import lib.hid.DPadButton;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -11,53 +13,43 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 public interface RobotMap {
 	
+	public interface JoystickPort {
+		// PORTS:
+		final int DRIVER = 0;
+		final int OPERATOR = 1;
+	}
+	
+	public interface Climber {
+		//PORTS:
+		final int CLIMBER_MOTOR = 11;
+		
+		//VALUES:
+		final boolean IS_INVERTED = false;
+		final double CLIMBER_SPEED = 0.8;
+	}
+	
 	public interface Drive {
 		//PORTS:
 		final int LEFT_MOTOR = 9;
 		final int RIGHT_MOTOR = 8;
-		final int ENCODER_L_A = 5;
-		final int ENCODER_L_B = 6;
-		final int ENCODER_R_A = 7;
-		final int ENCODER_R_B = 8;
+		final int ENCODER_L_A = 2;
+		final int ENCODER_L_B = 4;
+		final int ENCODER_R_A = 0;
+		final int ENCODER_R_B = 1;
 		
 		//VALUES:
 		final boolean LEFT_IS_INVERTED = false;
-		final boolean RIGHT_IS_INVERTED = false;
+		final boolean RIGHT_IS_INVERTED = true;
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 1; //TODO calculate
 		final double CM_PER_COUNT = 1;
 	}
 	
-	public interface Shoot {
-		//PORTS:
-		final int SHOOTER_MOTOR = 8;
-		final int ENCODER_A = 3;
-		final int ENCODER_B = 4;
-		
-		//VALUES:
-		final boolean IS_INVERTED = false;
-		final double SHOOTER_POWER = 0.8;
-	}
-	
-	public interface Turret {
-		//PORTS:
-		final int TURRET_MOTOR = 9;
-		final int ENCODER_A = 1;
-		final int ENCODER_B = 2;
-		
-		//VALUES:
-		final boolean IS_INVERTED = false;
-		final int FORWARD_LIMIT = 180; //TODO determine soft limit values
-		final int REVERSE_LIMIT = -90;
-		final double COUNTS_PER_DEGREE = 1;
-		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
-	}
-	
 	public interface Feeder {
 		//PORTS:
-		final int AGITATOR_MOTOR = 7;
-		
-		final int CONVEYOR_MOTOR = 6;
+		final int AGITATOR_MOTOR = 6;
+		final int CONVEYOR_MOTOR = 7;
+		final int BEAM_BREAK_PORT = 8;
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
@@ -67,18 +59,45 @@ public interface RobotMap {
 		final double CONVEYOR_SPEED = 0.8;
 	}
 	
-	public interface Climber {
+	public interface Flashlight {
 		//PORTS:
-		final int CLIMBER_MOTOR = 10;
-		
-		//VALUES:
-		final boolean IS_INVERTED = false;
-		final double CLIMBER_SPEED = 0.8;
+		final int GEAR_LIGHT_PORT = 1;
+		final int SHOOT_LIGHT_PORT = 0;
 	}
 	
 	public interface GearCollector {
 		//PORTS:
 		final int GEAR_SOLENOID = 0;
+		final int GEAR_DETECTOR_ANALOG_PORT = 0;
+		
+		//VALUES:
+		final double DETECTION_VOLTAGE = .1;
+	}
+	
+	public static class Joystick {
+		//PORTS:
+		public static final int PORT_NUMBER = 0;
+		public static final int LEFT_Y = 1;
+		public static final int RIGHT_Y = 5;
+		public static final int LEFT_X = 0;
+		public static final int RIGHT_X = 4;
+	}
+	
+	public interface LEDs {
+		//PORTS:
+		final int DIO_1_PORT = 5;
+		final int DIO_2_PORT = 6;
+		final int DIO_GEAR_PORT = 7;
+	}
+	
+	public interface LIDAR {
+		//PORTS:
+		final SerialPort.Port PORT = SerialPort.Port.kUSB;
+		
+		//VALUES:
+		final int BAUD = 9600;
+		
+		//random, useless comment
 	}
 	
 	public interface Pixy {
@@ -101,25 +120,28 @@ public interface RobotMap {
 		SERIAL_ONBOARD, SERIAL_MXP, I2C_ONBOARD, I2C_MXP
 	}
 	
-	public static class Joystick {
+	public interface Shoot { //TODO fix!
 		//PORTS:
-		public static final int PORT_NUMBER = 0;
-		public static final int LEFT_Y = 1;
-		public static final int RIGHT_Y = 5;
-		public static final int LEFT_X = 0;
-		public static final int RIGHT_X = 4;
-	}
-	
-	public interface LIDAR {
-		//PORTS:
-		final SerialPort.Port PORT = SerialPort.Port.kUSB;
+		final int RIGHT_SHOOTER_MOTOR = 12;
+		final int LEFT_SHOOTER_MOTOR = 9;
+		final int ENCODER_A = 9;
+		/**@deprecated*/
+		final int ENCODER_B = 4; //TODO remove
 		
 		//VALUES:
-		final int BAUD = 9600;
+		final boolean IS_INVERTED = true;
+		final double SHOOTER_POWER = 0.8;
 	}
 	
-	public interface Flashlight {
-		final int GEAR_LIGHT_PORT = 1;
-		final int SHOOT_LIGHT_PORT = 0;
+	public interface Turret {
+		//PORTS:
+		final int TURRET_MOTOR = 10;
+		
+		//VALUES:
+		final boolean IS_INVERTED = true;
+		final int FORWARD_LIMIT = 180; //TODO determine soft limit values
+		final int REVERSE_LIMIT = -90;
+		final double COUNTS_PER_DEGREE = 1;
+		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 	}
 }

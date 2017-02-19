@@ -1,12 +1,15 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.ArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 import lib.util.RecordMotorMovement;
 
 /**
@@ -19,6 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	private Spark rightMotor;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
+	private final boolean DEBUG = true;
 	
 	/**
 	 * Constructor, provides the port values for motors and encoders,
@@ -39,6 +43,10 @@ public class DriveSubsystem extends Subsystem {
 		LiveWindow.addActuator("Drive", "Right Motors", rightMotor);
 		LiveWindow.addSensor("Drive", "Left Encoder", leftEncoder);
 		LiveWindow.addSensor("Drive", "Right Encoder", rightEncoder);
+		
+		if(DEBUG){
+			SmartDashboard.putData("Drive subsystem", this);
+		}
 	}
 	
 	/**
@@ -46,7 +54,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param speed 1 to -1
 	 */
 	public void setL(double speed){
-		leftMotor.set(speed);
+		leftMotor.set(HoundMath.checkRange(speed));
 	}
 	
 	/**
@@ -54,7 +62,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param speed 1 to -1
 	 */
 	public void setR(double speed){
-		rightMotor.set(speed);
+		rightMotor.set(HoundMath.checkRange(speed));
 	}
 	
 	/**
@@ -79,7 +87,6 @@ public class DriveSubsystem extends Subsystem {
 
 	/**
 	 * @return speed of the left side of drive train.
->>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getLSpeed(){
 		return leftEncoder.getRate();
@@ -88,10 +95,6 @@ public class DriveSubsystem extends Subsystem {
 	/**
 	 * Gets speed of right drivetrain
 	 * @return cm per second
-=======
-	/**
-	 * @return speed of right side of the drive train.
->>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getRSpeed(){
 		return rightEncoder.getRate();
@@ -100,10 +103,6 @@ public class DriveSubsystem extends Subsystem {
 	/**
 	 * Gets average speed of drivetrain
 	 * @return cm per second
-=======
-	/**
-	 * @return the average speed of the drive train.
->>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public double getAvgSpeed(){
 		return (getRSpeed()+getLSpeed())/2;
@@ -112,10 +111,6 @@ public class DriveSubsystem extends Subsystem {
 	/**
 	 * Gets counts from right encoder
 	 * @return counts
-=======
-	/**
-	 * @return the number of counts on the right encoder.
->>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public int getRightEncoder() {
 		return rightEncoder.get();
@@ -154,7 +149,6 @@ public class DriveSubsystem extends Subsystem {
 	}
 	/**
 	 * @return the average number of counts on both encoders.
->>>>>>> 61bb94629fd2c38384afdcda7b45fb4867704a98
 	 */
 	public int getAvgEncoders() {
 		return (getRightEncoder() + getLeftEncoder()) / 2;
@@ -182,9 +176,16 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
+		if(DEBUG){
+			SmartDashboard.putNumber("Left Drive Counts", getLeftEncoder());
+			SmartDashboard.putNumber("Right Drive Counts", getRightEncoder());
+			SmartDashboard.putNumber("Left Drive Distance", getLeftEncoderDistance());
+			SmartDashboard.putNumber("Right Drive Distance", getRightEncoderDistance());
+		}
 	}
 
     public void initDefaultCommand() {
+    	setDefaultCommand(new ArcadeDriveCommand(OI.getInstance().getDriver()));
     }
 }
 

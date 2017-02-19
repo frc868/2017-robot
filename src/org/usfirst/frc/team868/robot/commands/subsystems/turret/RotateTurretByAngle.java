@@ -1,24 +1,29 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.gear;
+package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class RotateTurretByAngle extends Command {
 
-    public GearCollectorToggleCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	private double angle;
+	
+	/**
+	 * Rotates the turret by angle relative to its position when this command was called.
+	 * @param angle in degrees
+	 */
+    public RotateTurretByAngle(double angle) {
+    	this.angle = TurretRotationSubsystem.getInstance().getAngle()+angle;
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	new RotateTurretToAngle(angle).start();
     }
 
     // Called repeatedly when this Command is scheduled to run

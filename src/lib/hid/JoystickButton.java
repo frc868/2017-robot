@@ -34,10 +34,10 @@ public class JoystickButton extends Button {
 		if(off)
 			return false;
 		
-		if(controllerMap.getMultiButton(buttonNumber) != null) {
+		/*if(controllerMap.getMultiButton(buttonNumber) != null) {
 			if(controllerMap.getMultiButton(buttonNumber).get())
 				return false;
-		}
+		}*/
 		
 		return controllerMap.getJoystick().getRawButton(buttonNumber);
 	}

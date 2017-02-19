@@ -1,24 +1,28 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.gear;
+package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearCollectorToggleCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class ToggleClimbing extends Command {
 
-    public GearCollectorToggleCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+    private ClimberSubsystem climb;
+
+	public ToggleClimbing() {
+    	climb = ClimberSubsystem.getInstance();
+    	requires(climb);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	holder.toggleGearCollector();
+    	if(climb.isClimbing()){
+    		climb.stopClimbing();
+    	}else{
+    		climb.startClimbing();
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
