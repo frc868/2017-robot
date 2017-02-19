@@ -93,19 +93,19 @@ public class Robot extends IterativeRobot {
      * This function gets called to initialize the subsystems
      */
 	private void initSubsystems() {
-//		AgitatorSubsystem.getInstance();
-//		ClimberSubsystem.getInstance();
+		AgitatorSubsystem.getInstance();
+		ClimberSubsystem.getInstance();
 //		ColorPixySubsystem.getInstance();
-//		DriveSubsystem.getInstance();
+		DriveSubsystem.getInstance();
 //		GearCollectorSubsystem.getInstance();
 //		GearFlashlightSubsystem.getInstance();
-//		GyroSubsystem.getInstance();
+		GyroSubsystem.getInstance();
 //		IRPixySubsystem.getInstance();
 //		LidarSubsystem.getInstance();
-//		ShooterFeederSubsystem.getInstance();
+		ShooterFeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();
 		ShooterSubsystem.getInstance();
-		TurretRotationSubsystem.getInstance();
+//		TurretRotationSubsystem.getInstance();
 	}
     
     /**

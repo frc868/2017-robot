@@ -13,7 +13,7 @@ public interface RobotMap {
 	
 	public interface Climber {
 		//PORTS:
-		final int CLIMBER_MOTOR = 10;
+		final int CLIMBER_MOTOR = 11;
 		
 		//VALUES:
 		final boolean IS_INVERTED = false;
@@ -24,14 +24,14 @@ public interface RobotMap {
 		//PORTS:
 		final int LEFT_MOTOR = 9;
 		final int RIGHT_MOTOR = 8;
-		final int ENCODER_L_A = 5;
-		final int ENCODER_L_B = 6;
-		final int ENCODER_R_A = 7;
-		final int ENCODER_R_B = 8;
+		final int ENCODER_L_A = 2;
+		final int ENCODER_L_B = 4;
+		final int ENCODER_R_A = 0;
+		final int ENCODER_R_B = 1;
 		
 		//VALUES:
 		final boolean LEFT_IS_INVERTED = false;
-		final boolean RIGHT_IS_INVERTED = false;
+		final boolean RIGHT_IS_INVERTED = true;
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 1; //TODO calculate
 		final double CM_PER_COUNT = 1;
@@ -39,9 +39,9 @@ public interface RobotMap {
 	
 	public interface Feeder {
 		//PORTS:
-		final int AGITATOR_MOTOR = 7;
-		final int CONVEYOR_MOTOR = 6;
-		final int BEAM_BREAK_PORT = 0;
+		final int AGITATOR_MOTOR = 6;
+		final int CONVEYOR_MOTOR = 7;
+		final int BEAM_BREAK_PORT = 8;
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
@@ -77,9 +77,9 @@ public interface RobotMap {
 	
 	public interface LEDs {
 		//PORTS:
-		final int DIO_1_PORT = 0;
-		final int DIO_2_PORT = 1;
-		final int DIO_GEAR_PORT = 2;
+		final int DIO_1_PORT = 5;
+		final int DIO_2_PORT = 6;
+		final int DIO_GEAR_PORT = 7;
 	}
 	
 	public interface LIDAR {
@@ -114,9 +114,9 @@ public interface RobotMap {
 	
 	public interface Shoot { //TODO fix!
 		//PORTS:
-		final int RIGHT_SHOOTER_MOTOR = 13;
-		final int LEFT_SHOOTER_MOTOR = 19;
-		final int ENCODER_A = 3;
+		final int RIGHT_SHOOTER_MOTOR = 12;
+		final int LEFT_SHOOTER_MOTOR = 9;
+		final int ENCODER_A = 9;
 		/**@deprecated*/
 		final int ENCODER_B = 4; //TODO remove
 		
@@ -127,10 +127,10 @@ public interface RobotMap {
 	
 	public interface Turret {
 		//PORTS:
-		final int TURRET_MOTOR = 12;
+		final int TURRET_MOTOR = 10;
 		
 		//VALUES:
-		final boolean IS_INVERTED = false;
+		final boolean IS_INVERTED = true;
 		final int FORWARD_LIMIT = 180; //TODO determine soft limit values
 		final int REVERSE_LIMIT = -90;
 		final double COUNTS_PER_DEGREE = 1;
