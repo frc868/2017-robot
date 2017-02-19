@@ -70,6 +70,7 @@ public class OI {
 		final int R_PIXY = ControllerMap.Key.B;
 		final int CALIBRATE = ControllerMap.Key.LB;
 		final int AGITATOR = ControllerMap.Key.RT;
+		final int SPIN = ControllerMap.Key.LT;
 	
 		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
@@ -111,6 +112,8 @@ public class OI {
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.AGITATOR)
 			.whenPressed(new AgitatorCommand());
+		controller.getButton(Controls.SPIN)
+			.whenPressed(new ShootCommand(75));
 				
 		// GEAR
 		controller.getButton(Controls.TOGGLE_COLLECTOR)
