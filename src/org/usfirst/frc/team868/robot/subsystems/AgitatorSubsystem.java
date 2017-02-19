@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.FreeBall;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,6 +29,10 @@ public class AgitatorSubsystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
+		if (DEBUG) {
+			SmartDashboard.putNumber("FreeBallDelay", 1000);
+			SmartDashboard.putData("FreeBallFromAgitator", new FreeBall(1000));
+		}
 	}
 
 	private AgitatorSubsystem() {
