@@ -30,10 +30,10 @@ public interface RobotMap {
 		//PORTS:
 		final int LEFT_MOTOR = 9;
 		final int RIGHT_MOTOR = 8;
-		final int ENCODER_L_A = 2;
-		final int ENCODER_L_B = 4;
-		final int ENCODER_R_A = 0;
-		final int ENCODER_R_B = 1;
+		final int ENCODER_L_A = 0;
+		final int ENCODER_L_B = 1;
+		final int ENCODER_R_A = 2;
+		final int ENCODER_R_B = 3;
 		
 		//VALUES:
 		final boolean LEFT_IS_INVERTED = false;
