@@ -20,7 +20,6 @@ public class RotateUsingIRPixy extends Command {
 	 */
     public RotateUsingIRPixy(double timeout) {
     	camera = IRPixySubsystem.getInstance();
-    	requires(camera);
     	this.timeout = timeout;
     }
     
@@ -40,7 +39,7 @@ public class RotateUsingIRPixy extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	new RotateTurretByAngle(camera.getXAngleOffFromCenter()).start();
+    	new RotateTurretByAngle(camera.getTarget().getXAngleOffFromCenter()).start();
     }
 
     // Make this return true when this Command no longer needs to run execute()

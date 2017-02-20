@@ -1,8 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import lib.hid.ControllerMap;
-import lib.hid.DPadButton;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -32,10 +30,10 @@ public interface RobotMap {
 		//PORTS:
 		final int LEFT_MOTOR = 9;
 		final int RIGHT_MOTOR = 8;
-		final int ENCODER_L_A = 2;
-		final int ENCODER_L_B = 4;
-		final int ENCODER_R_A = 0;
-		final int ENCODER_R_B = 1;
+		final int ENCODER_L_A = 0;
+		final int ENCODER_L_B = 1;
+		final int ENCODER_R_A = 2;
+		final int ENCODER_R_B = 3;
 		
 		//VALUES:
 		final boolean LEFT_IS_INVERTED = false;
@@ -97,8 +95,6 @@ public interface RobotMap {
 		
 		//VALUES:
 		final int BAUD = 9600;
-		
-		//random, useless comment
 	}
 	
 	public interface Pixy {
@@ -121,17 +117,16 @@ public interface RobotMap {
 		SERIAL_ONBOARD, SERIAL_MXP, I2C_ONBOARD, I2C_MXP
 	}
 	
-	public interface Shoot { //TODO fix!
+	public interface Shoot {
 		//PORTS:
 		final int RIGHT_SHOOTER_MOTOR = 12;
 		final int LEFT_SHOOTER_MOTOR = 9;
 		final int ENCODER_A = 9;
-		/**@deprecated*/
-		final int ENCODER_B = 4; //TODO remove
 		
 		//VALUES:
 		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
+		final double ROTATIONS_PER_COUNT = 1.0;
 	}
 	
 	public interface Turret {

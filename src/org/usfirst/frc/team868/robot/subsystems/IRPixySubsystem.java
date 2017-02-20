@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
@@ -48,6 +49,102 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 19ft			18,19		16
  */
 public class IRPixySubsystem extends Subsystem {
+	
+	private final boolean DEBUG = false;
+	private static int idCounter = 0;
+
+	public final class Record {
+		private int x;
+		private int y;
+		private int width;
+		private int height;
+		private int id;
+
+		public Record(int x, int y, int width, int height) {
+			this.id = idCounter++;
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		public int getWidth() {
+			return width;
+		}
+
+		public int getHeight() {
+			return height;
+		}
+
+		public int getArea() {
+			return width * height;
+		}
+
+		/**
+		 * Returns the angle in degrees off from the x-axis center the target
+		 * is. Negative degrees means left, positive means right, zero means it
+		 * is either centered or cannot be found.
+		 * 
+		 * @return
+		 */
+		public double getXAngleOffFromCenter() {
+			int xMid = target.getX();
+			if (xMid != 0) {
+				return (xMid - (RobotMap.Pixy.CAM_WIDTH / 2)) * (RobotMap.Pixy.CAM_X_ANGLE / 2)
+						/ RobotMap.Pixy.CAM_WIDTH;
+			} else {
+				return xMid;
+			}
+		}
+
+		/**
+		 * Returns the angle in degrees off from the y-axis center the target
+		 * is. Negative degrees means below, positive means above, zero means it
+		 * is either centered or cannot be found.
+		 */
+		public double getYAngleOffFromCenter() {
+			int yMid = target.getY();
+			if (yMid != 0) {
+				return (yMid - (RobotMap.Pixy.CAM_HEIGHT / 2)) * (RobotMap.Pixy.CAM_Y_ANGLE / 2)
+						/ RobotMap.Pixy.CAM_HEIGHT;
+			} else {
+				return yMid;
+			}
+		}
+
+		/**
+		 * Returns the size of the current target in pixels.
+		 */
+		public int getSizeOfTargetInPixels() {
+			return width * height;
+		}
+
+		/**
+		 * Returns the width of the current target in pixels.
+		 */
+		public int getWidthOfTarget() {
+			return width;
+		}
+
+		/**
+		 * Returns the height of the current target in pixels.
+		 */
+		public int getHeightOfTarget() {
+			return height;
+		}
+	}
 
 	private static IRPixySubsystem instance;
 	private SerialPort pixyCamS;
@@ -57,22 +154,24 @@ public class IRPixySubsystem extends Subsystem {
 	private int bytesRecorded;
 	private int [] record = new int[6];
 	//volatile private int frame = 0;
-	volatile private double xMid;
-	volatile private int yMid;
-	volatile private int width;
-	volatile private int height;
+	volatile private Record target;
 
 	private Thread thread;
 
 	private IRPixySubsystem(){
-		if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.SERIAL_MXP){
-			pixyCamS = new SerialPort(RobotMap.Pixy.BAUDRATE, SerialPort.Port.kMXP);
-		}else if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.I2C_ONBOARD){
-			pixyCamI = new I2C(I2C.Port.kOnboard, RobotMap.Pixy.IR_I2C_VALUE);
-		}else{
-			pixyCamI = new I2C(I2C.Port.kMXP, RobotMap.Pixy.IR_I2C_VALUE);
-		}
+		pixyCamS = null;
+		pixyCamI = null;
+		target = new Record(0, 0, 0, 0);
 		startThread();
+	}
+	
+	/**
+	 * Get information about the last target received.
+	 * 
+	 * @return Reference to the last target received (note getID() will be 0 if none found yet).
+	 */
+	public Record getTarget() {
+		return target;
 	}
 
 	synchronized public void startThread() {
@@ -89,11 +188,34 @@ public class IRPixySubsystem extends Subsystem {
 		thread = null;
 	}
 
+	private boolean checkConnection() {
+		// If we still need to create a connection
+		if ((pixyCamS == null) && (pixyCamI == null)) {
+			if (RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.SERIAL_MXP) {
+				pixyCamS = new SerialPort(RobotMap.Pixy.BAUDRATE, SerialPort.Port.kMXP);
+			} else if (RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.I2C_ONBOARD) {
+				pixyCamI = new I2C(I2C.Port.kOnboard, RobotMap.Pixy.IR_I2C_VALUE);
+			} else {
+				pixyCamI = new I2C(I2C.Port.kMXP, RobotMap.Pixy.IR_I2C_VALUE);
+			}
+		}
+		return (pixyCamS != null) || (pixyCamI != null);
+	}
+
 	private Thread createThread() {
 		return new Thread() {
 			@Override
 			public void run() {
-				while(!isInterrupted()) {
+
+				while (!isInterrupted()) {
+					try {
+						if (!checkConnection()) {
+							Thread.sleep(3000);
+							continue;
+						}
+					} catch (Exception ignore) {
+
+					}
 					getValues();
 				}
 			}
@@ -104,11 +226,20 @@ public class IRPixySubsystem extends Subsystem {
 		byte [] input = new byte [14];
 		try{
 			if(RobotMap.Pixy.IR_PORT_TYPE == RobotMap.SerialPortType.SERIAL_MXP){
-				input = pixyCamS.read(pixyCamS.getBytesReceived());
+				int bytesAvailable = pixyCamS.getBytesReceived();
+				if(bytesAvailable == 0){
+					return;
+				}
+				input = pixyCamS.read(bytesAvailable);
 			}else{
-				pixyCamI.readOnly(input, 14);
+				if(pixyCamI.readOnly(input, 14)){
+					return;
+				}
 			}
 		}catch(Throwable t){
+			// Force re-open of port
+			pixyCamS = null;
+			pixyCamI = null;
 			return;
 		}
 		StringBuilder dump = new StringBuilder(48);
@@ -148,65 +279,22 @@ public class IRPixySubsystem extends Subsystem {
 	}
 
 	private void processRecord() {//Called in processByte(), sends obtained Pixy values to field values.
-		xMid = record[2];
-		yMid = record[3];
-		width = record[4];
-		height = record[5];
+		int xMid = record[2];
+		int yMid = record[3];
+		int width = record[4];
+		int height = record[5];
+		target = new Record(xMid, yMid, width, height);
 	}
 
 	public void updateSD(){//Updates the SD with the values specified.
-		SmartDashboard.putNumber("IR Target X", getXAngleOffFromCenter());
-		SmartDashboard.putNumber("IR Target Y", getYAngleOffFromCenter());
-		SmartDashboard.putNumber("IR Camera Target Width", getWidthOfTarget());
-		SmartDashboard.putNumber("IR Camera Target Height", getHeightOfTarget());
-		//SmartDashboard.putNumber("IR Frame count", frame);
-	}
-
-	/**
-	 * Returns the angle in degrees off from the x-axis center the target is. 
-	 * Negative degrees means left, positive means right, 
-	 * zero means it is either centered or cannot be found.
-	 */
-	synchronized public double getXAngleOffFromCenter(){
-		if(xMid != 0){
-			return (xMid - (RobotMap.Pixy.CAM_WIDTH/2))*(RobotMap.Pixy.CAM_X_ANGLE/2)/RobotMap.Pixy.CAM_WIDTH;
-		}else{
-			return xMid;
+		if (DEBUG) {
+			Record target = getTarget();
+			SmartDashboard.putNumber("IR Target X", target.getXAngleOffFromCenter());
+			SmartDashboard.putNumber("IR Target Y", target.getYAngleOffFromCenter());
+			SmartDashboard.putNumber("IR Camera Target Width", target.getWidthOfTarget());
+			SmartDashboard.putNumber("IR Camera Target Height", target.getHeightOfTarget());
+			//SmartDashboard.putNumber("IR Frame count", frame);
 		}
-	}
-
-	/**
-	 * Returns the angle in degrees off from the y-axis center the target is. 
-	 * Negative degrees means below, positive means above, 
-	 * zero means it is either centered or cannot be found.
-	 */
-	synchronized public double getYAngleOffFromCenter(){
-		if(yMid != 0){
-			return (yMid - (RobotMap.Pixy.CAM_HEIGHT/2))*(RobotMap.Pixy.CAM_Y_ANGLE/2)/RobotMap.Pixy.CAM_HEIGHT;
-		}else{
-			return yMid;
-		}
-	}
-
-	/**
-	 * Returns the size of the current target in pixels.
-	 */
-	synchronized public int getSizeOfTarget(){
-		return width*height;
-	}
-
-	/**
-	 * Returns the width of the current target in pixels.
-	 */
-	synchronized public int getWidthOfTarget(){
-		return width;
-	}
-
-	/**
-	 * Returns the height of the current target in pixels.
-	 */
-	synchronized public int getHeightOfTarget(){
-		return height;
 	}
 
 	synchronized public static IRPixySubsystem getInstance(){

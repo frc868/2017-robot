@@ -46,7 +46,7 @@ public interface RobotParts {
 	
 	public interface Camera {
 		final CameraSubsystem frontCamera = CameraSubsystem.getFrontInstance();
-		final CameraSubsystem rearCamera  = CameraSubsystem.getRearInstance();
+//		final CameraSubsystem rearCamera  = CameraSubsystem.getRearInstance();
 	}
 	
 	public interface Turret {
