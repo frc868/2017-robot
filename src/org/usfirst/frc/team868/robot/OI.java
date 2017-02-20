@@ -66,12 +66,11 @@ public class OI {
 		final int SHOOT = ControllerMap.Key.X;
 		final int R_FORWARD = DPadButton.Direction.UP;
 		final int R_BACKWARD = DPadButton.Direction.DOWN;
-		final int R_LEFT = DPadButton.Direction.LEFT;
 		final int R_RIGHT = DPadButton.Direction.RIGHT;
 		final int R_PIXY = ControllerMap.Key.B;
 		final int CALIBRATE = ControllerMap.Key.LB;
-		final int AGITATOR = ControllerMap.Key.RT;
-		final int SPIN = ControllerMap.Key.LT;
+		final int AGITATOR = ControllerMap.Key.RS;
+		final int SPIN = ControllerMap.Key.LS;
 	
 		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
@@ -81,10 +80,6 @@ public class OI {
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
-		
-		// DRIVE (DRIVER)
-		@SuppressWarnings("unused") // eclipse pls
-		ArcadeDriveCommand arcadedrive = new ArcadeDriveCommand(controller);
 		
 		// TURRET
 		controller.getButton(Controls.R_PIXY)
@@ -101,8 +96,6 @@ public class OI {
 			.whenPressed(new RotateTurretToAngle(0));
 		controller.getButton(Controls.R_BACKWARD)
 			.whenPressed(new RotateTurretToAngle(180));
-		controller.getButton(Controls.R_LEFT)
-			.whenPressed(new RotateTurretToAngle(90));
 		controller.getButton(Controls.R_RIGHT)
 			.whenPressed(new RotateTurretToAngle(-90));
 		controller.getButton(Controls.R_PIXY)
