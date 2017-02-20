@@ -30,7 +30,6 @@ public class AgitatorSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		if (DEBUG) {
-
 	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
 			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
 		}
@@ -79,7 +78,19 @@ public class AgitatorSubsystem extends Subsystem {
 		double speed = 0;
 		this.state = state;
 		
-		 if (state.equals(State.FORWARD)) {
+		switch (state) {
+		case FORWARD:
+			speed = RobotMap.Feeder.AGITATOR_SPEED;
+			break;
+		case BACKWARD:
+			speed = -RobotMap.Feeder.AGITATOR_SPEED;
+			break;
+		default:
+			break;
+		}
+		
+		/*
+		if (state.equals(State.FORWARD)) {
 			speed = RobotMap.Feeder.AGITATOR_SPEED;
 			
 			// When debugging/tuning, pull value from dashboard
@@ -93,9 +104,10 @@ public class AgitatorSubsystem extends Subsystem {
 			if (DEBUG) {
 				speed = -SmartDashboard.getNumber(SpeedLabel, speed);
 			}
-		}		
+		}
+		*/	
 		
-		setAgitatorSpeed(speed);;
+		setAgitatorSpeed(speed);
 	}
 	
 	/**
