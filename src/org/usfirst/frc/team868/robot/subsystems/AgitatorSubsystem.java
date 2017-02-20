@@ -81,31 +81,19 @@ public class AgitatorSubsystem extends Subsystem {
 		switch (state) {
 		case FORWARD:
 			speed = RobotMap.Feeder.AGITATOR_SPEED;
+			if (DEBUG) {
+				speed = SmartDashboard.getNumber(SpeedLabel, speed);
+			}
 			break;
 		case BACKWARD:
 			speed = -RobotMap.Feeder.AGITATOR_SPEED;
+			if (DEBUG) {
+				speed = -SmartDashboard.getNumber(SpeedLabel, speed);
+			}
 			break;
 		default:
 			break;
 		}
-		
-		/*
-		if (state.equals(State.FORWARD)) {
-			speed = RobotMap.Feeder.AGITATOR_SPEED;
-			
-			// When debugging/tuning, pull value from dashboard
-			if (DEBUG) {
-				speed = SmartDashboard.getNumber(SpeedLabel, speed);
-			}
-		} else if (state.equals(State.BACKWARD)) {
-			speed = -RobotMap.Feeder.AGITATOR_SPEED;
-			
-			// When debugging/tuning, pull value from dashboard (negates this value)
-			if (DEBUG) {
-				speed = -SmartDashboard.getNumber(SpeedLabel, speed);
-			}
-		}
-		*/	
 		
 		setAgitatorSpeed(speed);
 	}
