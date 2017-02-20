@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Agitator subsystem "stirs" the balls in the hopper so they can be picked
- * up by the {@link ShooterFeederSubsystem}.
+ * up by the {@link FeederSubsystem}.
  */
 public class AgitatorSubsystem extends Subsystem {
 
