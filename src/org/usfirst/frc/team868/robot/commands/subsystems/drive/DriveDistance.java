@@ -18,7 +18,7 @@ public class DriveDistance extends Command {
 	private DriveSubsystem drive;
 	private double endCount;
 	private PIDController control;
-	private final double kp = .002, ki = 0, kd = 0, kf = 0;
+	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
