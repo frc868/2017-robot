@@ -39,8 +39,8 @@ public interface RobotMap {
 		final boolean LEFT_IS_INVERTED = false;
 		final boolean RIGHT_IS_INVERTED = true;
 		final double SPEED = 0.8; //default drive speed
-		final double COUNTS_PER_CM = 1; //TODO calculate
-		final double CM_PER_COUNT = 1;
+		final double COUNTS_PER_CM = 67.07;
+		final double CM_PER_COUNT = 1 / COUNTS_PER_CM;
 	}
 	
 	public interface Feeder {
