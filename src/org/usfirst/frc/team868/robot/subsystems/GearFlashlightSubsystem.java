@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class GearFlashlightSubsystem extends Subsystem {
 
-    private static GearFlashlightSubsystem instance;
-    private Relay flashlight;
+    private static GearFlashlightSubsystem instance = new GearFlashlightSubsystem();
+    private final Relay flashlight;
     private boolean isOn;
     private static final boolean DEBUG = false;
     
@@ -23,6 +23,7 @@ public class GearFlashlightSubsystem extends Subsystem {
 	 */
     public static GearFlashlightSubsystem getInstance() {
     	if(instance == null) {
+    		System.out.println("Constructed new GFL");
     		instance = new GearFlashlightSubsystem();
     	} 
     	return instance;
@@ -54,7 +55,8 @@ public class GearFlashlightSubsystem extends Subsystem {
      * @return current status of the flashlight.
      */
     public boolean isOn() {
-    	return flashlight.get() == Relay.Value.kOn;
+//    	return flashlight.get() == Relay.Value.kOn;
+    	return isOn;
     }
     
     /**
