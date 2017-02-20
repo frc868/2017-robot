@@ -31,6 +31,8 @@ public class Main {
 								 "0. Submit Command Group\n" +
 								 "1. Add DriveDistance Command\n" +
 								 "2. Add TurnToAngle Command\n" +
+								 "3. Add Shooter Command\n" +
+								 "4. Add RotateTurretToAngle Command\n" +
 								 "100. EXIT");
 				
 				switch(input.nextInt()) {
@@ -49,6 +51,15 @@ public class Main {
 						System.out.print("Angle (double): ");
 						output.writeDouble(input.nextDouble());
 						break;
+					case 3:
+						output.writeInt(3);
+						System.out.print("RPS (double): ");
+						output.writeDouble(input.nextDouble());
+						break;
+					case 4:
+						output.writeInt(4);
+						System.out.print("Angle (double): ");
+						output.writeDouble(input.nextDouble());
 					default:
 						System.err.println("Invalid command number!");
 				}				

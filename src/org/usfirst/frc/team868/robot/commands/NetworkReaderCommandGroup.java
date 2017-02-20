@@ -1,7 +1,9 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
 import org.usfirst.frc.team868.robot.subsystems.TCPSubsystem;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,6 +36,14 @@ public class NetworkReaderCommandGroup extends CommandGroup {
 					
 				case 2:
 					addSequential(new TurnToAngle(input.readDouble()));
+					break;
+					
+				case 3:
+					addSequential(new ShootCommand(input.readDouble()));
+					break;
+					
+				case 4:
+					addSequential(new RotateTurretToAngle(input.readDouble()));
 					break;
 					
 				default:
