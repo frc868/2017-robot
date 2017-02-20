@@ -24,14 +24,14 @@ public class AgitatorSubsystem extends Subsystem {
 	public State state;
 	
 	/** Set this to true for tuning and diagnostic output. */
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	private static final String SpeedLabel = "Agitator Speed";
 
 	@Override
 	protected void initDefaultCommand() {
 		if (DEBUG) {
-			SmartDashboard.putNumber("FreeBallDelay", 1000);
-			SmartDashboard.putData("FreeBallFromAgitator", new FreeBall(1000));
+	    	SmartDashboard.putNumber("Agitator Shake Time", 1000);
+			SmartDashboard.putData("Agitator Shake", new FreeBall(1000));
 		}
 	}
 
@@ -85,7 +85,7 @@ public class AgitatorSubsystem extends Subsystem {
 			if (DEBUG) {
 				speed = SmartDashboard.getNumber(SpeedLabel, speed);
 			}
-		} else if (state.equals(State.FORWARD)) {
+		} else if (state.equals(State.BACKWARD)) {
 			speed = -RobotMap.Feeder.AGITATOR_SPEED;
 			
 			// When debugging/tuning, pull value from dashboard (negates this value)
@@ -148,7 +148,7 @@ public class AgitatorSubsystem extends Subsystem {
 	 *            Power level to apply in the range of [-1.0, +1.0] (0 stops,
 	 *            negative values turn in reverse direction).
 	 */
-	private void setAgitatorSpeed(double speed) {
+	public void setAgitatorSpeed(double speed) {
 		motor.set(speed);
 	}
 }
