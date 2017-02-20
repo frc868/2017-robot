@@ -151,7 +151,18 @@ public class DriveSubsystem extends Subsystem {
 	 * @return the average number of counts on both encoders.
 	 */
 	public int getAvgEncoders() {
-		return (getRightEncoder() + getLeftEncoder()) / 2;
+		int count = 0;
+		if(RobotMap.Drive.LEFT_IS_INVERTED){
+			count -= getLeftEncoder();
+		}else{
+			count += getLeftEncoder();
+		}
+		if(RobotMap.Drive.RIGHT_IS_INVERTED){
+			count -= getRightEncoder();
+		}else{
+			count += getRightEncoder();
+		}
+		return count;
 	}
 	/**
 	 * Attempts to record the movement of the motors.
