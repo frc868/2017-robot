@@ -31,6 +31,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 
  */
 public class ColorPixySubsystem extends Subsystem {
+	
+	private final boolean DEBUG = false;
 	private static int idCounter = 0;
 	
 	public final class Record {
@@ -263,14 +265,14 @@ public class ColorPixySubsystem extends Subsystem {
 	}
 
 	public void updateSD() {// Updates the SD with the values specified.
-		Record target = getTarget();
-		SmartDashboard.putNumber("Color Target X", target.getXAngleOffFromCenter());
-		SmartDashboard.putNumber("Color Target Y", target.getYAngleOffFromCenter());
-		// SmartDashboard.putNumber("Color Camera Target Width",
-		// getWidthOfTarget());
-		// SmartDashboard.putNumber("Color Camera Target Height",
-		// getHeightOfTarget());
-		// SmartDashboard.putNumber("Color Frame count", frame);
+		if (DEBUG) {
+			Record target = getTarget();
+			SmartDashboard.putNumber("Color Target X", target.getXAngleOffFromCenter());
+			SmartDashboard.putNumber("Color Target Y", target.getYAngleOffFromCenter());
+			SmartDashboard.putNumber("Color Camera Target Width", target.getWidthOfTarget());
+			SmartDashboard.putNumber("Color Camera Target Height", target.getHeightOfTarget());
+			// SmartDashboard.putNumber("Color Frame count", frame);
+		}
 	}
 
 	synchronized public static ColorPixySubsystem getInstance() {

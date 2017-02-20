@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GearCollectorSubsystem extends Subsystem {
 
 	private static GearCollectorSubsystem instance;
-	private Solenoid sol;
+	private Solenoid closer;
+	private Solenoid opener;
 	private boolean state;
 	private AnalogInput detector;
 	
@@ -22,11 +23,13 @@ public class GearCollectorSubsystem extends Subsystem {
 	 * Constructor
 	 */
 	private GearCollectorSubsystem() {
-		sol = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID);
+		closer = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_CLOSER);
+		opener = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_OPENER);
 		detector = new AnalogInput(RobotMap.GearCollector.GEAR_DETECTOR_ANALOG_PORT);
 		
 		// Assign test mode group
-		LiveWindow.addActuator("Gear Collector", "Solenoid", sol);
+		LiveWindow.addActuator("Gear Collector", "Closer", closer);
+		LiveWindow.addActuator("Gear Collector", "Opener", opener);
 		LiveWindow.addSensor("Gear Collector", "Detector", detector);
 	}
 	
@@ -39,9 +42,10 @@ public class GearCollectorSubsystem extends Subsystem {
 	/**
 	 * Set the gear collector to either: open = true, or closed = false.
 	 */
-	public void setGearCollector(boolean on) {
-		state = on;
-		sol.set(state);
+	public void setGearCollector(boolean open) {
+		state = open;
+		opener.set(state);
+		closer.set(!state);
 	}
 	/**
 	 * Opens the gear collector, if not already open.
@@ -71,7 +75,7 @@ public class GearCollectorSubsystem extends Subsystem {
 	 * Returns whether or not a gear has been collected according to a sensor.
 	 */
 	public boolean isAGearCollected(){
-		return detector.getVoltage() > RobotMap.GearCollector.DETECTION_VOLTAGE;//TODO find this value
+		return detector.getVoltage() > RobotMap.GearCollector.DETECTION_VOLTAGE;
 	}
 	/**
 	 * Updates the information on SmartDashboard.

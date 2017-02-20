@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.subsystems.ShooterFeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterFeederCommand extends Command {
 
-	ShooterFeederSubsystem feeder;
+	FeederSubsystem feeder;
 	
 	boolean state;
 	
@@ -18,7 +18,7 @@ public class ShooterFeederCommand extends Command {
 	 * @param on
 	 */
     public ShooterFeederCommand(boolean on) { 
-    	feeder = ShooterFeederSubsystem.getInstance(); 
+    	feeder = FeederSubsystem.getInstance(); 
         requires(feeder);
         
         state = on;
@@ -28,7 +28,7 @@ public class ShooterFeederCommand extends Command {
      * Toggles the feeder's on/off status
      */
     public ShooterFeederCommand(){
-    	feeder = ShooterFeederSubsystem.getInstance();
+    	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
     	state = !feeder.isFeederOn();
     }

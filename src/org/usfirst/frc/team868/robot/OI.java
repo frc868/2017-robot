@@ -70,6 +70,7 @@ public class OI {
 		final int R_PIXY = ControllerMap.Key.B;
 		final int CALIBRATE = ControllerMap.Key.LB;
 		final int AGITATOR = ControllerMap.Key.RT;
+		final int SPIN = ControllerMap.Key.LT;
 	
 		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
@@ -111,6 +112,8 @@ public class OI {
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.AGITATOR)
 			.whenPressed(new AgitatorCommand());
+		controller.getButton(Controls.SPIN)
+			.whenPressed(new ShootCommand(75));
 				
 		// GEAR
 		controller.getButton(Controls.TOGGLE_COLLECTOR)
@@ -135,6 +138,10 @@ public class OI {
 		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
 		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
+		SmartDashboard.putData("Rotate by 90", new RotateAngle(90));
+		SmartDashboard.putData("Turn to 90", new TurnToAngle(90));
+		SmartDashboard.putData("Rotate by -90", new RotateAngle(-90));
+		SmartDashboard.putData("Turn to -90", new RotateAngle(-90));
 	}
 
 	public static OI getInstance() {

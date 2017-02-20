@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
 		GyroSubsystem.getInstance();
 //		IRPixySubsystem.getInstance();
 //		LidarSubsystem.getInstance();
-		ShooterFeederSubsystem.getInstance();
+		FeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();
 		ShooterSubsystem.getInstance();
 //		TurretRotationSubsystem.getInstance();

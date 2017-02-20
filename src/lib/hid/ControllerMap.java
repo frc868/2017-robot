@@ -23,7 +23,7 @@ public class ControllerMap {
 		
 		// XBOX AND LOGITECH KEYS && UNIVERSAL AXIS KEYS
 		int A = 0, B = 1, X = 2, Y = 3, RB = 4, RT = 5, LB = 6,
-			LT = 7, START = 8, BACK = 9;
+			LT = 7, START = 8, BACK = 9, LS = 10, RS = 11;
 		
 		// PLAYSTATION KEYS (START = 8 but already defined)
 		int CROSS = 0, CIRCLE = 1, SQUARE = 2, TRIANGLE = 3, R1 = 4, R2 = 5, L1 = 6,
@@ -32,14 +32,16 @@ public class ControllerMap {
 	
 	public interface Direction {
 		
-		int LEFT_HORIZONTAL = 10,
-	  			RIGHT_HORIZONTAL = 11, LEFT_VERTICAL = 12, RIGHT_VERTICAL = 13;
+		int LEFT_HORIZONTAL = 12,
+	  			RIGHT_HORIZONTAL = 13, LEFT_VERTICAL = 14, RIGHT_VERTICAL = 15;
 	}
-	//										 0A 1B 2X 3Y 4RB 5RT 6LB 7LT 8ST  9BA 10LH 11RH 12LV 13RV
-	protected static final int[] logitech =	{ 2, 3, 1, 4, 6,  8,  5,  7,  10,  9,   0,   2,   1,   3};	
-    protected static final int[] xbox360 = 	{ 1, 2, 3, 4, 6, -1,  5, -1,   8,  7,   0,   4,   1,   5};
-    protected static final int[] ps4 =		{ 2, 3, 1, 4, 6,  8,  5,  7,  10,  9,   0,   2,   1,   5};
-    protected static final int[] xboxOne = 	{ 1, 2, 3, 4, 6,  3,  5,  2,   8,  7,   0,   4,   1,   5};
+	//										FRC may have unified all controllers into a single controller map, Logitech is now the exact
+	//										same as both xbox controllers.  See below.
+	//										 0A 1B 2X 3Y 4RB 5RT 6LB 7LT 8ST  9BA 10LS 10RS 12LH 13RH 14LV 15RV
+	protected static final int[] logitech =	{ 1, 2, 3, 4, 6,  3,  5,  2,   8,  7,   9,  10,   0,   4,   1,   5};	
+    protected static final int[] xbox360 = 	{ 1, 2, 3, 4, 6, -1,  5, -1,   8,  7,   9,  10,   0,   4,   1,   5};
+    protected static final int[] ps4 =		{ 2, 3, 1, 4, 6,  8,  5,  7,  10,  9,  -1,  -1,   0,   2,   1,   5};
+    protected static final int[] xboxOne = 	{ 1, 2, 3, 4, 6,  3,  5,  2,   8,  7,   9,  10,   0,   4,   1,   5};
     		
 	public ControllerMap(Joystick joystick) {
 		this(joystick, Type.LOGITECH);
@@ -78,7 +80,7 @@ public class ControllerMap {
 			JoystickButton button = buttons.get(buttonID);
 			if(button != null) {
 				button.setOff(true);
-				if((type == Type.XBOX_ONE || type == Type.XBOX_360) && (buttonID == Key.LT  || buttonID == Key.RT))
+				if((type == Type.XBOX_ONE || type == Type.XBOX_360 || type == Type.LOGITECH) && (buttonID == Key.LT  || buttonID == Key.RT))
 					buttons.replace(buttonID, new TriggerButton(this, buttonID));
 				else
 					buttons.replace(buttonID, new JoystickButton(this, buttonPorts[buttonID]));
