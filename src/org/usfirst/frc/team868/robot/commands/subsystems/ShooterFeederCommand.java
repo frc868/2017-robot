@@ -1,8 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.subsystems.ShooterFeederSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShooterFeederCommand extends Command {
 
-	ShooterFeederSubsystem feeder;
+	FeederSubsystem feeder;
 	
 	
 	public RobotMap.Feeder.State state;
@@ -21,7 +20,8 @@ public class ShooterFeederCommand extends Command {
 	 * @param state
 	 */
     public ShooterFeederCommand(RobotMap.Feeder.State state) { 
-    	feeder = ShooterFeederSubsystem.getInstance(); 
+    	feeder = FeederSubsystem.getInstance(); 
+
         requires(feeder);
         
         this.state = state;
@@ -31,7 +31,7 @@ public class ShooterFeederCommand extends Command {
      * Toggles the feeder's on/off status
      */
     public ShooterFeederCommand(){
-    	feeder = ShooterFeederSubsystem.getInstance();
+    	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
     	state = feeder.getOppositeState();
     }

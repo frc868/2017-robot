@@ -116,7 +116,10 @@ public class ShooterSubsystem extends Subsystem {
      */
     public double getCounts() {
     	return rightShooter.getPosition();
-    	
+    }
+    
+    public boolean isUpToSpeed() {
+    	return control.getError() < RobotMap.Shoot.ERROR_THRESHOLD;
     }
     
     /**

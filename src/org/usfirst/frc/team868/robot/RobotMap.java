@@ -51,12 +51,14 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
-		final double AGITATOR_SPEED = 0.8;
+		final double AGITATOR_SPEED = 0.75;
+		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
 		final double CONVEYOR_SPEED = 0.8;
 		
 		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
+		final double MIN_SHOOT_SPEED = 30;
 	
 		enum State {
 			FORWARD, OFF, BACKWARD;
@@ -73,10 +75,10 @@ public interface RobotMap {
 		//PORTS:
 		final int GEAR_SOLENOID_CLOSER = 1;
 		final int GEAR_SOLENOID_OPENER = 0;
-		final int GEAR_DETECTOR_ANALOG_PORT = 0;
+		final int GEAR_DETECTOR_ANALOG_PORT = 3;
 		
 		//VALUES:
-		final double DETECTION_VOLTAGE = .1;
+		final double DETECTION_VOLTAGE = 1.5;
 	}
 	
 	public static class Joystick {
@@ -133,6 +135,7 @@ public interface RobotMap {
 		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
 		final double ROTATIONS_PER_COUNT = 1.0;
+		final double ERROR_THRESHOLD = 1;
 	}
 	
 	public interface Turret {

@@ -10,7 +10,7 @@ import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.ShooterFeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
@@ -55,7 +55,7 @@ public interface RobotParts {
 	
 	public interface Feeder {
 		final AgitatorSubsystem agitator = AgitatorSubsystem.getInstance();
-		final ShooterFeederSubsystem shooterFeeder = ShooterFeederSubsystem.getInstance();
+		final FeederSubsystem shooterFeeder = FeederSubsystem.getInstance();
 	}
 	
 	public interface Climber {

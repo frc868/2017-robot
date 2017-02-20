@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Agitator subsystem "stirs" the balls in the hopper so they can be picked
- * up by the {@link ShooterFeederSubsystem}.
+ * up by the {@link FeederSubsystem}.
  */
 public class AgitatorSubsystem extends Subsystem {
 
@@ -30,8 +30,9 @@ public class AgitatorSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		if (DEBUG) {
-	    	SmartDashboard.putNumber("Agitator Shake Time", 1000);
-			SmartDashboard.putData("Agitator Shake", new FreeBall(1000));
+
+	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
+			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
 		}
 	}
 

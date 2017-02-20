@@ -6,6 +6,8 @@ import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import lib.util.HoundMath;
+
 /**
  *
  */
@@ -14,7 +16,6 @@ public class FreeBall extends Command {
 	private AgitatorSubsystem agitator;
 	private double delay;
 
-	
     public FreeBall(double delay) {
     	agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
@@ -27,14 +28,9 @@ public class FreeBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	delay = SmartDashboard.getNumber("Agitator Shake Time", 1000);
-    	double speed = RobotMap.Feeder.AGITATOR_SPEED * Math.sin(timeSinceInitialized() * (Math.PI/delay));
+    	delay = SmartDashboard.getNumber("Agitator Shake Time", delay);
+    	double speed = HoundMath.checkRange(2 * RobotMap.Feeder.AGITATOR_SPEED * Math.sin(timeSinceInitialized() * (Math.PI/delay)));
     	agitator.setAgitatorSpeed(speed);
-    	
-    	/*if (System.nanoTime() - start >= delay) {
-    		agitator.switchDirection();
-    		start = System.nanoTime();
-    	}*/
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -50,5 +46,6 @@ public class FreeBall extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

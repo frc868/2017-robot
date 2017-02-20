@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ShooterFeederSubsystem extends Subsystem {
-	private static ShooterFeederSubsystem instance;
+public class FeederSubsystem extends Subsystem {
+	private static FeederSubsystem instance;
 	private Spark motor;
 	
 	public RobotMap.Feeder.State state;
@@ -20,7 +20,7 @@ public class ShooterFeederSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {}
 	
-	private ShooterFeederSubsystem() {
+	private FeederSubsystem() {
 		motor = new Spark(RobotMap.Feeder.CONVEYOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.CONVEYOR_IS_INVERTED);
 		beamBreak = new DigitalInput(RobotMap.Feeder.BEAM_BREAK_PORT);
@@ -34,8 +34,8 @@ public class ShooterFeederSubsystem extends Subsystem {
 	 * Get the instance of this subsystem
 	 * @return instance
 	 */
-	public static ShooterFeederSubsystem getInstance() {
-		return instance == null ? instance = new ShooterFeederSubsystem() : instance;
+	public static FeederSubsystem getInstance() {
+		return instance == null ? instance = new FeederSubsystem() : instance;
 	}
 	
 	/**
