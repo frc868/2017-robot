@@ -80,14 +80,15 @@ public class LidarSubsystem extends Subsystem {
 		return new Thread() {
 			@Override
 			public void run() {
-				while (!isInterrupted()) {
-					if (bytesAvailable()) { //TODO remove if, just updateDistance() then delay
-						updateDistance();
-					} else {
-						try {
-							Thread.sleep(1);
-						} catch (InterruptedException e) {}
+				while (!isInterrupted()) {					
+					updateDistance();
+					
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						return;
 					}
+					
 				} //end while
 			} //end run
 		};

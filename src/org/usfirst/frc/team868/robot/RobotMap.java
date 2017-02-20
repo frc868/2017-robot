@@ -131,7 +131,6 @@ public interface RobotMap {
 		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
 		final double ROTATIONS_PER_COUNT = 1.0;
-		final double ERROR_THRESHOLD = 1;
 	}
 	
 	public interface Turret {
@@ -140,8 +139,7 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean IS_INVERTED = true;
-		final int FORWARD_LIMIT = 180;
-		final int REVERSE_LIMIT = -90;
+		final double SOFT_LIMIT_OFFSET = 2;
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 	}

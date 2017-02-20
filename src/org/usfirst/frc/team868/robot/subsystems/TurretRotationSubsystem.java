@@ -96,8 +96,8 @@ public class TurretRotationSubsystem extends Subsystem {
 		double endAngle = Math.abs(getAngle());
 		setAngle((startAngle + endAngle)/2);
 		
-		turretRotator.setForwardSoftLimit(startAngle-2);
-		turretRotator.setReverseSoftLimit(endAngle+2);
+		turretRotator.setForwardSoftLimit(startAngle-RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		turretRotator.setReverseSoftLimit(endAngle+RobotMap.Turret.SOFT_LIMIT_OFFSET);
 		turretRotator.enableForwardSoftLimit(true);
 		turretRotator.enableReverseSoftLimit(true);
 	}

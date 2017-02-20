@@ -12,14 +12,16 @@ public class ShootCommand extends Command {
 	ShooterSubsystem shooter;
 	double speed;
     
+	/**
+	 * Sets the speed of the shooter wheel
+	 * @param rps Rotations per Second (usually 50 - 80)
+	 */
     public ShootCommand(double rps) {
     	shooter = ShooterSubsystem.getInstance();
     	requires(shooter);
     	speed = rps;
     }
     
-    //TODO should be have a factory (public) or a Subsystem initializer (private) or neither?
-
     // Called just before this Command runs the first time
     protected void initialize() {
     	shooter.setSpeed(speed);
