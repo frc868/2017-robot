@@ -51,10 +51,10 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
-		final double AGITATOR_SPEED = 0.8;
+		final double AGITATOR_SPEED = 0.35;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
-		final double CONVEYOR_SPEED = 0.8;
+		final double CONVEYOR_SPEED = 0.7;
 		final double MIN_SHOOT_SPEED = 30;
 	}
 	
@@ -68,10 +68,10 @@ public interface RobotMap {
 		//PORTS:
 		final int GEAR_SOLENOID_CLOSER = 1;
 		final int GEAR_SOLENOID_OPENER = 0;
-		final int GEAR_DETECTOR_ANALOG_PORT = 0;
+		final int GEAR_DETECTOR_ANALOG_PORT = 3;
 		
 		//VALUES:
-		final double DETECTION_VOLTAGE = .1;
+		final double DETECTION_VOLTAGE = 1.5;
 	}
 	
 	public static class Joystick {

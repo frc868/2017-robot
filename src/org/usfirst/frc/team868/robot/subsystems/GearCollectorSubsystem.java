@@ -28,7 +28,8 @@ public class GearCollectorSubsystem extends Subsystem {
 		detector = new AnalogInput(RobotMap.GearCollector.GEAR_DETECTOR_ANALOG_PORT);
 		
 		// Assign test mode group
-		LiveWindow.addActuator("Gear Collector", "Solenoid", closer);
+		LiveWindow.addActuator("Gear Collector", "Closer", closer);
+		LiveWindow.addActuator("Gear Collector", "Opener", opener);
 		LiveWindow.addSensor("Gear Collector", "Detector", detector);
 	}
 	
@@ -74,7 +75,7 @@ public class GearCollectorSubsystem extends Subsystem {
 	 * Returns whether or not a gear has been collected according to a sensor.
 	 */
 	public boolean isAGearCollected(){
-		return detector.getVoltage() > RobotMap.GearCollector.DETECTION_VOLTAGE;//TODO find this value
+		return detector.getVoltage() > RobotMap.GearCollector.DETECTION_VOLTAGE;
 	}
 	/**
 	 * Updates the information on SmartDashboard.
