@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
