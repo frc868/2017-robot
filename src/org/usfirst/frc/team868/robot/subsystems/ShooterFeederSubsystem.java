@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -11,7 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterFeederSubsystem extends Subsystem {
 	private static ShooterFeederSubsystem instance;
 	private Spark motor;
-	private boolean state;
+	
+	public RobotMap.Feeder.State state;
 	private DigitalInput beamBreak;
 	private static final boolean DEBUG = false;
 	
@@ -40,37 +42,59 @@ public class ShooterFeederSubsystem extends Subsystem {
 	 * Turns the feeder on or off.
 	 * @param on
 	 */
-	public void setFeeder(boolean on) {
-		state = on;
+	public void setFeeder(RobotMap.Feeder.State state) {
+		this.state = state;
 		setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
 	}
 	
 	/**
-	 * Turns the feeder on.
+	 * Turns the feeder forward.
 	 */
-	public void setFeederOn() {
-		setFeeder(true);
+	public void setFeederForward() {
+		setFeeder(RobotMap.Feeder.State.FORWARD);
 	}
 	
 	/**
 	 * Turns the feeder off.
 	 */
 	public void setFeederOff() {
-		setFeeder(false);
+		setFeeder(RobotMap.Feeder.State.OFF);
+	}
+	
+	/**
+	 * Turns the feeder Backward.
+	 */
+	public void setFeederBackward(){
+		setFeeder(RobotMap.Feeder.State.BACKWARD);
 	}
 	
 	/**
 	 * Switches the feeder's status.
 	 */
+	public void switchDirection() {
+		setFeeder(!(state == RobotMap.Feeder.State.FORWARD) ? RobotMap.Feeder.State.FORWARD : RobotMap.Feeder.State.BACKWARD);
+	}
+
+	/**
+	 * Toggles the state of the agitator (this will reset the power to the
+	 * default setting when turned back on).
+	 */
 	public void toggleFeeder() {
-		setFeeder(!state);
+		setFeeder(!(state == RobotMap.Feeder.State.OFF) ? RobotMap.Feeder.State.OFF : RobotMap.Feeder.State.FORWARD);
+	}
+	
+	/**
+	 * returns opposite of current state
+	 */
+	public RobotMap.Feeder.State getOppositeState() {
+		return !(state == RobotMap.Feeder.State.FORWARD) ? RobotMap.Feeder.State.FORWARD : RobotMap.Feeder.State.BACKWARD;
 	}
 	
 	/**
 	 * Gets the feeder's status.
 	 * @return whether or not the feeder is on
 	 */
-	public boolean isFeederOn() {
+	public RobotMap.Feeder.State getState() {
 		return state;
 	}
 	
@@ -95,7 +119,7 @@ public class ShooterFeederSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
 		if(DEBUG){
-			SmartDashboard.putBoolean("Feeder is on", isFeederOn());
+			SmartDashboard.putBoolean("Feeder is on", getState().equals(State.FORWARD) || getState().equals(State.BACKWARD));
 		}
 	}
 }

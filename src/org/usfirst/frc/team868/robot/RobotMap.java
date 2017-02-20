@@ -55,6 +55,12 @@ public interface RobotMap {
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
 		final double CONVEYOR_SPEED = 0.8;
+		
+		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
+	
+		enum State {
+			FORWARD, OFF, BACKWARD;
+		}
 	}
 	
 	public interface Flashlight {
