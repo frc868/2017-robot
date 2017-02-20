@@ -1,9 +1,10 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.subsystems.TCPSubsystem;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -44,6 +45,14 @@ public class NetworkReaderCommandGroup extends CommandGroup {
 					
 				case 4:
 					addSequential(new RotateTurretToAngle(input.readDouble()));
+					break;
+					
+				case 5:
+					addSequential(new GearCollectorToggleCommand());
+					break;
+					
+				case 6:
+					addSequential(new GearFlashlightCommand());
 					break;
 					
 				default:

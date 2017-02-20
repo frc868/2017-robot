@@ -33,6 +33,8 @@ public class Main {
 								 "2. Add TurnToAngle Command\n" +
 								 "3. Add Shooter Command\n" +
 								 "4. Add RotateTurretToAngle Command\n" +
+								 "5. Add GearCollectorToggle Command\n" +
+								 "6. Add GearFlashlight Command\n" +
 								 "100. EXIT");
 				
 				switch(input.nextInt()) {
@@ -60,6 +62,12 @@ public class Main {
 						output.writeInt(4);
 						System.out.print("Angle (double): ");
 						output.writeDouble(input.nextDouble());
+					case 5:
+						output.writeInt(5);
+						break;
+					case 6:
+						output.writeInt(6);
+						break;
 					default:
 						System.err.println("Invalid command number!");
 				}				
