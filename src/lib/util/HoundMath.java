@@ -1,5 +1,7 @@
 package lib.util;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class HoundMath {
 
 	/**
@@ -51,5 +53,9 @@ public class HoundMath {
 	
 	public static double getAngleDifferenceDegrees(double from, double to) {
 	    return boundAngleNeg180to180Degrees(to - from);
+	}
+	
+	public long getTimeMillis() {
+		return (long) (Timer.getFPGATimestamp() * 1000);
 	}
 }
