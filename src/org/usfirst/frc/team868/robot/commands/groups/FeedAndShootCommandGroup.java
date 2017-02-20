@@ -1,8 +1,8 @@
 package org.usfirst.frc.team868.robot.commands.groups;
 
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFeederCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
