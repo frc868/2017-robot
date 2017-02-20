@@ -44,7 +44,19 @@ public class FeederSubsystem extends Subsystem {
 	 */
 	public void setFeeder(RobotMap.Feeder.State state) {
 		this.state = state;
-		setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+		switch(state) {
+			case FORWARD:
+				setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+				break;
+			case OFF:
+				setFeederSpeed(0);
+				break;
+			case BACKWARD:
+				setFeederSpeed(-RobotMap.Feeder.CONVEYOR_SPEED);
+				break;
+			default:
+				break;
+		}
 	}
 	
 	/**
