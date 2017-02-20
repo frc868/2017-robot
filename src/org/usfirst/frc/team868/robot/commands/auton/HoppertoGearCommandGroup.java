@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearReleaseCommand;
 
@@ -15,39 +15,39 @@ public class HoppertoGearCommandGroup extends CommandGroup {
     public HoppertoGearCommandGroup(StartingPoint selected) {
        switch(selected) {
        		case B1:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(-45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        		case B2:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(-45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        		case B3:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(-45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        		case R1:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        		case R2:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        		case R3:
-       			addSequential(new DriveDistanceCommand(196.5));
+       			addSequential(new DriveDistance(196.5));
        			addSequential(new TurnToAngle(45));
-       			addSequential(new DriveDistanceCommand(154.85638508));
+       			addSequential(new DriveDistance(154.85638508));
        			addSequential(new GearReleaseCommand());
        			break;
        }
