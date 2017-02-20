@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
