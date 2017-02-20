@@ -2,7 +2,6 @@ package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
@@ -45,8 +44,6 @@ public interface RobotParts {
 	}
 	
 	public interface Camera {
-		final CameraSubsystem frontCamera = CameraSubsystem.getFrontInstance();
-//		final CameraSubsystem rearCamera  = CameraSubsystem.getRearInstance();
 	}
 	
 	public interface Turret {
