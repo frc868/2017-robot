@@ -42,7 +42,11 @@ public class FeederSubsystem extends Subsystem {
 	 */
 	public void setFeeder(boolean on) {
 		state = on;
-		setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+		if(on && ShooterSubsystem.getInstance().getSpeed() > RobotMap.Feeder.MIN_SHOOT_SPEED) {
+			setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+		} else {
+			setFeederSpeed(0);
+		}
 	}
 	
 	/**

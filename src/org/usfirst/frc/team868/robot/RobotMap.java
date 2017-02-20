@@ -55,6 +55,7 @@ public interface RobotMap {
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
 		final double CONVEYOR_SPEED = 0.8;
+		final double MIN_SHOOT_SPEED = 30;
 	}
 	
 	public interface Flashlight {
