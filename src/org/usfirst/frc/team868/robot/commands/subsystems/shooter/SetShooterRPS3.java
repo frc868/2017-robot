@@ -38,6 +38,8 @@ public class SetShooterRPS3 extends Command {
 	private java.util.Timer controller = null;
 	private boolean controllerEnabled = false;
 
+	private double lastRps;
+
 	/**
 	 * Construct a new instance indicating the source of the target RPS you want us to track.
 	 * 
@@ -83,13 +85,14 @@ public class SetShooterRPS3 extends Command {
 	protected void initialize() {
 		lastErrRps = 0;
 		lastVolts = 0;
+		lastRps = 0;
 
 		if (DEBUG) {
 			// Get PID values from dashboard (if available)
 			Kp = SmartDashboard.getNumber(KP_LABEL, Kp);
 			Kd = SmartDashboard.getNumber(KD_LABEL, Kd);
 		}
-		
+
 		// Update at a rate of 20 times a second
 		TimerTask task = new TimerTask() {
 			@Override
@@ -104,11 +107,17 @@ public class SetShooterRPS3 extends Command {
 		controllerEnabled = true;
 		controller = new java.util.Timer(getName() + " RPS");
 		controller.schedule(task, 0, 1000 / 20);
+
 	}
 
 	@Override
 	protected void execute() {
-
+		double curRps = shooter.getSpeed();
+		double tarRps = rpsProvider.getSetpoint();
+		double errRps = tarRps - curRps;
+		
+		SmartDashboard.putNumber("RPS3 Volts", lastVolts);
+		SmartDashboard.putNumber("RPS3 Error", errRps);
 	}
 
 	@Override
@@ -132,6 +141,9 @@ public class SetShooterRPS3 extends Command {
 
 	private void pidWrite() {		
 		double curRps = shooter.getSpeed();
+		if (curRps < 0 || curRps > 120) {
+			curRps = lastRps;
+		}
 		double tarRps = rpsProvider.getSetpoint();
 		double errRps = tarRps - curRps;		
 		errRpsDelta = errRps - lastErrRps;
@@ -140,9 +152,10 @@ public class SetShooterRPS3 extends Command {
 		// accumulate too much during spin up
 
 		double outVolts = lastVolts + (Kp * errRps + Kd * errRpsDelta);
-		setVolts(Math.min(outVolts, MAX_VOLTS));
+		setVolts(Math.max(0.0, Math.min(outVolts, MAX_VOLTS)));
 		
 		lastErrRps = errRps;
+		lastRps = curRps;
 	}
 	
 	private void setVolts(double volts) {
