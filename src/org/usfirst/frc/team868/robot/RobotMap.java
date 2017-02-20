@@ -139,8 +139,7 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean IS_INVERTED = true;
-		final int FORWARD_LIMIT = 180;
-		final int REVERSE_LIMIT = -90;
+		final double SOFT_LIMIT_OFFSET = 2;
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 	}
