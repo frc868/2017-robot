@@ -41,6 +41,7 @@ public interface RobotMap {
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 67.07;
 		final double CM_PER_COUNT = 1 / COUNTS_PER_CM;
+		final double MIN_DRIVE_SPEED = .25;
 	}
 	
 	public interface Feeder {

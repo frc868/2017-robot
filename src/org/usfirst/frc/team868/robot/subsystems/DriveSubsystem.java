@@ -187,6 +187,8 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
+		SmartDashboard.putNumber("Left Motor Power", leftMotor.get());
+		SmartDashboard.putNumber("Right Motor Power", rightMotor.get());
 		if(DEBUG){
 			SmartDashboard.putNumber("Left Drive Counts", getLeftEncoder());
 			SmartDashboard.putNumber("Right Drive Counts", getRightEncoder());

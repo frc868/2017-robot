@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
+import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
@@ -8,6 +9,8 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 
 /**
  *
@@ -16,7 +19,7 @@ public class TurnToAngle extends Command {
 
 	private DriveSubsystem motors;
 	private PIDController controller;
-	private final double P = 0, I = 0, D = 0;
+	private final double P = 0.036, I = 0, D = 0.07;
 	private double setAngle;
 
 	/**
@@ -43,27 +46,21 @@ public class TurnToAngle extends Command {
 	}, new PIDOutput(){
 		
 		public void pidWrite(double output) {
-			motors.setL(rangeCheck(output));
-			motors.setR(rangeCheck(-output));
+			if(output > .05 && output < RobotMap.Drive.MIN_DRIVE_SPEED)
+				output = RobotMap.Drive.MIN_DRIVE_SPEED;
+			if(output < -.05 && output > -RobotMap.Drive.MIN_DRIVE_SPEED)
+				output = -RobotMap.Drive.MIN_DRIVE_SPEED;
+			motors.setL(HoundMath.checkRange(output, -.7, .7));
+			motors.setR(HoundMath.checkRange(-output, -.7, .7));
 		}
 		
 	});
 	controller.setAbsoluteTolerance(1);
-	controller.setToleranceBuffer(3);// I read the docs, and thought it was applicable, may be good to test if it is helpful or not.
-    }
-    
-    public double rangeCheck(double power){
-    	if(power > 1){
-    		return 1;
-    	}else if(power < -1){
-    		return -1;
-    	}else{
-    		return power;
-    	}
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putData("Rotation PID", controller);
     	controller.setSetpoint(setAngle);
     	controller.enable();
     }
@@ -80,10 +77,5 @@ public class TurnToAngle extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	controller.disable();
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
     }
 }
