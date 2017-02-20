@@ -33,7 +33,7 @@ public class GearFlashlightSubsystem extends Subsystem {
     	flashlight.setDirection(Relay.Direction.kForward);
 
     	// Assign test mode group
-		LiveWindow.addActuator("Gear Flashlight", "Relay", flashlight);
+		LiveWindow.addActuator("GearFlashlight", "Gear Relay", flashlight);
     }
     
     /**

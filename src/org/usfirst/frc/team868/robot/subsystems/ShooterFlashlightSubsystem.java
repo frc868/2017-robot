@@ -29,11 +29,11 @@ public class ShooterFlashlightSubsystem extends Subsystem {
     }
     
     private ShooterFlashlightSubsystem() {
-    	flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);
+    	flashlight = new Relay(RobotMap.Flashlight.SHOOT_LIGHT_PORT);
     	flashlight.setDirection(Relay.Direction.kForward);
 
 		// Assign test mode group
-		LiveWindow.addSensor("Shooter Flashlight", "Relay", flashlight);
+		LiveWindow.addActuator("ShooterFlashlight", "Shooter Relay", flashlight);
     }
     
     /**
