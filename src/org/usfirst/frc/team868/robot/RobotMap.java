@@ -51,7 +51,8 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
-		final double AGITATOR_SPEED = 0.35;
+		final double AGITATOR_SPEED = 0.75;
+		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
 		final double CONVEYOR_SPEED = 0.7;

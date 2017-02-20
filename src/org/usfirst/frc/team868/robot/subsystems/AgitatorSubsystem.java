@@ -24,14 +24,14 @@ public class AgitatorSubsystem extends Subsystem {
 	public State state;
 	
 	/** Set this to true for tuning and diagnostic output. */
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final String SpeedLabel = "Agitator Speed";
 
 	@Override
 	protected void initDefaultCommand() {
 		if (DEBUG) {
-	    	SmartDashboard.putNumber("Agitator Shake Time", 1000);
-			SmartDashboard.putData("Agitator Shake", new FreeBall(1000));
+	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
+			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
 		}
 	}
 
