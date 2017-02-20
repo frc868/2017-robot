@@ -30,6 +30,7 @@ public class AgitatorSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		if (DEBUG) {
+
 	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
 			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
 		}

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,17 +12,19 @@ public class ShooterFeederCommand extends Command {
 
 	FeederSubsystem feeder;
 	
-	boolean state;
+	
+	public RobotMap.Feeder.State state;
 	
 	/**
 	 * Sets the feeder to the given argument
-	 * @param on
+	 * @param state
 	 */
-    public ShooterFeederCommand(boolean on) { 
+    public ShooterFeederCommand(RobotMap.Feeder.State state) { 
     	feeder = FeederSubsystem.getInstance(); 
+
         requires(feeder);
         
-        state = on;
+        this.state = state;
     }
     
     /**
@@ -30,7 +33,7 @@ public class ShooterFeederCommand extends Command {
     public ShooterFeederCommand(){
     	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
-    	state = !feeder.isFeederOn();
+    	state = feeder.getOppositeState();
     }
 
     // Called just before this Command runs the first time
