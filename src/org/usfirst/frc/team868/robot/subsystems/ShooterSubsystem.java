@@ -58,7 +58,7 @@ public class ShooterSubsystem extends Subsystem {
     	}, new PIDOutput(){
 
 			public void pidWrite(double output) {
-				rightShooter.set(output); //TODO set otherShooter
+				rightShooter.set(output);
 			}
     		
     	});
@@ -116,10 +116,6 @@ public class ShooterSubsystem extends Subsystem {
      */
     public double getCounts() {
     	return rightShooter.getPosition();
-    }
-    
-    public boolean isUpToSpeed() {
-    	return control.getError() < RobotMap.Shoot.ERROR_THRESHOLD;
     }
     
     /**
