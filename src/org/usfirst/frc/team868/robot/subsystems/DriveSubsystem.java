@@ -162,7 +162,7 @@ public class DriveSubsystem extends Subsystem {
 		}else{
 			count += getRightEncoder();
 		}
-		return count;
+		return count/2;
 	}
 	/**
 	 * Attempts to record the movement of the motors.
@@ -187,11 +187,11 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
-		SmartDashboard.putNumber("Left Motor Power", leftMotor.get());
-		SmartDashboard.putNumber("Right Motor Power", rightMotor.get());
 		if(DEBUG){
 			SmartDashboard.putNumber("Left Drive Counts", getLeftEncoder());
 			SmartDashboard.putNumber("Right Drive Counts", getRightEncoder());
+			SmartDashboard.putNumber("Left Motor Power", leftMotor.get());
+			SmartDashboard.putNumber("Right Motor Power", rightMotor.get());
 			SmartDashboard.putNumber("Left Drive Distance", getLeftEncoderDistance());
 			SmartDashboard.putNumber("Right Drive Distance", getRightEncoderDistance());
 		}

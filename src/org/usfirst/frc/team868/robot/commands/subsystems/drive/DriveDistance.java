@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,16 +16,18 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveDistance extends Command {
 
 	private DriveSubsystem drive;
-	private int endCount;
+	private double endCount;
 	private PIDController control;
-	private final double kp = 0, ki = 0, kd = 0, kf = 0;
+	private final double kp = .002, ki = 0, kd = 0, kf = 0;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
 	public DriveDistance(double cm) {
-		endCount = drive.getAvgEncoders() + (int)(cm * RobotMap.Drive.COUNTS_PER_CM);
+		drive = DriveSubsystem.getInstance();
+		requires(drive);
+		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + cm;
 		control = new PIDController(kp , ki, kd, kf, new PIDSource(){
 			public void setPIDSourceType(PIDSourceType pidSource) {}
 
@@ -33,19 +36,27 @@ public class DriveDistance extends Command {
 			}
 
 			public double pidGet() {
-				return drive.getAvgEncoders();
+				return drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT;
 			}
 		}, new PIDOutput(){
 			public void pidWrite(double output) {
+				if(output > .7)
+					output = .7;
+				if(output < -.7)
+					output = -.7;
+				if(output < -.02 && output > -RobotMap.Drive.MIN_DRIVE_SPEED)
+					output = -RobotMap.Drive.MIN_DRIVE_SPEED;
+				if(output > .02 && output < RobotMap.Drive.MIN_DRIVE_SPEED)
+					output = RobotMap.Drive.MIN_DRIVE_SPEED;
 				drive.setSpeed(output);
 			}
 		});
-		control.setAbsoluteTolerance(10);
-		control.setToleranceBuffer(3);
+		control.setAbsoluteTolerance(4);
 	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
     }
@@ -56,7 +67,7 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return control.onTarget();
+    	return false;
     }
 
     // Called once after isFinished returns true
