@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.FreeBall;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,6 +29,10 @@ public class AgitatorSubsystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
+		if (DEBUG) {
+	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
+			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
+		}
 	}
 
 	private AgitatorSubsystem() {
@@ -80,7 +85,7 @@ public class AgitatorSubsystem extends Subsystem {
 			if (DEBUG) {
 				speed = SmartDashboard.getNumber(SpeedLabel, speed);
 			}
-		} else if (state.equals(State.FORWARD)) {
+		} else if (state.equals(State.BACKWARD)) {
 			speed = -RobotMap.Feeder.AGITATOR_SPEED;
 			
 			// When debugging/tuning, pull value from dashboard (negates this value)
@@ -143,7 +148,7 @@ public class AgitatorSubsystem extends Subsystem {
 	 *            Power level to apply in the range of [-1.0, +1.0] (0 stops,
 	 *            negative values turn in reverse direction).
 	 */
-	private void setAgitatorSpeed(double speed) {
+	public void setAgitatorSpeed(double speed) {
 		motor.set(speed);
 	}
 }
