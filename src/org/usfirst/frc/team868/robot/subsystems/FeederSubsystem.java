@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -13,9 +12,13 @@ public class FeederSubsystem extends Subsystem {
 	private static FeederSubsystem instance;
 	private Spark motor;
 	
-	public RobotMap.Feeder.State state;
+	public State state;
 	private DigitalInput beamBreak;
 	private static final boolean DEBUG = false;
+	
+	public static enum State {
+		FORWARD, OFF, BACKWARD;
+	}
 	
 	@Override
 	protected void initDefaultCommand() {}
@@ -42,7 +45,7 @@ public class FeederSubsystem extends Subsystem {
 	 * Turns the feeder on or off.
 	 * @param on
 	 */
-	public void setFeeder(RobotMap.Feeder.State state) {
+	public void setFeeder(State state) {
 		this.state = state;
 		switch(state) {
 			case FORWARD:
@@ -63,28 +66,28 @@ public class FeederSubsystem extends Subsystem {
 	 * Turns the feeder forward.
 	 */
 	public void setFeederForward() {
-		setFeeder(RobotMap.Feeder.State.FORWARD);
+		setFeeder(State.FORWARD);
 	}
 	
 	/**
 	 * Turns the feeder off.
 	 */
 	public void setFeederOff() {
-		setFeeder(RobotMap.Feeder.State.OFF);
+		setFeeder(State.OFF);
 	}
 	
 	/**
 	 * Turns the feeder Backward.
 	 */
 	public void setFeederBackward(){
-		setFeeder(RobotMap.Feeder.State.BACKWARD);
+		setFeeder(State.BACKWARD);
 	}
 	
 	/**
 	 * Switches the feeder's status.
 	 */
 	public void switchDirection() {
-		setFeeder(!(state == RobotMap.Feeder.State.FORWARD) ? RobotMap.Feeder.State.FORWARD : RobotMap.Feeder.State.BACKWARD);
+		setFeeder(!(state == State.FORWARD) ? State.FORWARD : State.BACKWARD);
 	}
 
 	/**
@@ -92,21 +95,21 @@ public class FeederSubsystem extends Subsystem {
 	 * default setting when turned back on).
 	 */
 	public void toggleFeeder() {
-		setFeeder(!(state == RobotMap.Feeder.State.OFF) ? RobotMap.Feeder.State.OFF : RobotMap.Feeder.State.FORWARD);
+		setFeeder(!(state == State.OFF) ? State.OFF : State.FORWARD);
 	}
 	
 	/**
 	 * returns opposite of current state
 	 */
-	public RobotMap.Feeder.State getOppositeState() {
-		return !(state == RobotMap.Feeder.State.FORWARD) ? RobotMap.Feeder.State.FORWARD : RobotMap.Feeder.State.BACKWARD;
+	public State getOppositeState() {
+		return !(state == State.FORWARD) ? State.FORWARD : State.BACKWARD;
 	}
 	
 	/**
 	 * Gets the feeder's status.
 	 * @return whether or not the feeder is on
 	 */
-	public RobotMap.Feeder.State getState() {
+	public State getState() {
 		return state;
 	}
 	

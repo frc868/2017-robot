@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFeederCommand;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
@@ -17,7 +16,7 @@ public class StopShooting extends CommandGroup {
     	if(AgitatorSubsystem.getInstance().getState() != AgitatorSubsystem.State.OFF){//Deactivates agitator
     		addSequential(new AgitatorCommand());
     	}
-    	if(FeederSubsystem.getInstance().getState() == RobotMap.Feeder.State.FORWARD || FeederSubsystem.getInstance().getState() == RobotMap.Feeder.State.BACKWARD){//Deactivates feeder
+    	if(FeederSubsystem.getInstance().getState() == FeederSubsystem.State.FORWARD || FeederSubsystem.getInstance().getState() == FeederSubsystem.State.BACKWARD){//Deactivates feeder
     		addSequential(new ShooterFeederCommand());
     	}
     	addSequential(new ShootUsingVoltage(0));//Deactivates shooter
