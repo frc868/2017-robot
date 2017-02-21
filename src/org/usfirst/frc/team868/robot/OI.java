@@ -1,10 +1,13 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootUsingVoltage;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
@@ -46,6 +49,8 @@ public class OI {
 	
 	static OI instance;
 	private ControllerMap driver, operator;
+	public boolean isPixyTargeting = true;
+	public boolean isShooterSpinning = false;
 	
 	public OI() {
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
@@ -60,7 +65,6 @@ public class OI {
 	}
 	
 	public interface Controls {
-		boolean isPixyTargeting = true;
 		
 		final int TOGGLE_GEAR_COLLECTOR = ControllerMap.Key.A;
 		final int TOGGLE_PIXY_TURRET_TARGETING = ControllerMap.Key.B;
@@ -73,10 +77,10 @@ public class OI {
 		final int TOGGLE_GEAR_FLASHLIGHT = ControllerMap.Key.LB;
 		final int TOGGLE_SHOOTER_FLASHLIGHT = ControllerMap.Key.RB;
 
-		final int CLIMB = ControllerMap.Key.RT;//TODO: make this command, make it so that LT must be fully pulled in order to start
-		final int FINE_TURRET_ADJUSTMENT_MULTIPLIER = ControllerMap.Key.LT;//TODO: add this multiplier to the joystick commands.
+		final int CLIMB = ControllerMap.Key.RT;
+		final int ADJUSTMENT_MULTIPLIER = ControllerMap.Key.LT;
 		
-		final int INCREASE_SHOOTER_SPEED = DPadButton.Direction.UP;//TODO: make this command
+		final int INCREASE_SHOOTER_SPEED = DPadButton.Direction.UP;
 		final int DECREASE_SHOOTER_SPEED = DPadButton.Direction.DOWN;
 	}
 	
@@ -90,17 +94,19 @@ public class OI {
 		
 		
 		// TURRET
-		controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)//TODO: make this command toggle-able
-			.whenPressed(new RotateUsingIRPixy());
+		if(isPixyTargeting){
+			controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
+				.whenPressed(new JoystickTurretControl());
+		}else{
+			controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
+				.whenPressed(new RotateUsingIRPixy());
+		}
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.FREE_THE_BALL)
 			.whenPressed(new FreeBall(2));//TODO: find a constant or some value to use here
-//		controller.getButton(Controls.TOGGLE_AGITATOR_AND_FEEDER)
-//			.whenPressed(new AgitatorCommand() && new ShooterFeederCommand());
-		//TODO: ^ make that command.
-		controller.getButton(Controls.TOGGLE_SHOOTER)
-			.whenPressed(new ShootCommand(0));//TODO: make this command
+		controller.getButton(Controls.TOGGLE_AGITATOR_AND_FEEDER)
+			.whenPressed(new ToggleFeederAndAgitator());
 				
 		// GEAR
 		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR)
@@ -111,6 +117,19 @@ public class OI {
 			.whenPressed(new GearFlashlightCommand());
 		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
 			.whenPressed(new ShooterFlashlightCommand());
+		
+		//SHOOTER
+		if(isShooterSpinning){
+			controller.getButton(Controls.TOGGLE_SHOOTER)
+				.whenPressed(new ShootUsingVoltage(0));
+		}else{
+			controller.getButton(Controls.TOGGLE_SHOOTER)
+				.whenPressed(new ShootCommand());
+		}
+		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
+			.whenPressed(new IncrementShooterSpeed(.02));
+		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
+			.whenPressed(new IncrementShooterSpeed(-.02));
 	}
 	
 	public ControllerMap getDriver() {

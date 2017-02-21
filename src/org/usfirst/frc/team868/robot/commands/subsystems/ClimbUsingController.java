@@ -1,0 +1,35 @@
+package org.usfirst.frc.team868.robot.commands.subsystems;
+
+import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+/**
+ *
+ */
+public class ClimbUsingController extends Command {
+
+	private ClimberSubsystem climb;
+	
+    public ClimbUsingController() {
+    	climb = ClimberSubsystem.getInstance();
+    	requires(climb);
+    }
+
+    protected void initialize() {
+    }
+
+    protected void execute() {
+    	if(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER) >= .9)
+    		climb.startClimbing(.8*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
+    }
+
+    protected boolean isFinished() {
+        return false;
+    }
+
+    protected void end() {
+    	climb.stopClimbing();
+    }
+}

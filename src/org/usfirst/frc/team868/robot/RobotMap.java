@@ -131,6 +131,7 @@ public interface RobotMap {
 		//VALUES:
 		final boolean IS_INVERTED = true;
 		final double SHOOTER_POWER = 0.8;
+		final double TARGET_SHOOTER_SPEED = 50;
 		final double ROTATIONS_PER_COUNT = 1.0;
 	}
 	
