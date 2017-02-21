@@ -50,9 +50,9 @@ public class OI {
 	
 	public OI() {
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
-						ControllerMap.Type.LOGITECH);
+						ControllerMap.Type.XBOX_ONE);
 		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
-						ControllerMap.Type.XBOX_360);
+						ControllerMap.Type.XBOX_ONE);
 		
 		setupDriver(driver);
 		setupOperator(operator);
@@ -61,28 +61,28 @@ public class OI {
 	}
 	
 	public interface Controls {
-		double MIN_JOYSTICK_VAL = 0.15;
-		
 		final int SHOOT = ControllerMap.Key.X;
-		final int R_FORWARD = DPadButton.Direction.UP;
-		final int R_BACKWARD = DPadButton.Direction.DOWN;
-		final int R_RIGHT = DPadButton.Direction.RIGHT;
-		final int R_PIXY = ControllerMap.Key.B;
+		final int FACE_TURRET_FORWARD = DPadButton.Direction.UP;
+		final int FACE_TURRET_BACKWARD = DPadButton.Direction.DOWN;
+		final int FACE_TURRET_RIGHT = DPadButton.Direction.RIGHT;
+		final int PIXY_TURRET_TARGETING = ControllerMap.Key.B;
 		final int CALIBRATE = ControllerMap.Key.LB;
-		final int AGITATOR = ControllerMap.Key.RS;
-		final int SPIN = ControllerMap.Key.LS;
+		final int SPIN_UP_SHOOTER = ControllerMap.Key.LT;
+		
+		final int TOGGLE_AGITATOR = ControllerMap.Key.RS;
+		final int TOGGLE_FEEDER = ControllerMap.Key.LS;
 	
 		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
 		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
 
-		final int CLIMB = ControllerMap.Key.RB;
+		final int TOGGLE_CLIMBING = ControllerMap.Key.RB;
 	}
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
 		
 		// TURRET
-		controller.getButton(Controls.R_PIXY)
+		controller.getButton(Controls.PIXY_TURRET_TARGETING)
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(Controls.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
@@ -90,34 +90,38 @@ public class OI {
 	
 	public void setupOperator(ControllerMap controller) {
 		controller.clearButtons();
+		//TODO: add rotate turret w/ joystick(s)
+		
 		
 		// TURRET
-		controller.getButton(Controls.R_FORWARD)
+		controller.getButton(Controls.FACE_TURRET_FORWARD)
 			.whenPressed(new RotateTurretToAngle(0));
-		controller.getButton(Controls.R_BACKWARD)
+		controller.getButton(Controls.FACE_TURRET_BACKWARD)
 			.whenPressed(new RotateTurretToAngle(180));
-		controller.getButton(Controls.R_RIGHT)
+		controller.getButton(Controls.FACE_TURRET_RIGHT)
 			.whenPressed(new RotateTurretToAngle(-90));
-		controller.getButton(Controls.R_PIXY)
+		controller.getButton(Controls.PIXY_TURRET_TARGETING)
 			.whenPressed(new RotateUsingIRPixy());
 		controller.getButton(Controls.SHOOT)
 			.whileHeld(new FeedAndShootCommandGroup());
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
-		controller.getButton(Controls.AGITATOR)
+		controller.getButton(Controls.TOGGLE_AGITATOR)
 			.whenPressed(new AgitatorCommand());
-		controller.getButton(Controls.SPIN)
+		controller.getButton(Controls.TOGGLE_FEEDER)
+			.whenPressed(new ShooterFeederCommand());
+		controller.getButton(Controls.SPIN_UP_SHOOTER)
 			.whenPressed(new ShootCommand(75));
 				
 		// GEAR
 		controller.getButton(Controls.TOGGLE_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
-		controller.getButton(Controls.TOGGLE_FLASHLIGHT)
-			.whenPressed(new GearFlashlightCommand());
+		//controller.getButton(Controls.TOGGLE_FLASHLIGHT)   Until relay bug is certainly fixed, this is to prevent issues.
+		//	.whenPressed(new GearFlashlightCommand());
 		
 		// CLIMBER (OPERATOR)
-		controller.getButton(Controls.CLIMB)
-			.whileHeld(new ClimberCommand());
+		controller.getButton(Controls.TOGGLE_CLIMBING)
+			.whenPressed(new ClimberCommand());
 	}
 	
 	public ControllerMap getDriver() {
@@ -132,10 +136,10 @@ public class OI {
 		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
 		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
-		SmartDashboard.putData("Rotate by 90", new RotateAngle(90));
-		SmartDashboard.putData("Turn to 90", new TurnToAngle(90));
-		SmartDashboard.putData("Rotate by -90", new RotateAngle(-90));
-		SmartDashboard.putData("Turn to -90", new RotateAngle(-90));
+		SmartDashboard.putData("Rotate 180", new RotateAngle(180));
+		SmartDashboard.putData("Rotate 90", new RotateAngle(90));
+		SmartDashboard.putData("Rotate 0", new RotateAngle(0));
+		SmartDashboard.putData("Drive forward 2m", new DriveDistance(200));
 	}
 
 	public static OI getInstance() {
