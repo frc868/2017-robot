@@ -12,7 +12,6 @@ import lib.util.gyro.BNO055;
  */
 public class MainGyroSubsystem extends Subsystem {
 
-    private static MainGyroSubsystem instance;
     private BNO055 gyro;
     private GyroBase gyroX;
     
@@ -39,17 +38,6 @@ public class MainGyroSubsystem extends Subsystem {
 	 */
     public void updateSD(){
     	SmartDashboard.putNumber("Rotation", getRotation());
-    }
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static MainGyroSubsystem getInstance(){
-    	if(instance == null){
-    		instance = new MainGyroSubsystem();
-    	}
-    	return instance;
     }
 
     public void initDefaultCommand() {

@@ -19,7 +19,7 @@ public class SetLEDs extends Command {
 	private FeederSubsystem feed;
 
 	public SetLEDs() {
-    	led = LEDSubsystem.getInstance();
+    	led = Robot.leds;
     	shoot = Robot.shooter;
     	gear = Robot.gearCollector;
     	feed = Robot.feeder;

@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LidarSubsystem extends Subsystem {
 
-	private static LidarSubsystem instance;
 	private SerialPort serial;
 
 	volatile private int distance;
@@ -27,15 +26,6 @@ public class LidarSubsystem extends Subsystem {
 	public LidarSubsystem() {
 		connect();
 		startThread();
-	}
-
-	/**
-	 * Gets the subsystem instance
-	 * 
-	 * @return subsystem instance
-	 */
-	public static LidarSubsystem getInstance() {
-		return instance == null ? instance = new LidarSubsystem() : instance;
 	}
 
 	public void startThread() {

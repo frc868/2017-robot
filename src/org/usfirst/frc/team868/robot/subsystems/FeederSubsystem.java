@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FeederSubsystem extends Subsystem {
-	private static FeederSubsystem instance;
 	private Spark motor;
 	
 	public State state;
@@ -32,15 +31,7 @@ public class FeederSubsystem extends Subsystem {
 		LiveWindow.addActuator("Feeder", "Motor", motor);
 		LiveWindow.addSensor("Feeder", "Beam break", beamBreak);
 	}
-	
-	/**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-	public static FeederSubsystem getInstance() {
-		return instance == null ? instance = new FeederSubsystem() : instance;
-	}
-	
+
 	/**
 	 * Turns the feeder on or off.
 	 * @param on

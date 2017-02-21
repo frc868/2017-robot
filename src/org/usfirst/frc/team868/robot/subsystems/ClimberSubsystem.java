@@ -14,7 +14,6 @@ import lib.util.HoundMath;
  */
 public class ClimberSubsystem extends Subsystem {
 	
-	private static ClimberSubsystem instance;
 	private CANTalon climber;
 	private static final boolean DEBUG = false;
 	
@@ -75,17 +74,6 @@ public class ClimberSubsystem extends Subsystem {
 			SmartDashboard.putBoolean("Is climbing", isClimbing());
 			SmartDashboard.putBoolean("Is pressing button", isPressingButton());
 		}
-	}
-	
-	/**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-	public static ClimberSubsystem getInstance(){
-		if(instance == null){
-			instance = new ClimberSubsystem();
-		}
-		return instance;
 	}
 
     public void initDefaultCommand() {

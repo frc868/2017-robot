@@ -11,6 +11,7 @@ import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.MainGyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.LEDSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static ShooterFlashlightSubsystem shooterFlashlight;
 	public static ShooterSubsystem shooter;
 	public static TurretRotationSubsystem turret;
+	public static LEDSubsystem leds;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -119,6 +121,7 @@ public class Robot extends IterativeRobot {
 	 */
 	private void initSubsystems() {
 		oi = new OI();
+		leds = new LEDSubsystem();
 		agitator = new AgitatorSubsystem();
 		climber = new ClimberSubsystem();
 		colorPixy = new ColorPixySubsystem();
