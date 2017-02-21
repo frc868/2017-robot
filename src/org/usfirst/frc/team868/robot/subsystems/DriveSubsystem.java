@@ -28,7 +28,7 @@ public class DriveSubsystem extends Subsystem {
 	 * Constructor, provides the port values for motors and encoders,
 	 * and inverts any motors that need inversion.
 	 */
-	private DriveSubsystem(){
+	public DriveSubsystem(){
 		leftMotor = new Spark(RobotMap.Drive.LEFT_MOTOR);
 		rightMotor = new Spark(RobotMap.Drive.RIGHT_MOTOR);
 		leftMotor.setInverted(RobotMap.Drive.LEFT_IS_INVERTED);

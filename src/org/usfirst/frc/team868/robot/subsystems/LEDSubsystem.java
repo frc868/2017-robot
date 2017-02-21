@@ -14,7 +14,7 @@ public class LEDSubsystem extends Subsystem {
 	private static LEDSubsystem instance;
 	private DigitalOutput led1, led2, ledGear;
 	
-	private LEDSubsystem(){
+	public LEDSubsystem(){
 		led1 = new DigitalOutput(RobotMap.LEDs.DIO_1_PORT);
 		led2 = new DigitalOutput(RobotMap.LEDs.DIO_2_PORT);
 		ledGear = new DigitalOutput(RobotMap.LEDs.DIO_GEAR_PORT);

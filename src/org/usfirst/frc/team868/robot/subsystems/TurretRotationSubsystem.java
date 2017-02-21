@@ -23,7 +23,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private final double P = 0, I = 0, D = 0;
 	private final boolean DEBUG = false;
 
-	private TurretRotationSubsystem(){
+	public TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
 		// Make sure we stop if we hit a physical limit switch

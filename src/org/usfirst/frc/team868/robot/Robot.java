@@ -16,27 +16,43 @@ import org.usfirst.frc.team868.robot.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {	
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
 
-    	initSubsystems();
-		OI.getInstance();
-    	new UpdateSmartDashboard().start();
-    	
-    }
+	public static OI oi; //TODO move to constructor of ROBOT, make FINAL?
+	public static AgitatorSubsystem agitator;
+	public static ClimberSubsystem climber;
+	public static ColorPixySubsystem colorPixy;
+	public static DriveSubsystem drivetrain;
+	public static GearCollectorSubsystem gearCollector;
+	public static GearFlashlightSubsystem gearFlashlight;
+	public static GyroSubsystem gyro;
+	public static IRPixySubsystem irPixy;
+	public static LidarSubsystem lidar;
+	public static FeederSubsystem feeder;
+	public static ShooterFlashlightSubsystem shooterFlashlight;
+	public static ShooterSubsystem shooter;
+	public static TurretRotationSubsystem turret;
 
 	/**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-     */
-    public void disabledInit(){
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 
-    }
-	
+		initSubsystems();
+		OI.getInstance();
+		new UpdateSmartDashboard().start();
+
+	}
+
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+	public void disabledInit(){
+
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
@@ -50,8 +66,8 @@ public class Robot extends IterativeRobot {
 	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
-    public void autonomousInit() {
-        
+	public void autonomousInit() {
+
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
 		case "My Auto":
@@ -62,54 +78,55 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
-    	
-    	// schedule the autonomous command (example)
-    }
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
-
-    public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-    }
-
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-	
-    /**
-     * This function gets called to initialize the subsystems
-     */
-	private void initSubsystems() {
-		AgitatorSubsystem.getInstance();
-		ClimberSubsystem.getInstance();
-//		ColorPixySubsystem.getInstance();
-		DriveSubsystem.getInstance();
-//		GearCollectorSubsystem.getInstance();
-//		GearFlashlightSubsystem.getInstance();
-		GyroSubsystem.getInstance();
-//		IRPixySubsystem.getInstance();
-//		LidarSubsystem.getInstance();
-		FeederSubsystem.getInstance();
-//		ShooterFlashlightSubsystem.getInstance();
-		ShooterSubsystem.getInstance();
-//		TurretRotationSubsystem.getInstance();
+		// schedule the autonomous command (example)
 	}
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+	}
+
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function gets called to initialize the subsystems
+	 */
+	private void initSubsystems() {
+		oi = new OI();
+		agitator = new AgitatorSubsystem();
+		climber = new ClimberSubsystem();
+		colorPixy = new ColorPixySubsystem();
+		drivetrain = new DriveSubsystem();
+		gearCollector = new GearCollectorSubsystem();
+		gearFlashlight = new GearFlashlightSubsystem();
+		gyro = new GyroSubsystem();
+		irPixy = new IRPixySubsystem();
+		lidar = new LidarSubsystem();
+		feeder = new FeederSubsystem();
+		shooterFlashlight = new ShooterFlashlightSubsystem();
+		shooter = new ShooterSubsystem();
+		turret = new TurretRotationSubsystem();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }

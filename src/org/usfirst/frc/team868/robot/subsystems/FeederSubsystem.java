@@ -23,7 +23,7 @@ public class FeederSubsystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {}
 	
-	private FeederSubsystem() {
+	public FeederSubsystem() {
 		motor = new Spark(RobotMap.Feeder.CONVEYOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.CONVEYOR_IS_INVERTED);
 		beamBreak = new DigitalInput(RobotMap.Feeder.BEAM_BREAK_PORT);

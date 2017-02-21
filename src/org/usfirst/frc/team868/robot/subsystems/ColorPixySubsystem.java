@@ -132,7 +132,7 @@ public class ColorPixySubsystem extends Subsystem {
 
 	private Thread thread;
 
-	private ColorPixySubsystem() {
+	public ColorPixySubsystem() {
 		pixyCamS = null;
 		pixyCamI = null;
 		target = new Record(0, 0, 0, 0);

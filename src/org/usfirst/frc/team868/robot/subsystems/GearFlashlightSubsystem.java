@@ -29,7 +29,7 @@ public class GearFlashlightSubsystem extends Subsystem {
     	return instance;
     }
     
-    private GearFlashlightSubsystem() {
+    public GearFlashlightSubsystem() {
     	flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);
     	flashlight.setDirection(Relay.Direction.kForward);
 
