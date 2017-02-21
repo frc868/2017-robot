@@ -24,9 +24,9 @@ public class ShooterSubsystem extends Subsystem {
     private CANTalon leftShooter;
     private PIDController control;
     private Counter count;
-    public static final double P = 0;
+    public static final double P = 0.0135;
     public static final double I = 0;
-    public static final double D = 0;
+    public static final double D = 0.0597;
     
     private ShooterSubsystem(){
     	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
@@ -37,6 +37,7 @@ public class ShooterSubsystem extends Subsystem {
     	
     	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
+    	
     	leftShooter.set(rightShooter.getDeviceID());
     	count = new Counter(RobotMap.Shoot.ENCODER_A);
     	
@@ -90,7 +91,7 @@ public class ShooterSubsystem extends Subsystem {
      * @param speed
      */
     public void setSpeed(double speed) {
-    	control.setSetpoint(HoundMath.checkRange(speed, 0, 1));
+    	control.setSetpoint(speed);
     	control.enable();
     }
     

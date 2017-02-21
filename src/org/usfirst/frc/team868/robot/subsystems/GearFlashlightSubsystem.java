@@ -55,7 +55,6 @@ public class GearFlashlightSubsystem extends Subsystem {
      * @return current status of the flashlight.
      */
     public boolean isOn() {
-//    	return flashlight.get() == Relay.Value.kOn;
     	return isOn;
     }
     
