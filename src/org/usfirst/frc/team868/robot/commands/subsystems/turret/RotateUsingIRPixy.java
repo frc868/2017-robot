@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
+import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -12,6 +13,7 @@ public class RotateUsingIRPixy extends Command {
 	
 	private IRPixySubsystem camera;
 	private Timer time;
+	@SuppressWarnings("unused")
 	private double timeout;
 
 	/**
@@ -44,16 +46,11 @@ public class RotateUsingIRPixy extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return time.get() > timeout;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
+    	OI.getInstance().isPixyTargeting = false;
     }
 }

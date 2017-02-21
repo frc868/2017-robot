@@ -1,5 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,6 +13,11 @@ public class ShootCommand extends Command {
 
 	ShooterSubsystem shooter;
 	double speed;
+	
+	public ShootCommand(){
+		this(RobotMap.Shoot.TARGET_SHOOTER_SPEED);
+		OI.getInstance().isShooterSpinning = true;
+	}
     
 	/**
 	 * Sets the speed of the shooter wheel

@@ -90,8 +90,16 @@ public class ShooterSubsystem extends Subsystem {
      * @param speed
      */
     public void setSpeed(double speed) {
-    	control.setSetpoint(speed);
+    	control.setSetpoint(HoundMath.checkRange(speed, 0, 1));
     	control.enable();
+    }
+    
+    /**
+     * Gets the shooter's targeted speed.
+     * @return setpoint
+     */
+    public double getSetpoint(){
+    	return control.getSetpoint();
     }
     
     /**
