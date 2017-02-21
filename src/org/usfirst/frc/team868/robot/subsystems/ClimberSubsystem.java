@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.ClimbUsingController;
 
 import com.ctre.CANTalon;
 
@@ -22,7 +23,7 @@ public class ClimberSubsystem extends Subsystem {
 		climber = new CANTalon(RobotMap.Climber.CLIMBER_MOTOR);
 		climber.setInverted(RobotMap.Climber.IS_INVERTED);
 		climber.enableLimitSwitch(true, false);
-		climber.enableBrakeMode(false);
+		climber.enableBrakeMode(true);
 		climber.changeControlMode(CANTalon.TalonControlMode.Voltage);
 		
 		// Assign test mode group
@@ -89,6 +90,7 @@ public class ClimberSubsystem extends Subsystem {
 	}
 
     public void initDefaultCommand() {
+    	setDefaultCommand(new ClimbUsingController());
     }
 }
 

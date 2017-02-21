@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
 
 import com.ctre.CANTalon;
 
@@ -21,6 +22,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private CANTalon turretRotator;
 	private PIDController control;
 	private final double P = 0, I = 0, D = 0;
+	private boolean isPixyTargeting = true;
 	private final boolean DEBUG = false;
 
 	private TurretRotationSubsystem(){
@@ -160,6 +162,14 @@ public class TurretRotationSubsystem extends Subsystem {
 		return turretRotator.getSetpoint() * RobotMap.Turret.DEGREES_PER_COUNT;
 	}
 	
+	public void toggleTargeting(){
+		isPixyTargeting = !isPixyTargeting;
+	}
+	
+	public boolean isPixyTargeting(){
+		return isPixyTargeting;
+	}
+	
 	/**
 	 * Update information on SmartDashboard.
 	 */
@@ -187,6 +197,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new RotateUsingIRPixy());
 	}
 }
 

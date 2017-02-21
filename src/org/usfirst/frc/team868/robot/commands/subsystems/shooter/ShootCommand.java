@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
@@ -16,7 +15,6 @@ public class ShootCommand extends Command {
 	
 	public ShootCommand(){
 		this(RobotMap.Shoot.TARGET_SHOOTER_SPEED);
-		OI.getInstance().isShooterSpinning = true;
 	}
     
 	/**
@@ -31,7 +29,11 @@ public class ShootCommand extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	shooter.setSpeed(speed);
+    	if(shooter.getPower() > 0){
+    		shooter.setSpeed(0);
+    	}else{
+    		shooter.setSpeed(speed);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run

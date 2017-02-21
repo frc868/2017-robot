@@ -24,6 +24,7 @@ public class ShooterSubsystem extends Subsystem {
     private CANTalon leftShooter;
     private PIDController control;
     private Counter count;
+    private double lastSpeed;
     public static final double P = 0.0135;
     public static final double I = 0;
     public static final double D = 0.0597;
@@ -108,7 +109,10 @@ public class ShooterSubsystem extends Subsystem {
      * @return
      */
     public double getSpeed(){
-    	return count.getRate();
+    	if(count.getRate() < 150){
+    		lastSpeed = count.getRate();
+    	}
+    	return lastSpeed;
     }
     
     /**

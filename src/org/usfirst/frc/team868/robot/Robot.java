@@ -23,7 +23,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
     	initSubsystems();
-		OI.getInstance();
+		OI.getInstance().initialize();
+		
     	new UpdateSmartDashboard().start();
     	
     }

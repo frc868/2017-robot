@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
@@ -7,7 +8,6 @@ import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootUsingVoltage;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
@@ -49,15 +49,15 @@ public class OI {
 	
 	static OI instance;
 	private ControllerMap driver, operator;
-	public boolean isPixyTargeting = true;
-	public boolean isShooterSpinning = false;
 	
 	public OI() {
 		driver = new ControllerMap(new Joystick(RobotMap.JoystickPort.DRIVER),
 						ControllerMap.Type.XBOX_ONE);
 		operator = new ControllerMap(new Joystick(RobotMap.JoystickPort.OPERATOR),
 						ControllerMap.Type.XBOX_ONE);
-		
+	}
+	
+	void initialize() {
 		setupDriver(driver);
 		setupOperator(operator);
 		
@@ -94,13 +94,8 @@ public class OI {
 		
 		
 		// TURRET
-		if(isPixyTargeting){
-			controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
-				.whenPressed(new JoystickTurretControl());
-		}else{
-			controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
-				.whenPressed(new RotateUsingIRPixy());
-		}
+		controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
+			.whenPressed(new JoystickTurretControl());
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.FREE_THE_BALL)
@@ -113,19 +108,14 @@ public class OI {
 			.whenPressed(new GearCollectorToggleCommand());
 		
 		//FLASHLIGHTS
-		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
-			.whenPressed(new GearFlashlightCommand());
-		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
-			.whenPressed(new ShooterFlashlightCommand());
+//		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
+//			.whenPressed(new GearFlashlightCommand());
+//		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
+//			.whenPressed(new ShooterFlashlightCommand());
 		
 		//SHOOTER
-		if(isShooterSpinning){
-			controller.getButton(Controls.TOGGLE_SHOOTER)
-				.whenPressed(new ShootUsingVoltage(0));
-		}else{
-			controller.getButton(Controls.TOGGLE_SHOOTER)
-				.whenPressed(new ShootCommand());
-		}
+		controller.getButton(Controls.TOGGLE_SHOOTER)
+			.whenPressed(new ShootCommand());
 		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
 			.whenPressed(new IncrementShooterSpeed(.02));
 		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
@@ -141,6 +131,7 @@ public class OI {
 	}
 
 	public void initSmartDashboard() {
+		AutonChooser.getInstance();
 		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
 		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));

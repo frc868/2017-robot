@@ -23,6 +23,8 @@ public class ClimbUsingController extends Command {
     protected void execute() {
     	if(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER) >= .9)
     		climb.startClimbing(.8*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
+    	if(OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB) == 0)
+    		climb.startClimbing(0);
     }
 
     protected boolean isFinished() {

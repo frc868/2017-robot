@@ -13,30 +13,17 @@ public class ShooterFeederCommand extends Command {
 	
 	public FeederSubsystem.State state;
 	
-	/**
-	 * Sets the feeder to the given argument
-	 * @param state
-	 */
-    public ShooterFeederCommand(FeederSubsystem.State state) { 
-    	feeder = FeederSubsystem.getInstance(); 
-
-        requires(feeder);
-        
-        this.state = state;
-    }
-    
     /**
      * Toggles the feeder's on/off status
      */
     public ShooterFeederCommand(){
     	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
-    	state = feeder.getOppositeState();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	feeder.setFeeder(state);
+    	feeder.toggleFeeder();
     }
 
     // Called repeatedly when this Command is scheduled to run
