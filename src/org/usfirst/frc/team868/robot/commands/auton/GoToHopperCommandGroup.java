@@ -13,20 +13,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class GoToHopperCommandGroup extends CommandGroup {
 
     public GoToHopperCommandGroup(StartingPoint selected) {
-    	CalculateAnglesAndDistances posOne = new CalculateAnglesAndDistances(541.589574413, 232.5); 
-    	CalculateAnglesAndDistances posTwo = new CalculateAnglesAndDistances(335.839574413, 232.5);
+    	double posOneAngle = CalculateAnglesAndDistances.getAngleFromSides(541.589574413, 232.5);
+    	double posTwoAngle = CalculateAnglesAndDistances.getAngleFromSides(335.839574413, 232.5);
+    	double posOneDistance = CalculateAnglesAndDistances.getHypotenuse(541.589574413, 232.5);
+    	double posTwoDistance = CalculateAnglesAndDistances.getHypotenuse(335.839574413, 232.5);
     	switch(selected) {
     		case R1:
-    			addSequential(new TurnToAngle(90 - posOne.getAngle()));
-    			addSequential(new DriveDistance(posOne.getHypotenuse()));
-    			addSequential(new TurnToAngle(-90 - (90 - posOne.getAngle())));
+    			addSequential(new TurnToAngle(90 - posOneAngle));
+    			addSequential(new DriveDistance(posOneDistance));
+    			addSequential(new TurnToAngle(-90 - (90 - posOneAngle)));
     			addSequential(new DriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case R2:
-    			addSequential(new TurnToAngle(90 - posTwo.getAngle()));
-    			addSequential(new DriveDistance(posTwo.getHypotenuse()));
-    			addSequential(new TurnToAngle(-90 - (90 - posTwo.getAngle())));
+    			addSequential(new TurnToAngle(90 - posTwoAngle));
+    			addSequential(new DriveDistance(posTwoDistance));
+    			addSequential(new TurnToAngle(-90 - (90 - posTwoAngle)));
     			addSequential(new DriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
@@ -37,16 +39,16 @@ public class GoToHopperCommandGroup extends CommandGroup {
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case B1:
-    			addSequential(new TurnToAngle(-(90 -posOne.getAngle())));
-    			addSequential(new DriveDistance(posOne.getHypotenuse()));
-    			addSequential(new TurnToAngle((-90 - (90 - posOne.getAngle()))));
+    			addSequential(new TurnToAngle(-(90 -posOneAngle)));
+    			addSequential(new DriveDistance(posOneDistance));
+    			addSequential(new TurnToAngle((-90 - (90 - posOneAngle))));
     			addSequential(new DriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case B2:
-    			addSequential(new TurnToAngle(90 - posTwo.getAngle()));
-    			addSequential(new DriveDistance(posTwo.getHypotenuse()));
-    			addSequential(new TurnToAngle((-90 - (90 - posTwo.getAngle()))));
+    			addSequential(new TurnToAngle(90 - posTwoAngle));
+    			addSequential(new DriveDistance(posTwoDistance));
+    			addSequential(new TurnToAngle((-90 - (90 - posTwoAngle))));
     			addSequential(new DriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
