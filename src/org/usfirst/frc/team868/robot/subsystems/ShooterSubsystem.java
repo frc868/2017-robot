@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 
 import com.ctre.CANTalon;
 
@@ -25,9 +26,9 @@ public class ShooterSubsystem extends Subsystem {
     private PIDController control;
     private Counter count;
     private double lastSpeed;
-    public static final double P = 0.0135;
+    public static final double P = 0.01;
     public static final double I = 0;
-    public static final double D = 0.0597;
+    public static final double D = 0.08;
     
     private ShooterSubsystem(){
     	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
@@ -149,6 +150,7 @@ public class ShooterSubsystem extends Subsystem {
     	SmartDashboard.putNumber("Shooter Speed", getSpeed());
     	SmartDashboard.putNumber("Shooter Power", getPower());
     	SmartDashboard.putData("Shooter PID", control);
+    	SmartDashboard.putData("Run Shooter @ 80", new ShootCommand(80));
     }
 
     public void initDefaultCommand() {
