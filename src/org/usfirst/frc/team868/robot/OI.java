@@ -1,16 +1,13 @@
 package org.usfirst.frc.team868.robot;
 
-import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
-import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.ClimberCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RecordMotorMovementHelper;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearCollectorToggleCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.CalibrateTurret;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -67,31 +64,28 @@ public class OI {
 	}
 	
 	public interface Controls {
-		final int SHOOT = ControllerMap.Key.X;
-		final int FACE_TURRET_FORWARD = DPadButton.Direction.UP;
-		final int FACE_TURRET_BACKWARD = DPadButton.Direction.DOWN;
-		final int FACE_TURRET_RIGHT = DPadButton.Direction.RIGHT;
-		final int PIXY_TURRET_TARGETING = ControllerMap.Key.B;
-		final int CALIBRATE = ControllerMap.Key.LB;
-		final int SPIN_UP_SHOOTER = ControllerMap.Key.LT;
+		boolean isPixyTargeting = true;
 		
-		final int TOGGLE_AGITATOR = ControllerMap.Key.RS;
-		final int TOGGLE_FEEDER = ControllerMap.Key.LS;
+		final int TOGGLE_GEAR_COLLECTOR = ControllerMap.Key.A;
+		final int TOGGLE_PIXY_TURRET_TARGETING = ControllerMap.Key.B;
+		final int TOGGLE_AGITATOR_AND_FEEDER = ControllerMap.Key.Y;
+		final int TOGGLE_SHOOTER = ControllerMap.Key.X;
+		
+		final int CALIBRATE = ControllerMap.Key.BACK;
+		final int FREE_THE_BALL = ControllerMap.Key.START;
 	
-		final int TOGGLE_COLLECTOR = ControllerMap.Key.A;
-		final int TOGGLE_FLASHLIGHT = ControllerMap.Key.Y;
+		final int TOGGLE_GEAR_FLASHLIGHT = ControllerMap.Key.LB;
+		final int TOGGLE_SHOOTER_FLASHLIGHT = ControllerMap.Key.RB;
 
-		final int TOGGLE_CLIMBING = ControllerMap.Key.RB;
+		final int CLIMB = ControllerMap.Key.RT;//TODO: make this command, make it so that LT must be fully pulled in order to start
+		final int FINE_TURRET_ADJUSTMENT_MULTIPLIER = ControllerMap.Key.LT;//TODO: add this multiplier to the joystick commands.
+		
+		final int INCREASE_SHOOTER_SPEED = DPadButton.Direction.UP;//TODO: make this command
+		final int DECREASE_SHOOTER_SPEED = DPadButton.Direction.DOWN;
 	}
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
-		
-		// TURRET
-		controller.getButton(Controls.PIXY_TURRET_TARGETING)
-			.whenPressed(new RotateUsingIRPixy());
-		controller.getButton(Controls.SHOOT)
-			.whileHeld(new FeedAndShootCommandGroup());
 	}
 	
 	public void setupOperator(ControllerMap controller) {
@@ -100,34 +94,27 @@ public class OI {
 		
 		
 		// TURRET
-		controller.getButton(Controls.FACE_TURRET_FORWARD)
-			.whenPressed(new RotateTurretToAngle(0));
-		controller.getButton(Controls.FACE_TURRET_BACKWARD)
-			.whenPressed(new RotateTurretToAngle(180));
-		controller.getButton(Controls.FACE_TURRET_RIGHT)
-			.whenPressed(new RotateTurretToAngle(-90));
-		controller.getButton(Controls.PIXY_TURRET_TARGETING)
+		controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)//TODO: make this command toggle-able
 			.whenPressed(new RotateUsingIRPixy());
-		controller.getButton(Controls.SHOOT)
-			.whileHeld(new FeedAndShootCommandGroup());
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
-		controller.getButton(Controls.TOGGLE_AGITATOR)
-			.whenPressed(new AgitatorCommand());
-		controller.getButton(Controls.TOGGLE_FEEDER)
-			.whenPressed(new ShooterFeederCommand());
-		controller.getButton(Controls.SPIN_UP_SHOOTER)
-			.whenPressed(new ShootCommand(75));
+		controller.getButton(Controls.FREE_THE_BALL)
+			.whenPressed(new FreeBall(2));//TODO: find a constant or some value to use here
+//		controller.getButton(Controls.TOGGLE_AGITATOR_AND_FEEDER)
+//			.whenPressed(new AgitatorCommand() && new ShooterFeederCommand());
+		//TODO: ^ make that command.
+		controller.getButton(Controls.TOGGLE_SHOOTER)
+			.whenPressed(new ShootCommand(0));//TODO: make this command
 				
 		// GEAR
-		controller.getButton(Controls.TOGGLE_COLLECTOR)
+		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
-		//controller.getButton(Controls.TOGGLE_FLASHLIGHT)   Until relay bug is certainly fixed, this is to prevent issues.
-		//	.whenPressed(new GearFlashlightCommand());
 		
-		// CLIMBER (OPERATOR)
-		controller.getButton(Controls.TOGGLE_CLIMBING)
-			.whenPressed(new ClimberCommand());
+		//FLASHLIGHTS
+		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
+			.whenPressed(new GearFlashlightCommand());
+		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
+			.whenPressed(new ShooterFlashlightCommand());
 	}
 	
 	public ControllerMap getDriver() {
