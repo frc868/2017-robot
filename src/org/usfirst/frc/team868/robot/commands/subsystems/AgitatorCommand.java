@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,7 +21,7 @@ public class AgitatorCommand extends Command {
 	public AgitatorCommand(boolean on) {
 		
 		state = on;
-		agitator = AgitatorSubsystem.getInstance();
+		agitator = Robot.agitator;
 		requires(agitator);
 	}
     
@@ -27,7 +29,7 @@ public class AgitatorCommand extends Command {
      * Toggles the agitator's on/off status
      */
     public AgitatorCommand(){
-    	agitator = AgitatorSubsystem.getInstance();
+    	agitator = Robot.agitator;
     	requires(agitator);
     }
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,7 +19,7 @@ public class RotateTurretToAngle extends Command {
 	 * @param absoluteAngle in degrees
 	 */
     public RotateTurretToAngle(double absoluteAngle) {
-        turret = TurretRotationSubsystem.getInstance();
+        turret = Robot.turret;
         requires(turret);
         angle = absoluteAngle; 
     }

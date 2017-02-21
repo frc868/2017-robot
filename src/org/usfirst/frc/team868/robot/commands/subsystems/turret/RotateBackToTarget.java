@@ -1,11 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
-import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +13,7 @@ public class RotateBackToTarget extends Command {
 	private boolean hasLockedOn = false;
 	
     public RotateBackToTarget() {
-    	camera = IRPixySubsystem.getInstance();
+    	camera = Robot.irPixy;
     	requires(camera);
     }
 
@@ -54,21 +50,21 @@ public class RotateBackToTarget extends Command {
   
 	
     public void lockedOn() {
-    	lockedOn = Math.abs((int) ColorPixySubsystem.getInstance().getTarget().getXAngleOffFromCenter()) < 1;
+    	lockedOn = Math.abs((int) Robot.colorPixy.getTarget().getXAngleOffFromCenter()) < 1;
     	if (lockedOn && !hasLockedOn) hasLockedOn = true;
     	
     }
     
     public void updateLocked() {
-    	distance_from_target = LidarSubsystem.getInstance().getDistance();
-    	movement_distance_locked = DriveSubsystem.getInstance().getAvgEncoders();
-    	angle_from_robot = TurretRotationSubsystem.getInstance().getAngle();
+    	distance_from_target = Robot.lidar.getDistance();
+    	movement_distance_locked = Robot.drivetrain.getAvgEncoders();
+    	angle_from_robot = Robot.turret.getAngle();
     	
     } 
     
     public void updateNotLocked() {
-    	movement_angle = GyroSubsystem.getInstance().getRotation();
-    	movement_distance_not_locked = DriveSubsystem.getInstance().getAvgEncoders();
+    	movement_angle = Robot.gyro.getRotation();
+    	movement_distance_not_locked = Robot.drivetrain.getAvgEncoders();
     }
 
     public double angle() 

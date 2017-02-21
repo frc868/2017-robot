@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+import org.usfirst.frc.team868.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,7 +18,7 @@ public class CalibrateTurret extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	TurretRotationSubsystem.getInstance().calibrateTurret();
+    	Robot.turret.calibrateTurret();
     }
 
     // Called repeatedly when this Command is scheduled to run

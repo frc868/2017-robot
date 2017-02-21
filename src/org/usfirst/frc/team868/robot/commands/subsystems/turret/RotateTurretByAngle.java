@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
-import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+import org.usfirst.frc.team868.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,7 +16,7 @@ public class RotateTurretByAngle extends Command {
 	 * @param angle in degrees
 	 */
     public RotateTurretByAngle(double angle) {
-    	this.angle = TurretRotationSubsystem.getInstance().getAngle()+angle;
+    	this.angle = Robot.turret.getAngle()+angle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

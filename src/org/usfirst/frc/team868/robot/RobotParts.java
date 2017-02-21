@@ -5,17 +5,17 @@ import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.MainGyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import lib.util.RecordMotorMovement;
-
 
 /**
  * essentially it acts like a factory 
@@ -32,40 +32,40 @@ public interface RobotParts {
 	}
 	
 	public interface Shoot {
-		final ShooterSubsystem shooter = ShooterSubsystem.getInstance();
+		final ShooterSubsystem shooter = Robot.shooter;
 	}
 	
 	public interface Gyro {
-		final org.usfirst.frc.team868.robot.subsystems.GyroSubsystem gyro = org.usfirst.frc.team868.robot.subsystems.GyroSubsystem.getInstance();
+		final MainGyroSubsystem gyro = Robot.gyro;
 	}
 	
 	public interface Drive {
-		final DriveSubsystem drive = DriveSubsystem.getInstance();
+		final DriveSubsystem drive = Robot.drivetrain;
 	}
 	
 	public interface Camera {
 	}
 	
 	public interface Turret {
-		final TurretRotationSubsystem turretRotation = TurretRotationSubsystem.getInstance();
+		final TurretRotationSubsystem turretRotation = Robot.turret;
 	}
 	
 	public interface Feeder {
-		final AgitatorSubsystem agitator = AgitatorSubsystem.getInstance();
-		final FeederSubsystem shooterFeeder = FeederSubsystem.getInstance();
+		final AgitatorSubsystem agitator = Robot.agitator;
+		final FeederSubsystem shooterFeeder = Robot.feeder;
 	}
 	
 	public interface Climber {
-		final ClimberSubsystem climber = ClimberSubsystem.getInstance();
+		final ClimberSubsystem climber = Robot.climber;
 	}
 	
 	public interface GearCollector {
-		final GearCollectorSubsystem gearCollector = GearCollectorSubsystem.getInstance();
+		final GearCollectorSubsystem gearCollector = Robot.gearCollector;
 	}
 	
 	public interface Pixy {
-		final IRPixySubsystem irPixy = IRPixySubsystem.getInstance();
-		final ColorPixySubsystem colorPixy = ColorPixySubsystem.getInstance();
+		final IRPixySubsystem irPixy = Robot.irPixy;
+		final ColorPixySubsystem colorPixy = Robot.colorPixy;
 	}
 	
 	
@@ -74,11 +74,11 @@ public interface RobotParts {
 	}
 	
 	public interface LIDAR {
-		final LidarSubsystem lidar = LidarSubsystem.getInstance();
+		final LidarSubsystem lidar = Robot.lidar;
 	}
 	
 	public interface Flashlight {
-		final GearFlashlightSubsystem gearFlashlight = GearFlashlightSubsystem.getInstance();
-		final ShooterFlashlightSubsystem shooterFlashlight = ShooterFlashlightSubsystem.getInstance();
+		final GearFlashlightSubsystem gearFlashlight = Robot.gearFlashlight;
+		final ShooterFlashlightSubsystem shooterFlashlight = Robot.shooterFlashlight;
 	}
 }

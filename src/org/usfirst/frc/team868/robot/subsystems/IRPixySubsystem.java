@@ -146,7 +146,6 @@ public class IRPixySubsystem extends Subsystem {
 		}
 	}
 
-	private static IRPixySubsystem instance;
 	private SerialPort pixyCamS;
 	private I2C pixyCamI;
 	private int lastVal = 0;
@@ -158,7 +157,7 @@ public class IRPixySubsystem extends Subsystem {
 
 	private Thread thread;
 
-	private IRPixySubsystem(){
+	public IRPixySubsystem(){
 		pixyCamS = null;
 		pixyCamI = null;
 		target = new Record(0, 0, 0, 0);
@@ -295,13 +294,6 @@ public class IRPixySubsystem extends Subsystem {
 			SmartDashboard.putNumber("IR Camera Target Height", target.getHeightOfTarget());
 			//SmartDashboard.putNumber("IR Frame count", frame);
 		}
-	}
-
-	synchronized public static IRPixySubsystem getInstance(){
-		if(instance == null){
-			instance = new IRPixySubsystem();
-		}
-		return instance;
 	}
 
 	public void initDefaultCommand() {

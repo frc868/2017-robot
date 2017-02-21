@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,7 +18,7 @@ public class ShootCommand extends Command {
 	 * @param rps Rotations per Second (usually 50 - 80)
 	 */
     public ShootCommand(double rps) {
-    	shooter = ShooterSubsystem.getInstance();
+    	shooter = Robot.shooter;
     	requires(shooter);
     	speed = rps;
     }

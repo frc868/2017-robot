@@ -1,11 +1,10 @@
 package lib.util.gyro;
 
-import lib.util.HoundSubsystem;
-
 import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundSubsystem;
 
 /**
  * Subsystem that provides access to sensors used to track rotation about x, y

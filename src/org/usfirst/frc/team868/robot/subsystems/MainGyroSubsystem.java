@@ -10,13 +10,12 @@ import lib.util.gyro.BNO055;
 /**
  *
  */
-public class GyroSubsystem extends Subsystem {
+public class MainGyroSubsystem extends Subsystem {
 
-    private static GyroSubsystem instance;
     private BNO055 gyro;
     private GyroBase gyroX;
     
-    private GyroSubsystem(){
+    public MainGyroSubsystem(){
     	gyro = BNO055.getInstance(I2C.Port.kOnboard);
     	gyroX = gyro.createGyroX();
     	gyroX.reset();
@@ -39,17 +38,6 @@ public class GyroSubsystem extends Subsystem {
 	 */
     public void updateSD(){
     	SmartDashboard.putNumber("Rotation", getRotation());
-    }
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static GyroSubsystem getInstance(){
-    	if(instance == null){
-    		instance = new GyroSubsystem();
-    	}
-    	return instance;
     }
 
     public void initDefaultCommand() {

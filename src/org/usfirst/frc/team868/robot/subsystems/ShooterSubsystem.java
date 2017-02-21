@@ -19,7 +19,6 @@ import lib.util.HoundMath;
  */
 public class ShooterSubsystem extends Subsystem {
 
-    private static ShooterSubsystem instance;
     private CANTalon rightShooter;
     private CANTalon leftShooter;
     private PIDController control;
@@ -28,7 +27,7 @@ public class ShooterSubsystem extends Subsystem {
     public static final double I = 0;
     public static final double D = 0;
     
-    private ShooterSubsystem(){
+    public ShooterSubsystem(){
     	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
     	leftShooter = new CANTalon(RobotMap.Shoot.LEFT_SHOOTER_MOTOR);
     	
@@ -116,17 +115,6 @@ public class ShooterSubsystem extends Subsystem {
      */
     public double getCounts() {
     	return rightShooter.getPosition();
-    }
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static ShooterSubsystem getInstance(){
-    	if(instance == null){
-    		instance = new ShooterSubsystem();
-    	}
-    	return instance;
     }
 	
 	/**

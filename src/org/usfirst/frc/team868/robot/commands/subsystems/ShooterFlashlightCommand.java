@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,7 +19,7 @@ public class ShooterFlashlightCommand extends Command {
 	 * @param on
 	 */
     public ShooterFlashlightCommand(boolean on) { 
-    	flash = ShooterFlashlightSubsystem.getInstance(); 
+    	flash = Robot.shooterFlashlight; 
         requires(flash);
         
         state = on;
@@ -28,7 +29,7 @@ public class ShooterFlashlightCommand extends Command {
      * Toggles the flashlight's on/off status
      */
     public ShooterFlashlightCommand(){
-    	flash = ShooterFlashlightSubsystem.getInstance();
+    	flash = Robot.shooterFlashlight;
     	requires(flash);
     	state = !flash.isOn();
     }
