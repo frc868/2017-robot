@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -25,7 +26,7 @@ public class DriveDistance extends Command {
 	 * @param cm in centimeters
 	 */
 	public DriveDistance(double cm) {
-		drive = DriveSubsystem.getInstance();
+		drive = Robot.drivetrain;
 		requires(drive);
 		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + cm;
 		control = new PIDController(kp , ki, kd, kf, new PIDSource(){

@@ -1,12 +1,24 @@
 
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.MainGyroSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
-import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,14 +29,14 @@ import org.usfirst.frc.team868.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {	
 
-	public static OI oi; //TODO move to constructor of ROBOT, make FINAL?
+	public static OI oi;
 	public static AgitatorSubsystem agitator;
 	public static ClimberSubsystem climber;
 	public static ColorPixySubsystem colorPixy;
 	public static DriveSubsystem drivetrain;
 	public static GearCollectorSubsystem gearCollector;
 	public static GearFlashlightSubsystem gearFlashlight;
-	public static GyroSubsystem gyro;
+	public static MainGyroSubsystem gyro;
 	public static IRPixySubsystem irPixy;
 	public static LidarSubsystem lidar;
 	public static FeederSubsystem feeder;
@@ -39,7 +51,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 
 		initSubsystems();
-		OI.getInstance();
 		new UpdateSmartDashboard().start();
 
 	}
@@ -112,9 +123,9 @@ public class Robot extends IterativeRobot {
 		climber = new ClimberSubsystem();
 		colorPixy = new ColorPixySubsystem();
 		drivetrain = new DriveSubsystem();
-		gearCollector = new GearCollectorSubsystem();
+		gearCollector = new GearCollectorSubsystem(); 
 		gearFlashlight = new GearFlashlightSubsystem();
-		gyro = new GyroSubsystem();
+		gyro = new MainGyroSubsystem();
 		irPixy = new IRPixySubsystem();
 		lidar = new LidarSubsystem();
 		feeder = new FeederSubsystem();

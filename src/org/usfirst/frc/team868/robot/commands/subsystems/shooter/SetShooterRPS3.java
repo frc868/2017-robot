@@ -2,8 +2,10 @@ package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
 import java.util.TimerTask;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TargetProvider;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -54,7 +56,7 @@ public class SetShooterRPS3 extends Command {
 		
 		this.rpsProvider = rps;
 
-		shooter = ShooterSubsystem.getInstance();
+		shooter = Robot.shooter;
 
 		if (DEBUG) {
 			// Get PID values from dash board (if available)

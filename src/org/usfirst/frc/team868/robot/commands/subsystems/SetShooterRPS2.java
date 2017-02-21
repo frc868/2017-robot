@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TargetProvider;
 
@@ -49,7 +50,7 @@ public class SetShooterRPS2 extends Command implements PIDOutput {
 		
 		this.rpsProvider = rps;
 
-		shooter = ShooterSubsystem.getInstance();
+		shooter = Robot.shooter;
 
 		PIDSource pidSrc = new PIDSource() {
 

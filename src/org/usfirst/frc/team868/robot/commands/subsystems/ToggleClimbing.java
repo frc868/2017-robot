@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +13,7 @@ public class ToggleClimbing extends Command {
     private ClimberSubsystem climb;
 
 	public ToggleClimbing() {
-    	climb = ClimberSubsystem.getInstance();
+    	climb = Robot.climber;
     	requires(climb);
     }
 

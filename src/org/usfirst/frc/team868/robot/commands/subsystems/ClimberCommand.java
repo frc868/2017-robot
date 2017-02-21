@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
-import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
+import org.usfirst.frc.team868.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,12 +12,12 @@ public class ClimberCommand extends Command {
     public ClimberCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(ClimberSubsystem.getInstance());
+    	requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	ClimberSubsystem.getInstance().startClimbing();
+    	Robot.climber.startClimbing();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +31,7 @@ public class ClimberCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	ClimberSubsystem.getInstance().stopClimbing();
+    	Robot.climber.stopClimbing();
     }
 
     // Called when another command which requires one or more of the same

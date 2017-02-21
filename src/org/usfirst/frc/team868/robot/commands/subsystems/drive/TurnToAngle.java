@@ -1,8 +1,8 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -28,7 +28,7 @@ public class TurnToAngle extends Command {
 	 * @param angle in degrees
 	 */
     public TurnToAngle(double angle) {
-    	motors = DriveSubsystem.getInstance();
+    	motors = Robot.drivetrain;
     	requires(motors);
     	setAngle = angle;
     	controller = new PIDController(P, I, D, new PIDSource(){
@@ -40,7 +40,7 @@ public class TurnToAngle extends Command {
 		}
 
 		public double pidGet() {
-			return GyroSubsystem.getInstance().getRotation();
+			return Robot.gyro.getRotation();
 		}
 		
 	}, new PIDOutput(){

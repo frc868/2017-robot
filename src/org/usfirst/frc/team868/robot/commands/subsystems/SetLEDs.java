@@ -1,8 +1,9 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.LEDSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,9 +20,9 @@ public class SetLEDs extends Command {
 
 	public SetLEDs() {
     	led = LEDSubsystem.getInstance();
-    	shoot = ShooterSubsystem.getInstance();
-    	gear = GearCollectorSubsystem.getInstance();
-    	feed = FeederSubsystem.getInstance();
+    	shoot = Robot.shooter;
+    	gear = Robot.gearCollector;
+    	feed = Robot.feeder;
     	requires(led);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

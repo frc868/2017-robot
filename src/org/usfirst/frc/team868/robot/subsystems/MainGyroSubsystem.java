@@ -10,13 +10,13 @@ import lib.util.gyro.BNO055;
 /**
  *
  */
-public class GyroSubsystem extends Subsystem {
+public class MainGyroSubsystem extends Subsystem {
 
-    private static GyroSubsystem instance;
+    private static MainGyroSubsystem instance;
     private BNO055 gyro;
     private GyroBase gyroX;
     
-    public GyroSubsystem(){
+    public MainGyroSubsystem(){
     	gyro = BNO055.getInstance(I2C.Port.kOnboard);
     	gyroX = gyro.createGyroX();
     	gyroX.reset();
@@ -45,9 +45,9 @@ public class GyroSubsystem extends Subsystem {
 	 * Get the instance of this subsystem
 	 * @return instance
 	 */
-    public static GyroSubsystem getInstance(){
+    public static MainGyroSubsystem getInstance(){
     	if(instance == null){
-    		instance = new GyroSubsystem();
+    		instance = new MainGyroSubsystem();
     	}
     	return instance;
     }

@@ -1,16 +1,22 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
-import org.usfirst.frc.team868.robot.commands.subsystems.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.ClimberCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFeederCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.RecordMotorMovementHelper;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearCollectorToggleCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.CalibrateTurret;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
 
-import lib.hid.ControllerMap;
-import lib.hid.DPadButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.hid.ControllerMap;
+import lib.hid.DPadButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
