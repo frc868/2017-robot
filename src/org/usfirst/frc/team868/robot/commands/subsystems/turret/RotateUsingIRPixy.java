@@ -14,7 +14,6 @@ public class RotateUsingIRPixy extends Command {
 	private IRPixySubsystem camera;
 	private TurretRotationSubsystem turret;
 	private Timer time;
-	@SuppressWarnings("unused")
 	private double timeout;
 
 	/**
@@ -22,9 +21,9 @@ public class RotateUsingIRPixy extends Command {
 	 * Will stop after 'timeout' seconds have passed.
 	 */
     public RotateUsingIRPixy(double timeout) {
+    	camera = IRPixySubsystem.getInstance();
     	turret = TurretRotationSubsystem.getInstance();
     	requires(turret);
-    	camera = IRPixySubsystem.getInstance();
     	this.timeout = timeout;
     }
     
@@ -44,15 +43,17 @@ public class RotateUsingIRPixy extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	new RotateTurretByAngle(camera.getTarget().getXAngleOffFromCenter()).start();
+    	turret.setAngle(turret.getAngle()+camera.getTarget().getXAngleOffFromCenter());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return time.get() > timeout;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	turret.setPower(0);
+    	new TurretLookForTarget().start();
     }
 }

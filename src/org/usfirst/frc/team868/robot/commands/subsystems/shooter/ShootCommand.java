@@ -29,11 +29,12 @@ public class ShootCommand extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(shooter.getPower() > 0){
-    		shooter.setSpeed(0);
+    	if(shooter.isRunning()){
+    		shooter.setPower(0);
     	}else{
     		shooter.setSpeed(speed);
     	}
+    	shooter.toggleShooting();
     }
 
     // Called repeatedly when this Command is scheduled to run

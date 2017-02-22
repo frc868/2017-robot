@@ -11,8 +11,6 @@ public class ShooterFeederCommand extends Command {
 
 	FeederSubsystem feeder;
 	
-	public FeederSubsystem.State state;
-	
     /**
      * Toggles the feeder's on/off status
      */
@@ -23,7 +21,10 @@ public class ShooterFeederCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	feeder.toggleFeeder();
+    	if(feeder.getState() != FeederSubsystem.State.OFF)
+    		feeder.setFeederOff();
+    	else
+    		feeder.setFeederForward();
     }
 
     // Called repeatedly when this Command is scheduled to run
