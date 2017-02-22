@@ -1,32 +1,37 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 public class CalculateAnglesAndDistances {
-	private double oppositeSide;
-	private double adjacentSide;
-	private double hypotenuse;
-	private double angle;
 	
-	public CalculateAnglesAndDistances(double adjacent, double opposite) {
-		adjacentSide = adjacent;
-		oppositeSide = opposite;
-		hypotenuse = (Math.pow(adjacent, 2) + Math.pow(opposite, 2));
-		angle = (Math.atan(opposite / adjacent) * 57.2958);
+	//public final static double UNKNOWN = -1;
+	
+	public static double getAngleFromSides(double adjacent, double opposite) {
+		return (Math.atan(opposite / adjacent) * 57.2958);
 	}
 	
-	public double getAngle() {
-		return angle;
+	public static double getHypotenuse(double adjacent, double opposite) {
+		return (Math.pow(adjacent, 2) + Math.pow(opposite, 2));
 	}
 	
-	public double getHypotenuse() {
-		return hypotenuse;
+	public static double getAdjacentFromAngleAndOpposite(double angle, double opposite) {
+		return (opposite / Math.tan(angle * 0.0174533));
 	}
 	
-	public double getOpposite() {
-		return oppositeSide;
+	public static double getOppositeFromAngleAndAdjacent(double angle, double adjacent) {
+		return (adjacent * Math.tan(angle * 0.0174533));
 	}
 	
-	public double getAdjacent() {
-		return adjacentSide;
+	public static double getSideFromHypotenuseAndOtherSide(double hypotenuse, double otherSide) {
+		return Math.sqrt(Math.pow(hypotenuse, 2) - Math.pow(otherSide, 2));
 	}
 	
+	/*public static double getMissingSide(double leg1, double leg2, double hypotenuse) {
+		if (leg1 == UNKNOWN) {
+			return getSideFromHypotenuseAndOtherSide(hypotenuse, leg2);
+		} else if (leg2 == UNKNOWN) {
+			return getSideFromHypotenuseAndOtherSide(hypotenuse, leg1);
+		} else {
+			return getHypotenuse(leg1, leg2);
+		}
+	}
+	*/
 }

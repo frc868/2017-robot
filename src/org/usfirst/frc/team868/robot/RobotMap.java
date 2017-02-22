@@ -1,5 +1,7 @@
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.auton.CalculateAnglesAndDistances;
+
 import edu.wpi.first.wpilibj.SerialPort;
 
 /**
@@ -145,5 +147,43 @@ public interface RobotMap {
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 		final double MIN_ROTATE_SPEED = .1;
+	}
+	public interface AutonValues {
+		
+		//Baseline from Start
+		double distanceToCrossBaselineFromPos1orPos3 = 300 - 91;
+		double distanceToCrossBaselineFromPos2 = CalculateAnglesAndDistances.getHypotenuse(distanceToCrossBaselineFromPos1orPos3, distanceToCrossBaselineFromPos1orPos3);
+		
+		//Gear from Start
+		double distanceToGearFromPos2 = 237 - 27 - 91;
+		double distanceToGearBeforeAngleFromPos1orPos3 = 237 - 91; //NOT ACCURATE
+		double angleToGearFromPos1orPos3 = 60; //angle of the triangle made w hypotenuse as robot to gear thing
+		double adjacentSideOfTriangleForGearFromPos1orPos3 = 50.5; //NOT ACCURATE, must figure out distance from position 1 x value to gear lift x value 
+		double distanceToGearAfterAngleFromPos1orPos3 = CalculateAnglesAndDistances.getHypotenuse(adjacentSideOfTriangleForGearFromPos1orPos3, CalculateAnglesAndDistances.getOppositeFromAngleAndAdjacent(angleToGearFromPos1orPos3, adjacentSideOfTriangleForGearFromPos1orPos3));
+		double distanceToBackup = 40;
+		
+		//Gear to Hopper
+		double distanceAcrossToHopperFromGearPos2 = 411.5 - (107 /Math.sqrt(2)) - 91;
+		double distanceForwardToHitHopperAfterDoingGearPos2 = 76 + 33.5 + distanceToBackup;
+		double angleToTurnToHitHopperAfterDoingGearPos2 = CalculateAnglesAndDistances.getAngleFromSides(66, 107 / Math.sqrt(2));
+		double distanceToBackUpToHitHopperAfterDoingGearPos2 = CalculateAnglesAndDistances.getHypotenuse(66, 107 / Math.sqrt(2));
+		double distanceToBackupFromGearPos3 = CalculateAnglesAndDistances.getSideFromHypotenuseAndOtherSide(155.25, 25.25);
+		double distanceToGoToHopperFromGearPos3 = 205.75 - 91 -10;
+		double angleToTurnToHitHopperAfterDoingGearPos3 = CalculateAnglesAndDistances.getAngleFromSides(28, 10);
+		double distanceToBackUpToHitHopperAfterDoingGearPos3 = CalculateAnglesAndDistances.getHypotenuse(28, 10);
+		//Gear to Neutral
+		double distanceToBackupMoreFromPos1orPos3 = 75;
+		double distanceAcrossFromPos2 = 300;
+		double distanceToNeutralZoneFromGear = 420;
+	
+		//Hopper from Start
+		
+		
+		//Hopper to Neutral
+		double distanceForwardBeforeTurning = 101;
+		double distanceToNeutralFromHopper = 33.5;
+		
+		//Hopper to Gear
+		
 	}
 }

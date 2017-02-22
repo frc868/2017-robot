@@ -23,16 +23,17 @@ public class DriveDistance extends Command {
 	private double initRotation;
 	private double power = 0;
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
+	private double distanceCM;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
 	public DriveDistance(double cm) {
+		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
 		gyro = GyroSubsystem.getInstance();
-		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + cm;
 		control = new PIDController(kp , ki, kd, kf, new PIDSource(){
 			public void setPIDSourceType(PIDSourceType pidSource) {}
 
@@ -53,6 +54,7 @@ public class DriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + distanceCM;
     	initRotation = gyro.getRotation();
     	SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
@@ -81,7 +83,7 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+    	return control.getError() < 5;
     }
 
     // Called once after isFinished returns true

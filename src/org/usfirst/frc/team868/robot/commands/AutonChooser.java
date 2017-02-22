@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -53,6 +54,8 @@ public class AutonChooser {
     		chooseDoThis.addObject("C: Shoot Balls", DoThis.HOPPER);
     		chooseDoThis.addObject("D: Drop off Gear Then Go To Neutral", DoThis.GEAR_TO_NEUTRAL);
     		chooseDoThis.addObject("E: Drop Off Gear Then Hit Hopper", DoThis.GEAR_TO_HOPPER);
+    	SmartDashboard.putData("Auton Start", chooseStart);
+    	SmartDashboard.putData("Auton Mode", chooseDoThis);
     }
 
 }
