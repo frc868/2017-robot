@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team868.robot.commands.AutonChooser;
+import org.usfirst.frc.team868.robot.commands.AutonLauncher;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
@@ -26,7 +28,7 @@ public class Robot extends IterativeRobot {
 		OI.getInstance().initialize();
 		
     	new UpdateSmartDashboard().start();
-    	
+    	AutonChooser.getInstance();
     }
 
 	/**
@@ -52,6 +54,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+        new AutonLauncher().start();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
