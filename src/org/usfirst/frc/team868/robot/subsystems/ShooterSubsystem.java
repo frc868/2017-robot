@@ -26,6 +26,7 @@ public class ShooterSubsystem extends Subsystem {
     private PIDController control;
     private Counter count;
     private double lastSpeed;
+    private boolean isRunning = false;
     public static final double P = 0.01;
     public static final double I = 0;
     public static final double D = 0.08;
@@ -130,6 +131,14 @@ public class ShooterSubsystem extends Subsystem {
      */
     public double getCounts() {
     	return rightShooter.getPosition();
+    }
+    
+    public void toggleShooting(){
+    	isRunning = !isRunning;
+    }
+    
+    public boolean isRunning(){
+    	return isRunning;
     }
     
     /**
