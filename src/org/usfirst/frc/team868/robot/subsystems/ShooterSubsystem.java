@@ -111,8 +111,10 @@ public class ShooterSubsystem extends Subsystem {
      * @return
      */
     public double getSpeed(){
-    	if(count.getRate() < 150){
-    		lastSpeed = count.getRate();
+    	double rate = count.getRate();
+    	
+    	if(rate < 150){
+    		lastSpeed = rate;
     	}
     	return lastSpeed;
     }
