@@ -146,7 +146,9 @@ public interface RobotMap {
 		final double SOFT_LIMIT_OFFSET = 2;
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
-		final double MIN_ROTATE_SPEED = .1;
+		final double MIN_VOLTAGE = 2.2;
+		final double MAX_VOLTAGE = 6;
+		final double RAMP_RATE = 1;
 	}
 	public interface AutonValues {
 		

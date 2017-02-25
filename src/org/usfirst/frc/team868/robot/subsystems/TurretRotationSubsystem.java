@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 
 /**
  *
@@ -30,8 +31,8 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
 		// Make sure we stop if we hit a physical limit switch
 		turretRotator.enableLimitSwitch(true, true);
-		
-		turretRotator.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		turretRotator.changeControlMode(CANTalon.TalonControlMode.Voltage);
+		turretRotator.setVoltageRampRate(RobotMap.Turret.RAMP_RATE);
 		control = new PIDController(P, I, D, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {}
@@ -75,27 +76,58 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return whether or not any limit switch has been closed.
 	 */
 	public boolean isALimitSwitchClosed(){
-		return turretRotator.isFwdLimitSwitchClosed() || turretRotator.isRevLimitSwitchClosed();
+		return isLeftLimitSwitchClosed() || isRightLimitSwitchClosed();
+	}
+	
+	/**
+	 * @return whether the leftmost limit switch has been closed.
+	 */
+	public boolean isLeftLimitSwitchClosed(){
+		return turretRotator.isRevLimitSwitchClosed();
+	}
+
+	/**
+	 * @return whether the rightmost limit switch has been closed.
+	 */
+	public boolean isRightLimitSwitchClosed(){
+		return turretRotator.isFwdLimitSwitchClosed();
 	}
 	
 	/**
 	 * Sets the power being output to the turret's motor.
-	 * @param power in percentage from -1 to 1
+	 * @param power in voltage from -12 to 12
 	 */
 	public void setPower(double power){
+		if(isLeftLimitSwitchClosed())
+			power = HoundMath.checkRange(power, 0, RobotMap.Turret.MAX_VOLTAGE);
+		else if(isRightLimitSwitchClosed())
+			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, 0);
+		else
+			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, RobotMap.Turret.MAX_VOLTAGE);
 		turretRotator.set(power);
 	}
 	
+	/**
+	 * Deactivates the PID controller and sets the turret's motor's power to 0.
+	 */
+	public void stop(){
+		if(control.isEnabled())
+			control.disable();
+		setPower(0);
+	}
+	
 	public void calibrateTurret() {
-		while (!isALimitSwitchClosed()) {
-			setPower(.3);
+		while (!isRightLimitSwitchClosed()) {
+			setPower(RobotMap.Turret.MIN_VOLTAGE);
 		}
-		double startAngle = Math.abs(getAngle());
-		
-		while(!isALimitSwitchClosed()) {
-			setPower(-.3);
+		stop();
+		double startAngle = getAngle();
+		setPower(-RobotMap.Turret.MIN_VOLTAGE);
+		while(!isLeftLimitSwitchClosed()) {
+			setPower(-RobotMap.Turret.MIN_VOLTAGE);
 		}
-		double endAngle = Math.abs(getAngle());
+		stop();
+		double endAngle = getAngle();
 		setAngle((startAngle + endAngle)/2);
 		
 		turretRotator.setForwardSoftLimit(startAngle-RobotMap.Turret.SOFT_LIMIT_OFFSET);
@@ -124,7 +156,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	
 	/**
 	 * Gets the current power being put out to the turret's motor.
-	 * @return power in percentage from -1 to 1
+	 * @return power in voltage from -12 to 12
 	 */
 	public double getPower(){
 		return turretRotator.get();
