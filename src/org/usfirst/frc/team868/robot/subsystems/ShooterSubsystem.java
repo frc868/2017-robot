@@ -41,6 +41,9 @@ public class ShooterSubsystem extends Subsystem {
     	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
     	
+    	rightShooter.setVoltageRampRate(20);
+    	leftShooter.setVoltageRampRate(20);
+    	
     	leftShooter.set(rightShooter.getDeviceID());
     	count = new Counter(RobotMap.Shoot.ENCODER_A);
     	
