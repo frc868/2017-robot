@@ -24,7 +24,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private PIDController control;
 	private final double P = 0, I = 0, D = 0;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
@@ -55,6 +55,9 @@ public class TurretRotationSubsystem extends Subsystem {
 		
 		// Assign test mode group
     	LiveWindow.addActuator("Turret", "Motor", turretRotator);
+    	if (DEBUG) {
+    		SmartDashboard.putData(this);
+    	}
 	}
 	
 	/**
@@ -191,7 +194,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return setpoint in degrees
 	 */
 	public double getSetpoint(){
-		return turretRotator.getSetpoint() * RobotMap.Turret.DEGREES_PER_COUNT;
+		return control.getSetpoint() * RobotMap.Turret.DEGREES_PER_COUNT;
 	}
 	
 	public void toggleTargeting(){

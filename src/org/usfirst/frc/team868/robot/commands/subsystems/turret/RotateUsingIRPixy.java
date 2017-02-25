@@ -44,16 +44,17 @@ public class RotateUsingIRPixy extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	turret.setAngle(turret.getAngle()+camera.getTarget().getXAngleOffFromCenter());
+    	if(time.get() > timeout)
+        	new TurretLookForTarget().start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return time.get() > timeout;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	turret.setPower(0);
-    	new TurretLookForTarget().start();
+    	turret.stop();
     }
 }

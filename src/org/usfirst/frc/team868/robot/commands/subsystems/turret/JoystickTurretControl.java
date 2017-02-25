@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.hid.ControllerMap;
 
 /**
@@ -29,12 +30,16 @@ public class JoystickTurretControl extends Command {
 	    	double y = -OI.getInstance().getOperator().getAxis(ControllerMap.Direction.LEFT_VERTICAL);
 	    	double angle;
 	    	if(x == 0 && y == 0){
-	        	x = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_HORIZONTAL);
+	    		turret.stop();
+	        	double x2 = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_HORIZONTAL);
+	        	SmartDashboard.putNumber("Right analog stick horizontal", x2);
 	        	double mult = .25+(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER)/2);
-	        	if(x > 0)
-	        		turret.setPower(x*mult+RobotMap.Turret.MIN_VOLTAGE);
+	        	if(x2 > 0)
+	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2-.05)*mult+RobotMap.Turret.MIN_VOLTAGE-.5);
+	        	else if(x2 < 0)
+	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2+.05)*mult-RobotMap.Turret.MIN_VOLTAGE+.5);
 	        	else
-	        		turret.setPower(x*mult-RobotMap.Turret.MIN_VOLTAGE);
+	        		turret.setPower(0);
 		    }else{
 		    	if(Math.abs(x) > Math.abs(y)){
 		    		if(x > 0)
