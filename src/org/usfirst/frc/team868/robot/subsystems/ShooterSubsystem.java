@@ -27,9 +27,10 @@ public class ShooterSubsystem extends Subsystem {
     private Counter count;
     private double lastSpeed;
     private boolean isRunning = false;
-    public static final double P = 0.01;
+    public static final double P = 0.03;
     public static final double I = 0;
-    public static final double D = 0.08;
+    public static final double D = 0.2;
+    public static final double F = 0.072;
     
     private ShooterSubsystem(){
     	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
@@ -41,15 +42,15 @@ public class ShooterSubsystem extends Subsystem {
     	rightShooter.changeControlMode(CANTalon.TalonControlMode.Voltage);
     	leftShooter.changeControlMode(CANTalon.TalonControlMode.Follower);
     	
-    	rightShooter.setVoltageRampRate(20);
-    	leftShooter.setVoltageRampRate(20);
+    	rightShooter.setVoltageRampRate(10);
+    	leftShooter.setVoltageRampRate(10);
     	
     	leftShooter.set(rightShooter.getDeviceID());
     	count = new Counter(RobotMap.Shoot.ENCODER_A);
     	
     	count.setDistancePerPulse(RobotMap.Shoot.ROTATIONS_PER_COUNT);
 
-    	control = new PIDController(P, I, D, new PIDSource(){
+    	control = new PIDController(P, I, D, F, new PIDSource(){
 
 			public void setPIDSourceType(PIDSourceType pidSource) {
 			}
@@ -116,9 +117,13 @@ public class ShooterSubsystem extends Subsystem {
     public double getSpeed(){
     	double rate = count.getRate();
     	
+    	
     	if(rate < 150){
     		lastSpeed = rate;
+    	} else {
+        	SmartDashboard.putNumber("Bad Shooter Speed Reads", 1 + (SmartDashboard.getNumber("Bad Shooter Speed Reads", 0)));
     	}
+    	
     	return lastSpeed;
     }
     
