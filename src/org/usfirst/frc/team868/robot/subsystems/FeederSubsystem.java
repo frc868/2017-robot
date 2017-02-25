@@ -49,7 +49,9 @@ public class FeederSubsystem extends Subsystem {
 		this.state = state;
 		switch(state) {
 			case FORWARD:
-				setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+				if(canFeed()) {
+					setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+				}
 				break;
 			case OFF:
 				setFeederSpeed(0);
@@ -60,6 +62,10 @@ public class FeederSubsystem extends Subsystem {
 			default:
 				break;
 		}
+	}
+	
+	public boolean canFeed() {
+		return ShooterSubsystem.getInstance().getSpeed() > 50 && ShooterSubsystem.getInstance().getError() < 3;
 	}
 	
 	/**

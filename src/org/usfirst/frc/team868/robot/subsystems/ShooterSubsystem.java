@@ -141,6 +141,10 @@ public class ShooterSubsystem extends Subsystem {
     	return isRunning;
     }
     
+    public double getError() {
+    	return control.getError();
+    }
+    
     /**
 	 * Get the instance of this subsystem
 	 * @return instance
