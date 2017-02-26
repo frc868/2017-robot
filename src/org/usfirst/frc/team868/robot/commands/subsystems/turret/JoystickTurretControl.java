@@ -32,7 +32,6 @@ public class JoystickTurretControl extends Command {
 	    	if(x == 0 && y == 0){
 	    		turret.stop();
 	        	double x2 = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_HORIZONTAL);
-	        	SmartDashboard.putNumber("Right analog stick horizontal", x2);
 	        	double mult = .25+(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER)/2);
 	        	if(x2 > 0)
 	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2-.05)*mult+RobotMap.Turret.MIN_VOLTAGE-.5);
@@ -41,24 +40,16 @@ public class JoystickTurretControl extends Command {
 	        	else
 	        		turret.setPower(0);
 		    }else{
-		    	if(Math.abs(x) > Math.abs(y)){
+		    	if(y == 0){
 		    		if(x > 0)
-		    			angle = 90 - Math.asin(y/x);
+		    			angle = 90;
 		    		else
-		    			angle = 270 - Math.asin(y/x);
-		    	}else if(Math.abs(x) < Math.abs(y)){
-		    		if(y > 0)
-		    			angle = Math.asin(x/y);
-		    		else
-		    			angle = 180 + Math.asin(x/y);
-		    	}else if(x == y && y > 0)
-		    		angle = 45;
-		    	else if(x == y && y < 0)
-		    		angle = 225;
-		    	else if(x == -y && x > 0)
-		    		angle = 135;
-		    	else
-		    		angle = -45;
+		    			angle = 270;
+		    	}else if(x > 0){
+		    		angle = Math.atan(x/y);
+		    	}else{
+		    		angle = 180 + Math.atan(x/y);
+		    	}
 		    	turret.setAngle(angle);
 	    	}
     	}else{
