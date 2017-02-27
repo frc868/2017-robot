@@ -44,10 +44,10 @@ public class JoystickTurretControl extends Command {
 		    			angle = 90;
 		    		else
 		    			angle = 270;
-		    	}else if(x > 0){
-		    		angle = Math.atan(x/y);
+		    	}else if(y > 0){
+		    		angle = Math.toDegrees(Math.atan(x/y));
 		    	}else{
-		    		angle = 180 + Math.atan(x/y);
+		    		angle = 180 + Math.toDegrees(Math.atan(x/y));
 		    	}
 		    	turret.setAngle(angle);
 	    	}
