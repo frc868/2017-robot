@@ -51,6 +51,8 @@ public class FeederSubsystem extends Subsystem {
 			case FORWARD:
 				if(canFeed()) {
 					setFeederSpeed(RobotMap.Feeder.CONVEYOR_SPEED);
+				} else {
+					setFeederSpeed(0);
 				}
 				break;
 			case OFF:
