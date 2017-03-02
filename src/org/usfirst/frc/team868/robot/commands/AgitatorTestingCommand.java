@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AgitatorBetterCommand extends Command {
+public class AgitatorTestingCommand extends Command {
 
 	
 	private AgitatorSubsystem agitator;
 	private AgitatorSubsystem.State state;
 	
-    public AgitatorBetterCommand(AgitatorSubsystem.State state) {
+    public AgitatorTestingCommand(AgitatorSubsystem.State state) {
     	agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
 		this.state = state;

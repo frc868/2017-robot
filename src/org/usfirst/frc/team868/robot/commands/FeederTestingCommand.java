@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShooterFeederBetterCommand extends Command {
+public class FeederTestingCommand extends Command {
 
 	private FeederSubsystem feeder;
 	private FeederSubsystem.State state;
 	
-    public ShooterFeederBetterCommand(FeederSubsystem.State state) {
+    public FeederTestingCommand(FeederSubsystem.State state) {
     	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
     	this.state = state;
