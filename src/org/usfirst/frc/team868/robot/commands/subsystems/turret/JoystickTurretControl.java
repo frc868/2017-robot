@@ -25,12 +25,12 @@ public class JoystickTurretControl extends Command {
 
     protected void execute() {
     	if(!turret.isPixyTargeting()){
-	    	double x = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.LEFT_HORIZONTAL);
-	    	double y = -OI.getInstance().getOperator().getAxis(ControllerMap.Direction.LEFT_VERTICAL);
+	    	double x = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_HORIZONTAL);
+	    	double y = -OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_VERTICAL);
 	    	double angle;
 	    	if(x == 0 && y == 0){
 	    		turret.stop();
-	        	double x2 = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.RIGHT_HORIZONTAL);
+	        	double x2 = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.LEFT_HORIZONTAL);
 	        	double mult = .25+(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER)/2);
 	        	if(x2 > 0)
 	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2-.05)*mult+RobotMap.Turret.MIN_VOLTAGE-.5);
