@@ -5,7 +5,6 @@ import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateUsingColorPixy;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearReleaseCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
