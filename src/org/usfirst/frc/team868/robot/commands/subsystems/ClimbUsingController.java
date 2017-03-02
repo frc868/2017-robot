@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
 import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,7 +23,7 @@ public class ClimbUsingController extends Command {
 
     protected void execute() {
     	if(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER) >= .9)
-    		climb.startClimbing(.8*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
+    		climb.startClimbing(RobotMap.Climber.CLIMBER_SPEED*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
     	if(OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB) == 0)
     		climb.startClimbing(0);
     }
