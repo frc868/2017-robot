@@ -71,6 +71,7 @@ public class ShooterSubsystem extends Subsystem {
     		
     	});
     	control.setOutputRange(0, 12);
+    	control.setAbsoluteTolerance(1);
     	
 		// Assign test mode group
     	LiveWindow.addActuator("Shooter", "RIGHT", rightShooter);
