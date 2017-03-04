@@ -54,7 +54,7 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
-		final double AGITATOR_SPEED = 0.4;
+		final double AGITATOR_SPEED = 0.8;
 		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
@@ -131,7 +131,7 @@ public interface RobotMap {
 		final int ENCODER_A = 9;
 		
 		//VALUES:
-		final boolean IS_INVERTED = true;
+		final boolean IS_INVERTED = false;
 		final double SHOOTER_POWER = 0.8;
 		final double TARGET_SHOOTER_SPEED = 80;
 		final double ROTATIONS_PER_COUNT = 1.0;
