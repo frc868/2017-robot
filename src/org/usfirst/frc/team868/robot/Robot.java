@@ -4,9 +4,13 @@ package org.usfirst.frc.team868.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team868.robot.commands.AgitatorTestingCommand;
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.AutonLauncher;
+import org.usfirst.frc.team868.robot.commands.FeederTestingCommand;
+import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
@@ -29,6 +33,13 @@ public class Robot extends IterativeRobot {
 		
     	new UpdateSmartDashboard().start();
     	AutonChooser.getInstance();
+    	
+    	SmartDashboard.putData("Agitator ON", new AgitatorTestingCommand(AgitatorSubsystem.State.FORWARD));
+    	SmartDashboard.putData("Agitator OFF", new AgitatorTestingCommand(AgitatorSubsystem.State.OFF));
+    	SmartDashboard.putData("Feeder ON", new FeederTestingCommand(FeederSubsystem.State.FORWARD));
+    	SmartDashboard.putData("Feeder OFF", new FeederTestingCommand(FeederSubsystem.State.OFF));
+    	SmartDashboard.putData("Shooter STOP", new ShooterCommandVoltage(0));
+
     }
 
 	/**
@@ -82,6 +93,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	
     }
 
     /**
@@ -97,17 +109,18 @@ public class Robot extends IterativeRobot {
 	private void initSubsystems() {
 		AgitatorSubsystem.getInstance();
 		ClimberSubsystem.getInstance();
-//		ColorPixySubsystem.getInstance();
+		ColorPixySubsystem.getInstance();
 		DriveSubsystem.getInstance();
-//		GearCollectorSubsystem.getInstance();
+		GearCollectorSubsystem.getInstance();
 //		GearFlashlightSubsystem.getInstance();
 		GyroSubsystem.getInstance();
 //		IRPixySubsystem.getInstance();
 //		LidarSubsystem.getInstance();
+		LEDSubsystem.getInstance();
 		FeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();
 		ShooterSubsystem.getInstance();
-//		TurretRotationSubsystem.getInstance();
+		TurretRotationSubsystem.getInstance();
 	}
     
     /**
