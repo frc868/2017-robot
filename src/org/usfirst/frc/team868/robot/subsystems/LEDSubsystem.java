@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.SetLEDs;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -18,6 +19,10 @@ public class LEDSubsystem extends Subsystem {
 		led1 = new DigitalOutput(RobotMap.LEDs.DIO_1_PORT);
 		led2 = new DigitalOutput(RobotMap.LEDs.DIO_2_PORT);
 		ledGear = new DigitalOutput(RobotMap.LEDs.DIO_GEAR_PORT);
+
+    	LiveWindow.addActuator("LED", "One", led1);
+    	LiveWindow.addActuator("LED", "Two", led2);
+    	LiveWindow.addActuator("LED", "Gear", ledGear);
 	}
 	
 	/**
