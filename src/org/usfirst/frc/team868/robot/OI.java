@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
+import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
@@ -110,12 +111,14 @@ public class OI {
 		//FLASHLIGHTS
 //		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
 //			.whenPressed(new GearFlashlightCommand());
-//		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
-//			.whenPressed(new ShooterFlashlightCommand());
+		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
+			.whenPressed(new ShooterFlashlightCommand());
 		
 		//SHOOTER
 		controller.getButton(Controls.TOGGLE_SHOOTER)
 			.whenPressed(new ShootCommand());
+//		controller.getButton(Controls.TOGGLE_SHOOTER)
+//		.whenPressed(new ShooterCommandVoltage(6));	
 		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
 			.whenPressed(new IncrementShooterSpeed(.02));
 		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
