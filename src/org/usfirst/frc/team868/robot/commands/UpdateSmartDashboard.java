@@ -9,6 +9,7 @@ import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -60,6 +61,9 @@ public class UpdateSmartDashboard extends Command {
     		counts++;
     		SmartDashboard.putNumber("Update SD Counts", counts);
     		//Debug
+    		
+        	SmartDashboard.putNumber("PDP Draw", new PowerDistributionPanel().getTotalCurrent());
+
     	}
     }
 
