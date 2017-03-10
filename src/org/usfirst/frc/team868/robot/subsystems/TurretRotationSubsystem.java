@@ -1,7 +1,9 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.StopTurret;
 
 import com.ctre.CANTalon;
 
@@ -12,7 +14,6 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import lib.util.HoundMath;
 
 /**
  *
@@ -22,7 +23,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private static TurretRotationSubsystem instance;
 	private CANTalon turretRotator;
 	private PIDController control;
-	private final double P = 0, I = 0, D = 0;
+	private final double P = 0.005, I = 0, D = 0;
 	private boolean isPixyTargeting = true;
 	private final boolean DEBUG = true;
 
@@ -30,8 +31,18 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
 		// Make sure we stop if we hit a physical limit switch
-		turretRotator.enableLimitSwitch(true, true);
+		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
+		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
+		turretRotator.enableLimitSwitch(false, false);
+		
+		turretRotator.setPosition(0);
+		turretRotator.enableForwardSoftLimit(true);
+		turretRotator.enableReverseSoftLimit(true);
+		turretRotator.setForwardSoftLimit(22000);
+		turretRotator.setReverseSoftLimit(-6000);
+		
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.Voltage);
+		turretRotator.enableBrakeMode(true);
 		turretRotator.setVoltageRampRate(RobotMap.Turret.RAMP_RATE);
 		control = new PIDController(P, I, D, new PIDSource(){
 
@@ -52,6 +63,7 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 			
 		});
+		control.setOutputRange(-RobotMap.Turret.MAX_VOLTAGE, RobotMap.Turret.MAX_VOLTAGE);
 		
 		// Assign test mode group
     	LiveWindow.addActuator("Turret", "Motor", turretRotator);
@@ -101,12 +113,13 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @param power in voltage from -12 to 12
 	 */
 	public void setPower(double power){
-		if(isLeftLimitSwitchClosed())
+		/*if(isLeftLimitSwitchClosed())
 			power = HoundMath.checkRange(power, 0, RobotMap.Turret.MAX_VOLTAGE);
 		else if(isRightLimitSwitchClosed())
 			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, 0);
 		else
 			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, RobotMap.Turret.MAX_VOLTAGE);
+		*/
 		turretRotator.set(power);
 	}
 	
@@ -232,7 +245,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new RotateUsingIRPixy());
+		setDefaultCommand(new RotateTurretToAngle(this.getPosition()));
 	}
 }
 
