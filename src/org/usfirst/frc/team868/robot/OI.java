@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
-import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
@@ -100,7 +99,7 @@ public class OI {
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.FREE_THE_BALL)
-			.whenPressed(new FreeBall(2));//TODO: find a constant or some value to use here
+			.whenPressed(new FreeBall(RobotMap.Feeder.SHAKE_TIME));
 		controller.getButton(Controls.TOGGLE_AGITATOR_AND_FEEDER)
 			.whenPressed(new ToggleFeederAndAgitator());
 				

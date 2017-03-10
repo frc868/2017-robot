@@ -2,24 +2,16 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team868.robot.RobotMap.Turret;
 import org.usfirst.frc.team868.robot.commands.AgitatorTestingCommand;
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.AutonLauncher;
 import org.usfirst.frc.team868.robot.commands.FeederTestingCommand;
 import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
-import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
-import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearCollectorToggleCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**

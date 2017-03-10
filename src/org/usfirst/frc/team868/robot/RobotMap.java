@@ -63,6 +63,7 @@ public interface RobotMap {
 		
 		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
 		final double MIN_SHOOT_SPEED = 30;
+		final double SHAKE_TIME = 5.0;
 	}
 	
 	public interface Flashlight {

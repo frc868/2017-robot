@@ -2,8 +2,6 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.StopTurret;
 
 import com.ctre.CANTalon;
 
