@@ -1,10 +1,10 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
-public class CalculateAnglesAndDistances {
+public class CalculateGeometry {
 	
 	//public final static double UNKNOWN = -1;
 	
-	public static double getAngleFromSides(double adjacent, double opposite) {
+	public static double getAngle(double adjacent, double opposite) {
 		return (Math.atan(opposite / adjacent) * 57.2958);
 	}
 	
@@ -12,15 +12,15 @@ public class CalculateAnglesAndDistances {
 		return (Math.pow(adjacent, 2) + Math.pow(opposite, 2));
 	}
 	
-	public static double getAdjacentFromAngleAndOpposite(double angle, double opposite) {
+	public static double getAdjacent(double angle, double opposite) {
 		return (opposite / Math.tan(angle * 0.0174533));
 	}
 	
-	public static double getOppositeFromAngleAndAdjacent(double angle, double adjacent) {
+	public static double getOpposite(double angle, double adjacent) {
 		return (adjacent * Math.tan(angle * 0.0174533));
 	}
 	
-	public static double getSideFromHypotenuseAndOtherSide(double hypotenuse, double otherSide) {
+	public static double getSide(double hypotenuse, double otherSide) {
 		return Math.sqrt(Math.pow(hypotenuse, 2) - Math.pow(otherSide, 2));
 	}
 	
