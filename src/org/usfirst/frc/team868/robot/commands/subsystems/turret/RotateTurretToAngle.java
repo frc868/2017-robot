@@ -25,7 +25,7 @@ public class RotateTurretToAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	turret.setPosition(angle); //convert to encoder counts?
+    	turret.setAngle(angle); //convert to encoder counts?
     }
 
     // Called repeatedly when this Command is scheduled to run
