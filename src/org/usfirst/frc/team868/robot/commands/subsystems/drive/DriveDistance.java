@@ -63,10 +63,10 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		if(power > .7)
-			power = .7;
-		if(power < -.7)
-			power = -.7;
+		if(power > RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
+			power = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
+		if(power < -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
+			power = -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
 		if(power < -.02 && power > -RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = -RobotMap.Drive.MIN_DRIVE_SPEED;
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
@@ -83,7 +83,7 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return control.getError() < 5;
+    	return Math.abs(control.getError()) < 1;
     }
 
     // Called once after isFinished returns true

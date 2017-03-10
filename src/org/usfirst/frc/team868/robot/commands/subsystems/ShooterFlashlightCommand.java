@@ -30,11 +30,11 @@ public class ShooterFlashlightCommand extends Command {
     public ShooterFlashlightCommand(){
     	flash = ShooterFlashlightSubsystem.getInstance();
     	requires(flash);
-    	state = !flash.isOn();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	state = !flash.isOn();
     	flash.setLight(state);
     }
 

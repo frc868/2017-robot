@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
-import org.usfirst.frc.team868.robot.commands.auton.CalculateAnglesAndDistances;
+import org.usfirst.frc.team868.robot.commands.auton.CalculateGeometry;
 
 import edu.wpi.first.wpilibj.SerialPort;
 
@@ -41,9 +41,10 @@ public interface RobotMap {
 		final boolean LEFT_IS_INVERTED = false;
 		final boolean RIGHT_IS_INVERTED = true;
 		final double SPEED = 0.8; //default drive speed
-		final double COUNTS_PER_CM = 70;
-		final double CM_PER_COUNT = 1 / COUNTS_PER_CM;
+		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
+		final double CM_PER_COUNT = 1.0 / COUNTS_PER_CM;
 		final double MIN_DRIVE_SPEED = .27;
+		final double MAX_AUTON_DRIVE_SPEED = .5;
 	}
 	
 	public interface Feeder {
@@ -54,11 +55,11 @@ public interface RobotMap {
 		
 		//VALUES:
 		final boolean AGITATOR_IS_INVERTED = false;
-		final double AGITATOR_SPEED = 0.8;
+		final double AGITATOR_SPEED = 0.4;
 		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
-		final double CONVEYOR_SPEED = 1;
+		final double CONVEYOR_SPEED = 0.8;
 		
 		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
 		final double MIN_SHOOT_SPEED = 30;
@@ -107,7 +108,7 @@ public interface RobotMap {
 	public interface Pixy {
 		//PORTS:
 		final SerialPortType IR_PORT_TYPE = SerialPortType.SERIAL_MXP;
-		final SerialPortType COLOR_PORT_TYPE = SerialPortType.I2C_ONBOARD;
+		final SerialPortType COLOR_PORT_TYPE = SerialPortType.I2C_MXP;
 		final int IR_I2C_VALUE = 0x5; // Only needed if using I2C
 		final int COLOR_I2C_VALUE = 0x5;
 		
@@ -142,37 +143,38 @@ public interface RobotMap {
 		final int TURRET_MOTOR = 10;
 		
 		//VALUES:
-		final boolean IS_INVERTED = true;
+		final boolean IS_INVERTED = false;
 		final double SOFT_LIMIT_OFFSET = 2;
 		final double COUNTS_PER_DEGREE = 1;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 		final double MIN_VOLTAGE = 2.2;
-		final double MAX_VOLTAGE = 6;
+		final double MAX_VOLTAGE = 5;
 		final double RAMP_RATE = 1;
 	}
 	public interface AutonValues {
 		
+		//VALUES ARE IN CM
+		
 		//Baseline from Start
-		double distanceToCrossBaselineFromPos1orPos3 = 300 - 91;
-		double distanceToCrossBaselineFromPos2 = CalculateAnglesAndDistances.getHypotenuse(distanceToCrossBaselineFromPos1orPos3, distanceToCrossBaselineFromPos1orPos3);
+		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
+		double BASELINE_MIDDLE_DISTANCE = 240;
 		
 		//Gear from Start
-		double distanceToGearFromPos2 = 237 - 27 - 91;
-		double distanceToGearBeforeAngleFromPos1orPos3 = 237 - 91; //NOT ACCURATE
-		double angleToGearFromPos1orPos3 = 60; //angle of the triangle made w hypotenuse as robot to gear thing
-		double adjacentSideOfTriangleForGearFromPos1orPos3 = 50.5; //NOT ACCURATE, must figure out distance from position 1 x value to gear lift x value 
-		double distanceToGearAfterAngleFromPos1orPos3 = CalculateAnglesAndDistances.getHypotenuse(adjacentSideOfTriangleForGearFromPos1orPos3, CalculateAnglesAndDistances.getOppositeFromAngleAndAdjacent(angleToGearFromPos1orPos3, adjacentSideOfTriangleForGearFromPos1orPos3));
-		double distanceToBackup = 40;
+		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
+		double GEAR_AUTON_DIST_1 = 160;//NOT ACCURATE: Distance until in line with hook if on sides.
+		double GEAR_AUTON_DIST_2 = 60;
+		double HOOK_BACKOFF = 5;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper
 		double distanceAcrossToHopperFromGearPos2 = 411.5 - (107 /Math.sqrt(2)) - 91;
-		double distanceForwardToHitHopperAfterDoingGearPos2 = 76 + 33.5 + distanceToBackup;
-		double angleToTurnToHitHopperAfterDoingGearPos2 = CalculateAnglesAndDistances.getAngleFromSides(66, 107 / Math.sqrt(2));
-		double distanceToBackUpToHitHopperAfterDoingGearPos2 = CalculateAnglesAndDistances.getHypotenuse(66, 107 / Math.sqrt(2));
-		double distanceToBackupFromGearPos3 = CalculateAnglesAndDistances.getSideFromHypotenuseAndOtherSide(155.25, 25.25);
+		double distanceForwardToHitHopperAfterDoingGearPos2 = 76 + 33.5 + HOOK_BACKOFF;
+		double angleToTurnToHitHopperAfterDoingGearPos2 = CalculateGeometry.getAngle(66, 107 / Math.sqrt(2));
+		double distanceToBackUpToHitHopperAfterDoingGearPos2 = CalculateGeometry.getHypotenuse(66, 107 / Math.sqrt(2));
+		double distanceToBackupFromGearPos3 = CalculateGeometry.getSide(155.25, 25.25);
 		double distanceToGoToHopperFromGearPos3 = 205.75 - 91 -10;
-		double angleToTurnToHitHopperAfterDoingGearPos3 = CalculateAnglesAndDistances.getAngleFromSides(28, 10);
-		double distanceToBackUpToHitHopperAfterDoingGearPos3 = CalculateAnglesAndDistances.getHypotenuse(28, 10);
+		double angleToTurnToHitHopperAfterDoingGearPos3 = CalculateGeometry.getAngle(28, 10);
+		double distanceToBackUpToHitHopperAfterDoingGearPos3 = CalculateGeometry.getHypotenuse(28, 10);
+		
 		//Gear to Neutral
 		double distanceToBackupMoreFromPos1orPos3 = 75;
 		double distanceAcrossFromPos2 = 300;

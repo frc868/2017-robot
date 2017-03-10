@@ -7,25 +7,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateTurretToAngle extends Command {
+public class StopTurret extends Command {
 
-	TurretRotationSubsystem turret;
-	double angle;
-	
-	/**
-	 * Rotates the turret to the position value of the given angle.
-	 * (Note that this is not relative to where the turret is when this command is called)
-	 * @param absoluteAngle in degrees
-	 */
-    public RotateTurretToAngle(double absoluteAngle) {
-        turret = TurretRotationSubsystem.getInstance();
-        requires(turret);
-        angle = absoluteAngle; 
+    private TurretRotationSubsystem turret;
+
+	public StopTurret() {
+    	turret = TurretRotationSubsystem.getInstance();
+    	requires(turret);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	turret.setAngle(angle); //convert to encoder counts?
+    	turret.setPower(0);
     }
 
     // Called repeatedly when this Command is scheduled to run

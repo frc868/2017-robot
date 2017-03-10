@@ -1,9 +1,15 @@
 package org.usfirst.frc.team868.robot.commands.groups;
 
+import org.usfirst.frc.team868.robot.commands.AgitatorTestingCommand;
+import org.usfirst.frc.team868.robot.commands.FeederTestingCommand;
+import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -14,17 +20,17 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class FeedAndShootCommandGroup extends CommandGroup {
 
     public FeedAndShootCommandGroup() {
-    	addSequential(new RotateUsingIRPixy(1));
+//    	addSequential(new RotateUsingIRPixy(1));
     	
-    	addParallel(new ShootCommand(75));
-    	addSequential(new WaitCommand(1));
+//    	addParallel(new ShootCommand(80));
+//    	addSequential(new WaitCommand(2));
     	
-    	addParallel(new AgitatorCommand(true));
-    	addParallel(new ShooterFeederCommand());
-    	addSequential(new WaitCommand(3));
+    	addParallel(new AgitatorTestingCommand(AgitatorSubsystem.State.FORWARD));
+    	addParallel(new FeederTestingCommand(FeederSubsystem.State.FORWARD));
+    	addSequential(new WaitCommand(5));
     	
-    	addParallel(new ShootCommand(75));
-    	addParallel(new AgitatorCommand(false));
-    	addParallel(new ShooterFeederCommand());
+    	addParallel(new ShooterCommandVoltage(0));
+    	addParallel(new AgitatorTestingCommand(AgitatorSubsystem.State.OFF));
+    	addParallel(new FeederTestingCommand(FeederSubsystem.State.OFF));
     }
 }

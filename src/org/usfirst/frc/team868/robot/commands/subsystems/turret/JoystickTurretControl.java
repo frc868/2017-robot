@@ -32,9 +32,9 @@ public class JoystickTurretControl extends Command {
 	    		turret.stop();
 	        	double x2 = OI.getInstance().getOperator().getAxis(ControllerMap.Direction.LEFT_HORIZONTAL);
 	        	double mult = .25+(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER)/2);
-	        	if(x2 > 0)
+	        	if(x2 < 0)
 	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2-.05)*mult+RobotMap.Turret.MIN_VOLTAGE-.5);
-	        	else if(x2 < 0)
+	        	else if(x2 > 0)
 	        		turret.setPower(RobotMap.Turret.MAX_VOLTAGE*(x2+.05)*mult-RobotMap.Turret.MIN_VOLTAGE+.5);
 	        	else
 	        		turret.setPower(0);
@@ -49,7 +49,7 @@ public class JoystickTurretControl extends Command {
 		    	}else{
 		    		angle = 180 + Math.toDegrees(Math.atan(x/y));
 		    	}
-		    	turret.setAngle(angle);
+		    	turret.setAngle(angle); 
 	    	}
     	}else{
     		new RotateUsingIRPixy().start();

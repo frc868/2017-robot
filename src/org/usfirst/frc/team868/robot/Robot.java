@@ -2,16 +2,24 @@
 package org.usfirst.frc.team868.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team868.robot.RobotMap.Turret;
 import org.usfirst.frc.team868.robot.commands.AgitatorTestingCommand;
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.AutonLauncher;
 import org.usfirst.frc.team868.robot.commands.FeederTestingCommand;
 import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
+import org.usfirst.frc.team868.robot.commands.groups.FeedAndShootCommandGroup;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearCollectorToggleCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**
@@ -67,18 +75,6 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         new AutonLauncher().start();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
-    	// schedule the autonomous command (example)
     }
 
     /**
@@ -89,6 +85,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
@@ -109,6 +106,7 @@ public class Robot extends IterativeRobot {
 	private void initSubsystems() {
 		AgitatorSubsystem.getInstance();
 		ClimberSubsystem.getInstance();
+		CameraSubsystem.getRearInstance();
 		ColorPixySubsystem.getInstance();
 		DriveSubsystem.getInstance();
 		GearCollectorSubsystem.getInstance();
