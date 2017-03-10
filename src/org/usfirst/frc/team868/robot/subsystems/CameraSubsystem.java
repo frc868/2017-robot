@@ -72,9 +72,6 @@ public class CameraSubsystem extends Subsystem {
 	/**
 	 * Return an instance of the USB camera mounted on the rear of the robot.
 	 * 
-	 * @deprecated All ground collection systems have been removed, so this
-	 * camera will most likely not be added to the final robot.
-	 * 
 	 * @return An instance of the rear-mounted USB camera.
 	 * */
 	public static CameraSubsystem getRearInstance(){
@@ -91,6 +88,8 @@ public class CameraSubsystem extends Subsystem {
 	 * gear collector. This camera will be used by the drivers to align
 	 * the robot while collecting gears from the feeder station, and
 	 * so sophisticated vision processing will likely not be required.
+	 * 
+	 * @deprecated Not using the network cam
 	 * 
 	 * @return An instance of the Axis camera on the gear collector.
 	 */
