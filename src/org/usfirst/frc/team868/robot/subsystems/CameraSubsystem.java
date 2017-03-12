@@ -27,7 +27,7 @@ public class CameraSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private CameraSubsystem(VideoCamera camera){
+	public CameraSubsystem(VideoCamera camera){
 		visionThread = new Thread(() -> {
 			// Get the Axis camera from CameraServer
 			CameraServer.getInstance().addCamera(camera);

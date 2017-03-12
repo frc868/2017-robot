@@ -32,7 +32,7 @@ public class ShooterSubsystem extends Subsystem {
     public static final double D = 0.2;
     public static final double F = 0.072;
     
-    private ShooterSubsystem(){
+    public ShooterSubsystem(){
     	rightShooter = new CANTalon(RobotMap.Shoot.RIGHT_SHOOTER_MOTOR);
     	leftShooter = new CANTalon(RobotMap.Shoot.LEFT_SHOOTER_MOTOR);
     	

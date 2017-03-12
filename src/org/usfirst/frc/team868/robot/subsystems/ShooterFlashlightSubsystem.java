@@ -28,7 +28,7 @@ public class ShooterFlashlightSubsystem extends Subsystem {
     	return instance;
     }
     
-    private ShooterFlashlightSubsystem() {
+    public ShooterFlashlightSubsystem() {
     	flashlight = new Relay(RobotMap.Flashlight.SHOOT_LIGHT_PORT);
     	flashlight.setDirection(Relay.Direction.kForward);
 

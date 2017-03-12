@@ -19,7 +19,7 @@ public class ClimberSubsystem extends Subsystem {
 	private CANTalon climber;
 	private static final boolean DEBUG = false;
 	
-	private ClimberSubsystem(){
+	public ClimberSubsystem(){
 		climber = new CANTalon(RobotMap.Climber.CLIMBER_MOTOR);
 		climber.setInverted(RobotMap.Climber.IS_INVERTED);
 		climber.enableLimitSwitch(true, false);

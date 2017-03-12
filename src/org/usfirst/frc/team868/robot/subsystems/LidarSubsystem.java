@@ -24,7 +24,7 @@ public class LidarSubsystem extends Subsystem {
 	 * and a serial port object, and then creates
 	 * a thread and runs it.
 	 */
-	private LidarSubsystem() {
+	public LidarSubsystem() {
 		connect();
 		startThread();
 	}

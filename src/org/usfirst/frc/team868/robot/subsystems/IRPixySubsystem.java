@@ -158,7 +158,7 @@ public class IRPixySubsystem extends Subsystem {
 
 	private Thread thread;
 
-	private IRPixySubsystem(){
+	public IRPixySubsystem(){
 		pixyCamS = null;
 		pixyCamI = null;
 		target = new Record(0, 0, 0, 0);

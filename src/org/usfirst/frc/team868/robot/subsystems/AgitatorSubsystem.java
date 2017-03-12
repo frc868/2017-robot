@@ -35,7 +35,7 @@ public class AgitatorSubsystem extends Subsystem {
 		}
 	}
 
-	private AgitatorSubsystem() {
+	public AgitatorSubsystem() {
 		motor = new Spark(RobotMap.Feeder.AGITATOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.AGITATOR_IS_INVERTED);
 		LiveWindow.addActuator("Agitator", "Motor", motor);

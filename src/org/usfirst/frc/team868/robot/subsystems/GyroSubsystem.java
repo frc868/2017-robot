@@ -16,7 +16,7 @@ public class GyroSubsystem extends Subsystem {
     private BNO055 gyro;
     private GyroBase gyroX;
     
-    private GyroSubsystem(){
+    public GyroSubsystem(){
     	gyro = BNO055.getInstance(I2C.Port.kOnboard);
     	gyroX = gyro.createGyroX();
     	gyroX.reset();
