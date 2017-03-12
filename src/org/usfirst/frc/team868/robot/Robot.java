@@ -4,13 +4,8 @@ package org.usfirst.frc.team868.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team868.robot.commands.AgitatorTestingCommand;
-import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.AutonLauncher;
-import org.usfirst.frc.team868.robot.commands.FeederTestingCommand;
-import org.usfirst.frc.team868.robot.commands.ShooterCommandVoltage;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
@@ -32,13 +27,6 @@ public class Robot extends IterativeRobot {
 		OI.getInstance().initialize();
 		
     	new UpdateSmartDashboard().start();
-    	AutonChooser.getInstance();
-    	
-    	SmartDashboard.putData("Agitator ON", new AgitatorTestingCommand(AgitatorSubsystem.State.FORWARD));
-    	SmartDashboard.putData("Agitator OFF", new AgitatorTestingCommand(AgitatorSubsystem.State.OFF));
-    	SmartDashboard.putData("Feeder ON", new FeederTestingCommand(FeederSubsystem.State.FORWARD));
-    	SmartDashboard.putData("Feeder OFF", new FeederTestingCommand(FeederSubsystem.State.OFF));
-    	SmartDashboard.putData("Shooter STOP", new ShooterCommandVoltage(0));
 
     }
 

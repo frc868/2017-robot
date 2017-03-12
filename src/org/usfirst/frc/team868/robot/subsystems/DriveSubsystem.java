@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	private Spark rightMotor;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	
 	/**
 	 * Constructor, provides the port values for motors and encoders,

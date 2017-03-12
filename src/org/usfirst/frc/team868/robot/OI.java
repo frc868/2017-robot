@@ -3,7 +3,6 @@ package org.usfirst.frc.team868.robot;
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
@@ -12,7 +11,6 @@ import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -134,13 +132,21 @@ public class OI {
 
 	public void initSmartDashboard() {
 		AutonChooser.getInstance();
-		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
-		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
-		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
-		SmartDashboard.putData("Rotate 180", new RotateAngle(180));
-		SmartDashboard.putData("Rotate 90", new RotateAngle(90));
-		SmartDashboard.putData("Rotate 0", new RotateAngle(0));
-		SmartDashboard.putData("Drive forward 2m", new DriveDistance(200));
+		
+//		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
+//		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
+//		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));
+		
+//		SmartDashboard.putData("Rotate 180", new RotateAngle(180));
+//		SmartDashboard.putData("Rotate 90", new RotateAngle(90));
+//		SmartDashboard.putData("Rotate 0", new RotateAngle(0));
+//		SmartDashboard.putData("Drive forward 2m", new DriveDistance(200));
+    	
+//    	SmartDashboard.putData("Agitator ON", new AgitatorTestingCommand(AgitatorSubsystem.State.FORWARD));
+//    	SmartDashboard.putData("Agitator OFF", new AgitatorTestingCommand(AgitatorSubsystem.State.OFF));
+//    	SmartDashboard.putData("Feeder ON", new FeederTestingCommand(FeederSubsystem.State.FORWARD));
+//    	SmartDashboard.putData("Feeder OFF", new FeederTestingCommand(FeederSubsystem.State.OFF));
+//    	SmartDashboard.putData("Shooter STOP", new ShooterCommandVoltage(0));
 	}
 
 	public static OI getInstance() {

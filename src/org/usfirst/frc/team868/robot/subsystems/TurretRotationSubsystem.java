@@ -23,7 +23,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private PIDController control;
 	private final double P = 0.005, I = 0, D = 0;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);

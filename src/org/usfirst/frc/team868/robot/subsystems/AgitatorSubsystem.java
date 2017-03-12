@@ -41,7 +41,7 @@ public class AgitatorSubsystem extends Subsystem {
 		LiveWindow.addActuator("Agitator", "Motor", motor);
 		
 		if (DEBUG) {
-			SmartDashboard.putNumber(SpeedLabel, RobotMap.Feeder.AGITATOR_SPEED);
+			SmartDashboard.putNumber(SpeedLabel, RobotMap.Feeder.AGITATOR_SPEED); //TODO cleanup all of these debug checks
 		}
 	}
 	
