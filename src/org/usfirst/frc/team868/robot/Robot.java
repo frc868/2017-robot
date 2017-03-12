@@ -17,7 +17,24 @@ import org.usfirst.frc.team868.robot.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {	
-    /**
+	
+    public static AgitatorSubsystem agitator;
+    public static ClimberSubsystem climber;
+    public static CameraSubsystem camera;
+    public static ColorPixySubsystem colorPixy;
+    public static DriveSubsystem drivetrain;
+    public static GearCollectorSubsystem gearCollector;
+    public static GearFlashlightSubsystem gearLight;
+    public static GyroSubsystem gyro;
+    public static IRPixySubsystem irPixy;
+    public static LidarSubsystem lidar;
+    public static LEDSubsystem leds;
+    public static FeederSubsystem feeder;
+    public static ShooterFlashlightSubsystem shooterLight;
+    public static ShooterSubsystem shooter;
+    public static TurretRotationSubsystem turret;
+
+	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
@@ -84,21 +101,37 @@ public class Robot extends IterativeRobot {
      * This function gets called to initialize the subsystems
      */
 	private void initSubsystems() {
-		AgitatorSubsystem.getInstance();
-		ClimberSubsystem.getInstance();
-		CameraSubsystem.getRearInstance();
-		ColorPixySubsystem.getInstance();
-		DriveSubsystem.getInstance();
-		GearCollectorSubsystem.getInstance();
-//		GearFlashlightSubsystem.getInstance();
-		GyroSubsystem.getInstance();
-//		IRPixySubsystem.getInstance();
-//		LidarSubsystem.getInstance();
-		LEDSubsystem.getInstance();
-		FeederSubsystem.getInstance();
-//		ShooterFlashlightSubsystem.getInstance();
-		ShooterSubsystem.getInstance();
-		TurretRotationSubsystem.getInstance();
+//		AgitatorSubsystem.getInstance();
+//		ClimberSubsystem.getInstance();
+//		CameraSubsystem.getRearInstance();
+//		ColorPixySubsystem.getInstance();
+//		DriveSubsystem.getInstance();
+//		GearCollectorSubsystem.getInstance();
+////		GearFlashlightSubsystem.getInstance();
+//		GyroSubsystem.getInstance();
+////		IRPixySubsystem.getInstance();
+////		LidarSubsystem.getInstance();
+//		LEDSubsystem.getInstance();
+//		FeederSubsystem.getInstance();
+////		ShooterFlashlightSubsystem.getInstance();
+//		ShooterSubsystem.getInstance();
+//		TurretRotationSubsystem.getInstance();
+		
+		agitator = new AgitatorSubsystem();
+		climber = new ClimberSubsystem();
+		camera = CameraSubsystem.getRearInstance();
+		colorPixy = new ColorPixySubsystem();
+		drivetrain = new DriveSubsystem();
+		gearCollector = new GearCollectorSubsystem();
+		gearLight = new GearFlashlightSubsystem();
+		gyro = new GyroSubsystem();
+		irPixy = new IRPixySubsystem();
+		lidar = new LidarSubsystem();
+		leds = new LEDSubsystem();
+		feeder = new FeederSubsystem();
+		shooterLight = new ShooterFlashlightSubsystem();
+		shooter = new ShooterSubsystem();
+		turret = new TurretRotationSubsystem();
 	}
     
     /**
