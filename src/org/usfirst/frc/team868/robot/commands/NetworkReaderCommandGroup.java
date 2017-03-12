@@ -32,7 +32,7 @@ public class NetworkReaderCommandGroup extends CommandGroup {
 					break;
 					
 				case 1:
-					addSequential(new DriveDistanceCommand(input.readDouble()));
+					addSequential(new DriveDistance(input.readDouble()));
 					break;
 					
 				case 2:
