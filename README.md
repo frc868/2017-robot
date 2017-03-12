@@ -1,5 +1,6 @@
-# 2017-robot
-2017 Robot
+# FRC 868 - 2017 Robot "Ratchet"
+
+https://travis-ci.com/frc868/2017-robot.svg?token=2H69xuvDWYHku9YjLRkf&branch=master
 
 ### Classpath Issues
 
