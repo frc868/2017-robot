@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
@@ -31,9 +32,9 @@ public class DriveDistance extends Command {
 	 */
 	public DriveDistance(double cm) {
 		distanceCM = cm;
-		drive = DriveSubsystem.getInstance();
+		drive = Robot.drivetrain;
 		requires(drive);
-		gyro = GyroSubsystem.getInstance();
+		gyro = Robot.gyro;
 		control = new PIDController(kp , ki, kd, kf, new PIDSource(){
 			public void setPIDSourceType(PIDSourceType pidSource) {}
 

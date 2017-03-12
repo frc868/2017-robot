@@ -1,13 +1,27 @@
 
 package org.usfirst.frc.team868.robot;
 
+import org.usfirst.frc.team868.robot.commands.AutonLauncher;
+import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.CameraSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
+import org.usfirst.frc.team868.robot.subsystems.LEDSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterFlashlightSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team868.robot.commands.AutonLauncher;
-import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
-import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -101,21 +115,21 @@ public class Robot extends IterativeRobot {
      * This function gets called to initialize the subsystems
      */
 	private void initSubsystems() {
-//		AgitatorSubsystem.getInstance();
-//		ClimberSubsystem.getInstance();
-//		CameraSubsystem.getRearInstance();
-//		ColorPixySubsystem.getInstance();
-//		DriveSubsystem.getInstance();
-//		GearCollectorSubsystem.getInstance();
-////		GearFlashlightSubsystem.getInstance();
-//		GyroSubsystem.getInstance();
-////		IRPixySubsystem.getInstance();
-////		LidarSubsystem.getInstance();
-//		LEDSubsystem.getInstance();
-//		FeederSubsystem.getInstance();
-////		ShooterFlashlightSubsystem.getInstance();
-//		ShooterSubsystem.getInstance();
-//		TurretRotationSubsystem.getInstance();
+//		Robot.agitator;
+//		Robot.climber;
+//		Robot.camera;
+//		Robot.colorPixy;
+//		Robot.drivetrain;
+//		Robot.gearCollector;
+////		Robot.gearLight;
+//		Robot.gyro;
+////		Robot.irPixy;
+////		Robot.lidar;
+//		Robot.leds;
+//		Robot.feeder;
+////		Robot.shooterLight;
+//		Robot.shooter;
+//		Robot.turret;
 		
 		agitator = new AgitatorSubsystem();
 		climber = new ClimberSubsystem();

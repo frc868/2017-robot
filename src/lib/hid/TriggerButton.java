@@ -1,7 +1,6 @@
 package lib.hid;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-
 import lib.hid.ControllerMap.Key;
 
 public class TriggerButton extends JoystickButton {

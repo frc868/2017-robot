@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
 import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 
@@ -14,7 +15,7 @@ public class ClimbUsingController extends Command {
 	private ClimberSubsystem climb;
 	
     public ClimbUsingController() {
-    	climb = ClimberSubsystem.getInstance();
+    	climb = Robot.climber;
     	requires(climb);
     }
 

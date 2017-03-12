@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem.Record;
@@ -21,7 +22,7 @@ public class RotateColorPixyTest extends Command {
 	 * Will stop after 'timeout' seconds have passed.
 	 */
     public RotateColorPixyTest(double timeout) {
-    	camera = ColorPixySubsystem.getInstance();
+    	camera = Robot.colorPixy;
     	this.timeout = timeout;
     }
     

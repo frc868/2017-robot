@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,7 @@ public class ArcadeDriveCommand extends Command {
 	ControllerMap controller;
 
     public ArcadeDriveCommand(ControllerMap ctrl) {
-        drive = DriveSubsystem.getInstance();
+        drive = Robot.drivetrain;
         requires(drive);
         controller = ctrl;
     }

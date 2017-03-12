@@ -2,15 +2,17 @@ package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
-import org.usfirst.frc.team868.robot.commands.subsystems.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.FreeBall;
+import org.usfirst.frc.team868.robot.commands.subsystems.ShooterFlashlightCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearCollectorToggleCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.CalibrateTurret;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.JoystickTurretControl;
 
+import edu.wpi.first.wpilibj.Joystick;
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator

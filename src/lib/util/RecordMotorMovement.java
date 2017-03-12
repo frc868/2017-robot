@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+
+import org.usfirst.frc.team868.robot.Robot;
 
 public class RecordMotorMovement{
 	
@@ -60,8 +61,8 @@ public class RecordMotorMovement{
 	}
 	
 	public void RecordMotors(){
-		DrivePowersR.add(DriveSubsystem.getInstance().getRSpeed());
-		DrivePowersL.add(DriveSubsystem.getInstance().getLSpeed());
+		DrivePowersR.add(Robot.drivetrain.getRSpeed());
+		DrivePowersL.add(Robot.drivetrain.getLSpeed());
 		
 	}
 	

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
@@ -15,9 +16,9 @@ public class TurretLookForTarget extends Command {
 	private boolean isTurningLeft = true;
 	
     public TurretLookForTarget() {
-    	turret = TurretRotationSubsystem.getInstance();
+    	turret = Robot.turret;
     	requires(turret);
-    	camera = IRPixySubsystem.getInstance();
+    	camera = Robot.irPixy;
     }
 
     protected void initialize() {

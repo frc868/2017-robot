@@ -1,11 +1,11 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import lib.util.HoundMath;
 
 /**
@@ -17,7 +17,7 @@ public class FreeBall extends Command {
 	private double delay;
 
     public FreeBall(double delay) {
-    	agitator = AgitatorSubsystem.getInstance();
+    	agitator = Robot.agitator;
 		requires(agitator);
 		this.delay = delay;
     }

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -68,7 +69,7 @@ public class FeederSubsystem extends Subsystem {
 	
 	public boolean canFeed() {
 		if(DEBUG) return true;
-		return ShooterSubsystem.getInstance().getSpeed() > 50 && ShooterSubsystem.getInstance().getError() < 3;
+		return Robot.shooter.getSpeed() > 50 && Robot.shooter.getError() < 3;
 	}
 	
 	/**

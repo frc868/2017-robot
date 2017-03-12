@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,7 @@ public class ShootUsingVoltage extends Command {
     private double voltage;
 
 	public ShootUsingVoltage(double volts) {
-    	shooter = ShooterSubsystem.getInstance();
+    	shooter = Robot.shooter;
     	requires(shooter);
     	voltage = volts;
         // Use requires() here to declare subsystem dependencies
