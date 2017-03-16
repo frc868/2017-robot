@@ -97,7 +97,7 @@ public class OI {
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.FREE_THE_BALL)
-			.whenPressed(new FreeBall(RobotMap.Feeder.SHAKE_TIME));
+			.whenPressed(new AgitatorFreeCommand(RobotMap.Feeder.SHAKE_TIME));
 		controller.getButton(Controls.TOGGLE_AGITATOR_AND_FEEDER)
 			.whenPressed(new ToggleFeederAndAgitator());
 				

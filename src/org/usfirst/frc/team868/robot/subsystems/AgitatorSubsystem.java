@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.FreeBall;
+import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,7 +31,7 @@ public class AgitatorSubsystem extends Subsystem {
 	protected void initDefaultCommand() {
 		if (DEBUG) {
 	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
-			SmartDashboard.putData("Agitator Shake", new FreeBall(RobotMap.Feeder.SHAKE_PERIOD));
+			SmartDashboard.putData("Agitator Shake", new AgitatorFreeCommand(RobotMap.Feeder.SHAKE_PERIOD));
 		}
 	}
 
