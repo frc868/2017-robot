@@ -1,27 +1,26 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AgitatorTestingCommand extends Command {
+public class ShooterCommandVoltage extends Command {
 
+	private ShooterSubsystem shooter;
+	private double volts;
 	
-	private AgitatorSubsystem agitator;
-	private AgitatorSubsystem.State state;
-	
-    public AgitatorTestingCommand(AgitatorSubsystem.State state) {
-    	agitator = AgitatorSubsystem.getInstance();
-		requires(agitator);
-		this.state = state;
+    public ShooterCommandVoltage(double volts) {
+        shooter = ShooterSubsystem.getInstance();
+        requires(shooter);
+        this.volts = volts;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	agitator.setAgitator(state);
+    	shooter.setPower(volts);
     }
 
     // Called repeatedly when this Command is scheduled to run

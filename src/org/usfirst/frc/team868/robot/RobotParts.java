@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot;
 
-import org.usfirst.frc.team868.robot.commands.AutonChooser;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;

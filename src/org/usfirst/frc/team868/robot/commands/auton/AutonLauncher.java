@@ -1,13 +1,7 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.auton;
 
-import org.usfirst.frc.team868.robot.commands.AutonChooser;
-import org.usfirst.frc.team868.robot.commands.AutonChooser.DoThis;
-import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
-import org.usfirst.frc.team868.robot.commands.auton.CrossBaselineCommandGroup;
-import org.usfirst.frc.team868.robot.commands.auton.DropOffGearAutonCommandGroup;
-import org.usfirst.frc.team868.robot.commands.auton.GearToHopperCommandGroup;
-import org.usfirst.frc.team868.robot.commands.auton.GearToNeutralCommandGroup;
-import org.usfirst.frc.team868.robot.commands.auton.GoToHopperCommandGroup;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.DoThis;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

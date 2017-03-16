@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngle;
 

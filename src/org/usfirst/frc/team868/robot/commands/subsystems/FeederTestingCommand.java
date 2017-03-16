@@ -7,24 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShooterFeederCommand extends Command {
+public class FeederTestingCommand extends Command {
 
-	FeederSubsystem feeder;
+	private FeederSubsystem feeder;
+	private FeederSubsystem.State state;
 	
-    /**
-     * Toggles the feeder's on/off status
-     */
-    public ShooterFeederCommand(){
+    public FeederTestingCommand(FeederSubsystem.State state) {
     	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
+    	this.state = state;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(feeder.getState() != FeederSubsystem.State.OFF)
-    		feeder.setFeederOff();
-    	else
-    		feeder.setFeederForward();
+    	feeder.setFeeder(state);
     }
 
     // Called repeatedly when this Command is scheduled to run

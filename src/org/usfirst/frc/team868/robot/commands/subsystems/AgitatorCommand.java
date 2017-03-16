@@ -1,6 +1,8 @@
 package org.usfirst.frc.team868.robot.commands.subsystems;
 
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -8,50 +10,27 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AgitatorCommand extends Command {
 
-	AgitatorSubsystem agitator;
 	
-	boolean state;
+	private AgitatorSubsystem agitator;
+	private AgitatorSubsystem.State state;
 	
-	/**
-	 * Sets the agitator to the given argument
-	 * @param on
-	 */
-	public AgitatorCommand(boolean on) {
-		
-		state = on;
-		agitator = AgitatorSubsystem.getInstance();
-		requires(agitator);
-	}
-    
-    /**
-     * Toggles the agitator's on/off status
-     */
-    public AgitatorCommand(){
+    public AgitatorCommand(AgitatorSubsystem.State state) {
     	agitator = AgitatorSubsystem.getInstance();
-    	requires(agitator);
+		requires(agitator);
+		this.state = state;
+    }
+    
+    public AgitatorCommand(boolean on) {
+    	this(on ? State.FORWARD : State.OFF);
     }
 
-	// Called just before this Command runs the first time
-	protected void initialize() {
-		agitator.toggleAgitator();;
-	}
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	agitator.setAgitator(state);
+    }
 
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-
-	}
-
-	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {
-		return true;
-	}
-
-	// Called once after isFinished returns true
-	protected void end() {
-	}
-
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted() {
-	}	
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return true;
+    }
 }
