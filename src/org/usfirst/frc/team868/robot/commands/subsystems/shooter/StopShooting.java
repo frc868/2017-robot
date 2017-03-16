@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class StopShooting extends CommandGroup {
+public class StopShooting extends CommandGroup { //TODO integrate with ShooterFeederCommand (have on/off argument)
 
     public StopShooting() {
     	if(AgitatorSubsystem.getInstance().getState() != AgitatorSubsystem.State.OFF){//Deactivates agitator

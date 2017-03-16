@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AgitatorToggleCommand extends Command {
+public class AgitatorToggleCommand extends Command { //TODO integrate into Agitator COmmand
 
 	AgitatorSubsystem agitator;	
     
