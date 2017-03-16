@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class HopperToNeutralCommandGroup extends CommandGroup {
+public class HopperToNeutralAuton extends CommandGroup {
 
-    public HopperToNeutralCommandGroup(StartingPoint selected) {
+    public HopperToNeutralAuton(StartingPoint selected) {
     	double distanceForward = 101;
     	double DistanceToNeutral = 33.5;
     	switch(selected) {

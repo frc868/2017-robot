@@ -6,6 +6,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterFlashlightCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterIncrementSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 

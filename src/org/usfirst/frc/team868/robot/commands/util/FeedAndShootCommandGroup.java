@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.util;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.FeederTestingCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetVoltageCommand;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
@@ -21,11 +21,11 @@ public class FeedAndShootCommandGroup extends CommandGroup {
 //    	addSequential(new WaitCommand(2));
     	
     	addParallel(new AgitatorCommand(AgitatorSubsystem.State.FORWARD));
-    	addParallel(new FeederTestingCommand(FeederSubsystem.State.FORWARD));
+    	addParallel(new FeederCommand(FeederSubsystem.State.FORWARD));
     	addSequential(new WaitCommand(5));
     	
     	addParallel(new ShooterSetVoltageCommand(0));
     	addParallel(new AgitatorCommand(AgitatorSubsystem.State.OFF));
-    	addParallel(new FeederTestingCommand(FeederSubsystem.State.OFF));
+    	addParallel(new FeederCommand(FeederSubsystem.State.OFF));
     }
 }

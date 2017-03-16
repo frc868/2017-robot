@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CrossBaselineCommandGroup extends CommandGroup {
-    public CrossBaselineCommandGroup(StartingPoint selected) {
+public class BaselineAuton extends CommandGroup {
+    public BaselineAuton(StartingPoint selected) {
     	switch(selected) {
     		case B1:
     			addSequential(new DriveDistance(RobotMap.AutonValues.DISTANCE_TO_BASELINE));

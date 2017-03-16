@@ -16,23 +16,23 @@ public class AutonLauncher extends CommandGroup {
         
         switch(action) {
         	case CROSS_BASE:
-        		new CrossBaselineCommandGroup(start).start();
+        		new BaselineAuton(start).start();
         		break;
         		
         	case DROP_GEAR:
-        		new DropOffGearAutonCommandGroup(start).start();
+        		new GearAuton(start).start();
         		break;
         		
         	case HOPPER: 
-        		new GoToHopperCommandGroup(start).start();
+        		new HopperAuton(start).start();
         		break;
         		
         	case GEAR_TO_HOPPER:
-        		new GearToHopperCommandGroup(start).start();
+        		new GearToHopperAuton(start).start();
         		break;
         		
         	case GEAR_TO_NEUTRAL:
-        	    new GearToNeutralCommandGroup(start).start();
+        	    new GearToNeutralAuton(start).start();
         		break;
         		
 			default:

@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class GoToHopperCommandGroup extends CommandGroup {
+public class HopperAuton extends CommandGroup {
 
-    public GoToHopperCommandGroup(StartingPoint selected) {
+    public HopperAuton(StartingPoint selected) {
     	double posOneAngle = CalculateGeometry.getAngle(541.589574413, 232.5);
     	double posTwoAngle = CalculateGeometry.getAngle(335.839574413, 232.5);
     	double posOneDistance = CalculateGeometry.getHypotenuse(541.589574413, 232.5);

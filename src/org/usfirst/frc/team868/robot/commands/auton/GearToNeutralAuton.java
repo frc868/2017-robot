@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class GearToNeutralCommandGroup extends CommandGroup {
+public class GearToNeutralAuton extends CommandGroup {
 
-    public GearToNeutralCommandGroup(StartingPoint selected) {
+    public GearToNeutralAuton(StartingPoint selected) {
     	switch(selected) {
 	    	case B1:
 	    		addSequential(new DriveDistance(-RobotMap.AutonValues.distanceToBackupMoreFromPos1orPos3));

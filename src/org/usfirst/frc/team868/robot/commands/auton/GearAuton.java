@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class DropOffGearAutonCommandGroup extends CommandGroup {
+public class GearAuton extends CommandGroup {
 
-    public DropOffGearAutonCommandGroup(StartingPoint selected) {
+    public GearAuton(StartingPoint selected) {
     	switch(selected) {
     		case B1:
     		case R3:

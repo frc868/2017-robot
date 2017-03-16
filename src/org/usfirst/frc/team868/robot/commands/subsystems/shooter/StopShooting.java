@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorToggleCommand;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands.subsystems;
+package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import edu.wpi.first.wpilibj.command.Command;

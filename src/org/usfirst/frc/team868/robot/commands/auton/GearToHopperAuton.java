@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class GearToHopperCommandGroup extends CommandGroup {
+public class GearToHopperAuton extends CommandGroup {
 
-    public GearToHopperCommandGroup(StartingPoint selected) {
+    public GearToHopperAuton(StartingPoint selected) {
     	switch(selected) {
     	case B1:
-    		addSequential(new GearToNeutralCommandGroup(selected));
+    		addSequential(new GearToNeutralAuton(selected));
     		break;
     	case B2:
     		addSequential(new TurnToAngleGyro(-90));
@@ -38,7 +38,7 @@ public class GearToHopperCommandGroup extends CommandGroup {
     		addSequential(new FeedAndShootCommandGroup());
     		break;
     	case R1:
-    		addSequential(new GearToNeutralCommandGroup(selected));
+    		addSequential(new GearToNeutralAuton(selected));
     		break;
     	case R2:
     		addSequential(new TurnToAngleGyro(90));

@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class HoppertoGearCommandGroup extends CommandGroup {
+public class HopperToGearAuton extends CommandGroup {
 
-    public HoppertoGearCommandGroup(StartingPoint selected) {
+    public HopperToGearAuton(StartingPoint selected) {
        switch(selected) {
        		case B1:
        			addSequential(new DriveDistance(196.5));

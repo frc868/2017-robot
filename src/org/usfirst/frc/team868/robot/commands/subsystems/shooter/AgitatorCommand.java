@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands.subsystems;
+package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AgitatorCommand extends Command {
+public class AgitatorCommand extends Command { //TOOD integrate into ShooterFeeder
 
 	
 	private AgitatorSubsystem agitator;
