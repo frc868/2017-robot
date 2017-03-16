@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,33 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootCommand extends Command {
+public class ShooterSetSpeed extends Command {
 
 	ShooterSubsystem shooter;
 	double speed;
 	
-	public ShootCommand(){
-		this(RobotMap.Shoot.TARGET_SHOOTER_SPEED);
-	}
-    
-	/**
-	 * Sets the speed of the shooter wheel
-	 * @param rps Rotations per Second (usually 50 - 80)
-	 */
-    public ShootCommand(double rps) {
+    public ShooterSetSpeed(double rps) {
     	shooter = ShooterSubsystem.getInstance();
     	requires(shooter);
     	speed = rps;
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(shooter.isRunning()){
-    		shooter.setPower(0);
-    	}else{
-    		shooter.setSpeed(speed);
-    	}
-    	shooter.toggleShooting();
+    	shooter.setSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,11 +29,12 @@ public class ShootCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	shooter.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

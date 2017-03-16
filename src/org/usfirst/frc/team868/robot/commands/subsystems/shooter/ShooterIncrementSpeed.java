@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IncrementShooterSpeed extends Command {
+public class ShooterIncrementSpeed extends Command {
 	
 	private ShooterSubsystem shoot;
 	private double increment;
-    public IncrementShooterSpeed(double increment) {
+    public ShooterIncrementSpeed(double increment) {
     	shoot = ShooterSubsystem.getInstance();
     	requires(shoot);
     	this.increment = increment;

@@ -6,8 +6,8 @@ import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterIncrementSpeed;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
@@ -114,13 +114,13 @@ public class OI {
 		
 		//SHOOTER
 		controller.getButton(Controls.TOGGLE_SHOOTER)
-			.whenPressed(new ShootCommand());
+			.whenPressed(new ShooterSetSpeed(80));
 //		controller.getButton(Controls.TOGGLE_SHOOTER)
 //		.whenPressed(new ShooterCommandVoltage(6));	
 		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
-			.whenPressed(new IncrementShooterSpeed(.02));
+			.whenPressed(new ShooterIncrementSpeed(.02));
 		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
-			.whenPressed(new IncrementShooterSpeed(-.02));
+			.whenPressed(new ShooterIncrementSpeed(-.02));
 	}
 	
 	public ControllerMap getDriver() {

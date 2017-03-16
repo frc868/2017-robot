@@ -21,7 +21,7 @@ public class ShooterFeederCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(feeder.getState() != FeederSubsystem.State.OFF)
+    	if(feeder.getState() != FeederSubsystem.State.OFF) //TODO make a method in the subsystem for this
     		feeder.setFeederOff();
     	else
     		feeder.setFeederForward();
