@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands.groups;
+package org.usfirst.frc.team868.robot.commands.util;
 
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorToggleCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterFeederCommand;

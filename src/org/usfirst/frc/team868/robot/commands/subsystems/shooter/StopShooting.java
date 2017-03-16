@@ -18,7 +18,7 @@ public class StopShooting extends CommandGroup {
     	if(FeederSubsystem.getInstance().getState() == FeederSubsystem.State.FORWARD || FeederSubsystem.getInstance().getState() == FeederSubsystem.State.BACKWARD){//Deactivates feeder
     		addSequential(new ShooterFeederCommand());
     	}
-    	addSequential(new ShootUsingVoltage(0));//Deactivates shooter
+    	addSequential(new ShooterSetVoltageCommand(0));//Deactivates shooter
     	
     	//Should we also stop the turret from rotating to whatever target it finds?
     }

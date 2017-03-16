@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.ClimbUsingController;
+import org.usfirst.frc.team868.robot.commands.operator.ClimbUsingController;
 
 import com.ctre.CANTalon;
 

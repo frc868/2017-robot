@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShooterCommandVoltage extends Command {
+public class ShooterSetVoltageCommand extends Command {
 
 	private ShooterSubsystem shooter;
 	private double volts;
 	
-    public ShooterCommandVoltage(double volts) {
+    public ShooterSetVoltageCommand(double volts) {
         shooter = ShooterSubsystem.getInstance();
         requires(shooter);
         this.volts = volts;

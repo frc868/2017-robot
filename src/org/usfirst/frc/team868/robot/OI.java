@@ -1,9 +1,10 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser;
-import org.usfirst.frc.team868.robot.commands.groups.ToggleFeederAndAgitator;
+import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
+import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.IncrementShooterSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team868.robot.commands.subsystems;
+package org.usfirst.frc.team868.robot.commands.operator;
 
 import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
