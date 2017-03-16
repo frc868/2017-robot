@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateAngle extends Command {
+public class TurnByAngleGyro extends Command {
 	
 	private double angle;
 	
@@ -15,13 +15,13 @@ public class RotateAngle extends Command {
 	 * Rotates the robot by 'angle' degrees from it's current rotation, where right is positive and left is negative
 	 * @param angle
 	 */
-    public RotateAngle(double angle) {
+    public TurnByAngleGyro(double angle) {
     	this.angle = GyroSubsystem.getInstance().getRotation()+angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	new TurnToAngle(angle).start();
+    	new TurnToAngleGyro(angle).start();
     }
 
     // Called repeatedly when this Command is scheduled to run

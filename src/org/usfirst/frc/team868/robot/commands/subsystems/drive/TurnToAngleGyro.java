@@ -15,7 +15,7 @@ import lib.util.HoundMath;
 /**
  *
  */
-public class TurnToAngle extends Command {
+public class TurnToAngleGyro extends Command {
 
 	private DriveSubsystem motors;
 	private PIDController controller;
@@ -27,7 +27,7 @@ public class TurnToAngle extends Command {
 	 * (Note that this is not relative to the robot's orientation is when this command is called)
 	 * @param angle in degrees
 	 */
-    public TurnToAngle(double angle) {
+    public TurnToAngleGyro(double angle) {
     	motors = DriveSubsystem.getInstance();
     	requires(motors);
     	setAngle = angle;

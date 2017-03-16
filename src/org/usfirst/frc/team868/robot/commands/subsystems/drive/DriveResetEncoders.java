@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ResetEncoders extends Command {
+public class DriveResetEncoders extends Command {
 
 	private DriveSubsystem drive;
 	
-    public ResetEncoders() {
+    public DriveResetEncoders() {
     	drive = DriveSubsystem.getInstance();
     	requires(drive);
         // Use requires() here to declare subsystem dependencies

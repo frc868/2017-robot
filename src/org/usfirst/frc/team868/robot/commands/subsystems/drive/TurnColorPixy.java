@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateUsingColorPixy extends Command {
+public class TurnColorPixy extends Command {
 
 	@Override
 	protected boolean isFinished() {
