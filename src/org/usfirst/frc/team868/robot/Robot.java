@@ -47,6 +47,13 @@ public class Robot extends IterativeRobot {
     public static ShooterFlashlightSubsystem shooterLight;
     public static ShooterSubsystem shooter;
     public static TurretRotationSubsystem turret;
+    
+    /*
+     * TODO we could make them final as well, and then initialize them in a 
+     * static code block here. However, this would result in the subsystems 
+     * being constructed possibly before Robot itself, which could lead to
+     * issues?
+     */
 
 	/**
      * This function is run when the robot is first started up and should be
