@@ -20,7 +20,6 @@ import lib.util.HoundMath;
  */
 public class ShooterSubsystem extends Subsystem {
 
-    private static ShooterSubsystem instance;
     private CANTalon rightShooter;
     private CANTalon leftShooter;
     private PIDController control;
@@ -154,17 +153,6 @@ public class ShooterSubsystem extends Subsystem {
     
     public double getError() {
     	return control.getError();
-    }
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static ShooterSubsystem getInstance(){
-    	if(instance == null){
-    		instance = new ShooterSubsystem();
-    	}
-    	return instance;
     }
 	
 	/**

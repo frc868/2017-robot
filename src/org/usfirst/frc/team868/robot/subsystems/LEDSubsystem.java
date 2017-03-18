@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class LEDSubsystem extends Subsystem {
 	
-	private static LEDSubsystem instance;
 	private DigitalOutput led1, led2, ledGear;
 	
 	public LEDSubsystem(){
@@ -41,16 +40,6 @@ public class LEDSubsystem extends Subsystem {
 	 */
 	public void setGearLEDs(boolean state){
 		ledGear.set(state);
-	}
-
-	/**
-	 * Normal get instance method.
-	 */
-	public static LEDSubsystem getInstance(){
-		if(instance == null){
-			instance = new LEDSubsystem();
-		}
-		return instance;
 	}
 	
     public void initDefaultCommand() {

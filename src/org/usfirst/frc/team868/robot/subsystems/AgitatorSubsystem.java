@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AgitatorSubsystem extends Subsystem {
 
-	private static AgitatorSubsystem instance;
 	private Spark motor;
 	
 	public enum State {
@@ -56,15 +55,6 @@ public class AgitatorSubsystem extends Subsystem {
 		if (DEBUG) {
 			SmartDashboard.putNumber("Agitator Power", power);
 		}
-	}
-
-	/**
-	 * Get access to the single Agitator on the robot.
-	 * 
-	 * @return Reference to agitator singleton.
-	 */
-	public static AgitatorSubsystem getInstance() {
-		return instance == null ? instance = new AgitatorSubsystem() : instance;
 	}
 
 	/**

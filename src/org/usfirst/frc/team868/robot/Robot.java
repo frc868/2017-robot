@@ -140,7 +140,7 @@ public class Robot extends IterativeRobot {
 		
 		agitator = new AgitatorSubsystem();
 		climber = new ClimberSubsystem();
-		camera = CameraSubsystem.getRearInstance();
+		camera = new CameraSubsystem();
 		colorPixy = new ColorPixySubsystem();
 		drivetrain = new DriveSubsystem();
 		gearCollector = new GearCollectorSubsystem();

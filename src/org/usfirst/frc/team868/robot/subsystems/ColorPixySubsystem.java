@@ -120,7 +120,6 @@ public class ColorPixySubsystem extends Subsystem {
 		}
 	}
 
-	private static ColorPixySubsystem instance;
 	private SerialPort pixyCamS;
 	private I2C pixyCamI;
 	private int lastVal = 0;
@@ -273,13 +272,6 @@ public class ColorPixySubsystem extends Subsystem {
 			SmartDashboard.putNumber("Color Camera Target Height", target.getHeightOfTarget());
 			// SmartDashboard.putNumber("Color Frame count", frame);
 		}
-	}
-
-	synchronized public static ColorPixySubsystem getInstance() {
-		if (instance == null) {
-			instance = new ColorPixySubsystem();
-		}
-		return instance;
 	}
 
 	public void initDefaultCommand() {

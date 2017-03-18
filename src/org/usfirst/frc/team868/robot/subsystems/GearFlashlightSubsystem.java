@@ -12,22 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class GearFlashlightSubsystem extends Subsystem {
 
-    private static GearFlashlightSubsystem instance = new GearFlashlightSubsystem();
     private final Relay flashlight;
     private boolean isOn;
     private static final boolean DEBUG = false;
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static GearFlashlightSubsystem getInstance() {
-    	if(instance == null) {
-    		System.out.println("Constructed new GFL");
-    		instance = new GearFlashlightSubsystem();
-    	} 
-    	return instance;
-    }
     
     public GearFlashlightSubsystem() {
     	flashlight = new Relay(RobotMap.Flashlight.GEAR_LIGHT_PORT);

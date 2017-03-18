@@ -12,21 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterFlashlightSubsystem extends Subsystem {
 
-    private static ShooterFlashlightSubsystem instance;
     private Relay flashlight;
     private boolean isOn;
     private static final boolean DEBUG = false;
-    
-    /**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-    public static ShooterFlashlightSubsystem getInstance() {
-    	if(instance == null) {
-    		instance = new ShooterFlashlightSubsystem();
-    	} 
-    	return instance;
-    }
     
     public ShooterFlashlightSubsystem() {
     	flashlight = new Relay(RobotMap.Flashlight.SHOOT_LIGHT_PORT);

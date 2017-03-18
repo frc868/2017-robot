@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurretRotationSubsystem extends Subsystem {
 
-	private static TurretRotationSubsystem instance;
 	private CANTalon turretRotator;
 	private PIDController control;
 	private final double P = 0.005, I = 0, D = 0;
@@ -229,17 +228,6 @@ public class TurretRotationSubsystem extends Subsystem {
 			SmartDashboard.putBoolean("Turret at reverse limit", turretRotator.isRevLimitSwitchClosed());
 		}
 		SmartDashboard.putNumber("Turret Position", getPosition());
-	}
-
-	/**
-	 * Get the instance of this subsystem
-	 * @return instance
-	 */
-	public static TurretRotationSubsystem getInstance(){
-		if(instance == null){
-			instance = new TurretRotationSubsystem();
-		}
-		return instance;
 	}
 
 	public void initDefaultCommand() {
