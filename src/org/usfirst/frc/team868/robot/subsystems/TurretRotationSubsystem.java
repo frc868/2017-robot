@@ -5,7 +5,6 @@ import org.usfirst.frc.team868.robot.commands.subsystems.turret.JoystickTurretCo
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -26,13 +25,13 @@ public class TurretRotationSubsystem extends Subsystem {
 	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
 	private final boolean DEBUG = true;
-	private DigitalInput leftLimit, rightLimit;
+	//private DigitalInput leftLimit, rightLimit;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
-		leftLimit = new DigitalInput(1);
-		rightLimit = new DigitalInput(2);
+		//leftLimit = new DigitalInput(1);
+		//rightLimit = new DigitalInput(2);
 		// Make sure we stop if we hit a physical limit switch
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
 		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
@@ -101,7 +100,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return whether the leftmost limit switch has been closed.
 	 */
 	public boolean isLeftLimitSwitchClosed(){
-		return !leftLimit.get();//turretRotator.isRevLimitSwitchClosed();
+		return turretRotator.isRevLimitSwitchClosed();//!leftLimit.get();
 	}
 	
 	public boolean isAtLeftSoftLimit(){
@@ -116,7 +115,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return whether the rightmost limit switch has been closed.
 	 */
 	public boolean isRightLimitSwitchClosed(){
-		return !rightLimit.get();//turretRotator.isFwdLimitSwitchClosed();
+		return turretRotator.isFwdLimitSwitchClosed();//!rightLimit.get();
 	}
 	
 	/**
