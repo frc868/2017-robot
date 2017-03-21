@@ -24,6 +24,8 @@ public class DriveSubsystem extends Subsystem {
 	private Encoder rightEncoder;
 	private final boolean DEBUG = false;
 	
+	PowerThread powerThread;
+	
 	/**
 	 * Constructor, provides the port values for motors and encoders,
 	 * and inverts any motors that need inversion.
@@ -47,14 +49,17 @@ public class DriveSubsystem extends Subsystem {
 		if(DEBUG){
 			SmartDashboard.putData("Drive subsystem", this);
 		}
+		
+		startPowerThread();
 	}
-	
+
+
 	/**
 	 * Sets power to left motors
 	 * @param speed 1 to -1
 	 */
 	public void setL(double speed){
-		leftMotor.set(HoundMath.checkRange(speed));
+		powerThread.setLeft(speed);
 	}
 	
 	/**
@@ -62,7 +67,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param speed 1 to -1
 	 */
 	public void setR(double speed){
-		rightMotor.set(HoundMath.checkRange(speed));
+		powerThread.setRight(speed);
 	}
 	
 	/**
@@ -199,6 +204,61 @@ public class DriveSubsystem extends Subsystem {
 
     public void initDefaultCommand() {
     	setDefaultCommand(new ArcadeDriveCommand(OI.getInstance().getDriver()));
+    }
+    
+    private void startPowerThread() {
+    	if(powerThread == null) {
+    		powerThread = new PowerThread();
+    		powerThread.start();
+    	}
+    }
+    
+    public class PowerThread extends Thread {
+
+    	private double leftPower = 0, rightPower = 0;
+    	private double maxPower = 1.0;
+    	PowerDrawSubsystem power;
+    	
+    	private final double factor = 0.005;
+    	
+    	public PowerThread() {
+    		power = new PowerDrawSubsystem();
+    	}
+    	
+		@Override
+		public void run() {
+			while(!isInterrupted()) {
+				
+				if(power.getTotalCurrent() > 200) { //if excessive current draw
+					if(maxPower >= factor) { //don't want max to go below 0
+						maxPower -= factor;
+					}
+				} else {
+					if(maxPower <= 1 - (factor)) { //don't want max to exceed 1
+						maxPower += factor;
+					}
+				}
+				
+				leftMotor.set(HoundMath.checkRange(leftPower, -maxPower, maxPower)); //TODO finish above set methods
+				rightMotor.set(HoundMath.checkRange(rightPower, -maxPower, maxPower));
+
+				
+				try {
+					Thread.sleep(1000 / 200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		public void setLeft(double power) {
+			leftPower = power;
+		}
+		
+		public void setRight(double power) {
+			rightPower = power;
+		}
+    	
     }
 }
 
