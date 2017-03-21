@@ -220,6 +220,8 @@ public class DriveSubsystem extends Subsystem {
     	PowerDrawSubsystem power;
     	
     	private final double factor = 0.005;
+    	private final double maxCurrent = 200;
+    	private final double minVoltage = 7.0;
     	
     	public PowerThread() {
     		power = new PowerDrawSubsystem();
@@ -229,7 +231,7 @@ public class DriveSubsystem extends Subsystem {
 		public void run() {
 			while(!isInterrupted()) {
 				
-				if(power.getTotalCurrent() > 200) { //if excessive current draw
+				if(power.getTotalCurrent() > maxCurrent) { //if excessive current draw
 					if(maxPower >= factor) { //don't want max to go below 0
 						maxPower -= factor;
 					}
@@ -239,8 +241,13 @@ public class DriveSubsystem extends Subsystem {
 					}
 				}
 				
-				leftMotor.set(HoundMath.checkRange(leftPower, -maxPower, maxPower)); //TODO finish above set methods
+				leftMotor.set(HoundMath.checkRange(leftPower, -maxPower, maxPower));
 				rightMotor.set(HoundMath.checkRange(rightPower, -maxPower, maxPower));
+				
+				if(power.getVoltage() < minVoltage) {
+					leftMotor.set(0);
+					rightMotor.set(0);
+				}
 
 				
 				try {
