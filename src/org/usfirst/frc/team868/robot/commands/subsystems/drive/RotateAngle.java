@@ -1,6 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team868.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,7 +16,7 @@ public class RotateAngle extends Command {
 	 * @param angle
 	 */
     public RotateAngle(double angle) {
-    	this.angle = GyroSubsystem.getInstance().getRotation()+angle;
+    	this.angle = Robot.gyro.getRotation()+angle;
     }
 
     // Called just before this Command runs the first time

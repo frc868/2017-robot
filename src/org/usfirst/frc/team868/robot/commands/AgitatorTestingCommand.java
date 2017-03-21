@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,7 +15,7 @@ public class AgitatorTestingCommand extends Command {
 	private AgitatorSubsystem.State state;
 	
     public AgitatorTestingCommand(AgitatorSubsystem.State state) {
-    	agitator = AgitatorSubsystem.getInstance();
+    	agitator = Robot.agitator;
 		requires(agitator);
 		this.state = state;
     }

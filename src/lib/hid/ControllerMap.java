@@ -2,10 +2,9 @@ package lib.hid;
 
 import java.util.HashMap;
 
-import lib.util.HoundMath;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
+import lib.util.HoundMath;
 
 public class ControllerMap {
 	

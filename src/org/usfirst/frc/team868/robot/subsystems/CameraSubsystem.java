@@ -5,11 +5,9 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,14 +18,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class CameraSubsystem extends Subsystem {
 	
-	private static CameraSubsystem rearInstance;
-	private static CameraSubsystem frontInstance;
 	private Thread visionThread;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private CameraSubsystem(VideoCamera camera){
+	public CameraSubsystem(){
+		UsbCamera camera = new UsbCamera("rear", 0);
+		camera.setResolution(320, 240);
+		
 		visionThread = new Thread(() -> {
 			// Get the Axis camera from CameraServer
 			CameraServer.getInstance().addCamera(camera);
@@ -68,39 +67,6 @@ public class CameraSubsystem extends Subsystem {
 	 * on the boilers. Once the boiler is located, the {@link TurretRotationSubsystem}
 	 * can rotate the turret to aim at the goal.
 	 * */
-	
-	/**
-	 * Return an instance of the USB camera mounted on the rear of the robot.
-	 * 
-	 * @return An instance of the rear-mounted USB camera.
-	 * */
-	public static CameraSubsystem getRearInstance(){
-		if(rearInstance == null){
-			UsbCamera cam = new UsbCamera("rear", 0);
-			cam.setResolution(320, 240);
-			rearInstance = new CameraSubsystem(cam);
-		}
-		return rearInstance;
-	}
-	
-	/**
-	 * Return and instance of the Axis Camera that is mounted on the
-	 * gear collector. This camera will be used by the drivers to align
-	 * the robot while collecting gears from the feeder station, and
-	 * so sophisticated vision processing will likely not be required.
-	 * 
-	 * @deprecated Not using the network cam
-	 * 
-	 * @return An instance of the Axis camera on the gear collector.
-	 */
-	public static CameraSubsystem getFrontInstance(){
-		if(frontInstance == null){
-			AxisCamera cam = new AxisCamera("front", "10.8.68.11");
-			cam.setResolution(320, 240);
-			frontInstance = new CameraSubsystem(cam);
-		}
-		return frontInstance;
-	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

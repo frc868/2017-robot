@@ -17,7 +17,6 @@ import lib.util.RecordMotorMovement;
  */
 public class DriveSubsystem extends Subsystem {
 	
-	private static DriveSubsystem instance;
 	private Spark leftMotor;
 	private Spark rightMotor;
 	private Encoder leftEncoder;
@@ -30,7 +29,7 @@ public class DriveSubsystem extends Subsystem {
 	 * Constructor, provides the port values for motors and encoders,
 	 * and inverts any motors that need inversion.
 	 */
-	private DriveSubsystem(){
+	public DriveSubsystem(){
 		leftMotor = new Spark(RobotMap.Drive.LEFT_MOTOR);
 		rightMotor = new Spark(RobotMap.Drive.RIGHT_MOTOR);
 		leftMotor.setInverted(RobotMap.Drive.LEFT_IS_INVERTED);
@@ -175,18 +174,6 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void recordMotor(){
 		RecordMotorMovement.getInstance().RecordMotors();
-	}
-
-	/**
-	 * Gets the subsystem instance
-	 * 
-	 * @return subsystem instance
-	 */
-	public static DriveSubsystem getInstance(){
-		if(instance == null){
-			instance = new DriveSubsystem();
-		}
-		return instance;
 	}
 	
 	public void updateSD(){

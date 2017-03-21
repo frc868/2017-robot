@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GearCollectorSubsystem extends Subsystem {
 
-	private static GearCollectorSubsystem instance;
 	private Solenoid closer;
 	private Solenoid opener;
 	private boolean state;
@@ -22,7 +21,7 @@ public class GearCollectorSubsystem extends Subsystem {
 	/**
 	 * Constructor
 	 */
-	private GearCollectorSubsystem() {
+	public GearCollectorSubsystem() {
 		closer = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_CLOSER);
 		opener = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_OPENER);
 		detector = new AnalogInput(RobotMap.GearCollector.GEAR_DETECTOR_ANALOG_PORT);
@@ -32,13 +31,7 @@ public class GearCollectorSubsystem extends Subsystem {
 		LiveWindow.addActuator("Gear Collector", "Opener", opener);
 		LiveWindow.addSensor("Gear Collector", "Detector", detector);
 	}
-	
-	/**
-	 * Normal get instance method.
-	 */
-	public static GearCollectorSubsystem getInstance() {
-		return instance == null ? instance = new GearCollectorSubsystem() : instance;
-	}
+
 	/**
 	 * Set the gear collector to either: open = true, or closed = false.
 	 */

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
@@ -21,7 +22,7 @@ public class DriveAndTurn extends Command {
 	}
 	
     private DriveAndTurn(int counts) {
-    	drive = DriveSubsystem.getInstance();
+    	drive = Robot.drivetrain;
     	requires(drive);
     	
     	endCount = drive.getAvgEncoders() + counts;        

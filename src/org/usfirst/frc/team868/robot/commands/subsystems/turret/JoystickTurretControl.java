@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
 import org.usfirst.frc.team868.robot.OI;
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
@@ -15,7 +16,7 @@ public class JoystickTurretControl extends Command {
 	private TurretRotationSubsystem turret;
 	
 	public JoystickTurretControl(){
-    	turret = TurretRotationSubsystem.getInstance();
+    	turret = Robot.turret;
     	requires(turret);
 	}
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.GearFlashlightSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,7 +19,7 @@ public class GearFlashlightCommand extends Command {
 	 * @param on
 	 */
     public GearFlashlightCommand(boolean on) { 
-    	flash = GearFlashlightSubsystem.getInstance(); 
+    	flash = Robot.gearLight; 
         requires(flash);
         
         state = on;
@@ -28,7 +29,7 @@ public class GearFlashlightCommand extends Command {
      * Toggles the flashlight's on/off status
      */
     public GearFlashlightCommand(){
-    	flash = GearFlashlightSubsystem.getInstance();
+    	flash = Robot.gearLight;
     	requires(flash);
     	state = !flash.isOn();
     }

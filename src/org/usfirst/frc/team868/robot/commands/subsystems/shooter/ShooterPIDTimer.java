@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -17,7 +18,7 @@ public class ShooterPIDTimer extends Command {
     Timer timer;
 
 	public ShooterPIDTimer(double rps) {
-		shooter = ShooterSubsystem.getInstance();
+		shooter = Robot.shooter;
 		requires(shooter);
 		timer = new Timer();
 		speed = rps;

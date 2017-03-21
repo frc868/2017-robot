@@ -21,7 +21,7 @@ public class RotateUsingColorPixy extends Command {
 //	 * Will stop after 'timeout' seconds have passed.
 //	 */
 //    public RotateUsingColorPixy(double timeout) {
-//    	camera = ColorPixySubsystem.getInstance();
+//    	camera = Robot.colorPixy;
 //    	this.timeout = timeout;
 //    }
 //    

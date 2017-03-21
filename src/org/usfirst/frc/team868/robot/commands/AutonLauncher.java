@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands;
 
-import org.usfirst.frc.team868.robot.commands.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.AutonChooser.DoThis;
 import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.auton.CrossBaselineCommandGroup;

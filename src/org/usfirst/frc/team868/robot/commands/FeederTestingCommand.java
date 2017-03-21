@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,7 @@ public class FeederTestingCommand extends Command {
 	private FeederSubsystem.State state;
 	
     public FeederTestingCommand(FeederSubsystem.State state) {
-    	feeder = FeederSubsystem.getInstance();
+    	feeder = Robot.feeder;
     	requires(feeder);
     	this.state = state;
     }

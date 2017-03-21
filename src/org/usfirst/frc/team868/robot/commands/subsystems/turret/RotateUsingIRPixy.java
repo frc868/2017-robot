@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.turret;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.IRPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
@@ -21,8 +22,8 @@ public class RotateUsingIRPixy extends Command {
 	 * Will stop after 'timeout' seconds have passed.
 	 */
     public RotateUsingIRPixy(double timeout) {
-    	camera = IRPixySubsystem.getInstance();
-    	turret = TurretRotationSubsystem.getInstance();
+    	camera = Robot.irPixy;
+    	turret = Robot.turret;
     	requires(turret);
     	this.timeout = timeout;
     }

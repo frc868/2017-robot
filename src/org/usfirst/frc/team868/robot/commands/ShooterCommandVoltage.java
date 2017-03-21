@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands;
 
+import org.usfirst.frc.team868.robot.Robot;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,7 @@ public class ShooterCommandVoltage extends Command {
 	private double volts;
 	
     public ShooterCommandVoltage(double volts) {
-        shooter = ShooterSubsystem.getInstance();
+        shooter = Robot.shooter;
         requires(shooter);
         this.volts = volts;
     }
