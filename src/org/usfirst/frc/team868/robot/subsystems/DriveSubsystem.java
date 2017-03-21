@@ -2,7 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.ArcadeDriveCommand;
+import org.usfirst.frc.team868.robot.commands.operator.ArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;

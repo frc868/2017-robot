@@ -1,7 +1,8 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.turret;
+package org.usfirst.frc.team868.robot.commands.operator;
 
 import org.usfirst.frc.team868.robot.OI;
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateUsingIRPixy;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;

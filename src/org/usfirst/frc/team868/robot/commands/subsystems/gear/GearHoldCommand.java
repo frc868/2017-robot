@@ -11,7 +11,7 @@ public class GearHoldCommand extends Command {
 	
 	private GearCollectorSubsystem holder;
 
-    public GearHoldCommand() {
+    public GearHoldCommand() { //TODO merge this with the GearRelease Command
     	holder = GearCollectorSubsystem.getInstance();
     	requires(holder);
     }

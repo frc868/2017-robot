@@ -1,27 +1,26 @@
-package org.usfirst.frc.team868.robot.commands.subsystems.drive;
+package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RotateAngle extends Command {
+public class ShooterSetSpeed extends Command {
+
+	ShooterSubsystem shooter;
+	double speed;
 	
-	private double angle;
-	
-	/**
-	 * Rotates the robot by 'angle' degrees from it's current rotation, where right is positive and left is negative
-	 * @param angle
-	 */
-    public RotateAngle(double angle) {
-    	this.angle = GyroSubsystem.getInstance().getRotation()+angle;
+    public ShooterSetSpeed(double rps) {
+    	shooter = ShooterSubsystem.getInstance();
+    	requires(shooter);
+    	speed = rps;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	new TurnToAngle(angle).start();
+    	shooter.setSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,11 +29,12 @@ public class RotateAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	shooter.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateColorPixyTest extends Command {
+public class TESTColorPixy extends Command {
 	
 	private ColorPixySubsystem camera;
 	private Timer time;
@@ -20,7 +20,7 @@ public class RotateColorPixyTest extends Command {
 	 * Uses the Pixy camera to rotate to look directly towards the target 
 	 * Will stop after 'timeout' seconds have passed.
 	 */
-    public RotateColorPixyTest(double timeout) {
+    public TESTColorPixy(double timeout) {
     	camera = ColorPixySubsystem.getInstance();
     	this.timeout = timeout;
     }
@@ -28,7 +28,7 @@ public class RotateColorPixyTest extends Command {
     /**
      * Runs this command with a default timeout of 2.5 seconds
      */
-    public RotateColorPixyTest(){
+    public TESTColorPixy(){
     	this(2.5);
     }
 
@@ -46,7 +46,7 @@ public class RotateColorPixyTest extends Command {
     		//Target is either too close or too far to the left to be distinguishable
     		return;
     	}else{
-    		new RotateAngle(target.getXAngleOffFromCenter() + (RobotMap.Pixy.CAM_X_ANGLE/4)).start();
+    		new TurnByAngleGyro(target.getXAngleOffFromCenter() + (RobotMap.Pixy.CAM_X_ANGLE/4)).start();
     	}
     }
 

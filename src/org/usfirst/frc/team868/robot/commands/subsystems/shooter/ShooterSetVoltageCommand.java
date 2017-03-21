@@ -1,26 +1,26 @@
-package org.usfirst.frc.team868.robot.commands;
+package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class FeederTestingCommand extends Command {
+public class ShooterSetVoltageCommand extends Command {
 
-	private FeederSubsystem feeder;
-	private FeederSubsystem.State state;
+	private ShooterSubsystem shooter;
+	private double volts;
 	
-    public FeederTestingCommand(FeederSubsystem.State state) {
-    	feeder = FeederSubsystem.getInstance();
-    	requires(feeder);
-    	this.state = state;
+    public ShooterSetVoltageCommand(double volts) {
+        shooter = ShooterSubsystem.getInstance();
+        requires(shooter);
+        this.volts = volts;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	feeder.setFeeder(state);
+    	shooter.setPower(volts);
     }
 
     // Called repeatedly when this Command is scheduled to run

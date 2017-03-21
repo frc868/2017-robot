@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
-import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,47 +7,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveAndTurn extends Command {
+public class DriveResetEncoders extends Command {
 
-	private boolean isFinished = false;
 	private DriveSubsystem drive;
-	private int endCount;
-	private boolean isTurningR;
 	
-	public DriveAndTurn(double cm, boolean isTurningR) {
-		this((int)(cm * RobotMap.Drive.COUNTS_PER_CM));
-		this.isTurningR = isTurningR;
-	}
-	
-    private DriveAndTurn(int counts) {
+    public DriveResetEncoders() {
     	drive = DriveSubsystem.getInstance();
     	requires(drive);
-    	
-    	endCount = drive.getAvgEncoders() + counts;        
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(isTurningR) {
-    		drive.setR(RobotMap.Drive.SPEED);
-    		drive.setL(RobotMap.Drive.SPEED / 2.0);
-    	} else {
-    		drive.setL(RobotMap.Drive.SPEED);
-    		drive.setR(RobotMap.Drive.SPEED / 2.0);
-    	}
+    	drive.resetEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(drive.getAvgEncoders() > endCount) {
-    		isFinished = true;
-    		drive.setSpeed(0);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isFinished;
+    	return true;
     }
 
     // Called once after isFinished returns true

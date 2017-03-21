@@ -1,40 +1,30 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ShootCommand extends Command {
+public class ShooterFeederCommand extends Command {
 
-	ShooterSubsystem shooter;
-	double speed;
+	FeederSubsystem feeder;
 	
-	public ShootCommand(){
-		this(RobotMap.Shoot.TARGET_SHOOTER_SPEED);
-	}
-    
-	/**
-	 * Sets the speed of the shooter wheel
-	 * @param rps Rotations per Second (usually 50 - 80)
-	 */
-    public ShootCommand(double rps) {
-    	shooter = ShooterSubsystem.getInstance();
-    	requires(shooter);
-    	speed = rps;
+    /**
+     * Toggles the feeder's on/off status
+     */
+    public ShooterFeederCommand(){
+    	feeder = FeederSubsystem.getInstance();
+    	requires(feeder);
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(shooter.isRunning()){
-    		shooter.setPower(0);
-    	}else{
-    		shooter.setSpeed(speed);
-    	}
-    	shooter.toggleShooting();
+    	if(feeder.getState() != FeederSubsystem.State.OFF) //TODO make a method in the subsystem for this
+    		feeder.setFeederOff();
+    	else
+    		feeder.setFeederForward();
     }
 
     // Called repeatedly when this Command is scheduled to run

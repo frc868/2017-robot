@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team868.robot.commands.AutonLauncher;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
+import org.usfirst.frc.team868.robot.commands.auton.AutonLauncher;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**

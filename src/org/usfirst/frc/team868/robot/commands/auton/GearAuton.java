@@ -1,9 +1,9 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.RotateAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnByAngleGyro;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearReleaseCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class DropOffGearAutonCommandGroup extends CommandGroup {
+public class GearAuton extends CommandGroup {
 
-    public DropOffGearAutonCommandGroup(StartingPoint selected) {
+    public GearAuton(StartingPoint selected) {
     	switch(selected) {
     		case B1:
     		case R3:
     			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1));
     			addSequential(new WaitCommand(.1));
-    			addSequential(new RotateAngle(-60));
+    			addSequential(new TurnByAngleGyro(-60));
 //    			addSequential(new RotateUsingColorPixy());
     			addSequential(new WaitCommand(.1));
     			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_2));
@@ -33,7 +33,7 @@ public class DropOffGearAutonCommandGroup extends CommandGroup {
     		case R1:
     			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1));
     			addSequential(new WaitCommand(.1));
-    			addSequential(new RotateAngle(60));
+    			addSequential(new TurnByAngleGyro(60));
 //    			addSequential(new RotateUsingColorPixy());
     			addSequential(new WaitCommand(.1));
     			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_2));

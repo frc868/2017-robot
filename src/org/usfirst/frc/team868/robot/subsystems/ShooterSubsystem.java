@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShootCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 
 import com.ctre.CANTalon;
 
@@ -174,7 +174,7 @@ public class ShooterSubsystem extends Subsystem {
     	SmartDashboard.putNumber("Shooter Speed", getSpeed());
     	SmartDashboard.putNumber("Shooter Power", getPower());
     	SmartDashboard.putData("Shooter PID", control);
-    	SmartDashboard.putData("Run Shooter @ 80", new ShootCommand(80));
+    	SmartDashboard.putData("Run Shooter @ 80", new ShooterSetSpeed(80));
     }
 
     public void initDefaultCommand() {

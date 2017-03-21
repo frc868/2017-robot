@@ -11,12 +11,12 @@ import lib.util.HoundMath;
 /**
  *
  */
-public class FreeBall extends Command {
+public class AgitatorFreeCommand extends Command {
 
 	private AgitatorSubsystem agitator;
 	private double delay;
 
-    public FreeBall(double delay) {
+    public AgitatorFreeCommand(double delay) {
     	agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
 		this.delay = delay;

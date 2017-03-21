@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.AutonChooser.StartingPoint;
+import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CrossBaselineCommandGroup extends CommandGroup {
-    public CrossBaselineCommandGroup(StartingPoint selected) {
+public class BaselineAuton extends CommandGroup {
+    public BaselineAuton(StartingPoint selected) {
     	switch(selected) {
     		case B1:
     			addSequential(new DriveDistance(RobotMap.AutonValues.DISTANCE_TO_BASELINE));
