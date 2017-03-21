@@ -250,6 +250,8 @@ public class IRPixySubsystem extends Subsystem {
 				dump.append(Integer.toHexString(input[i] & 0xff));
 			}
 			processBytesRecieved(input);
+		}else{
+			target = new Record(0,0,0,0);
 		}
 	}
 

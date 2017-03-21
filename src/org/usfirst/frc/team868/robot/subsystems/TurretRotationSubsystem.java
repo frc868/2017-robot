@@ -1,10 +1,11 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.RotateTurretToAngle;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.JoystickTurretControl;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import lib.util.HoundMath;
 
 /**
  *
@@ -21,23 +23,20 @@ public class TurretRotationSubsystem extends Subsystem {
 	private static TurretRotationSubsystem instance;
 	private CANTalon turretRotator;
 	private PIDController control;
-	private final double P = 0.005, I = 0, D = 0;
+	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
+	private DigitalInput leftLimit, rightLimit;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
+		leftLimit = new DigitalInput(1);
+		rightLimit = new DigitalInput(2);
 		// Make sure we stop if we hit a physical limit switch
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
 		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
-		turretRotator.enableLimitSwitch(false, false);
-		
-		turretRotator.setPosition(0);
-		turretRotator.enableForwardSoftLimit(true);
-		turretRotator.enableReverseSoftLimit(true);
-		turretRotator.setForwardSoftLimit(22000);
-		turretRotator.setReverseSoftLimit(-6000);
+		turretRotator.enableLimitSwitch(true, true);
 		
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.Voltage);
 		turretRotator.enableBrakeMode(true);
@@ -51,16 +50,22 @@ public class TurretRotationSubsystem extends Subsystem {
 			}
 
 			public double pidGet() {
-				return getPosition();
+				return getAngle();
 			}
 			
 		}, new PIDOutput(){
 
 			public void pidWrite(double output) {
+				if(output < 0){
+					output -= RobotMap.Turret.MIN_PID_ADDITIONAL_VOLTAGE;
+				}else if(output > 0){
+					output += RobotMap.Turret.MIN_PID_ADDITIONAL_VOLTAGE;
+				}
 				setPower(output);
 			}
 			
 		});
+		control.setAbsoluteTolerance(.5);
 		control.setOutputRange(-RobotMap.Turret.MAX_VOLTAGE, RobotMap.Turret.MAX_VOLTAGE);
 		
 		// Assign test mode group
@@ -96,14 +101,22 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return whether the leftmost limit switch has been closed.
 	 */
 	public boolean isLeftLimitSwitchClosed(){
-		return turretRotator.isRevLimitSwitchClosed();
+		return !leftLimit.get();//turretRotator.isRevLimitSwitchClosed();
+	}
+	
+	public boolean isAtLeftSoftLimit(){
+		return turretRotator.getPosition() >= turretRotator.getForwardSoftLimit();
+	}
+	
+	public boolean isAtRightSoftLimit(){
+		return turretRotator.getPosition() <= turretRotator.getReverseSoftLimit();
 	}
 
 	/**
 	 * @return whether the rightmost limit switch has been closed.
 	 */
 	public boolean isRightLimitSwitchClosed(){
-		return turretRotator.isFwdLimitSwitchClosed();
+		return !rightLimit.get();//turretRotator.isFwdLimitSwitchClosed();
 	}
 	
 	/**
@@ -111,13 +124,12 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @param power in voltage from -12 to 12
 	 */
 	public void setPower(double power){
-		/*if(isLeftLimitSwitchClosed())
+		if(isLeftLimitSwitchClosed())
 			power = HoundMath.checkRange(power, 0, RobotMap.Turret.MAX_VOLTAGE);
 		else if(isRightLimitSwitchClosed())
 			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, 0);
 		else
 			power = HoundMath.checkRange(power, -RobotMap.Turret.MAX_VOLTAGE, RobotMap.Turret.MAX_VOLTAGE);
-		*/
 		turretRotator.set(power);
 	}
 	
@@ -125,29 +137,36 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * Deactivates the PID controller and sets the turret's motor's power to 0.
 	 */
 	public void stop(){
-		if(control.isEnabled())
-			control.disable();
-		setPower(0);
+		control.disable();
+		turretRotator.set(0);
 	}
 	
 	public void calibrateTurret() {
-		while (!isRightLimitSwitchClosed()) {
+		turretRotator.enableForwardSoftLimit(false);
+		turretRotator.enableReverseSoftLimit(false);
+		while(!isRightLimitSwitchClosed()){
 			setPower(RobotMap.Turret.MIN_VOLTAGE);
 		}
 		stop();
-		double startAngle = getAngle();
-		setPower(-RobotMap.Turret.MIN_VOLTAGE);
+		double rightLimit = getPosition();
 		while(!isLeftLimitSwitchClosed()) {
 			setPower(-RobotMap.Turret.MIN_VOLTAGE);
 		}
 		stop();
-		double endAngle = getAngle();
-		setAngle((startAngle + endAngle)/2);
-		
-		turretRotator.setForwardSoftLimit(startAngle-RobotMap.Turret.SOFT_LIMIT_OFFSET);
-		turretRotator.setReverseSoftLimit(endAngle+RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		double leftLimit = getPosition();
+		setAngle(getAngle()+RobotMap.Turret.LEFT_LIMIT_TO_FORWARD);
+		while(!control.onTarget()){}
+		double endPos = getPosition();
+		stop();
+		resetPosition();
+		setAngle(0);
+		stop();
+		turretRotator.setForwardSoftLimit(leftLimit-endPos-RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		turretRotator.setReverseSoftLimit(rightLimit-endPos+RobotMap.Turret.SOFT_LIMIT_OFFSET);
 		turretRotator.enableForwardSoftLimit(true);
 		turretRotator.enableReverseSoftLimit(true);
+		if(control.isEnabled())
+			stop();
 	}
 	
 	/**
@@ -165,7 +184,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @param degree in degrees
 	 */
 	public void setAngle(double degree) {
-		setSetpoint(degree * RobotMap.Turret.COUNTS_PER_DEGREE);
+		setSetpoint(degree);
 	}
 	
 	/**
@@ -189,7 +208,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return angle in degrees
 	 */
 	public double getAngle() {
-		return getPosition() * RobotMap.Turret.DEGREES_PER_COUNT;
+		return -getPosition() * RobotMap.Turret.DEGREES_PER_COUNT;
 	}
 	
 	/**
@@ -208,8 +227,8 @@ public class TurretRotationSubsystem extends Subsystem {
 		return control.getSetpoint() * RobotMap.Turret.DEGREES_PER_COUNT;
 	}
 	
-	public void toggleTargeting(){
-		isPixyTargeting = !isPixyTargeting;
+	public void toggleTargeting(boolean setTo){
+		isPixyTargeting = setTo;
 	}
 	
 	public boolean isPixyTargeting(){
@@ -224,9 +243,11 @@ public class TurretRotationSubsystem extends Subsystem {
 			SmartDashboard.putData("Turret PID", control);
 			SmartDashboard.putNumber("Turret Power", getPower());
 			SmartDashboard.putNumber("Turret Speed", getSpeed());
+			SmartDashboard.putNumber("Turret Angle", getAngle());
 			SmartDashboard.putNumber("Turret Setpoint", getSetpoint());
-			SmartDashboard.putBoolean("Turret at forward limit", turretRotator.isFwdLimitSwitchClosed());
-			SmartDashboard.putBoolean("Turret at reverse limit", turretRotator.isRevLimitSwitchClosed());
+			SmartDashboard.putBoolean("Turret at forward limit", isLeftLimitSwitchClosed());
+			SmartDashboard.putBoolean("Turret at reverse limit", isRightLimitSwitchClosed());
+			SmartDashboard.putBoolean("Pixy turret targeting", isPixyTargeting());
 		}
 		SmartDashboard.putNumber("Turret Position", getPosition());
 	}
@@ -243,7 +264,6 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new RotateTurretToAngle(this.getPosition()));
+		setDefaultCommand(new JoystickTurretControl());
 	}
 }
-
