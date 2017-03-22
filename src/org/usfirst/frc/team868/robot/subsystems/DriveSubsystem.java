@@ -203,7 +203,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArcadeDriveCommand(OI.getInstance().getDriver()));
+    	setDefaultCommand(new ArcadeDriveCommand(OI.getInstance().getDriver(),true));
     }
     
     private void startPowerThread() {
