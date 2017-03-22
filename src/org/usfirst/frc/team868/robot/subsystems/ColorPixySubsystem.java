@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
@@ -9,10 +8,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Pinout of back of Pixy: ^top of Pixy^ 1 2 3 4 5 6 7 8 9 10
+ * Pinout of back of Pixy: ^top of Pixy^ 
+ * 		1 2 
+ * 		3 4 
+ * 		5 6 
+ * 		7 8 
+ * 		9 10
  * 
- * RC Servo ports: ^directly below pinout^ PWM0 PWM1 <---(Programmable Pixy
- * output PWMs) 5V 5V <---(5V of power) GND GND <---(Ground)
+ * RC Servo ports: ^directly below pinout^ 
+ * 				PWM0 PWM1 <---(Programmable Pixy output PWMs) 
+ * 				5V 5V <---(5V of power) 
+ * 				GND GND <---(Ground)
  * 
  * Pixy to I2C ports: (kOnboard)
  * 
@@ -32,7 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ColorPixySubsystem extends Subsystem {
 	
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
 	private static int idCounter = 0;
 	
 	public final class Record {
@@ -127,7 +133,7 @@ public class ColorPixySubsystem extends Subsystem {
 	private boolean recordStarted = false;
 	private int bytesRecorded;
 	private int[] record = new int[6];
-	// volatile private int frame = 0;
+	volatile private int byteCount = 0;
 	volatile private Record target;
 
 	private Thread thread;
@@ -221,11 +227,13 @@ public class ColorPixySubsystem extends Subsystem {
 		}
 		StringBuilder dump = new StringBuilder(48);
 		if (input.length > 0) {
+			byteCount+=input.length;
 			dump.append(Integer.toHexString(input[0] & 0xff));
 			for (int i = 1; i < input.length; i++) {
 				dump.append(' ');
 				dump.append(Integer.toHexString(input[i] & 0xff));
 			}
+			SmartDashboard.putString("Color data dump", dump.toString());
 			processBytesRecieved(input);
 		}
 	}
@@ -261,7 +269,10 @@ public class ColorPixySubsystem extends Subsystem {
 		int yMid = record[3];
 		int width = record[4];
 		int height = record[5];
+		if ((width != 0) && (height != 0)) {
 		target = new Record(xMid, yMid, width, height);
+		SmartDashboard.putNumber("Color record count", target.getId());
+		}
 	}
 
 	public void updateSD() {// Updates the SD with the values specified.
@@ -271,7 +282,7 @@ public class ColorPixySubsystem extends Subsystem {
 			SmartDashboard.putNumber("Color Target Y", target.getYAngleOffFromCenter());
 			SmartDashboard.putNumber("Color Camera Target Width", target.getWidthOfTarget());
 			SmartDashboard.putNumber("Color Camera Target Height", target.getHeightOfTarget());
-			// SmartDashboard.putNumber("Color Frame count", frame);
+			SmartDashboard.putNumber("Color byte count", byteCount);
 		}
 	}
 
