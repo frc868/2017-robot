@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.turret.JoystickTurretControl;
+import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
 
 import com.ctre.CANTalon;
 

@@ -74,12 +74,20 @@ public interface RobotMap {
 	
 	public interface GearCollector {
 		//PORTS:
-		final int GEAR_SOLENOID_CLOSER = 1;
-		final int GEAR_SOLENOID_OPENER = 0;
+		final int GEAR_COLLECTOR_CLOSER = 6;
+		final int GEAR_COLLECTOR_OPENER = 7;
 		final int GEAR_DETECTOR_ANALOG_PORT = 3;
 		
 		//VALUES:
 		final double DETECTION_VOLTAGE = 1.5;
+	}
+	
+	public interface GearEjector {
+		//PORTS:
+		final int GEAR_EJECTOR_CLOSER = 1;
+		final int GEAR_EJECTOR_OPENER = 0;
+		
+		final int GEAR_PRESSURE_PLATE = 4;
 	}
 	
 	public static class Joystick {
