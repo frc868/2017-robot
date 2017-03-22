@@ -23,8 +23,8 @@ public class GearCollectorSubsystem extends Subsystem {
 	 * Constructor
 	 */
 	private GearCollectorSubsystem() {
-		closer = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_CLOSER);
-		opener = new Solenoid(RobotMap.GearCollector.GEAR_SOLENOID_OPENER);
+		closer = new Solenoid(RobotMap.GearCollector.GEAR_COLLECTOR_CLOSER);
+		opener = new Solenoid(RobotMap.GearCollector.GEAR_COLLECTOR_OPENER);
 		detector = new AnalogInput(RobotMap.GearCollector.GEAR_DETECTOR_ANALOG_PORT);
 		
 		// Assign test mode group

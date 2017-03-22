@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser;
-import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
+import org.usfirst.frc.team868.robot.commands.operator.CallJoystickTurretControl;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
@@ -95,7 +95,7 @@ public class OI {
 		
 		// TURRET
 		controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
-			.whenPressed(new JoystickTurretControl());
+			.whenPressed(new CallJoystickTurretControl());
 		controller.getButton(Controls.CALIBRATE)
 			.whenPressed(new CalibrateTurret());
 		controller.getButton(Controls.FREE_THE_BALL)
