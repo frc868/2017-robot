@@ -54,8 +54,6 @@ public class CameraSubsystem extends Subsystem {
 //						new Scalar(255, 255, 255), 5);
 				// Give the output stream a new image to display
 				outputStream.putFrame(mat);
-				
-				mat.release();
 			}
 		});
 		visionThread.setDaemon(true);
