@@ -1,9 +1,6 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CvSink;
@@ -53,10 +50,12 @@ public class CameraSubsystem extends Subsystem {
 					continue;
 				}
 				// Put a rectangle on the image
-				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
-						new Scalar(255, 255, 255), 5);
+//				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
+//						new Scalar(255, 255, 255), 5);
 				// Give the output stream a new image to display
 				outputStream.putFrame(mat);
+				
+				mat.release();
 			}
 		});
 		visionThread.setDaemon(true);
