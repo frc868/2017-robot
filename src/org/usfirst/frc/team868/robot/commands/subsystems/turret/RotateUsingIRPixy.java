@@ -15,6 +15,7 @@ public class RotateUsingIRPixy extends Command {
 	private TurretRotationSubsystem turret;
 	private Timer time;
 	private double timeout;
+	private double lastAngle;
 
 	/**
 	 * Uses the Pixy camera to rotate to look directly towards the target 
@@ -36,16 +37,22 @@ public class RotateUsingIRPixy extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	turret.stop();
     	time = new Timer();
     	time.reset();
     	time.start();
+    	lastAngle = camera.getTarget().getXAngleOffFromCenter();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	turret.setAngle(turret.getAngle()+camera.getTarget().getXAngleOffFromCenter());
+    	double currAngle = camera.getTarget().getXAngleOffFromCenter();
+    	turret.setAngle(turret.getAngle()+currAngle);
+    	if(lastAngle != currAngle)
+    		time.reset();
     	if(time.get() > timeout)
         	new TurretLookForTarget().start();
+    	lastAngle = currAngle;
     }
 
     // Make this return true when this Command no longer needs to run execute()

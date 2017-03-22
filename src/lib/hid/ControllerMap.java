@@ -17,7 +17,7 @@ public class ControllerMap {
 	
 	private int [] buttonPorts;
 	
-	private double DEADZONE = 0.05;
+	private double DEADZONE = 0.06;
 	
 	public interface Key {
 		

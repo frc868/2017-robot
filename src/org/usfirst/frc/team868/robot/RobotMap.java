@@ -74,12 +74,20 @@ public interface RobotMap {
 	
 	public interface GearCollector {
 		//PORTS:
-		final int GEAR_SOLENOID_CLOSER = 1;
-		final int GEAR_SOLENOID_OPENER = 0;
+		final int GEAR_COLLECTOR_CLOSER = 6;
+		final int GEAR_COLLECTOR_OPENER = 7;
 		final int GEAR_DETECTOR_ANALOG_PORT = 3;
 		
 		//VALUES:
 		final double DETECTION_VOLTAGE = 1.5;
+	}
+	
+	public interface GearEjector {
+		//PORTS:
+		final int GEAR_EJECTOR_CLOSER = 1;
+		final int GEAR_EJECTOR_OPENER = 0;
+		
+		final int GEAR_PRESSURE_PLATE = 4;
 	}
 	
 	public static class Joystick {
@@ -144,12 +152,14 @@ public interface RobotMap {
 		final int TURRET_MOTOR = 10;
 		
 		//VALUES:
-		final boolean IS_INVERTED = false;
-		final double SOFT_LIMIT_OFFSET = 2;
-		final double COUNTS_PER_DEGREE = 1;
+		final boolean IS_INVERTED = true;
+		final double SOFT_LIMIT_OFFSET = 700;
+		final double COUNTS_PER_DEGREE = 100;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
-		final double MIN_VOLTAGE = 2.2;
+		final double MIN_PID_ADDITIONAL_VOLTAGE = .64;
+		final double MIN_VOLTAGE = 2;
 		final double MAX_VOLTAGE = 5;
+		final double LEFT_LIMIT_TO_FORWARD = 40; //degrees
 		final double RAMP_RATE = 1;
 	}
 	public interface AutonValues {
