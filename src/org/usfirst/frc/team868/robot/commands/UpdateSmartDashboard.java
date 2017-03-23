@@ -21,6 +21,7 @@ public class UpdateSmartDashboard extends Command {
 	
 	private Timer time;
 	private int counts;
+	private PowerDistributionPanel pdp;
 	
 	/**
 	 * Use this command for adding any SmartDashboard output.  e.g. Subsystem get methods
@@ -28,6 +29,7 @@ public class UpdateSmartDashboard extends Command {
     public UpdateSmartDashboard() {
     	setRunWhenDisabled(true);
     	time = new Timer();
+    	pdp = new PowerDistributionPanel();
     }
 
     // Called just before this Command runs the first time
@@ -62,7 +64,7 @@ public class UpdateSmartDashboard extends Command {
     		SmartDashboard.putNumber("Update SD Counts", counts);
     		//Debug
     		
-        	SmartDashboard.putNumber("PDP Draw", new PowerDistributionPanel().getTotalCurrent());
+        	SmartDashboard.putNumber("PDP Draw", pdp.getTotalCurrent());
 
     	}
     }
