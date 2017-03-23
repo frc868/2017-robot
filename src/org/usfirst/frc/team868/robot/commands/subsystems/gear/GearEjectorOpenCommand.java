@@ -1,26 +1,24 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearReleaseCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class GearEjectorOpenCommand extends Command {
 
-    public GearReleaseCommand() {
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+private GearEjectorSubsystem ejector;
+	
+    public GearEjectorOpenCommand() {
+        ejector = GearEjectorSubsystem.getInstance();
+        requires(ejector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(!holder.isGearCollectorOpen()){
-    		holder.setGearCollectorOpen();
-    	}
+    	ejector.setGearEjectorOpen();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +27,7 @@ public class GearReleaseCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -45,7 +45,7 @@ public class GearEjectorSubsystem extends Subsystem {
 	/**
 	 * Set the gear ejector to either: open = true, or closed = false.
 	 */
-	public void setGearCollector(boolean open) {
+	public void setGearEjector(boolean open) {
 		state = open;
 		opener.set(state);
 		closer.set(!state);
@@ -53,25 +53,25 @@ public class GearEjectorSubsystem extends Subsystem {
 	/**
 	 * Opens the gear ejector, if not already open.
 	 */
-	public void setGearCollectorOpen() {
-		setGearCollector(true);
+	public void setGearEjectorOpen() {
+		setGearEjector(true);
 	}
 	/**
 	 * Closes the gear ejector, if not already closed.
 	 */
-	public void setGearCollectorClosed() {
-		setGearCollector(false);
+	public void setGearEjectorClosed() {
+		setGearEjector(false);
 	}
 	/**
 	 * Switches the gear ejector between open and closed states.
 	 */
-	public void toggleGearCollector() {
-		setGearCollector(!state);
+	public void toggleGearEjector() {
+		setGearEjector(!state);
 	}
 	/**
 	 * Returns whether or not the gear ejector is open.
 	 */
-	public boolean isGearCollectorOpen() {
+	public boolean isGearEjectorOpen() {
 		return state;
 	}
 	/**

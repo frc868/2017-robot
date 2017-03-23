@@ -7,19 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearHoldCommand extends Command {
+public class GearCollectorOpenCommand extends Command {
 	
 	private GearCollectorSubsystem holder;
 
-    public GearHoldCommand() { //TODO merge this with the GearRelease Command
+    public GearCollectorOpenCommand() {
     	holder = GearCollectorSubsystem.getInstance();
     	requires(holder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(holder.isGearCollectorOpen()){
-    		holder.setGearCollectorClosed();
+    	if(!holder.isGearCollectorOpen()){
+    		holder.setGearCollectorOpen();
     	}
     }
 
