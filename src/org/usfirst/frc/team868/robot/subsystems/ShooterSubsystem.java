@@ -174,7 +174,7 @@ public class ShooterSubsystem extends Subsystem {
     	SmartDashboard.putNumber("Shooter Speed", getSpeed());
     	SmartDashboard.putNumber("Shooter Power", getPower());
     	SmartDashboard.putData("Shooter PID", control);
-    	SmartDashboard.putData("Run Shooter @ 80", new ShooterSetSpeed(80));
+//    	SmartDashboard.putData("Run Shooter @ 80", new ShooterSetSpeed(80));
     }
 
     public void initDefaultCommand() {
