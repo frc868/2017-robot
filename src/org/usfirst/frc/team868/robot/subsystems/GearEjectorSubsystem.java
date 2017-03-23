@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearEjectorAutomaticCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -19,8 +20,11 @@ public class GearEjectorSubsystem extends Subsystem {
 	private Solenoid opener;
 	private DigitalInput spikeDetector;
 	private boolean state;
+	
 	@Override
-	protected void initDefaultCommand() {}
+	protected void initDefaultCommand() {
+		setDefaultCommand(new GearEjectorAutomaticCommand());
+	}
 
 	/**
 	 * Constructor
