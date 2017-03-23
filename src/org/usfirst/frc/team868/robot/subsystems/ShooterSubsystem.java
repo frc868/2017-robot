@@ -1,7 +1,6 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 
 import com.ctre.CANTalon;
 
