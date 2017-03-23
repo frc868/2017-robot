@@ -12,6 +12,7 @@ import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -21,6 +22,9 @@ public class UpdateSmartDashboard extends Command {
 	
 	private Timer time;
 	private int counts;
+	private PowerDistributionPanel pdp;
+	
+	final double REFRESH_RATE = (1.0 / 20.0);
 	
 	/**
 	 * Use this command for adding any SmartDashboard output.  e.g. Subsystem get methods
@@ -28,12 +32,15 @@ public class UpdateSmartDashboard extends Command {
     public UpdateSmartDashboard() {
     	setRunWhenDisabled(true);
     	time = new Timer();
+    	pdp = new PowerDistributionPanel();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	time.reset();
     	time.start();
+    	
+    	NetworkTable.setUpdateRate(REFRESH_RATE);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,9 +48,8 @@ public class UpdateSmartDashboard extends Command {
     	// This had been set to go as high as 200 times a second (actually it had been infinite as it was 1/20 which is probably 0)
     	// I turned it down to 20 times a second max - does it need to be higher? (pkb)
     	// I don't know, last year's robot was 1/200, so I assumed that it would be fine. (cjd)
-    	final double refreshRate = (1.0 / 20.0);
     	
-    	if(time.get() >= refreshRate){
+    	if(time.get() >= REFRESH_RATE){
     		AgitatorSubsystem.getInstance().updateSD();
     		ClimberSubsystem.getInstance().updateSD();
     		ColorPixySubsystem.getInstance().updateSD();
@@ -62,7 +68,9 @@ public class UpdateSmartDashboard extends Command {
     		SmartDashboard.putNumber("Update SD Counts", counts);
     		//Debug
     		
-        	SmartDashboard.putNumber("PDP Draw", new PowerDistributionPanel().getTotalCurrent());
+        	SmartDashboard.putNumber("PDP Draw", pdp.getTotalCurrent());
+        	
+        	NetworkTable.flush();
 
     	}
     }
