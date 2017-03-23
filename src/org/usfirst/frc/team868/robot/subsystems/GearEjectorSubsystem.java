@@ -74,6 +74,13 @@ public class GearEjectorSubsystem extends Subsystem {
 	public boolean isGearEjectorOpen() {
 		return state;
 	}
+	
+	/**
+	 * @return Whether or not the gear spike pressure plate is pressed or not
+	 */
+	public boolean isPlatePressed() {
+		return spikeDetector.get();
+	}
 	/**
 	 * Updates the information on SmartDashboard.
 	 */
