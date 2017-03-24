@@ -20,6 +20,7 @@ public class GearEjectorSubsystem extends Subsystem {
 	private Solenoid opener;
 	private DigitalInput spikeDetector;
 	private boolean state;
+	private boolean willAutoEject = true;
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -72,6 +73,12 @@ public class GearEjectorSubsystem extends Subsystem {
 	public void toggleGearEjector() {
 		setGearEjector(!state);
 	}
+	public void toggleAutoEject(){
+		willAutoEject = !willAutoEject;
+	}
+	public boolean willGearAutoEject(){
+		return willAutoEject;
+	}
 	/**
 	 * Returns whether or not the gear ejector is open.
 	 */
@@ -92,6 +99,7 @@ public class GearEjectorSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putBoolean("Gear Ejector", state);
 		SmartDashboard.putBoolean("Spike sensor", isPlatePressed());
+		SmartDashboard.putBoolean("Gear will be auto-ejected", willAutoEject);
 	}
 }
 

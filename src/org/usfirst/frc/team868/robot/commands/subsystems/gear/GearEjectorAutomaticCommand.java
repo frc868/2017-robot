@@ -22,7 +22,7 @@ public class GearEjectorAutomaticCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(ejector.isPlatePressed()) {
+		if(ejector.isPlatePressed() && ejector.willGearAutoEject()) {
 			ejector.setGearEjectorOpen(); //TODO wait a bit then close it?
 		}
 	}

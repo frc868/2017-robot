@@ -12,7 +12,7 @@ public class FeederSubsystem extends Subsystem {
 	private static FeederSubsystem instance;
 	private Spark motor;
 	
-	public State state;
+	public State state = State.OFF;
 	private DigitalInput beamBreak;
 	private static final boolean DEBUG = false;
 	
@@ -142,8 +142,6 @@ public class FeederSubsystem extends Subsystem {
 	 */
 	public void updateSD(){
 		SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
-		if(DEBUG){
-			SmartDashboard.putBoolean("Feeder is on", getState().equals(State.FORWARD) || getState().equals(State.BACKWARD));
-		}
+		SmartDashboard.putBoolean("Feeder on", getState().equals(State.FORWARD));
 	}
 }
