@@ -87,7 +87,7 @@ public interface RobotMap {
 		final int GEAR_EJECTOR_CLOSER = 1;
 		final int GEAR_EJECTOR_OPENER = 0;
 		
-		final int GEAR_PRESSURE_PLATE = 4;
+		final int GEAR_PRESSURE_PLATE = 5;
 	}
 	
 	public static class Joystick {
@@ -101,7 +101,7 @@ public interface RobotMap {
 	
 	public interface LEDs {
 		//PORTS:
-		final int DIO_1_PORT = 5;
+		final int DIO_1_PORT = 4; //TODO this port does not physically work!!
 		final int DIO_2_PORT = 6;
 		final int DIO_GEAR_PORT = 7;
 	}

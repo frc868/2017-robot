@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.commands.subsystems.gear.GearEjectorAutomaticCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -19,8 +20,11 @@ public class GearEjectorSubsystem extends Subsystem {
 	private Solenoid opener;
 	private DigitalInput spikeDetector;
 	private boolean state;
+	
 	@Override
-	protected void initDefaultCommand() {}
+	protected void initDefaultCommand() {
+		setDefaultCommand(new GearEjectorAutomaticCommand());
+	}
 
 	/**
 	 * Constructor
@@ -45,40 +49,49 @@ public class GearEjectorSubsystem extends Subsystem {
 	/**
 	 * Set the gear ejector to either: open = true, or closed = false.
 	 */
-	public void setGearCollector(boolean open) {
+	public void setGearEjector(boolean open) {
 		state = open;
-		opener.set(state);
-		closer.set(!state);
+		opener.set(!state);
+		closer.set(state);
 	}
 	/**
 	 * Opens the gear ejector, if not already open.
 	 */
-	public void setGearCollectorOpen() {
-		setGearCollector(true);
+	public void setGearEjectorOpen() {
+		setGearEjector(true);
 	}
 	/**
 	 * Closes the gear ejector, if not already closed.
 	 */
-	public void setGearCollectorClosed() {
-		setGearCollector(false);
+	public void setGearEjectorClosed() {
+		setGearEjector(false);
 	}
 	/**
 	 * Switches the gear ejector between open and closed states.
 	 */
-	public void toggleGearCollector() {
-		setGearCollector(!state);
+	public void toggleGearEjector() {
+		setGearEjector(!state);
 	}
 	/**
 	 * Returns whether or not the gear ejector is open.
 	 */
-	public boolean isGearCollectorOpen() {
+	public boolean isGearEjectorOpen() {
 		return state;
+	}
+	
+	/**
+	 * @return Whether or not the gear spike pressure plate is pressed or not
+	 */
+	public boolean isPlatePressed() {
+		//yes, this is supposed to be inverted, it's wired backwards
+		return !spikeDetector.get();
 	}
 	/**
 	 * Updates the information on SmartDashboard.
 	 */
 	public void updateSD(){
 		SmartDashboard.putBoolean("Gear Ejector", state);
+		SmartDashboard.putBoolean("Spike sensor", isPlatePressed());
 	}
 }
 
