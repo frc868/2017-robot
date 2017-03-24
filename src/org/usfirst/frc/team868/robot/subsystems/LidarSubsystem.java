@@ -54,7 +54,11 @@ public class LidarSubsystem extends Subsystem {
 
 	public void connect() {
 		if(serial == null) {
-			serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
+			try {
+				serial = new SerialPort(RobotMap.LIDAR.BAUD, RobotMap.LIDAR.PORT);
+			} catch (Exception e) {
+				System.err.println("LIDAR Cannot Connect!"); //serial will be null here
+			}
 		}
 	}
 
@@ -80,8 +84,11 @@ public class LidarSubsystem extends Subsystem {
 		return new Thread() {
 			@Override
 			public void run() {
-				while (!isInterrupted()) {					
-					updateDistance();
+				while (!isInterrupted()) {	
+					
+					if(serial != null) {
+						updateDistance();
+					}
 					
 					try {
 						Thread.sleep(1);
