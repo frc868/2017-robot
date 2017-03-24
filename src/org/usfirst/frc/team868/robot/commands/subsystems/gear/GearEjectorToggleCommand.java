@@ -1,26 +1,24 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
-import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GearHoldCommand extends Command {
-	
-	private GearCollectorSubsystem holder;
+public class GearEjectorToggleCommand extends Command {
 
-    public GearHoldCommand() { //TODO merge this with the GearRelease Command
-    	holder = GearCollectorSubsystem.getInstance();
-    	requires(holder);
+	private GearEjectorSubsystem ejector;
+	
+    public GearEjectorToggleCommand() {
+        ejector = GearEjectorSubsystem.getInstance();
+        requires(ejector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(holder.isGearCollectorOpen()){
-    		holder.setGearCollectorClosed();
-    	}
+    	ejector.toggleGearEjector();
     }
 
     // Called repeatedly when this Command is scheduled to run
