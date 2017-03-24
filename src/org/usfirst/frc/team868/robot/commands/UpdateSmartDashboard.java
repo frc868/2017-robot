@@ -7,6 +7,7 @@ import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.LidarSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
 
@@ -59,7 +60,7 @@ public class UpdateSmartDashboard extends Command {
     		GearEjectorSubsystem.getInstance().updateSD();
 //			GearFlashlightSubsystem.getInstance().updateSD();
 //    		IRPixySubsystem.getInstance().updateSD();
-//    		LidarSubsystem.getInstance().updateSmartDashboard();
+    		LidarSubsystem.getInstance().updateSmartDashboard();
 			FeederSubsystem.getInstance().updateSD();
 //			ShooterFlashlightSubsystem.getInstance().updateSD();
     		ShooterSubsystem.getInstance().updateSD();
