@@ -44,7 +44,7 @@ public interface RobotMap {
 		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
 		final double CM_PER_COUNT = 1.0 / COUNTS_PER_CM;
 		final double MIN_DRIVE_SPEED = .27;
-		final double MAX_AUTON_DRIVE_SPEED = .5;
+		final double MAX_AUTON_DRIVE_SPEED = .35;
 	}
 	
 	public interface Feeder {
@@ -111,7 +111,7 @@ public interface RobotMap {
 		final SerialPort.Port PORT = SerialPort.Port.kUSB;
 		
 		//VALUES:
-		final int BAUD = 9600;
+		final int BAUD = 115200;
 	}
 	
 	public interface Pixy {
