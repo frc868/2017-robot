@@ -66,7 +66,7 @@ public class OI {
 	
 	public interface Controls {
 		
-		final int TOGGLE_GEAR_COLLECTOR = ControllerMap.Key.A;
+		final int TOGGLE_GEAR_COLLECTOR = DPadButton.Direction.RIGHT;
 		final int TOGGLE_PIXY_TURRET_TARGETING = ControllerMap.Key.B;
 		final int TOGGLE_AGITATOR_AND_FEEDER = ControllerMap.Key.Y;
 		final int TOGGLE_SHOOTER = ControllerMap.Key.X;
@@ -82,6 +82,7 @@ public class OI {
 		
 		final int INCREASE_SHOOTER_SPEED = DPadButton.Direction.UP;
 		final int DECREASE_SHOOTER_SPEED = DPadButton.Direction.DOWN;
+		final int TOGGLE_GEAR_EJECTOR = ControllerMap.Key.A;
 	}
 	
 	public void setupDriver(ControllerMap controller) {
@@ -104,8 +105,10 @@ public class OI {
 			.whenPressed(new ToggleFeederAndAgitator());
 				
 		// GEAR
-		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR)
+		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR) //TODO maybe set the ejector to closed whenever this happens?
 			.whenPressed(new GearCollectorToggleCommand());
+		controller.getButton(Controls.TOGGLE_GEAR_EJECTOR)
+			.whenPressed(new GearEjectorToggleCommand());
 		
 		//FLASHLIGHTS
 //		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)

@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearReleaseCommand extends Command {
+public class GearCollectorOpenCommand extends Command {
 	
 	private GearCollectorSubsystem holder;
 
-    public GearReleaseCommand() {
+    public GearCollectorOpenCommand() {
     	holder = GearCollectorSubsystem.getInstance();
     	requires(holder);
     }

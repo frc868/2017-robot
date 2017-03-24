@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ColorPixySubsystem;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.TurretRotationSubsystem;
@@ -55,6 +56,7 @@ public class UpdateSmartDashboard extends Command {
     		ColorPixySubsystem.getInstance().updateSD();
     		DriveSubsystem.getInstance().updateSD();
     		GyroSubsystem.getInstance().updateSD();
+    		GearEjectorSubsystem.getInstance().updateSD();
 //			GearFlashlightSubsystem.getInstance().updateSD();
 //    		IRPixySubsystem.getInstance().updateSD();
 //    		LidarSubsystem.getInstance().updateSmartDashboard();
