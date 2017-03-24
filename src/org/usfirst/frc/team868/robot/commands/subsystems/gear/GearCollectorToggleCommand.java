@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.gear;
 
 import org.usfirst.frc.team868.robot.subsystems.GearCollectorSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,15 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GearCollectorToggleCommand extends Command {
 	
 	private GearCollectorSubsystem holder;
+	private GearEjectorSubsystem ejector;
 
     public GearCollectorToggleCommand() {
     	holder = GearCollectorSubsystem.getInstance();
+    	ejector = GearEjectorSubsystem.getInstance();
     	requires(holder);
+    	requires(ejector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	holder.toggleGearCollector();
+    	ejector.setGearEjectorClosed();
     }
 
     // Called repeatedly when this Command is scheduled to run
