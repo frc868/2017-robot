@@ -90,6 +90,7 @@ public class GearEjectorSubsystem extends Subsystem {
 	 */
 	public void updateSD(){
 		SmartDashboard.putBoolean("Gear Ejector", state);
+		SmartDashboard.putBoolean("Spike sensor", isPlatePressed());
 	}
 }
 
