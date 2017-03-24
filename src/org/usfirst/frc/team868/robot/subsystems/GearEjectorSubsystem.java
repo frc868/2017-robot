@@ -83,7 +83,8 @@ public class GearEjectorSubsystem extends Subsystem {
 	 * @return Whether or not the gear spike pressure plate is pressed or not
 	 */
 	public boolean isPlatePressed() {
-		return spikeDetector.get();
+		//yes, this is supposed to be inverted, it's wired backwards
+		return !spikeDetector.get();
 	}
 	/**
 	 * Updates the information on SmartDashboard.
