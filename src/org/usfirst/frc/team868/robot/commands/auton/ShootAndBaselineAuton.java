@@ -21,7 +21,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 			addParallel(new ShooterSetSpeed(75));
 			addSequential(new WaitCommand(2));
 			addSequential(new FeedAndShootCommandGroup());
-			addSequential(new DriveDistance(-600));
+			addSequential(new DriveDistance(-280));
 			break;
 		case R1:
 		case R2:
@@ -29,7 +29,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 			addParallel(new ShooterSetSpeed(75));
 			addSequential(new WaitCommand(2));
 			addSequential(new FeedAndShootCommandGroup());
-			addSequential(new DriveDistance(600));
+			addSequential(new DriveDistance(280));
 			break;
 			
 		}
