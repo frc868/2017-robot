@@ -51,8 +51,8 @@ public class GearEjectorSubsystem extends Subsystem {
 	 */
 	public void setGearEjector(boolean open) {
 		state = open;
-		opener.set(state);
-		closer.set(!state);
+		opener.set(!state);
+		closer.set(state);
 	}
 	/**
 	 * Opens the gear ejector, if not already open.
