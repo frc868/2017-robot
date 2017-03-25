@@ -35,6 +35,9 @@ public class AutonLauncher extends CommandGroup {
         	    new GearToNeutralAuton(start).start();
         		break;
         		
+        	case SHOOT_AND_BASELINE:
+        		new ShootAndBaselineAuton(start).start();
+        		break;
 			default:
 				break;
         }
