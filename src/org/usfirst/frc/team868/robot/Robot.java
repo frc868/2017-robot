@@ -50,9 +50,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
     	initSubsystems();
+    	resetRobot();
 		OI.getInstance().initialize();
 		
-    	new UpdateSmartDashboard().start();
 
     }
 
@@ -79,6 +79,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	resetRobot();
         new AutonLauncher().start();
         
     }
@@ -91,9 +92,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    
-    	Scheduler.getInstance().removeAll();
-    	new UpdateSmartDashboard().start();
+    	resetRobot();    	
     }
 
     /**
@@ -129,5 +128,10 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    private void resetRobot() {
+    	Scheduler.getInstance().removeAll();
+    	new UpdateSmartDashboard().start();
     }
 }
