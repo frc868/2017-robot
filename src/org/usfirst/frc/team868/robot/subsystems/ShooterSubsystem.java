@@ -26,6 +26,7 @@ public class ShooterSubsystem extends Subsystem {
     private Counter count;
     private double lastSpeed;
     private boolean isRunning = false;
+	private final boolean DEBUG = false;
     public static final double P = 0.03;
     public static final double I = 0;
     public static final double D = 0.2;
@@ -172,7 +173,9 @@ public class ShooterSubsystem extends Subsystem {
     public void updateSD(){
     	SmartDashboard.putNumber("Shooter Speed", getSpeed());
     	SmartDashboard.putNumber("Shooter Power", getPower());
-    	SmartDashboard.putData("Shooter PID", control);
+    	if(DEBUG){
+    		SmartDashboard.putData("Shooter PID", control);
+    	}
 //    	SmartDashboard.putData("Run Shooter @ 80", new ShooterSetSpeed(80));
     }
 

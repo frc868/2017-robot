@@ -73,9 +73,9 @@ public class ClimberSubsystem extends Subsystem {
 	 */
 	public void updateSD(){
 		if(DEBUG){
-			SmartDashboard.putBoolean("Is climbing", isClimbing());
 			SmartDashboard.putBoolean("Is pressing button", isPressingButton());
 		}
+		SmartDashboard.putBoolean("Is climbing", isClimbing());
 	}
 	
 	/**
