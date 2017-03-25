@@ -2,7 +2,6 @@ package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -13,13 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveDistance extends Command {
+public class DriveDistanceEncoders extends Command {
 
 	private DriveSubsystem drive;
-	private GyroSubsystem gyro;
 	private double endCount;
 	private PIDController control;
-	private double initRotation;
 	private double power = 0;
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
@@ -28,11 +25,10 @@ public class DriveDistance extends Command {
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm) {
+	public DriveDistanceEncoders(double cm) {
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
-		gyro = GyroSubsystem.getInstance();
 		control = new PIDController(kp , ki, kd, kf, new PIDSource(){
 			public void setPIDSourceType(PIDSourceType pidSource) {}
 
@@ -54,7 +50,6 @@ public class DriveDistance extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + distanceCM;
-    	initRotation = gyro.getRotation();
     	//SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
@@ -71,11 +66,11 @@ public class DriveDistance extends Command {
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
-		double multiplier = 1 - 2*Math.sin((gyro.getRotation()-initRotation)*Math.PI/180);
-    	if(gyro.getRotation()-initRotation > 1){
-    		lPower = lPower*multiplier;
-    	}else if(gyro.getRotation()-initRotation < -1){
-    		rPower = rPower*multiplier;
+		double lSpeed = drive.getLSpeed(), rSpeed = drive.getRSpeed();
+    	if(lSpeed > rSpeed){
+    		lPower = lPower*rSpeed/lSpeed;
+    	}else if(rSpeed > lSpeed){
+    		rPower = rPower*lSpeed/rSpeed;
     	}
 		drive.setSpeed(lPower, rPower);
     }
