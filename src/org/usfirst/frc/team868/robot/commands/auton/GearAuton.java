@@ -44,11 +44,11 @@ public class GearAuton extends CommandGroup {
     			break;
     		case B2:
     		case R2:
-    			addSequential(new DriveDistance(RobotMap.AutonValues.WALL_TO_HOOK/* - 30));
+    			addParallel(new DriveDistance(RobotMap.AutonValues.WALL_TO_HOOK/* - 30));
     			addSequential(new RotateUsingColorPixy());
     			addSequential(new WaitCommand(1));
     			addSequential(new DriveDistance(30*/));
-    			addSequential(new WaitCommand(.5));
+    			addSequential(new WaitCommand(4.5));
 //	    		addSequential(new GearCollectorOpenCommand());
     			addSequential(new WaitCommand(1));
 	    		addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));

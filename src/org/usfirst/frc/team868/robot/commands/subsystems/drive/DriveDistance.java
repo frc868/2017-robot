@@ -75,7 +75,7 @@ public class DriveDistance extends Command {
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
-		double multiplier = 1 - 2*Math.sin((gyro.getRotation()-initRotation)*Math.PI/180);
+		double multiplier = 1 - Math.abs(2*Math.sin((gyro.getRotation()-initRotation)*Math.PI/180));
     	if(gyro.getRotation()-initRotation > 1){
     		lPower = lPower*multiplier;
     	}else if(gyro.getRotation()-initRotation < -1){
