@@ -28,13 +28,20 @@ public class ArcadeDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putBoolean("Driver Direction", direction);
+    	double L, R;
     	if(direction){
-    		drive.setL(controller.getForwardsLeftPower());
-    		drive.setR(controller.getForwardsRightPower());
+    		L = controller.getForwardsLeftPower();
+    		R = controller.getForwardsRightPower();
     	}else{
-        	drive.setL(controller.getBackwardsLeftPower());
-        	drive.setR(controller.getBackwardsRightPower());
+    		L = controller.getBackwardsLeftPower();
+    		R = controller.getBackwardsRightPower();
     	}
+    	if(controller.getAxis(ControllerMap.Key.LT) > .3){
+    		L *= .5;
+    		R *= .5;
+    	}
+    	drive.setL(L);
+    	drive.setR(R);
     	
     }
 
