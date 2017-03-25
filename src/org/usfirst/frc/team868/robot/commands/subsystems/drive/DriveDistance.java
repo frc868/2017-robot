@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -50,6 +51,8 @@ public class DriveDistance extends Command {
 		});
 		control.setAbsoluteTolerance(4);
 	}
+	
+	double startDistance;
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -58,6 +61,7 @@ public class DriveDistance extends Command {
     	//SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
+    	startDistance = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -78,6 +82,7 @@ public class DriveDistance extends Command {
     		rPower = rPower*multiplier;
     	}
 		drive.setSpeed(lPower, rPower);
+		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT - startDistance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -88,5 +93,6 @@ public class DriveDistance extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	control.disable();
+    	drive.setSpeed(0);
     }
 }
