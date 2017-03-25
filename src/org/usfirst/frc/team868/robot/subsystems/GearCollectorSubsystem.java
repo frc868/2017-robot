@@ -15,6 +15,7 @@ public class GearCollectorSubsystem extends Subsystem {
 	private Solenoid opener;
 	private boolean state;
 	private AnalogInput detector;
+	private final boolean DEBUG = false;
 	
 	@Override
 	protected void initDefaultCommand() {}
@@ -83,5 +84,8 @@ public class GearCollectorSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putBoolean("Gear Collector", state);
 		SmartDashboard.putBoolean("Gear detected", isAGearCollected());
+		if(DEBUG ){
+			SmartDashboard.putNumber("Gear Detector voltage", detector.getVoltage());
+		}
 	}
 }
