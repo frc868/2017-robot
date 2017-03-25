@@ -145,8 +145,8 @@ public class FeederSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
 		SmartDashboard.putBoolean("Feeder on", getState().equals(State.FORWARD));
 		if(DEBUG) {
-			SmartDashboard.putData("Set Feeder On", new FeederCommand(State.FORWARD));
-			SmartDashboard.putData("Set Feeder Off", new FeederCommand(State.OFF));			
+//			SmartDashboard.putData("Set Feeder On", new FeederCommand(State.FORWARD));
+//			SmartDashboard.putData("Set Feeder Off", new FeederCommand(State.OFF));			
 		}
 	}
 }
