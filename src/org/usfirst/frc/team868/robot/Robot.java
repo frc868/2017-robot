@@ -50,9 +50,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
     	initSubsystems();
+    	resetRobot();
 		OI.getInstance().initialize();
 		
-    	new UpdateSmartDashboard().start();
 
     }
 
@@ -79,6 +79,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
+    	resetRobot();
         new AutonLauncher().start();
         
     }
@@ -91,12 +92,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-    	
+    	resetRobot();    	
     }
 
     /**
@@ -118,8 +114,8 @@ public class Robot extends IterativeRobot {
 		GearCollectorSubsystem.getInstance();
 //		GearFlashlightSubsystem.getInstance();
 		GyroSubsystem.getInstance();
-//		IRPixySubsystem.getInstance();
-//		LidarSubsystem.getInstance();
+		IRPixySubsystem.getInstance();
+		LidarSubsystem.getInstance();
 		LEDSubsystem.getInstance();
 		FeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();
@@ -132,5 +128,10 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    private void resetRobot() {
+    	Scheduler.getInstance().removeAll();
+    	new UpdateSmartDashboard().start();
     }
 }

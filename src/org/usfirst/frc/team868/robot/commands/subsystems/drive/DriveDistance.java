@@ -51,6 +51,8 @@ public class DriveDistance extends Command {
 		});
 		control.setAbsoluteTolerance(4);
 	}
+	
+	double startDistance;
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -59,6 +61,7 @@ public class DriveDistance extends Command {
     	SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
+    	startDistance = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -72,13 +75,14 @@ public class DriveDistance extends Command {
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
-		double multiplier = 1 - Math.abs(gyro.getRotation()-initRotation)/100;
+		double multiplier = 1 - Math.abs(gyro.getRotation()-initRotation)/10;
     	if(gyro.getRotation()-initRotation > 1){
     		lPower = lPower*multiplier;
     	}else if(gyro.getRotation()-initRotation < -1){
     		rPower = rPower*multiplier;
     	}
 		drive.setSpeed(lPower, rPower);
+		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT - startDistance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -89,5 +93,6 @@ public class DriveDistance extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	control.disable();
+    	drive.setSpeed(0);
     }
 }

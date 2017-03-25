@@ -26,6 +26,9 @@ public class CameraSubsystem extends Subsystem {
 	
 	private CameraSubsystem(VideoCamera camera){
 		visionThread = new Thread(() -> {
+			
+			camera.setFPS(30);
+			
 			// Get the Axis camera from CameraServer
 			CameraServer.getInstance().addCamera(camera);
 
@@ -33,6 +36,7 @@ public class CameraSubsystem extends Subsystem {
 			CvSink cvSink = CameraServer.getInstance().getVideo();
 			// Setup a CvSource. This will send images back to the Dashboard
 			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 320, 240);
+			outputStream.setFPS(30);
 
 			// Mats are very memory expensive. Lets reuse this Mat.
 			Mat mat = new Mat();
