@@ -168,13 +168,13 @@ public interface RobotMap {
 		
 		//Baseline from Start
 		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
-		double BASELINE_MIDDLE_DISTANCE = 240;
+		double BASELINE_MIDDLE_DISTANCE = 200;
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
 		double GEAR_AUTON_DIST_1 = 160;//NOT ACCURATE: Distance until in line with hook if on sides.
 		double GEAR_AUTON_DIST_2 = 60;
-		double HOOK_BACKOFF = 5;//Arbitrary value: how far to back away from the hook after placing the gear.
+		double HOOK_BACKOFF = 30;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper
 		double distanceAcrossToHopperFromGearPos2 = 411.5 - (107 /Math.sqrt(2)) - 91;
