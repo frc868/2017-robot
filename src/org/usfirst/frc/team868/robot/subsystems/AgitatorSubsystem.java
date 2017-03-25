@@ -56,8 +56,8 @@ public class AgitatorSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Agitator On", on);
 		if (DEBUG) {
 			SmartDashboard.putNumber("Agitator Power", power);
-			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
-			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
+//			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
+//			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
 		}
 	}
 
