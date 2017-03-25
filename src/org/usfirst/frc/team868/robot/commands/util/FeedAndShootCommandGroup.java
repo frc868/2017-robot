@@ -17,7 +17,7 @@ public class FeedAndShootCommandGroup extends CommandGroup {
     public FeedAndShootCommandGroup() {
 //    	addSequential(new RotateUsingIRPixy(1));
     	
-//    	addParallel(new ShootCommand(80));
+//    	addParallel(new ShootCommand(80)); //TODO fix tihs wtf
 //    	addSequential(new WaitCommand(2));
     	
     	addParallel(new AgitatorCommand(AgitatorSubsystem.State.FORWARD));

@@ -25,7 +25,7 @@ public class ShooterIncrementSpeed extends Command {
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {
