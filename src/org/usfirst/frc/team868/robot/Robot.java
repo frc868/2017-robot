@@ -114,8 +114,8 @@ public class Robot extends IterativeRobot {
 		GearCollectorSubsystem.getInstance();
 //		GearFlashlightSubsystem.getInstance();
 		GyroSubsystem.getInstance();
-//		IRPixySubsystem.getInstance();
-//		LidarSubsystem.getInstance();
+		IRPixySubsystem.getInstance();
+		LidarSubsystem.getInstance();
 		LEDSubsystem.getInstance();
 		FeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();
