@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot;
 
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.operator.CallJoystickTurretControl;
+import org.usfirst.frc.team868.robot.commands.operator.ToggleGearAutoEject;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
@@ -66,10 +67,10 @@ public class OI {
 	
 	public interface Controls {
 		
-		final int TOGGLE_GEAR_COLLECTOR = DPadButton.Direction.RIGHT;
 		final int TOGGLE_PIXY_TURRET_TARGETING = ControllerMap.Key.B;
 		final int TOGGLE_AGITATOR_AND_FEEDER = ControllerMap.Key.Y;
 		final int TOGGLE_SHOOTER = ControllerMap.Key.X;
+		final int TOGGLE_GEAR_EJECTOR = ControllerMap.Key.A;
 		
 		final int CALIBRATE = ControllerMap.Key.BACK;
 		final int FREE_THE_BALL = ControllerMap.Key.START;
@@ -82,7 +83,8 @@ public class OI {
 		
 		final int INCREASE_SHOOTER_SPEED = DPadButton.Direction.UP;
 		final int DECREASE_SHOOTER_SPEED = DPadButton.Direction.DOWN;
-		final int TOGGLE_GEAR_EJECTOR = ControllerMap.Key.A;
+		final int TOGGLE_GEAR_COLLECTOR = DPadButton.Direction.RIGHT;
+		final int TOGGLE_GEAR_AUTO_EJECT = DPadButton.Direction.LEFT;
 	}
 	
 	public void setupDriver(ControllerMap controller) {
@@ -109,6 +111,8 @@ public class OI {
 			.whenPressed(new GearCollectorToggleCommand());
 		controller.getButton(Controls.TOGGLE_GEAR_EJECTOR)
 			.whenPressed(new GearEjectorToggleCommand());
+		controller.getButton(Controls.TOGGLE_GEAR_AUTO_EJECT)
+			.whenPressed(new ToggleGearAutoEject());
 		
 		//FLASHLIGHTS
 //		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)

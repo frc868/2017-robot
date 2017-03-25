@@ -24,7 +24,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private PIDController control;
 	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	//private DigitalInput leftLimit, rightLimit;
 
 	private TurretRotationSubsystem(){
@@ -69,9 +69,7 @@ public class TurretRotationSubsystem extends Subsystem {
 		
 		// Assign test mode group
     	LiveWindow.addActuator("Turret", "Motor", turretRotator);
-    	if (DEBUG) {
-    		SmartDashboard.putData(this);
-    	}
+    	SmartDashboard.putData(this);
 	}
 	
 	/**
@@ -242,13 +240,13 @@ public class TurretRotationSubsystem extends Subsystem {
 			SmartDashboard.putData("Turret PID", control);
 			SmartDashboard.putNumber("Turret Power", getPower());
 			SmartDashboard.putNumber("Turret Speed", getSpeed());
-			SmartDashboard.putNumber("Turret Angle", getAngle());
+			SmartDashboard.putNumber("Turret Position", getPosition());
 			SmartDashboard.putNumber("Turret Setpoint", getSetpoint());
 			SmartDashboard.putBoolean("Turret at forward limit", isLeftLimitSwitchClosed());
 			SmartDashboard.putBoolean("Turret at reverse limit", isRightLimitSwitchClosed());
-			SmartDashboard.putBoolean("Pixy turret targeting", isPixyTargeting());
 		}
-		SmartDashboard.putNumber("Turret Position", getPosition());
+		SmartDashboard.putNumber("Turret Angle", getAngle());
+		SmartDashboard.putBoolean("Pixy turret targeting", isPixyTargeting());
 	}
 
 	/**
