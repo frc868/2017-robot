@@ -20,7 +20,6 @@ public class DriveDistance extends Command {
 	private GyroSubsystem gyro;
 	private double endCount;
 	private PIDController control;
-	private double initRotation;
 	private double power = 0;
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
@@ -57,7 +56,7 @@ public class DriveDistance extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + distanceCM;
-    	initRotation = gyro.getRotation();
+		gyro.reset();
     	//SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
@@ -75,10 +74,11 @@ public class DriveDistance extends Command {
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
-		double multiplier = 1 - Math.abs(2*Math.sin((gyro.getRotation()-initRotation)*Math.PI/180));
-    	if(gyro.getRotation()-initRotation > 1){
+		double rotation = gyro.getRotation();
+		double multiplier = 1 - Math.abs(10*Math.sin(rotation*Math.PI/180));
+    	if(rotation > 1){
     		lPower = lPower*multiplier;
-    	}else if(gyro.getRotation()-initRotation < -1){
+    	}else if(rotation < -1){
     		rPower = rPower*multiplier;
     	}
 		drive.setSpeed(lPower, rPower);

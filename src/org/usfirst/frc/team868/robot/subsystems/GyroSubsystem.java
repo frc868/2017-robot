@@ -34,6 +34,10 @@ public class GyroSubsystem extends Subsystem {
     	return gyroX.getAngle();
     }
     
+    public void reset(){
+    	gyroX.reset();
+    }
+    
     /**
 	 * Update information on SmartDashboard.
 	 */

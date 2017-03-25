@@ -168,7 +168,7 @@ public interface RobotMap {
 		
 		//Baseline from Start
 		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
-		double BASELINE_MIDDLE_DISTANCE = 200;
+		double BASELINE_MIDDLE_DISTANCE = 199;
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
