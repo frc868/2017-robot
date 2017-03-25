@@ -44,7 +44,7 @@ public interface RobotMap {
 		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
 		final double CM_PER_COUNT = 1.0 / COUNTS_PER_CM;
 		final double MIN_DRIVE_SPEED = .27;
-		final double MAX_AUTON_DRIVE_SPEED = .5;
+		final double MAX_AUTON_DRIVE_SPEED = .35;
 	}
 	
 	public interface Feeder {
@@ -111,7 +111,7 @@ public interface RobotMap {
 		final SerialPort.Port PORT = SerialPort.Port.kUSB;
 		
 		//VALUES:
-		final int BAUD = 9600;
+		final int BAUD = 115200;
 	}
 	
 	public interface Pixy {
@@ -168,13 +168,13 @@ public interface RobotMap {
 		
 		//Baseline from Start
 		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
-		double BASELINE_MIDDLE_DISTANCE = 240;
+		double BASELINE_MIDDLE_DISTANCE = 200;
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
 		double GEAR_AUTON_DIST_1 = 160;//NOT ACCURATE: Distance until in line with hook if on sides.
 		double GEAR_AUTON_DIST_2 = 60;
-		double HOOK_BACKOFF = 5;//Arbitrary value: how far to back away from the hook after placing the gear.
+		double HOOK_BACKOFF = 30;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper
 		double distanceAcrossToHopperFromGearPos2 = 411.5 - (107 /Math.sqrt(2)) - 91;

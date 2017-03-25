@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,7 +25,7 @@ public class AgitatorSubsystem extends Subsystem {
 	public State state;
 	
 	/** Set this to true for tuning and diagnostic output. */
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	private static final String SpeedLabel = "Agitator Speed";
 
 	@Override
@@ -55,6 +56,8 @@ public class AgitatorSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Agitator On", on);
 		if (DEBUG) {
 			SmartDashboard.putNumber("Agitator Power", power);
+			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
+			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
 		}
 	}
 

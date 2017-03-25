@@ -3,13 +3,13 @@ package org.usfirst.frc.team868.robot;
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser;
 import org.usfirst.frc.team868.robot.commands.operator.CallJoystickTurretControl;
 import org.usfirst.frc.team868.robot.commands.operator.ToggleGearAutoEject;
+import org.usfirst.frc.team868.robot.commands.operator.ToggleShooting;
 import org.usfirst.frc.team868.robot.commands.subsystems.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.turret.*;
 import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterFlashlightCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterIncrementSpeed;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
@@ -93,8 +93,6 @@ public class OI {
 	
 	public void setupOperator(ControllerMap controller) {
 		controller.clearButtons();
-		//TODO: add rotate turret w/ joystick(s)
-		
 		
 		// TURRET
 		controller.getButton(Controls.TOGGLE_PIXY_TURRET_TARGETING)
@@ -115,16 +113,14 @@ public class OI {
 			.whenPressed(new ToggleGearAutoEject());
 		
 		//FLASHLIGHTS
-//		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
-//			.whenPressed(new GearFlashlightCommand());
+		controller.getButton(Controls.TOGGLE_GEAR_FLASHLIGHT)
+			.whenPressed(new GearFlashlightCommand());
 		controller.getButton(Controls.TOGGLE_SHOOTER_FLASHLIGHT)
 			.whenPressed(new ShooterFlashlightCommand());
 		
 		//SHOOTER
 		controller.getButton(Controls.TOGGLE_SHOOTER)
-			.whenPressed(new ShooterSetSpeed(80));
-//		controller.getButton(Controls.TOGGLE_SHOOTER)
-//		.whenPressed(new ShooterCommandVoltage(6));	
+			.whenPressed(new ToggleShooting());
 		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
 			.whenPressed(new ShooterIncrementSpeed(.02));
 		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
