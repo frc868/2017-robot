@@ -91,12 +91,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-    	
+    
+    	Scheduler.getInstance().removeAll();
+    	new UpdateSmartDashboard().start();
     }
 
     /**
@@ -118,8 +115,8 @@ public class Robot extends IterativeRobot {
 		GearCollectorSubsystem.getInstance();
 //		GearFlashlightSubsystem.getInstance();
 		GyroSubsystem.getInstance();
-//		IRPixySubsystem.getInstance();
-//		LidarSubsystem.getInstance();
+		IRPixySubsystem.getInstance();
+		LidarSubsystem.getInstance();
 		LEDSubsystem.getInstance();
 		FeederSubsystem.getInstance();
 //		ShooterFlashlightSubsystem.getInstance();

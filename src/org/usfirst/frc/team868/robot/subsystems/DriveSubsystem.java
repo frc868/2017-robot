@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	private Spark rightMotor;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
 	
 	PowerThread powerThread;
 	
