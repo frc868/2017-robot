@@ -5,6 +5,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetVoltageCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.HoldPosition;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
@@ -22,6 +23,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 		case B1:
 		case B2:
 		case B3:
+			addParallel(new HoldPosition());
 			addParallel(new ShooterSetSpeed(75));
 			addSequential(new WaitCommand(2));
 	    	addParallel(new AgitatorCommand(AgitatorSubsystem.State.FORWARD));
@@ -36,6 +38,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 		case R1:
 		case R2:
 		case R3:
+			addParallel(new HoldPosition());
 			addParallel(new ShooterSetSpeed(75));
 			addSequential(new WaitCommand(2));
 	    	addParallel(new AgitatorCommand(AgitatorSubsystem.State.FORWARD));
