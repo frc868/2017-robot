@@ -105,7 +105,7 @@ public class OI {
 			.whenPressed(new ToggleFeederAndAgitator());
 				
 		// GEAR
-		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR) //TODO maybe set the ejector to closed whenever this happens?
+		controller.getButton(Controls.TOGGLE_GEAR_COLLECTOR)
 			.whenPressed(new GearCollectorToggleCommand());
 		controller.getButton(Controls.TOGGLE_GEAR_EJECTOR)
 			.whenPressed(new GearEjectorToggleCommand());
