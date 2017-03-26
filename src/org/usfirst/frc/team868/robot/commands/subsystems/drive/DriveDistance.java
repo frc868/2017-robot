@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -153,5 +155,25 @@ public class DriveDistance extends Command {
      */
     public void enableFinishOnGearEject(boolean enable) {
     	finishOnGearEject = enable;
+    }
+    
+    /**
+     * Example of using new "enable" options to create a one gear auton on the middle post.
+     */
+    public static Command createMiddleGearAuton() {
+    	CommandGroup cg = new CommandGroup("One Gear Auton");
+    	
+    	// Drive distance to spike, but stop driving if eject plate was pressed.
+    	DriveDistance dd = new DriveDistance(RobotMap.AutonValues.WALL_TO_HOOK);
+    	dd.enableFinishOnGearEject(true);
+    	cg.addSequential(dd);
+    	
+    	// Give .25 seconds for gear to fly onto spike
+    	cg.addSequential(new WaitCommand(0.25));
+    	
+    	// Back off spike
+    	cg.addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
+    	
+    	return cg;
     }
 }
