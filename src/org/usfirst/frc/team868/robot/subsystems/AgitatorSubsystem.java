@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
 
 import edu.wpi.first.wpilibj.Spark;
@@ -16,10 +17,6 @@ public class AgitatorSubsystem extends Subsystem {
 
 	private static AgitatorSubsystem instance;
 	private Spark motor;
-	
-	public enum State {
-		FORWARD, OFF, BACKWARD;
-	}
 	
 	public State state;
 	

@@ -147,10 +147,10 @@ public class OI {
 //		SmartDashboard.putData("Rotate 0", new RotateAngle(0));
 //		SmartDashboard.putData("Drive forward 2m", new DriveDistance(200));
     	
-//    	SmartDashboard.putData("Agitator ON", new AgitatorTestingCommand(AgitatorSubsystem.State.FORWARD));
-//    	SmartDashboard.putData("Agitator OFF", new AgitatorTestingCommand(AgitatorSubsystem.State.OFF));
-//    	SmartDashboard.putData("Feeder ON", new FeederTestingCommand(FeederSubsystem.State.FORWARD));
-//    	SmartDashboard.putData("Feeder OFF", new FeederTestingCommand(FeederSubsystem.State.OFF));
+//    	SmartDashboard.putData("Agitator ON", new AgitatorTestingCommand(State.FORWARD));
+//    	SmartDashboard.putData("Agitator OFF", new AgitatorTestingCommand(State.OFF));
+//    	SmartDashboard.putData("Feeder ON", new FeederTestingCommand(State.FORWARD));
+//    	SmartDashboard.putData("Feeder OFF", new FeederTestingCommand(State.OFF));
 //    	SmartDashboard.putData("Shooter STOP", new ShooterCommandVoltage(0));
 	}
 

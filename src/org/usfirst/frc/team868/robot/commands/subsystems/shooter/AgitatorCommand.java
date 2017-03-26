@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem;
-import org.usfirst.frc.team868.robot.subsystems.AgitatorSubsystem.State;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,9 +12,9 @@ public class AgitatorCommand extends Command { //TOOD integrate into ShooterFeed
 
 	
 	private AgitatorSubsystem agitator;
-	private AgitatorSubsystem.State state;
+	private State state;
 	
-    public AgitatorCommand(AgitatorSubsystem.State state) {
+    public AgitatorCommand(State state) {
     	agitator = AgitatorSubsystem.getInstance();
 		requires(agitator);
 		this.state = state;
