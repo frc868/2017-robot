@@ -2,7 +2,6 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
