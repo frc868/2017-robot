@@ -1,5 +1,6 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
+import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FeederCommand extends Command {
 
 	private FeederSubsystem feeder;
-	private FeederSubsystem.State state;
+	private State state;
 	
-    public FeederCommand(FeederSubsystem.State state) {
+    public FeederCommand(State state) {
     	feeder = FeederSubsystem.getInstance();
     	requires(feeder);
     	this.state = state;

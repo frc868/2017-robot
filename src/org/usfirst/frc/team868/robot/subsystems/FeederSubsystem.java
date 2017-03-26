@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.RobotMap.State;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -15,10 +16,6 @@ public class FeederSubsystem extends Subsystem {
 	public State state = State.OFF;
 	private DigitalInput beamBreak;
 	private static final boolean DEBUG = true;
-	
-	public static enum State {
-		FORWARD, OFF, BACKWARD;
-	}
 	
 	@Override
 	protected void initDefaultCommand() {}

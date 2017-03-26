@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 public interface RobotMap {
 	
+	public enum State {
+		FORWARD, OFF, BACKWARD;
+	}
+	
 	public interface JoystickPort {
 		// PORTS:
 		final int DRIVER = 0;
