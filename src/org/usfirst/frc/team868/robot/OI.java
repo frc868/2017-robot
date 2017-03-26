@@ -136,7 +136,7 @@ public class OI {
 	}
 
 	public void initSmartDashboard() {
-		AutonChooser.getInstance();
+		AutonChooser.setupDashboard();
 		
 //		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 //		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
