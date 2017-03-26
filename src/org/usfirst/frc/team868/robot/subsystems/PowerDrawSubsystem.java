@@ -8,10 +8,18 @@ public class PowerDrawSubsystem extends Subsystem { //TODO does this really need
 
 	PowerDistributionPanel pdp;
 	DriverStation ds;
+	private static PowerDrawSubsystem instance;
 	
-	public PowerDrawSubsystem() {
+	private PowerDrawSubsystem() {
 		pdp = new PowerDistributionPanel();
 		ds = DriverStation.getInstance();
+	}
+	
+	public static PowerDrawSubsystem getInstance() {
+		if(instance == null) {
+			instance = new PowerDrawSubsystem();
+		}
+		return instance;
 	}
 	
 	public double getTotalCurrent() {
@@ -43,6 +51,10 @@ public class PowerDrawSubsystem extends Subsystem { //TODO does this really need
 	
 	@Override
 	protected void initDefaultCommand() {		
+	}
+
+	public void updateSD() {
+		
 	}
 
 }
