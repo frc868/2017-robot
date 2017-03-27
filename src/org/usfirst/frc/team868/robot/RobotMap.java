@@ -63,7 +63,7 @@ public interface RobotMap {
 		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
-		final double CONVEYOR_SPEED = 0.8;
+		final double CONVEYOR_SPEED = .75;
 		
 		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
 		final double MIN_SHOOT_SPEED = 30;
