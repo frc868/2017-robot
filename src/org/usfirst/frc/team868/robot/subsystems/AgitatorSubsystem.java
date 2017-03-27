@@ -2,7 +2,6 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.RobotMap.State;
-import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,20 +25,12 @@ public class AgitatorSubsystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		if (DEBUG) {
-	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
-			SmartDashboard.putData("Agitator Shake", new AgitatorFreeCommand(RobotMap.Feeder.SHAKE_PERIOD));
-		}
 	}
 
 	private AgitatorSubsystem() {
 		motor = new Spark(RobotMap.Feeder.AGITATOR_MOTOR);
 		motor.setInverted(RobotMap.Feeder.AGITATOR_IS_INVERTED);
 		LiveWindow.addActuator("Agitator", "Motor", motor);
-		
-		if (DEBUG) {
-			SmartDashboard.putNumber(SpeedLabel, RobotMap.Feeder.AGITATOR_SPEED); //TODO cleanup all of these debug checks
-		}
 	}
 	
 	/**
@@ -52,6 +43,9 @@ public class AgitatorSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Agitator On", on);
 		if (DEBUG) {
 			SmartDashboard.putNumber("Agitator Power", power);
+			SmartDashboard.putNumber("Agitator Speed", RobotMap.Feeder.AGITATOR_SPEED); //TODO cleanup all of these debug checks
+	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);
+//			SmartDashboard.putData("Agitator Shake", new AgitatorFreeCommand(RobotMap.Feeder.SHAKE_PERIOD));
 //			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
 //			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
 		}

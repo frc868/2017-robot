@@ -7,21 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class AutonChooser {
-
-	private static AutonChooser instance;
 	
 	private static SendableChooser<StartingPoint> chooseStart;
 	private static SendableChooser<DoThis> chooseDoThis;
-	
-	public static AutonChooser getInstance() {
-		if(instance == null) instance = new AutonChooser();
-		return instance;
-	}
-    private AutonChooser() { 
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	setupDashboard();
-    }
     
     public static enum StartingPoint{
     	B1, B2, B3, R1, R2, R3
@@ -39,7 +27,7 @@ public class AutonChooser {
     	return ((DoThis) chooseDoThis.getSelected());
     }
     
-    public void setupDashboard() {
+    public static void setupDashboard() {
     	chooseStart = new SendableChooser<StartingPoint>();
     		chooseStart.addObject("B1", StartingPoint.B1);
     		chooseStart.addObject("B2", StartingPoint.B2);
