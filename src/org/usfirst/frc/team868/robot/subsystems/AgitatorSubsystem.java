@@ -1,8 +1,8 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
+import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.commands.subsystems.AgitatorFreeCommand;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,10 +17,6 @@ public class AgitatorSubsystem extends Subsystem {
 
 	private static AgitatorSubsystem instance;
 	private Spark motor;
-	
-	public enum State {
-		FORWARD, OFF, BACKWARD;
-	}
 	
 	public State state;
 	
@@ -56,8 +52,8 @@ public class AgitatorSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Agitator On", on);
 		if (DEBUG) {
 			SmartDashboard.putNumber("Agitator Power", power);
-			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
-			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
+//			SmartDashboard.putData("Agitator On", new AgitatorCommand(State.FORWARD));
+//			SmartDashboard.putData("Agitator Off", new AgitatorCommand(State.OFF));
 		}
 	}
 

@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 public interface RobotMap {
 	
+	public enum State {
+		FORWARD, OFF, BACKWARD;
+	}
+	
 	public interface JoystickPort {
 		// PORTS:
 		final int DRIVER = 0;
@@ -168,7 +172,7 @@ public interface RobotMap {
 		
 		//Baseline from Start
 		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
-		double BASELINE_MIDDLE_DISTANCE = 200;
+		double BASELINE_MIDDLE_DISTANCE = 199;
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.

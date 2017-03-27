@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
-import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
+import org.usfirst.frc.team868.robot.RobotMap.State;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -16,10 +16,6 @@ public class FeederSubsystem extends Subsystem {
 	public State state = State.OFF;
 	private DigitalInput beamBreak;
 	private static final boolean DEBUG = true;
-	
-	public static enum State {
-		FORWARD, OFF, BACKWARD;
-	}
 	
 	@Override
 	protected void initDefaultCommand() {}
@@ -145,8 +141,8 @@ public class FeederSubsystem extends Subsystem {
 		SmartDashboard.putBoolean("Ball is ready", getBallBeamBreak());
 		SmartDashboard.putBoolean("Feeder on", getState().equals(State.FORWARD));
 		if(DEBUG) {
-			SmartDashboard.putData("Set Feeder On", new FeederCommand(State.FORWARD));
-			SmartDashboard.putData("Set Feeder Off", new FeederCommand(State.OFF));			
+//			SmartDashboard.putData("Set Feeder On", new FeederCommand(State.FORWARD));
+//			SmartDashboard.putData("Set Feeder Off", new FeederCommand(State.OFF));			
 		}
 	}
 }
