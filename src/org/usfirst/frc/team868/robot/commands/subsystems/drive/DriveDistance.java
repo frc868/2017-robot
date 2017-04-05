@@ -50,17 +50,15 @@ public class DriveDistance extends Command {
 		});
 		control.setAbsoluteTolerance(4);
 	}
-	
-	double startDistance;
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + distanceCM;
+    	drive.resetEncoders();
+		endCount = distanceCM;
 		gyro.reset();
     	//SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
-    	startDistance = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -77,12 +75,18 @@ public class DriveDistance extends Command {
 		double rotation = gyro.getRotation();
 		double multiplier = 1 - Math.abs(10*Math.sin(rotation*Math.PI/180));
     	if(rotation > 1){
-    		lPower = lPower*multiplier;
+    		if(power > 0)
+    			lPower = lPower*multiplier;
+    		else
+    			rPower = rPower*multiplier;
     	}else if(rotation < -1){
-    		rPower = rPower*multiplier;
+    		if(power > 0)
+    			rPower = rPower*multiplier;
+    		else
+    			lPower = lPower*multiplier;
     	}
 		drive.setSpeed(lPower, rPower);
-		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT - startDistance);
+		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
     }
 
     // Make this return true when this Command no longer needs to run execute()

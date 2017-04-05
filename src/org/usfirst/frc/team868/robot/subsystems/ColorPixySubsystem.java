@@ -38,7 +38,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ColorPixySubsystem extends Subsystem {
 	
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	private static int idCounter = 0;
 	
 	public final class Record {

@@ -58,13 +58,13 @@ public class UpdateSmartDashboard extends Command {
     		ClimberSubsystem.getInstance().updateSD();
     		ColorPixySubsystem.getInstance().updateSD();
     		DriveSubsystem.getInstance().updateSD();
-    		GyroSubsystem.getInstance().updateSD();
+    		FeederSubsystem.getInstance().updateSD();
     		GearCollectorSubsystem.getInstance().updateSD();
     		GearEjectorSubsystem.getInstance().updateSD();
 //			GearFlashlightSubsystem.getInstance().updateSD();
+    		GyroSubsystem.getInstance().updateSD();
     		IRPixySubsystem.getInstance().updateSD();
     		LidarSubsystem.getInstance().updateSmartDashboard();
-			FeederSubsystem.getInstance().updateSD();
 //			ShooterFlashlightSubsystem.getInstance().updateSD();
     		ShooterSubsystem.getInstance().updateSD();
     		TurretRotationSubsystem.getInstance().updateSD();

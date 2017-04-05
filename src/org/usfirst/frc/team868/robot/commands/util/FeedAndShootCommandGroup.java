@@ -14,14 +14,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class FeedAndShootCommandGroup extends CommandGroup {
 
     public FeedAndShootCommandGroup() {
-//    	addSequential(new RotateUsingIRPixy(1));
     	
-//    	addParallel(new ShootCommand(80)); //TODO this isn't working
-//    	addSequential(new WaitCommand(2));
+    	addParallel(new ShooterSetVoltageCommand(6));
+    	addSequential(new WaitCommand(2));
     	
     	addParallel(new AgitatorCommand(State.FORWARD));
     	addParallel(new FeederCommand(State.FORWARD));
-    	addSequential(new WaitCommand(5));
+    	addSequential(new WaitCommand(6));
     	
     	addParallel(new ShooterSetVoltageCommand(0));
     	addParallel(new AgitatorCommand(State.OFF));
