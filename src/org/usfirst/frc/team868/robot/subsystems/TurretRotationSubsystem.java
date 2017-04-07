@@ -24,7 +24,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private PIDController control;
 	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = false;
+	private final boolean DEBUG = true;
 	//private DigitalInput leftLimit, rightLimit;
 
 	private TurretRotationSubsystem(){
@@ -83,7 +83,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * Sets the position of the turret.
 	 * @param pos in encoder counts
 	 */
-	public void setPosition(double pos){
+	private void setPosition(double pos){
 		turretRotator.setPosition(pos);
 	}
 	
@@ -213,7 +213,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return in encoder counts
 	 */
 	public double getPosition(){
-		return turretRotator.getPosition();
+		return turretRotator.getEncPosition();
 	}
 	
 	/**

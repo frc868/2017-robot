@@ -37,8 +37,8 @@ public class CalibrateTurret extends Command {
 		turret.resetPosition();
 		turret.setAngle(0);
 		turret.stop();
-		turret.setSoftLimits(leftLimit-endPos-RobotMap.Turret.SOFT_LIMIT_OFFSET,
-							rightLimit-endPos+RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		turret.setSoftLimits(rightLimit-endPos+RobotMap.Turret.SOFT_LIMIT_OFFSET,
+							leftLimit-endPos-RobotMap.Turret.SOFT_LIMIT_OFFSET);
 		if(turret.isPIDEnabled())
 			turret.stop();
     }
@@ -54,10 +54,5 @@ public class CalibrateTurret extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
     }
 }
