@@ -73,7 +73,7 @@ public class DriveDistance extends Command {
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
 		double rotation = gyro.getRotation();
-		double multiplier = 1 - Math.abs(10*Math.sin(rotation*Math.PI/180));
+		double multiplier = 1 - Math.abs(5*Math.sin(rotation*Math.PI/180));
     	if(rotation > 1){
     		if(power > 0)
     			lPower = lPower*multiplier;
@@ -85,7 +85,7 @@ public class DriveDistance extends Command {
     		else
     			lPower = lPower*multiplier;
     	}
-		drive.setSpeed(lPower, rPower);
+		drive.setSpeed(.8*lPower, rPower);
 		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
     }
 

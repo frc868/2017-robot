@@ -7,6 +7,7 @@ import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngleGyro;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetVoltageCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.TurretIRLockToTarget;
 import org.usfirst.frc.team868.robot.commands.util.FeedAndShootCommandGroup;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -57,6 +58,7 @@ public class HopperAuton extends CommandGroup {
     			addSequential(new DriveDistance(-136));
     			addSequential(new TurnToAngleGyro(-90));
     			addSequential(new DriveDistance(30));
+    			addParallel(new TurretIRLockToTarget());
     			addSequential(new AgitatorCommand(State.FORWARD));
     			addSequential(new FeederCommand(State.FORWARD));
     			break;
@@ -67,6 +69,7 @@ public class HopperAuton extends CommandGroup {
     			addSequential(new DriveDistance(-136));
     			addSequential(new TurnToAngleGyro(90));
     			addSequential(new DriveDistance(30));
+    			addParallel(new TurretIRLockToTarget());
     			addSequential(new AgitatorCommand(State.FORWARD));
     			addSequential(new FeederCommand(State.FORWARD));
     			break;
