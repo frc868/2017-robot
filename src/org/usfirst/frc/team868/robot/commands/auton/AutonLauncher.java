@@ -38,6 +38,11 @@ public class AutonLauncher extends CommandGroup {
         	case SHOOT_AND_BASELINE:
         		new ShootAndBaselineAuton(start).start();
         		break;
+        		
+        	case GEAR_AND_SHOOT:
+        		new GearToShootAuton().start();
+        		break;
+        		
 			default:
 				break;
         }
