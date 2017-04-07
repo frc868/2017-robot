@@ -10,10 +10,12 @@ import org.usfirst.frc.team868.robot.commands.util.ToggleFeederAndAgitator;
 import org.usfirst.frc.team868.robot.commands.subsystems.gear.*;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterFlashlightCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterIncrementSpeed;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetVoltageCommand;
 
 import lib.hid.ControllerMap;
 import lib.hid.DPadButton;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -138,6 +140,13 @@ public class OI {
 	public void initSmartDashboard() {
 		AutonChooser.setupDashboard();
 		
+		SmartDashboard.putData("Shooter 6V", new ShooterSetVoltageCommand(6));
+		SmartDashboard.putData("Shooter 5.8V", new ShooterSetVoltageCommand(5.8));
+		SmartDashboard.putData("Shooter 5.6V", new ShooterSetVoltageCommand(5.6));
+		SmartDashboard.putData("Shooter 5.4V", new ShooterSetVoltageCommand(5.4));
+		SmartDashboard.putData("Shooter 5.2V", new ShooterSetVoltageCommand(5.2));
+		SmartDashboard.putData("Shooter 5V", new ShooterSetVoltageCommand(5));
+
 //		SmartDashboard.putData("save file", new RecordMotorMovementHelper("saveFile", "testing#1.txt"));
 //		SmartDashboard.putData("loadFile(dont press)", new RecordMotorMovementHelper("readFile", "testing#1.txt"));
 //		SmartDashboard.putData("record motors start", new RecordMotorMovementHelper("record", "testing#1.txt"));

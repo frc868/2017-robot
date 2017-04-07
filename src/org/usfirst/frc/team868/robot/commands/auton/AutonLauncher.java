@@ -40,7 +40,7 @@ public class AutonLauncher extends CommandGroup {
         		break;
         		
         	case GEAR_AND_SHOOT:
-        		new GearToShootAuton().start();
+        		new GearToShootAuton(start).start();
         		break;
         		
 			default:

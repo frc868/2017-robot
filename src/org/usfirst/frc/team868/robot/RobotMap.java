@@ -48,7 +48,7 @@ public interface RobotMap {
 		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
 		final double CM_PER_COUNT = 1.0 / COUNTS_PER_CM;
 		final double MIN_DRIVE_SPEED = .27;
-		final double MAX_AUTON_DRIVE_SPEED = .45;
+		final double MAX_AUTON_DRIVE_SPEED = .65;//.45;
 	}
 	
 	public interface Feeder {
@@ -178,7 +178,7 @@ public interface RobotMap {
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
 		double GEAR_AUTON_DIST_1 = 160;//NOT ACCURATE: Distance until in line with hook if on sides.
 		double GEAR_AUTON_DIST_2 = 60;
-		double HOOK_BACKOFF = 30;//Arbitrary value: how far to back away from the hook after placing the gear.
+		double HOOK_BACKOFF = 45;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper
 		double distanceAcrossToHopperFromGearPos2 = 411.5 - (107 /Math.sqrt(2)) - 91;

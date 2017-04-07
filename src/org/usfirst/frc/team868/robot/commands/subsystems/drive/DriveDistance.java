@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -23,12 +24,13 @@ public class DriveDistance extends Command {
 	private double power = 0;
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
+	private boolean disableOnPlate = false;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm) {
+	public DriveDistance(double cm, boolean usePressurePlate) {
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
@@ -49,6 +51,11 @@ public class DriveDistance extends Command {
 			}
 		});
 		control.setAbsoluteTolerance(4);
+		disableOnPlate = usePressurePlate;
+	}
+	
+	public DriveDistance(double cm) {
+		this(cm, false);
 	}
 
     // Called just before this Command runs the first time
@@ -91,7 +98,7 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(control.getError()) < 1;
+    	return Math.abs(control.getError()) < 1 || (disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
     }
 
     // Called once after isFinished returns true
