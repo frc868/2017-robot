@@ -28,7 +28,7 @@ public class AutonLauncher extends CommandGroup {
         		break;
         		
         	case GEAR_TO_HOPPER:
-        		new GearToHopperAuton(start).start();
+        		new HopperAuton(start).start();
         		break;
         		
         	case GEAR_TO_NEUTRAL:

@@ -41,7 +41,7 @@ public class AutonChooser {
     		chooseDoThis.addObject("B: Drop off Gear", DoThis.DROP_GEAR);
     		chooseDoThis.addObject("C: Shoot Balls", DoThis.HOPPER);
     		chooseDoThis.addObject("D: Drop off Gear Then Go To Neutral", DoThis.GEAR_TO_NEUTRAL);
-    		chooseDoThis.addObject("E: Drop Off Gear Then Hit Hopper", DoThis.GEAR_TO_HOPPER);
+    		chooseDoThis.addObject("E: Hit Hopper and Shoot", DoThis.GEAR_TO_HOPPER);
     		chooseDoThis.addObject("F: Shoot and cross the baseline", DoThis.SHOOT_AND_BASELINE);
     	SmartDashboard.putData("Auton Start", chooseStart);
     	SmartDashboard.putData("Auton Mode", chooseDoThis);

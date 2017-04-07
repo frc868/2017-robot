@@ -23,7 +23,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	private CANTalon turretRotator;
 	private PIDController control;
 	private final double P = 0.12, I = 0, D = 0.02;
-	private boolean isPixyTargeting = true;
+	private boolean isPixyTargeting = false;
 	private final boolean DEBUG = false;
 	//private DigitalInput leftLimit, rightLimit;
 

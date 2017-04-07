@@ -17,8 +17,8 @@ public class AgitatorSubsystem extends Subsystem {
 	private static AgitatorSubsystem instance;
 	private Spark motor;
 	
-	public State state;
-	
+	public State state = State.OFF;
+
 	/** Set this to true for tuning and diagnostic output. */
 	private static final boolean DEBUG = true;
 	private static final String SpeedLabel = "Agitator Speed";
@@ -42,6 +42,7 @@ public class AgitatorSubsystem extends Subsystem {
 		
 		SmartDashboard.putBoolean("Agitator On", on);
 		if (DEBUG) {
+			SmartDashboard.putData("Agitator Subsystem", this);
 			SmartDashboard.putNumber("Agitator Power", power);
 			SmartDashboard.putNumber("Agitator Speed", RobotMap.Feeder.AGITATOR_SPEED); //TODO cleanup all of these debug checks
 	    	SmartDashboard.putNumber("Agitator Shake Time", RobotMap.Feeder.SHAKE_PERIOD);

@@ -5,8 +5,11 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.commands.UpdateSmartDashboard;
 import org.usfirst.frc.team868.robot.commands.auton.AutonLauncher;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
+import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
 import org.usfirst.frc.team868.robot.subsystems.*;
 
 /**
@@ -132,6 +135,8 @@ public class Robot extends IterativeRobot {
     
     private void resetRobot() {
     	Scheduler.getInstance().removeAll();
+    	new AgitatorCommand(State.OFF).start();
+    	new FeederCommand(State.OFF).start();
     	new UpdateSmartDashboard().start();
     }
 }

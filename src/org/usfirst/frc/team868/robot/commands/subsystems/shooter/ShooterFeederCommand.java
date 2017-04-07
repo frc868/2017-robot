@@ -1,6 +1,5 @@
 package org.usfirst.frc.team868.robot.commands.subsystems.shooter;
 
-import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.subsystems.FeederSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,10 +21,7 @@ public class ShooterFeederCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(feeder.getState() != State.OFF) //TODO make a method in the subsystem for this
-    		feeder.setFeederOff();
-    	else
-    		feeder.setFeederForward();
+    	feeder.toggleFeeder();
     }
 
     // Called repeatedly when this Command is scheduled to run
