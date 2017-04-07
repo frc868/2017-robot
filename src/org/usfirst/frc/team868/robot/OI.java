@@ -122,9 +122,9 @@ public class OI {
 		controller.getButton(Controls.TOGGLE_SHOOTER)
 			.whenPressed(new ToggleShooting());
 		controller.getButton(Controls.INCREASE_SHOOTER_SPEED)
-			.whenPressed(new ShooterIncrementSpeed(.02));
+			.whenPressed(new ShooterIncrementSpeed(2));
 		controller.getButton(Controls.DECREASE_SHOOTER_SPEED)
-			.whenPressed(new ShooterIncrementSpeed(-.02));
+			.whenPressed(new ShooterIncrementSpeed(-2));
 	}
 	
 	public ControllerMap getDriver() {

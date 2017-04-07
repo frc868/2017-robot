@@ -13,19 +13,18 @@ public class ShooterIncrementSpeed extends Command {
 	private double increment;
     public ShooterIncrementSpeed(double increment) {
     	shoot = ShooterSubsystem.getInstance();
-    	requires(shoot);
     	this.increment = increment;
     }
 
     protected void initialize() {
-    	shoot.setSpeed(increment+shoot.getSetpoint());
+    	new ShooterSetSpeed(increment+shoot.getSetpoint()).start();
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     protected void end() {
