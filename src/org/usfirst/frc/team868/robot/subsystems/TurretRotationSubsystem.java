@@ -285,4 +285,55 @@ public class TurretRotationSubsystem extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new JoystickTurretControl());
 	}
+
+	/**
+	 * Starts the process of calibrating the turret (disables soft limits and starts moving towards limit switch).
+	 */
+	public void calibrationBegin() {
+		turretRotator.enableForwardSoftLimit(false);
+		turretRotator.enableReverseSoftLimit(false);
+		if (!isCalibrationDone()) {
+			// Start moving if not at limit switch
+			setPower(-RobotMap.Turret.MIN_VOLTAGE);
+		}
+	}
+
+	/**
+	 * Checks to see if hard limit switch is reached and if so, stops motors and re-enables soft limits.
+	 * 
+	 * @return true If calibration when at limit switch and calibration done.
+	 */
+	public boolean isCalibrationDone() {
+		boolean done = false;
+		
+		// Once we've closed the limit switch, we are done
+		// WARNING: I am uncertain at this point how left/right map to forward/reverse!!!
+		if (isLeftLimitSwitchClosed()) {
+			stop();
+			
+			// Set current position to where limit switch is located and re-enable soft limits
+			double degreesBetweenLimits = 280.0; // RobotMap.Turret.ROTATION_RANGE_DEG
+			double countsBetweenLimits = degreesBetweenLimits * RobotMap.Turret.COUNTS_PER_DEGREE;
+			double rightLimitPosition = countsBetweenLimits / 2;
+			double leftLimitPosition = -rightLimitPosition;
+			turretRotator.setPosition(leftLimitPosition);
+			turretRotator.setReverseSoftLimit(leftLimitPosition + RobotMap.Turret.SOFT_LIMIT_OFFSET);
+			turretRotator.setForwardSoftLimit(rightLimitPosition - RobotMap.Turret.SOFT_LIMIT_OFFSET);
+			turretRotator.enableForwardSoftLimit(true);
+			turretRotator.enableReverseSoftLimit(true);
+		}
+		return done;
+	}
+
+	/**
+	 * Any command that starts calibrating ({@link #calibrationBegin()) should call this if they give up.
+	 */
+	public void calbrationCancel() {
+		// Give one last chance to check if calibration is done.
+		if (!isCalibrationDone()) {
+			// Stop moving, and leave soft limits disabled as we haven't reached the
+			// limit switch.
+			stop();
+		}
+	}
 }
