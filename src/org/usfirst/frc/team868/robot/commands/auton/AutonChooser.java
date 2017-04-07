@@ -16,7 +16,7 @@ public class AutonChooser {
     }
     
     public static enum DoThis {
-    	CROSS_BASE, DROP_GEAR, HOPPER, GEAR_TO_NEUTRAL, GEAR_TO_HOPPER, SHOOT_AND_BASELINE
+    	CROSS_BASE, DROP_GEAR, HOPPER, GEAR_TO_NEUTRAL, GEAR_TO_HOPPER, SHOOT_AND_BASELINE, GEAR_AND_SHOOT
     }
     
     public static StartingPoint getStart() {
@@ -43,6 +43,7 @@ public class AutonChooser {
     		chooseDoThis.addObject("D: Drop off Gear Then Go To Neutral", DoThis.GEAR_TO_NEUTRAL);
     		chooseDoThis.addObject("E: Hit Hopper and Shoot", DoThis.GEAR_TO_HOPPER);
     		chooseDoThis.addObject("F: Shoot and cross the baseline", DoThis.SHOOT_AND_BASELINE);
+    		chooseDoThis.addObject("G: Place Gear and Shoot 10", DoThis.GEAR_AND_SHOOT);
     	SmartDashboard.putData("Auton Start", chooseStart);
     	SmartDashboard.putData("Auton Mode", chooseDoThis);
     }

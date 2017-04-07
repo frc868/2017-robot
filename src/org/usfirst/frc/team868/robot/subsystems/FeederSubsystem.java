@@ -16,7 +16,7 @@ public class FeederSubsystem extends Subsystem {
 	
 	public State state = State.OFF;
 	private DigitalInput beamBreak;
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	
 	@Override
 	protected void initDefaultCommand() {}

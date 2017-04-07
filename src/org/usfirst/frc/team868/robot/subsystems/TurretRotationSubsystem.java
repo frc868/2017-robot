@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -33,6 +34,7 @@ public class TurretRotationSubsystem extends Subsystem {
 		//leftLimit = new DigitalInput(1);
 		//rightLimit = new DigitalInput(2);
 		// Make sure we stop if we hit a physical limit switch
+		turretRotator.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
 		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
 		turretRotator.enableLimitSwitch(true, true);
