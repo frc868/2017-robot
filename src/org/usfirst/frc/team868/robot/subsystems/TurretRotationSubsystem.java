@@ -232,6 +232,22 @@ public class TurretRotationSubsystem extends Subsystem {
 		return isPixyTargeting;
 	}
 	
+	public boolean isPIDEnabled(){
+		return control.isEnabled();
+	}
+	
+	public void disableSoftLimits(){
+		turretRotator.enableForwardSoftLimit(false);
+		turretRotator.enableReverseSoftLimit(false);
+	}
+	
+	public void setSoftLimits(double forward, double backward){
+		turretRotator.setForwardSoftLimit(forward);
+		turretRotator.setReverseSoftLimit(backward);
+		turretRotator.enableForwardSoftLimit(true);
+		turretRotator.enableReverseSoftLimit(true);
+	}
+	
 	/**
 	 * Update information on SmartDashboard.
 	 */
