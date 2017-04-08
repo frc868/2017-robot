@@ -161,7 +161,7 @@ public interface RobotMap {
 		final double COUNTS_PER_DEGREE = 100;
 		final double DEGREES_PER_COUNT = 1/COUNTS_PER_DEGREE;
 		final double MIN_PID_ADDITIONAL_VOLTAGE = .64;
-		final double MIN_VOLTAGE = 2;
+		final double MIN_VOLTAGE = 2.3;
 		final double MAX_VOLTAGE = 5;
 		final double LEFT_LIMIT_TO_FORWARD = 40; //degrees
 		final double RAMP_RATE = 1;
@@ -176,8 +176,8 @@ public interface RobotMap {
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
-		double GEAR_AUTON_DIST_1 = 160;//NOT ACCURATE: Distance until in line with hook if on sides.
-		double GEAR_AUTON_DIST_2 = 140;
+		double GEAR_AUTON_DIST_1 = 170;//NOT ACCURATE: Distance until in line with hook if on sides.
+		double GEAR_AUTON_DIST_2 = 198;
 		double HOOK_BACKOFF = 45;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper
