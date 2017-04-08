@@ -91,6 +91,8 @@ public class OI {
 	
 	public void setupDriver(ControllerMap controller) {
 		controller.clearButtons();
+		controller.getButton(Controls.TOGGLE_GEAR_EJECTOR)
+			.whenPressed(new GearEjectorToggleCommand());
 	}
 	
 	public void setupOperator(ControllerMap controller) {
