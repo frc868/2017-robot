@@ -137,7 +137,9 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.set(0);
 	}
 	
-	public void calibrateTurret() {
+	@SuppressWarnings("unused")
+	private void calibrateTurret() {// use the command instead
+		/*
 		turretRotator.enableForwardSoftLimit(false);
 		turretRotator.enableReverseSoftLimit(false);
 		while(!isRightLimitSwitchClosed()){
@@ -163,6 +165,7 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.enableReverseSoftLimit(true);
 		if(control.isEnabled())
 			stop();
+		*/
 	}
 	
 	/**
@@ -233,6 +236,10 @@ public class TurretRotationSubsystem extends Subsystem {
 	
 	public boolean isPIDEnabled(){
 		return control.isEnabled();
+	}
+	
+	public boolean isOnTarget(){
+		return control.onTarget();
 	}
 	
 	public void disableSoftLimits(){

@@ -21,24 +21,26 @@ public class CalibrateTurret extends Command {
     protected void initialize() {
     	turret.disableSoftLimits();
 		while(!turret.isRightLimitSwitchClosed()){
-			turret.setPower(RobotMap.Turret.MIN_VOLTAGE);
+			turret.setPower(RobotMap.Turret.MIN_VOLTAGE+.2);
 		}
 		turret.stop();
 		double rightLimit = turret.getPosition();
 		while(!turret.isLeftLimitSwitchClosed()) {
-			turret.setPower(-RobotMap.Turret.MIN_VOLTAGE);
+			turret.setPower(-RobotMap.Turret.MIN_VOLTAGE-.2);
 		}
 		turret.stop();
 		double leftLimit = turret.getPosition();
-		turret.setAngle(turret.getAngle()+RobotMap.Turret.LEFT_LIMIT_TO_FORWARD);
-		while(!turret.isPIDEnabled()){}
-		double endPos = turret.getPosition();
+		double rightMinusleft = rightLimit-leftLimit;
+		turret.resetPosition();
+		turret.setAngle(RobotMap.Turret.LEFT_LIMIT_TO_FORWARD);
+		while(!turret.isOnTarget()){
+			turret.setPower(RobotMap.Turret.MIN_VOLTAGE);
+		}
 		turret.stop();
 		turret.resetPosition();
-		turret.setAngle(0);
-		turret.stop();
-		turret.setSoftLimits(rightLimit-endPos+RobotMap.Turret.SOFT_LIMIT_OFFSET,
-							leftLimit-endPos-RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		double reverseLimit = -RobotMap.Turret.LEFT_LIMIT_TO_FORWARD*RobotMap.Turret.COUNTS_PER_DEGREE;
+		turret.setSoftLimits(reverseLimit+rightMinusleft-RobotMap.Turret.SOFT_LIMIT_OFFSET,
+							 reverseLimit+RobotMap.Turret.SOFT_LIMIT_OFFSET);
 		if(turret.isPIDEnabled())
 			turret.stop();
     }
