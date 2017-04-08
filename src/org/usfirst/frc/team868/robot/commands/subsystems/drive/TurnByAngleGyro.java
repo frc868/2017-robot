@@ -21,6 +21,7 @@ public class TurnByAngleGyro extends Command {
 	private PIDController controller;
 	private final double P = 0.036, I = 0, D = 0.07;
 	private double setAngle;
+	private int counter = 0;
 
 	/**
 	 * Rotates the robot by the given angle.
@@ -50,12 +51,12 @@ public class TurnByAngleGyro extends Command {
 				output = RobotMap.Drive.MIN_DRIVE_SPEED;
 			if(output < -.05 && output > -RobotMap.Drive.MIN_DRIVE_SPEED)
 				output = -RobotMap.Drive.MIN_DRIVE_SPEED;
-			motors.setL(HoundMath.checkRange(output, -.7, .7));
-			motors.setR(HoundMath.checkRange(-output, -.7, .7));
+			motors.setL(HoundMath.checkRange(output, -.6, .6));
+			motors.setR(HoundMath.checkRange(-output, -.6, .6));
 		}
 		
 	});
-	controller.setAbsoluteTolerance(1);
+	controller.setAbsoluteTolerance(1.5);
     }
 
     // Called just before this Command runs the first time
@@ -67,11 +68,14 @@ public class TurnByAngleGyro extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(controller.onTarget()){
+    		counter++;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return controller.onTarget();
+        return counter > 3;
     }
 
     // Called once after isFinished returns true
