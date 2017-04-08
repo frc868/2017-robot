@@ -66,7 +66,7 @@ public class FeederSubsystem extends Subsystem {
 	
 	public boolean canFeed() {
 		if(DEBUG) return true;
-		return ShooterSubsystem.getInstance().getSpeed() > 50 && ShooterSubsystem.getInstance().getError() < 3;
+		return ShooterSubsystem.getInstance().getSpeed() > 50;
 	}
 	
 	/**

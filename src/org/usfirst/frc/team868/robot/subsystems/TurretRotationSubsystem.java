@@ -25,14 +25,11 @@ public class TurretRotationSubsystem extends Subsystem {
 	private PIDController control;
 	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
-	private final boolean DEBUG = true;
-	//private DigitalInput leftLimit, rightLimit;
+	private final boolean DEBUG = false;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
-		//leftLimit = new DigitalInput(1);
-		//rightLimit = new DigitalInput(2);
 		// Make sure we stop if we hit a physical limit switch
 		turretRotator.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
@@ -85,7 +82,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * Sets the position of the turret.
 	 * @param pos in encoder counts
 	 */
-	private void setPosition(double pos){
+	public void setPosition(double pos){
 		turretRotator.setPosition(pos);
 	}
 	
@@ -215,7 +212,7 @@ public class TurretRotationSubsystem extends Subsystem {
 	 * @return in encoder counts
 	 */
 	public double getPosition(){
-		return turretRotator.getEncPosition();
+		return turretRotator.getPosition();
 	}
 	
 	/**

@@ -26,11 +26,11 @@ public class GearToShootAuton extends CommandGroup {
 			addSequential(new WaitCommand(2));
 			addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
 			addSequential(new TurnByAngleGyro(-60));
-			addParallel(new ShooterSetSpeed(80));
-			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK));
+			addParallel(new ShooterSetSpeed(84));
+			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK-40));
 //			addSequential(new TurnByAngleGyro(45));
 			
-//			addParallel(new TurretIRLockToTarget());
+			addParallel(new TurretIRLockToTarget());
 	    	addParallel(new AgitatorCommand(State.FORWARD));
 	    	addParallel(new FeederCommand(State.FORWARD));
 	    	addSequential(new WaitCommand(8));
@@ -44,11 +44,11 @@ public class GearToShootAuton extends CommandGroup {
 			addSequential(new WaitCommand(2));
 			addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
 			addSequential(new TurnByAngleGyro(60));
-			addParallel(new ShooterSetSpeed(80));
-			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK - 40));
+			addParallel(new ShooterSetSpeed(84));
+			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK-40));
 //			addSequential(new TurnByAngleGyro(-45));
 			
-//			addParallel(new TurretIRLockToTarget());
+			addParallel(new TurretIRLockToTarget());
 	    	addParallel(new AgitatorCommand(State.FORWARD));
 	    	addParallel(new FeederCommand(State.FORWARD));
 	    	addSequential(new WaitCommand(8));

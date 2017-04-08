@@ -92,7 +92,7 @@ public class DriveDistance extends Command {
     		else
     			lPower = lPower*multiplier;
     	}
-		drive.setSpeed(.8*lPower, rPower);
+		drive.setSpeed(.9*lPower, rPower);
 		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
     }
 
