@@ -55,7 +55,7 @@ public class GearToShootAuton extends CommandGroup {
 	    	break;
 	    	
 		default:
-			break;
+			break; //TODO other cases
 		}
 		
 	}
