@@ -23,7 +23,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 		case B2:
 		case B3:
 			addParallel(new HoldPosition());
-			addParallel(new ShooterSetSpeed(75));
+			addParallel(new ShooterSetSpeed(82));
 			addSequential(new WaitCommand(2));
 	    	addParallel(new AgitatorCommand(State.FORWARD));
 	    	addParallel(new FeederCommand(State.FORWARD));
@@ -38,7 +38,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 		case R2:
 		case R3:
 			addParallel(new HoldPosition());
-			addParallel(new ShooterSetSpeed(75));
+			addParallel(new ShooterSetSpeed(82));
 			addSequential(new WaitCommand(2));
 	    	addParallel(new AgitatorCommand(State.FORWARD));
 	    	addParallel(new FeederCommand(State.FORWARD));

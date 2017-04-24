@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -25,14 +26,12 @@ public class TurretRotationSubsystem extends Subsystem {
 	private final double P = 0.12, I = 0, D = 0.02;
 	private boolean isPixyTargeting = true;
 	private final boolean DEBUG = false;
-	//private DigitalInput leftLimit, rightLimit;
 
 	private TurretRotationSubsystem(){
 		turretRotator = new CANTalon(RobotMap.Turret.TURRET_MOTOR);
 		turretRotator.setInverted(RobotMap.Turret.IS_INVERTED);
-		//leftLimit = new DigitalInput(1);
-		//rightLimit = new DigitalInput(2);
 		// Make sure we stop if we hit a physical limit switch
+		turretRotator.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
 		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
 		turretRotator.enableLimitSwitch(true, true);
@@ -138,7 +137,9 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.set(0);
 	}
 	
-	public void calibrateTurret() {
+	@SuppressWarnings("unused")
+	private void calibrateTurret() {// use the command instead
+		/*
 		turretRotator.enableForwardSoftLimit(false);
 		turretRotator.enableReverseSoftLimit(false);
 		while(!isRightLimitSwitchClosed()){
@@ -164,6 +165,7 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.enableReverseSoftLimit(true);
 		if(control.isEnabled())
 			stop();
+		*/
 	}
 	
 	/**
@@ -230,6 +232,26 @@ public class TurretRotationSubsystem extends Subsystem {
 	
 	public boolean isPixyTargeting(){
 		return isPixyTargeting;
+	}
+	
+	public boolean isPIDEnabled(){
+		return control.isEnabled();
+	}
+	
+	public boolean isOnTarget(){
+		return control.onTarget();
+	}
+	
+	public void disableSoftLimits(){
+		turretRotator.enableForwardSoftLimit(false);
+		turretRotator.enableReverseSoftLimit(false);
+	}
+	
+	public void setSoftLimits(double forward, double backward){
+		turretRotator.setForwardSoftLimit(forward);
+		turretRotator.setReverseSoftLimit(backward);
+		turretRotator.enableForwardSoftLimit(true);
+		turretRotator.enableReverseSoftLimit(true);
 	}
 	
 	/**

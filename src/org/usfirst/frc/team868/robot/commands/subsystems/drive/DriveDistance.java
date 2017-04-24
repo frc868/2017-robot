@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.commands.subsystems.drive;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 import org.usfirst.frc.team868.robot.subsystems.GyroSubsystem;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -23,12 +24,13 @@ public class DriveDistance extends Command {
 	private double power = 0;
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
+	private boolean disableOnPlate = false;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm) {
+	public DriveDistance(double cm, boolean usePressurePlate) {
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
@@ -49,18 +51,21 @@ public class DriveDistance extends Command {
 			}
 		});
 		control.setAbsoluteTolerance(4);
+		disableOnPlate = usePressurePlate;
 	}
 	
-	double startDistance;
+	public DriveDistance(double cm) {
+		this(cm, false);
+	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		endCount = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT + distanceCM;
+    	drive.resetEncoders();
+		endCount = distanceCM;
 		gyro.reset();
     	//SmartDashboard.putData("Drive distance PID", control);
     	control.setSetpoint(endCount);
     	control.enable();
-    	startDistance = drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -75,19 +80,25 @@ public class DriveDistance extends Command {
 			power = RobotMap.Drive.MIN_DRIVE_SPEED;
 		double rPower = power, lPower = power;
 		double rotation = gyro.getRotation();
-		double multiplier = 1 - Math.abs(10*Math.sin(rotation*Math.PI/180));
+		double multiplier = 1 - Math.abs(5*Math.sin(rotation*Math.PI/180));
     	if(rotation > 1){
-    		lPower = lPower*multiplier;
+    		if(power > 0)
+    			lPower = lPower*multiplier;
+    		else
+    			rPower = rPower*multiplier;
     	}else if(rotation < -1){
-    		rPower = rPower*multiplier;
+    		if(power > 0)
+    			rPower = rPower*multiplier;
+    		else
+    			lPower = lPower*multiplier;
     	}
-		drive.setSpeed(lPower, rPower);
-		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT - startDistance);
+		drive.setSpeed(.9*lPower, rPower);
+		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(control.getError()) < 1;
+    	return Math.abs(control.getError()) < 1 || (disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
     }
 
     // Called once after isFinished returns true
