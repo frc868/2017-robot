@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import lib.util.HoundMath;
 
 /**
  *
  */
-public class TurnByAngleGyro extends Command {
+public class TurnByAngleGyro extends TimedCommand {
 	
 	private DriveSubsystem motors;
 	private PIDController controller;
@@ -28,7 +28,8 @@ public class TurnByAngleGyro extends Command {
 	 * (left is negative, right is positive)
 	 * @param angle in degrees
 	 */
-    public TurnByAngleGyro(double angle) {
+    public TurnByAngleGyro(double angle, double timeout) {
+    	super(timeout);
     	motors = DriveSubsystem.getInstance();
     	requires(motors);
     	setAngle = angle;
@@ -57,6 +58,10 @@ public class TurnByAngleGyro extends Command {
 		
 	});
 	controller.setAbsoluteTolerance(1.5);
+    }
+    
+    public TurnByAngleGyro(double angle) {
+    	this(angle, 3);
     }
 
     // Called just before this Command runs the first time

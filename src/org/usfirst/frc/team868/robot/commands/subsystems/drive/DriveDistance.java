@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveDistance extends Command {
+public class DriveDistance extends TimedCommand {
 
 	private DriveSubsystem drive;
 	private GyroSubsystem gyro;
@@ -30,7 +30,8 @@ public class DriveDistance extends Command {
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm, boolean usePressurePlate) {
+	public DriveDistance(double cm, double timeout, boolean usePressurePlate) {
+		super(timeout);
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
@@ -53,9 +54,17 @@ public class DriveDistance extends Command {
 		control.setAbsoluteTolerance(4);
 		disableOnPlate = usePressurePlate;
 	}
-	
+	//TODO should we be using a builder?
 	public DriveDistance(double cm) {
-		this(cm, false);
+		this(cm, 3, false);
+	}
+	
+	public DriveDistance(double cm, boolean usePressurePlate) {
+		this(cm, 3, usePressurePlate);
+	}
+	
+	public DriveDistance(double cm, double timeout) {
+		this(cm, timeout, false);
 	}
 
     // Called just before this Command runs the first time
