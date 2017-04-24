@@ -29,7 +29,7 @@ public class AutonChooser {
     
     public static void setupDashboard() {
     	chooseStart = new SendableChooser<StartingPoint>();
-    		chooseStart.addObject("B1", StartingPoint.B1);
+    		chooseStart.addDefault("B1", StartingPoint.B1);
     		chooseStart.addObject("B2", StartingPoint.B2);
     		chooseStart.addObject("B3", StartingPoint.B3);
     		chooseStart.addObject("R1", StartingPoint.R1);
@@ -37,7 +37,7 @@ public class AutonChooser {
     		chooseStart.addObject("R3", StartingPoint.R3);
     		
     	chooseDoThis = new SendableChooser<DoThis>();
-    		chooseDoThis.addObject("A: Cross the Baseline", DoThis.CROSS_BASE);
+    		chooseDoThis.addDefault("A: Cross the Baseline", DoThis.CROSS_BASE);
     		chooseDoThis.addObject("B: Drop off Gear", DoThis.DROP_GEAR);
     		chooseDoThis.addObject("C: Shoot Balls", DoThis.HOPPER);
     		chooseDoThis.addObject("D: Drop off Gear Then Go To Neutral", DoThis.GEAR_TO_NEUTRAL);
