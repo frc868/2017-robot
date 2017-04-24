@@ -30,7 +30,7 @@ public class DriveDistance extends TimedCommand {
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm, double timeout, boolean usePressurePlate) {
+	public DriveDistance(double cm, double timeout, boolean usePressurePlate) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
 		super(timeout);
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
