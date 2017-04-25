@@ -30,7 +30,7 @@ public class DriveDistanceBuilder extends TimedCommand {
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistanceBuilder(double cm, double timeout, boolean usePressurePlate) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
+	public DriveDistanceBuilder(double cm, double timeout, boolean usePressurePlate, double speed) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
 		super(timeout);
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
@@ -80,7 +80,7 @@ public class DriveDistanceBuilder extends TimedCommand {
 		}
 		
 		public DriveDistanceBuilder build() {
-			return new DriveDistanceBuilder(distance, timeout, usePlate); //TODO speed arg
+			return new DriveDistanceBuilder(distance, timeout, usePlate, speed);
 		}
 	}
 
