@@ -1,6 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.operator;
 
 import org.usfirst.frc.team868.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team868.robot.subsystems.GearEjectorSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,9 +11,13 @@ import lib.hid.ControllerMap;
  *
  */
 public class ArcadeDriveCommand extends Command {
+	private static final double RUMBLE_TIME = .4;
 	DriveSubsystem drive;
 	ControllerMap controller;
 	boolean direction;
+	boolean previousAutoEjectState;
+	double timeSinceToggled = 0;
+	boolean isRumbling = false;
 
     public ArcadeDriveCommand(ControllerMap ctrl, boolean direction) {
         drive = DriveSubsystem.getInstance();
@@ -23,6 +28,7 @@ public class ArcadeDriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	previousAutoEjectState = GearEjectorSubsystem.getInstance().willGearAutoEject();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,6 +49,16 @@ public class ArcadeDriveCommand extends Command {
     	drive.setL(L);
     	drive.setR(R);
     	
+    	// Now goes through rumbling logic:  will rumble for RUMBLE_TIME if the gear auto-eject is toggled
+    	if(previousAutoEjectState != GearEjectorSubsystem.getInstance().willGearAutoEject()){
+    		timeSinceToggled = timeSinceInitialized();
+    		previousAutoEjectState = !previousAutoEjectState;
+    		controller.startRumble();
+    		isRumbling = true;
+    	}else if(isRumbling && timeSinceToggled+RUMBLE_TIME < timeSinceInitialized()){
+    		controller.stopRumble();
+    		isRumbling = false;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -54,6 +70,9 @@ public class ArcadeDriveCommand extends Command {
     protected void end() {
     	drive.setL(0);
     	drive.setR(0);
+    	if(isRumbling){
+    		controller.stopRumble();
+    	}
     }
 
     // Called when another command which requires one or more of the same
