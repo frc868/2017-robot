@@ -25,6 +25,8 @@ public class DriveDistance extends TimedCommand {
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
 	private boolean disableOnPlate = false;
+	private double offsetAdjustor = .9;
+	private boolean DEBUG = false;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
@@ -32,6 +34,9 @@ public class DriveDistance extends TimedCommand {
 	 */
 	public DriveDistance(double cm, double timeout, boolean usePressurePlate) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
 		super(timeout);
+		if(DEBUG){
+			SmartDashboard.putNumber("Auton offset multiplier", offsetAdjustor);
+		}
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
@@ -55,7 +60,7 @@ public class DriveDistance extends TimedCommand {
 		disableOnPlate = usePressurePlate;
 	}
 	//TODO should we be using a builder?
-	public DriveDistance(double cm) { //TODO argument for speed
+	public DriveDistance(double cm) {
 		this(cm, 3, false);
 	}
 	
@@ -69,6 +74,9 @@ public class DriveDistance extends TimedCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(DEBUG){
+    		offsetAdjustor = SmartDashboard.getNumber("Auton offset multiplier", offsetAdjustor);
+    	}
     	drive.resetEncoders();
 		endCount = distanceCM;
 		gyro.reset();
@@ -101,7 +109,7 @@ public class DriveDistance extends TimedCommand {
     		else
     			lPower = lPower*multiplier;
     	}
-		drive.setSpeed(.9*lPower, rPower);
+		drive.setSpeed(offsetAdjustor*lPower, rPower);
 		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
     }
 
