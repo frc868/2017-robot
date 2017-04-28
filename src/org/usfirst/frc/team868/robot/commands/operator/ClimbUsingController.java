@@ -22,8 +22,9 @@ public class ClimbUsingController extends Command {
     }
 
     protected void execute() {
-    	if(OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER) >= .9)
-    		climb.startClimbing(RobotMap.Climber.CLIMBER_SPEED*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
+    	double multiplier = OI.getInstance().getOperator().getAxis(OI.Controls.ADJUSTMENT_MULTIPLIER);
+    	if(multiplier >= .5)
+    		climb.startClimbing(multiplier*RobotMap.Climber.CLIMBER_SPEED*OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB));
     	if(OI.getInstance().getOperator().getAxis(OI.Controls.CLIMB) == 0)
     		climb.startClimbing(0);
     }

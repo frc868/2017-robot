@@ -35,6 +35,9 @@ public class TurretRotationSubsystem extends Subsystem {
 		turretRotator.ConfigFwdLimitSwitchNormallyOpen(true);
 		turretRotator.ConfigRevLimitSwitchNormallyOpen(true);
 		turretRotator.enableLimitSwitch(true, true);
+		if(DEBUG){
+			disableSoftLimits();
+		}
 		
 		turretRotator.changeControlMode(CANTalon.TalonControlMode.Voltage);
 		turretRotator.enableBrakeMode(true);

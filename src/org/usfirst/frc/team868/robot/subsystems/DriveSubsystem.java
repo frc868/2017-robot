@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	private Spark rightMotor;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	
 	PowerThread powerThread;
 	
@@ -110,7 +110,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @return cm per second
 	 */
 	public double getAvgSpeed(){
-		return (getRSpeed()+getLSpeed())/2;
+		return getLSpeed(); //(getRSpeed()+getLSpeed())/2;
 	}
 	
 	/**
@@ -167,7 +167,7 @@ public class DriveSubsystem extends Subsystem {
 		}else{
 			count += getRightEncoder();
 		}
-		return count/2;
+		return getLeftEncoder(); //count/2;
 	}
 	/**
 	 * Attempts to record the movement of the motors.
@@ -192,9 +192,9 @@ public class DriveSubsystem extends Subsystem {
 	public void updateSD(){
 		SmartDashboard.putNumber("Left Motor Speed", getLSpeed());
 		SmartDashboard.putNumber("Right Motor Speed", getRSpeed());
+		SmartDashboard.putNumber("Left Drive Counts", getLeftEncoder());
+		SmartDashboard.putNumber("Right Drive Counts", getRightEncoder());
 		if(DEBUG){
-			SmartDashboard.putNumber("Left Drive Counts", getLeftEncoder());
-			SmartDashboard.putNumber("Right Drive Counts", getRightEncoder());
 			SmartDashboard.putNumber("Left Motor Power", leftMotor.get());
 			SmartDashboard.putNumber("Right Motor Power", rightMotor.get());
 			SmartDashboard.putNumber("Left Drive Distance", getLeftEncoderDistance());

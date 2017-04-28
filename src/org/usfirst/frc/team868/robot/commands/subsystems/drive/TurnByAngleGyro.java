@@ -80,7 +80,7 @@ public class TurnByAngleGyro extends TimedCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return counter > 3;
+        return super.isFinished() || counter > 3;
     }
 
     // Called once after isFinished returns true

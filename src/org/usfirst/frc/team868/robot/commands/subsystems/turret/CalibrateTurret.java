@@ -39,8 +39,8 @@ public class CalibrateTurret extends Command {
 		turret.stop();
 		turret.resetPosition();
 		double reverseLimit = -RobotMap.Turret.LEFT_LIMIT_TO_FORWARD*RobotMap.Turret.COUNTS_PER_DEGREE;
-		turret.setSoftLimits(reverseLimit+rightMinusleft-RobotMap.Turret.SOFT_LIMIT_OFFSET,
-							 reverseLimit+RobotMap.Turret.SOFT_LIMIT_OFFSET);
+		turret.setSoftLimits(-reverseLimit-RobotMap.Turret.SOFT_LIMIT_OFFSET,
+							 -reverseLimit+rightMinusleft+RobotMap.Turret.SOFT_LIMIT_OFFSET);
 		if(turret.isPIDEnabled())
 			turret.stop();
     }

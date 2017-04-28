@@ -48,7 +48,7 @@ public interface RobotMap {
 		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
 		final double CM_PER_COUNT = 1.0 / COUNTS_PER_CM;
 		final double MIN_DRIVE_SPEED = .27;
-		final double MAX_AUTON_DRIVE_SPEED = .65;//.45;
+		final double MAX_AUTON_DRIVE_SPEED = .35;//.65;
 	}
 	
 	public interface Feeder {
@@ -63,7 +63,7 @@ public interface RobotMap {
 		final double SHAKE_PERIOD = 1.0;
 		
 		final boolean CONVEYOR_IS_INVERTED = false;
-		final double CONVEYOR_SPEED = .75;
+		final double CONVEYOR_SPEED = .7;
 		
 		final double SHOOTER_SPEED_THREASHOLD = .5; //minimum speed to allow feeder to run forward
 		final double MIN_SHOOT_SPEED = 30;
@@ -172,12 +172,12 @@ public interface RobotMap {
 		
 		//Baseline from Start
 		double DISTANCE_TO_BASELINE = 280;// Will likely go farther than baseline
-		double BASELINE_MIDDLE_DISTANCE = 199;
+		double BASELINE_MIDDLE_DISTANCE = 195;
 		
 		//Gear from Start
 		double WALL_TO_HOOK = BASELINE_MIDDLE_DISTANCE;//Distance from alliance wall to the middle hook.
-		double GEAR_AUTON_DIST_1 = 170;//NOT ACCURATE: Distance until in line with hook if on sides.
-		double GEAR_AUTON_DIST_2 = 198;
+		double GEAR_AUTON_DIST_1 = 166;//NOT ACCURATE: Distance until in line with hook if on sides.
+		double GEAR_AUTON_DIST_2 = 196;
 		double HOOK_BACKOFF = 45;//Arbitrary value: how far to back away from the hook after placing the gear.
 		
 		//Gear to Hopper

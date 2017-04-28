@@ -26,7 +26,7 @@ public class DriveDistance extends TimedCommand {
 	private double distanceCM;
 	private boolean disableOnPlate = false;
 	private double offsetAdjustor = .9;
-	private boolean DEBUG = false;
+	private boolean DEBUG = true;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
@@ -35,7 +35,8 @@ public class DriveDistance extends TimedCommand {
 	public DriveDistance(double cm, double timeout, boolean usePressurePlate) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
 		super(timeout);
 		if(DEBUG){
-			SmartDashboard.putNumber("Auton offset multiplier", offsetAdjustor);
+			SmartDashboard.putNumber("Auton offset multiplier", 
+					SmartDashboard.getNumber("Auton offset multiplier", 0.9));
 		}
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
@@ -61,11 +62,11 @@ public class DriveDistance extends TimedCommand {
 	}
 	//TODO should we be using a builder?
 	public DriveDistance(double cm) {
-		this(cm, 3, false);
+		this(cm, 4, false);
 	}
 	
 	public DriveDistance(double cm, boolean usePressurePlate) {
-		this(cm, 3, usePressurePlate);
+		this(cm, 4, usePressurePlate);
 	}
 	
 	public DriveDistance(double cm, double timeout) {
@@ -115,7 +116,7 @@ public class DriveDistance extends TimedCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(control.getError()) < 1 || (disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
+    	return super.isFinished() || Math.abs(control.getError()) < 1 || (disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
     }
 
     // Called once after isFinished returns true

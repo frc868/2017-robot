@@ -17,25 +17,25 @@ public class GearToNeutralAuton extends CommandGroup {
     	switch(selected) {
     	case B1:
 		case R3:
-			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1+5));
-			addSequential(new TurnByAngleGyro(-60, 1.5));
+			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1+35));
+			addSequential(new TurnByAngleGyro(-58, 1.5));
 			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_2, true));
 			addSequential(new WaitCommand(1));
     		addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
     		
     		addSequential(new TurnByAngleGyro(60, 1.5));
-    		addSequential(new DriveDistance(400));
+    		addSequential(new DriveDistance(300));
 			break;
 			
 		case B3:
 		case R1:
-			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1-5));
+			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_1-5));//Test decreasing this distance by 1 inch or so
 			addSequential(new TurnByAngleGyro(60, 1.5));
 			addSequential(new DriveDistance(RobotMap.AutonValues.GEAR_AUTON_DIST_2, true));
 			addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
 			
 			addSequential(new TurnByAngleGyro(-60, 1.5));
-    		addSequential(new DriveDistance(400));
+    		addSequential(new DriveDistance(300));
 			break;
 			
 		case B2:
