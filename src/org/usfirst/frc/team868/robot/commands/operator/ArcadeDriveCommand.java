@@ -16,7 +16,8 @@ public class ArcadeDriveCommand extends Command {
 	ControllerMap controller;
 	boolean direction;
 	boolean previousAutoEjectState;
-	double timeSinceToggled = 0;
+	double timeSinceRumbleToggled = 0;
+	boolean directionToggled = false;
 	boolean isRumbling = false;
 
     public ArcadeDriveCommand(ControllerMap ctrl, boolean direction) {
@@ -51,13 +52,21 @@ public class ArcadeDriveCommand extends Command {
     	
     	// Now goes through rumbling logic:  will rumble for RUMBLE_TIME if the gear auto-eject is toggled
     	if(previousAutoEjectState != GearEjectorSubsystem.getInstance().willGearAutoEject()){
-    		timeSinceToggled = timeSinceInitialized();
+    		timeSinceRumbleToggled = timeSinceInitialized();
     		previousAutoEjectState = !previousAutoEjectState;
     		controller.startRumble();
     		isRumbling = true;
-    	}else if(isRumbling && timeSinceToggled+RUMBLE_TIME < timeSinceInitialized()){
+    	}else if(isRumbling && timeSinceRumbleToggled+RUMBLE_TIME < timeSinceInitialized()){
     		controller.stopRumble();
     		isRumbling = false;
+    	}
+    	
+    	//Toggles driving direction if RT is pressed
+    	if(controller.getAxis(ControllerMap.Key.RT) > .9 && !directionToggled){
+    		direction = !direction;
+    		directionToggled = !directionToggled;
+    	}else if(controller.getAxis(ControllerMap.Key.RT) < .9 && directionToggled){
+    		directionToggled = !directionToggled;
     	}
     }
 

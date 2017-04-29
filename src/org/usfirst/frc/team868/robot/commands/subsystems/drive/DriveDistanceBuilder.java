@@ -25,6 +25,7 @@ public class DriveDistanceBuilder extends TimedCommand {
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
 	private boolean disableOnPlate = false;
+	private double speed = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
@@ -53,12 +54,13 @@ public class DriveDistanceBuilder extends TimedCommand {
 		});
 		control.setAbsoluteTolerance(4);
 		disableOnPlate = usePressurePlate;
+		this.speed = speed;
 	}
 	
 	public static class Builder {
 		private double distance = 0;
-		private double timeout = 3;
-		private double speed = 3.5;
+		private double timeout = 4;
+		private double speed = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
 		private boolean usePlate = false;
 		
 		public Builder() {}
@@ -96,10 +98,10 @@ public class DriveDistanceBuilder extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		if(power > RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
-			power = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
-		if(power < -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
-			power = -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
+		if(power > speed)
+			power = speed;
+		if(power < -speed)
+			power = -speed;
 		if(power < -.02 && power > -RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = -RobotMap.Drive.MIN_DRIVE_SPEED;
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)

@@ -2,6 +2,7 @@ package org.usfirst.frc.team868.robot.subsystems;
 
 import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.commands.operator.JoystickTurretControl;
+import org.usfirst.frc.team868.robot.commands.subsystems.turret.HoldPosition;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -286,6 +287,6 @@ public class TurretRotationSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new JoystickTurretControl());
+		setDefaultCommand(new HoldPosition());
 	}
 }

@@ -4,6 +4,7 @@ import org.usfirst.frc.team868.robot.RobotMap;
 import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistanceBuilder;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnByAngleGyro;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
@@ -20,8 +21,9 @@ public class GearToShootAuton extends CommandGroup {
 	public GearToShootAuton(StartingPoint start) {
 		switch(start) {
 		case R2:
-			addSequential(new DriveDistance(RobotMap.AutonValues.WALL_TO_HOOK));
-			addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
+			addSequential(new DriveDistanceBuilder.Builder().setDistance(RobotMap.AutonValues.WALL_TO_HOOK-30).setSpeed(0.6).build());
+			addSequential(new DriveDistanceBuilder.Builder().setDistance(30).setSpeed(0.35).usePlate(true).build());
+    		addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
 			addSequential(new TurnByAngleGyro(-60, 2)); //75 degrees?
 			addParallel(new ShooterSetSpeed(84));
 			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK-40)); //TODO make this it's own constant
@@ -33,8 +35,9 @@ public class GearToShootAuton extends CommandGroup {
 	    	break;
 	    	
 		case B2:
-			addSequential(new DriveDistance(RobotMap.AutonValues.WALL_TO_HOOK));
-			addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
+			addSequential(new DriveDistanceBuilder.Builder().setDistance(RobotMap.AutonValues.WALL_TO_HOOK-30).setSpeed(0.6).build());
+			addSequential(new DriveDistanceBuilder.Builder().setDistance(30).setSpeed(0.35).usePlate(true).build());
+    		addSequential(new DriveDistance(-RobotMap.AutonValues.HOOK_BACKOFF));
 			addSequential(new TurnByAngleGyro(60, 2));
 			addParallel(new ShooterSetSpeed(84));
 			addSequential(new DriveDistance(-RobotMap.AutonValues.WALL_TO_HOOK-40));

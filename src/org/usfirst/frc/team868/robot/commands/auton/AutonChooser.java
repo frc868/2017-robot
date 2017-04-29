@@ -29,12 +29,12 @@ public class AutonChooser {
     
     public static void setupDashboard() {
     	chooseStart = new SendableChooser<StartingPoint>();
-    		chooseStart.addDefault("B1", StartingPoint.B1);
-    		chooseStart.addObject("B2", StartingPoint.B2);
-    		chooseStart.addObject("B3", StartingPoint.B3);
-    		chooseStart.addObject("R1", StartingPoint.R1);
-    		chooseStart.addObject("R2", StartingPoint.R2);
-    		chooseStart.addObject("R3", StartingPoint.R3);
+    		chooseStart.addDefault("Blue Loading", StartingPoint.B1);
+    		chooseStart.addObject("Blue Center", StartingPoint.B2);
+    		chooseStart.addObject("Blue Boiler", StartingPoint.B3);
+    		chooseStart.addObject("Red Loading", StartingPoint.R1);
+    		chooseStart.addObject("Red Center", StartingPoint.R2);
+    		chooseStart.addObject("Red Boiler", StartingPoint.R3);
     		
     	chooseDoThis = new SendableChooser<DoThis>();
     		chooseDoThis.addDefault("A: Cross the Baseline", DoThis.CROSS_BASE);

@@ -27,6 +27,7 @@ public class DriveDistance extends TimedCommand {
 	private boolean disableOnPlate = false;
 	private double offsetAdjustor = .9;
 	private boolean DEBUG = true;
+	private int onTargetCounts = 0;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
@@ -57,7 +58,7 @@ public class DriveDistance extends TimedCommand {
 				power = output;
 			}
 		});
-		control.setAbsoluteTolerance(4);
+		control.setAbsoluteTolerance(2); //TODO update builder
 		disableOnPlate = usePressurePlate;
 	}
 	//TODO should we be using a builder?
@@ -112,11 +113,19 @@ public class DriveDistance extends TimedCommand {
     	}
 		drive.setSpeed(offsetAdjustor*lPower, rPower);
 		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
+		
+		if(control.onTarget()) {
+			onTargetCounts++;
+		} else {
+			onTargetCounts = 0;
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return super.isFinished() || Math.abs(control.getError()) < 1 || (disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
+    	return super.isFinished() || 
+    			onTargetCounts > 3 || 
+    			(disableOnPlate && GearEjectorSubsystem.getInstance().isPlatePressed());
     }
 
     // Called once after isFinished returns true

@@ -22,7 +22,7 @@ public class ToggleShooting extends Command {
     protected void initialize() {
     	shooter.toggleShooting();
     	if(shooter.isRunning()){
-    		new ShooterSetSpeed(80).start();
+    		new ShooterSetSpeed(69).start();
     	}else{
     		new ShooterSetSpeed(0).start();
     	}
