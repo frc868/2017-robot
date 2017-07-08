@@ -25,20 +25,15 @@ public class DriveDistance extends TimedCommand {
 	private final double kp = .02, ki = 0, kd = .05, kf = 0;
 	private double distanceCM;
 	private boolean disableOnPlate = false;
-	private double offsetAdjustor = .9;
-	private boolean DEBUG = true;
+	private double speed = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
 	private int onTargetCounts = 0;
 	
 	/**
 	 * Drives the given distance in centimeters using a PID controller.
 	 * @param cm in centimeters
 	 */
-	public DriveDistance(double cm, double timeout, boolean usePressurePlate) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
+	public DriveDistance(double cm, double timeout, boolean usePressurePlate, double speed) { //TODO could we instead use a trigger -> on plate press, run StopDriving command?
 		super(timeout);
-		if(DEBUG){
-			SmartDashboard.putNumber("Auton offset multiplier", 
-					SmartDashboard.getNumber("Auton offset multiplier", 0.9));
-		}
 		distanceCM = cm;
 		drive = DriveSubsystem.getInstance();
 		requires(drive);
@@ -58,27 +53,44 @@ public class DriveDistance extends TimedCommand {
 				power = output;
 			}
 		});
-		control.setAbsoluteTolerance(2); //TODO update builder
+		control.setAbsoluteTolerance(2);
 		disableOnPlate = usePressurePlate;
-	}
-	//TODO should we be using a builder?
-	public DriveDistance(double cm) {
-		this(cm, 4, false);
+		this.speed = speed;
 	}
 	
-	public DriveDistance(double cm, boolean usePressurePlate) {
-		this(cm, 4, usePressurePlate);
-	}
-	
-	public DriveDistance(double cm, double timeout) {
-		this(cm, timeout, false);
+	public static class Builder {
+		private double distance = 0;
+		private double timeout = 4;
+		private double speed = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
+		private boolean usePlate = false;
+		
+		public Builder(double cm) {
+			distance = cm;
+		}
+		
+//		public Builder setDistance(double cm) {
+//			distance = cm; return this;
+//		}
+		
+		public Builder time(double seconds) {
+			timeout = seconds; return this;
+		}
+		
+		public Builder speed(double cps) {
+			speed = cps; return this;
+		}
+		
+		public Builder plate(boolean enablePlate) {
+			usePlate = enablePlate; return this;
+		}
+		
+		public DriveDistance build() {
+			return new DriveDistance(distance, timeout, usePlate, speed);
+		}
 	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(DEBUG){
-    		offsetAdjustor = SmartDashboard.getNumber("Auton offset multiplier", offsetAdjustor);
-    	}
     	drive.resetEncoders();
 		endCount = distanceCM;
 		gyro.reset();
@@ -89,10 +101,10 @@ public class DriveDistance extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		if(power > RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
-			power = RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
-		if(power < -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED)
-			power = -RobotMap.Drive.MAX_AUTON_DRIVE_SPEED;
+		if(power > speed)
+			power = speed;
+		if(power < -speed)
+			power = -speed;
 		if(power < -.02 && power > -RobotMap.Drive.MIN_DRIVE_SPEED)
 			power = -RobotMap.Drive.MIN_DRIVE_SPEED;
 		if(power > .02 && power < RobotMap.Drive.MIN_DRIVE_SPEED)
@@ -111,11 +123,11 @@ public class DriveDistance extends TimedCommand {
     		else
     			lPower = lPower*multiplier;
     	}
-		drive.setSpeed(offsetAdjustor*lPower, rPower);
+		drive.setSpeed(.9*lPower, rPower);
 		SmartDashboard.putNumber("Auton Driven Distance", drive.getAvgEncoders()*RobotMap.Drive.CM_PER_COUNT);
 		
 		if(control.onTarget()) {
-			onTargetCounts++;
+			onTargetCounts ++;
 		} else {
 			onTargetCounts = 0;
 		}

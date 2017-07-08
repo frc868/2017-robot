@@ -1,7 +1,7 @@
 package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.RobotMap.State;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.OldDriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.ShooterSetSpeed;
@@ -32,7 +32,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 	    	addParallel(new ShooterSetVoltageCommand(0));
 	    	addParallel(new AgitatorCommand(State.OFF));
 	    	addParallel(new FeederCommand(State.OFF));
-			addSequential(new DriveDistance(-280));
+			addSequential(new OldDriveDistance(-280));
 			break;
 		case R1:
 		case R2:
@@ -47,7 +47,7 @@ public class ShootAndBaselineAuton extends CommandGroup {
 	    	addParallel(new ShooterSetVoltageCommand(0));
 	    	addParallel(new AgitatorCommand(State.OFF));
 	    	addParallel(new FeederCommand(State.OFF));
-			addSequential(new DriveDistance(280));
+			addSequential(new OldDriveDistance(280));
 			break;
 			
 		}

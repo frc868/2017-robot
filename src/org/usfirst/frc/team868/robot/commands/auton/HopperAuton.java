@@ -2,7 +2,7 @@ package org.usfirst.frc.team868.robot.commands.auton;
 
 import org.usfirst.frc.team868.robot.RobotMap.State;
 import org.usfirst.frc.team868.robot.commands.auton.AutonChooser.StartingPoint;
-import org.usfirst.frc.team868.robot.commands.subsystems.drive.DriveDistance;
+import org.usfirst.frc.team868.robot.commands.subsystems.drive.OldDriveDistance;
 import org.usfirst.frc.team868.robot.commands.subsystems.drive.TurnToAngleGyro;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.AgitatorCommand;
 import org.usfirst.frc.team868.robot.commands.subsystems.shooter.FeederCommand;
@@ -25,50 +25,50 @@ public class HopperAuton extends CommandGroup {
     	switch(selected) {
     		case R1:
     			addSequential(new TurnToAngleGyro(90 - posOneAngle));
-    			addSequential(new DriveDistance(posOneDistance));
+    			addSequential(new OldDriveDistance(posOneDistance));
     			addSequential(new TurnToAngleGyro(-90 - (90 - posOneAngle)));
-    			addSequential(new DriveDistance(-75.660425587));
+    			addSequential(new OldDriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case B1:
     			addSequential(new TurnToAngleGyro(-(90 -posOneAngle)));
-    			addSequential(new DriveDistance(posOneDistance));
+    			addSequential(new OldDriveDistance(posOneDistance));
     			addSequential(new TurnToAngleGyro((-90 - (90 - posOneAngle))));
-    			addSequential(new DriveDistance(-75.660425587));
+    			addSequential(new OldDriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case R2:
     			addSequential(new TurnToAngleGyro(90 - posTwoAngle));
-    			addSequential(new DriveDistance(posTwoDistance));
+    			addSequential(new OldDriveDistance(posTwoDistance));
     			addSequential(new TurnToAngleGyro(-90 - (90 - posTwoAngle)));
-    			addSequential(new DriveDistance(-75.660425587));
+    			addSequential(new OldDriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case B2:
     			addSequential(new TurnToAngleGyro(90 - posTwoAngle));
-    			addSequential(new DriveDistance(posTwoDistance));
+    			addSequential(new OldDriveDistance(posTwoDistance));
     			addSequential(new TurnToAngleGyro((-90 - (90 - posTwoAngle))));
-    			addSequential(new DriveDistance(-75.660425587));
+    			addSequential(new OldDriveDistance(-75.660425587));
     			addSequential(new FeedAndShootCommandGroup());
     			break;
     		case R3:
-    			addSequential(new DriveDistance(230));
+    			addSequential(new OldDriveDistance(230));
     			addSequential(new TurnToAngleGyro(-90));
     			addParallel(new ShooterSetVoltageCommand(6));
-    			addSequential(new DriveDistance(-136));
+    			addSequential(new OldDriveDistance(-136));
     			addSequential(new TurnToAngleGyro(-90));
-    			addSequential(new DriveDistance(30));
+    			addSequential(new OldDriveDistance(30));
     			addParallel(new TurretIRLockToTarget());
     			addSequential(new AgitatorCommand(State.FORWARD));
     			addSequential(new FeederCommand(State.FORWARD));
     			break;
     		case B3:
-    			addSequential(new DriveDistance(230));
+    			addSequential(new OldDriveDistance(230));
     			addSequential(new TurnToAngleGyro(90));
     			addParallel(new ShooterSetVoltageCommand(6));
-    			addSequential(new DriveDistance(-136));
+    			addSequential(new OldDriveDistance(-136));
     			addSequential(new TurnToAngleGyro(90));
-    			addSequential(new DriveDistance(30));
+    			addSequential(new OldDriveDistance(30));
     			addParallel(new TurretIRLockToTarget());
     			addSequential(new AgitatorCommand(State.FORWARD));
     			addSequential(new FeederCommand(State.FORWARD));
