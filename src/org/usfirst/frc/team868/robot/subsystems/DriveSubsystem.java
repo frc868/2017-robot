@@ -216,7 +216,8 @@ public class DriveSubsystem extends Subsystem {
     public class PowerThread extends Thread {
 
     	private double leftPower = 0, rightPower = 0;
-    	private double maxPower = 1.0;
+    	private final double absMaxPower = 1;
+    	private double maxPower = absMaxPower;
     	PowerDrawSubsystem power;
     	
     	private final double factor = 0.005;
@@ -234,7 +235,7 @@ public class DriveSubsystem extends Subsystem {
 						maxPower -= factor;
 					}
 				} else {
-					if(maxPower <= 1 - (factor)) { //don't want max to exceed 1
+					if(maxPower <= absMaxPower - (factor)) { //don't want max to exceed 1
 						maxPower += factor;
 					}
 				}
