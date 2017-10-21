@@ -36,13 +36,13 @@ public interface RobotMap {
 		//PORTS:
 		final int LEFT_MOTOR = 9;
 		final int RIGHT_MOTOR = 8;
-		final int ENCODER_L_A = 0;
-		final int ENCODER_L_B = 1;
-		final int ENCODER_R_A = 2;
-		final int ENCODER_R_B = 3;
+		final int ENCODER_L_A = 2;
+		final int ENCODER_L_B = 3;
+		final int ENCODER_R_A = 1;
+		final int ENCODER_R_B = 0;
 		
 		//VALUES:
-		final boolean LEFT_IS_INVERTED = false;
+		final boolean LEFT_IS_INVERTED = false; //Not sure if these affect encoders & distances for auton
 		final boolean RIGHT_IS_INVERTED = true;
 		final double SPEED = 0.8; //default drive speed
 		final double COUNTS_PER_CM = 9925.0 / 140.0; //70
