@@ -33,16 +33,17 @@ public class GearAuton extends CommandGroup {
     			
     		case B2:
     		case R2:
-    			addSequential(new DriveDistance.Builder(RobotMap.AutonValues.WALL_TO_HOOK-30).speed(0.6).build());
-    			addSequential(new DriveDistance.Builder(30).speed(0.35).plate(true).build());
-	    		addSequential(new DriveDistance.Builder(-RobotMap.AutonValues.HOOK_BACKOFF).build());
+    			addSequential(new DriveDistance.Builder(RobotMap.AutonValues.WALL_TO_HOOK).speed(0.4).plate(true).build());
+//    			addSequential(new DriveDistance.Builder(30).speed(0.35).plate(true).build());
+	    		addSequential(new DriveDistance.Builder(-RobotMap.AutonValues.HOOK_BACKOFF).time(1).build());
 
 //	    		addSequential(new WaitCommand(5));//TODO: Test this before any actual matches!!!
 	    		addSequential(new StopIfDroppedGear());//Anything after this should only
-	    		addSequential(new TurnByAngleGyro(-45, 1.5));
-	    		addSequential(new DriveDistance.Builder(22).build());
-	    		addSequential(new TurnByAngleGyro(45, 1.5));
+//	    		addSequential(new TurnByAngleGyro(-45, 1.5));
+//	    		addSequential(new DriveDistance.Builder(22).build());
+//	    		addSequential(new TurnByAngleGyro(45, 1.5));
 	    		addSequential(new DriveDistance.Builder(RobotMap.AutonValues.HOOK_BACKOFF+20).plate(true).build());
+	    		addSequential(new DriveDistance.Builder(-RobotMap.AutonValues.HOOK_BACKOFF).time(1).build());
     			break;
     			
     		default:

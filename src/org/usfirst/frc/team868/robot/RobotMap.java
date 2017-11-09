@@ -38,8 +38,8 @@ public interface RobotMap {
 		final int RIGHT_MOTOR = 8;
 		final int ENCODER_L_A = 2;
 		final int ENCODER_L_B = 3;
-		final int ENCODER_R_A = 1;
-		final int ENCODER_R_B = 0;
+		final int ENCODER_R_A = 0;
+		final int ENCODER_R_B = 1;
 		
 		//VALUES:
 		final boolean LEFT_IS_INVERTED = false; //Not sure if these affect encoders & distances for auton

@@ -167,7 +167,7 @@ public class DriveSubsystem extends Subsystem {
 		}else{
 			count += getRightEncoder();
 		}
-		return getLeftEncoder(); //count/2;
+		return getRightEncoder(); //count/2;
 	}
 	/**
 	 * Attempts to record the movement of the motors.
