@@ -223,7 +223,7 @@ public class DriveSubsystem extends Subsystem {
     	private final double factor = 0.005;
     	
     	public PowerThread() {
-    		power = new PowerDrawSubsystem();
+    		power = PowerDrawSubsystem.getInstance();
     	}
     	
 		@Override
