@@ -19,7 +19,7 @@ public class CameraSubsystem extends Subsystem {
 	
 	private static CameraSubsystem rearInstance;
 	private static CameraSubsystem frontInstance;
-	private Thread visionThread;
+	private Thread visionThread; //NOTE by having this, you won't be able to have both a front and back camera
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -29,7 +29,7 @@ public class CameraSubsystem extends Subsystem {
 		
 		visionThread = new Thread(() -> {
 			
-			//camera.setFPS(30);
+			//camera.setFPS(30); //TODO this may be causing issues
 			
 			// Get the Axis camera from CameraServer
 			CameraServer.getInstance().addCamera(camera);
